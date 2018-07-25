@@ -36,6 +36,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(Parameterized.class)
 public class LoggerAdapterTest {
+
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
@@ -47,6 +48,7 @@ public class LoggerAdapterTest {
     }
 
     private Class loggerClass;
+
     private LoggerAdapter loggerAdapter;
 
     public LoggerAdapterTest(Class<? extends LoggerAdapter> loggerAdapterClass, Class<? extends Logger> loggerClass) throws Exception {

@@ -20,7 +20,6 @@ import org.apache.dubbo.common.URL;
 
 /**
  * Configurator. (SPI, Prototype, ThreadSafe)
- *
  */
 public interface Configurator extends Comparable<Configurator> {
 
@@ -36,6 +35,7 @@ public interface Configurator extends Comparable<Configurator> {
      * O
      *
      * @param url - old rovider url.
+     *
      * @return new provider url.
      */
     URL configure(URL url);

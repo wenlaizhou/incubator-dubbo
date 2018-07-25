@@ -18,4 +18,5 @@ package com.alibaba.dubbo.rpc.cluster;
 
 @Deprecated
 public interface ConfiguratorFactory extends org.apache.dubbo.rpc.cluster.ConfiguratorFactory {
+
 }

@@ -22,7 +22,9 @@ package org.apache.dubbo.common.status;
 public class Status {
 
     private final Level level;
+
     private final String message;
+
     private final String description;
 
     public Status(Level level) {

@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class HolderTest {
+
     @Test
     public void testSetAndGet() throws Exception {
         Holder<String> holder = new Holder<String>();

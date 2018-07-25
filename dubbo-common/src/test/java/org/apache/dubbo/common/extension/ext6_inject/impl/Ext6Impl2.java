@@ -22,6 +22,7 @@ import org.apache.dubbo.common.extension.ext6_inject.Ext6;
 import java.util.List;
 
 public class Ext6Impl2 implements Ext6 {
+
     List<String> list;
 
     public List<String> getList() {

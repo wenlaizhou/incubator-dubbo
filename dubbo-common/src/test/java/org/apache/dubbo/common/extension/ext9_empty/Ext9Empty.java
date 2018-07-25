@@ -20,5 +20,6 @@ import org.apache.dubbo.common.extension.SPI;
 
 @SPI
 public interface Ext9Empty {
+
     void empty();
 }

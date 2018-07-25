@@ -35,7 +35,8 @@ public class ProxyTest extends TestCase {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 if ("getName".equals(method.getName())) {
                     assertEquals(args.length, 0);
-                } else if ("setName".equals(method.getName())) {
+                }
+                else if ("setName".equals(method.getName())) {
                     assertEquals(args.length, 2);
                     assertEquals(args[0], "qianlei");
                     assertEquals(args[1], "hello");
@@ -68,13 +69,15 @@ public class ProxyTest extends TestCase {
         });
         try {
             enhancer.create();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             e.printStackTrace();
             Assert.fail();
         }
     }
 
     public static interface ITest {
+
         String getName();
 
         void setName(String name, String name2);

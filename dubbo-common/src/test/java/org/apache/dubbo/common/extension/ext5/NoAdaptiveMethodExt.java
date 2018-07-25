@@ -24,5 +24,6 @@ import org.apache.dubbo.common.extension.SPI;
  */
 @SPI("impl1")
 public interface NoAdaptiveMethodExt {
+
     String echo(URL url, String s);
 }

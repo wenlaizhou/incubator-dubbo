@@ -17,6 +17,7 @@
 package org.apache.dubbo.compatible.service;
 
 public interface DemoService {
+
     String sayHello(String name);
 
     long timestamp();
@@ -33,7 +34,7 @@ public interface DemoService {
 
     Type enumlength(Type... types);
 
-//	Type enumlength(Type type);
+    //	Type enumlength(Type type);
 
     String get(CustomArgument arg1);
 

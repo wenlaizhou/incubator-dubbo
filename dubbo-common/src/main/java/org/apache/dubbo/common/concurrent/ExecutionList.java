@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
  * logged.
  */
 public final class ExecutionList {
+
     // Logger to log exceptions caught when running runnables.
     static final Logger logger = LoggerFactory.getLogger(ExecutionList.class.getName());
 
@@ -157,7 +158,8 @@ public final class ExecutionList {
     private static void executeListener(Runnable runnable, Executor executor) {
         try {
             executor.execute(runnable);
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
             // Log it and keep going, bad runnable and/or executor.  Don't
             // punish the other runnables if we're given a bad one.  We only
             // catch RuntimeException because we want Errors to propagate up.
@@ -167,8 +169,11 @@ public final class ExecutionList {
     }
 
     private static final class RunnableExecutorPair {
+
         final Runnable runnable;
+
         final Executor executor;
+
         RunnableExecutorPair next;
 
         RunnableExecutorPair(Runnable runnable, Executor executor, RunnableExecutorPair next) {

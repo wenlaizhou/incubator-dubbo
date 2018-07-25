@@ -34,7 +34,8 @@ public class ArrayMerger implements Merger<Object[]> {
             Object item = others[i];
             if (item != null && item.getClass().isArray()) {
                 totalLen += Array.getLength(item);
-            } else {
+            }
+            else {
                 throw new IllegalArgumentException((i + 1) + "th argument is not an array");
             }
         }

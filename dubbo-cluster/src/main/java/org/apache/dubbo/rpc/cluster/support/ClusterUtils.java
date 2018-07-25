@@ -24,7 +24,6 @@ import java.util.Map;
 
 /**
  * ClusterUtils
- *
  */
 public class ClusterUtils {
 

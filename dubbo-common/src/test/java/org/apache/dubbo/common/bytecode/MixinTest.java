@@ -34,18 +34,22 @@ public class MixinTest extends TestCase {
     }
 
     interface I1 {
+
         void m1();
     }
 
     interface I2 {
+
         void m2();
     }
 
     interface I3 {
+
         void m3();
     }
 
     class C1 implements Mixin.MixinAware {
+
         public void m1() {
             System.out.println("c1.m1();");
         }
@@ -60,6 +64,7 @@ public class MixinTest extends TestCase {
     }
 
     class C2 implements Mixin.MixinAware {
+
         public void m3() {
             System.out.println("c2.m3();");
         }

@@ -26,12 +26,14 @@ import java.util.Map;
  */
 @Deprecated
 public class JSONObject implements JSONNode {
+
     private Map<String, Object> mMap = new HashMap<String, Object>();
 
     /**
      * get.
      *
      * @param key key.
+     *
      * @return boolean or long or double or String or JSONArray or JSONObject or null.
      */
     public Object get(String key) {
@@ -43,6 +45,7 @@ public class JSONObject implements JSONNode {
      *
      * @param key key.
      * @param def default value.
+     *
      * @return value or default value.
      */
     public boolean getBoolean(String key, boolean def) {
@@ -55,6 +58,7 @@ public class JSONObject implements JSONNode {
      *
      * @param key key.
      * @param def default value.
+     *
      * @return value or default value.
      */
     public int getInt(String key, int def) {
@@ -67,6 +71,7 @@ public class JSONObject implements JSONNode {
      *
      * @param key key.
      * @param def default value.
+     *
      * @return value or default value.
      */
     public long getLong(String key, long def) {
@@ -79,6 +84,7 @@ public class JSONObject implements JSONNode {
      *
      * @param key key.
      * @param def default value.
+     *
      * @return value or default value.
      */
     public float getFloat(String key, float def) {
@@ -91,6 +97,7 @@ public class JSONObject implements JSONNode {
      *
      * @param key key.
      * @param def default value.
+     *
      * @return value or default value.
      */
     public double getDouble(String key, double def) {
@@ -102,6 +109,7 @@ public class JSONObject implements JSONNode {
      * get string value.
      *
      * @param key key.
+     *
      * @return value or default value.
      */
     public String getString(String key) {
@@ -113,6 +121,7 @@ public class JSONObject implements JSONNode {
      * get JSONArray value.
      *
      * @param key key.
+     *
      * @return value or default value.
      */
     public JSONArray getArray(String key) {
@@ -124,6 +133,7 @@ public class JSONObject implements JSONNode {
      * get JSONObject value.
      *
      * @param key key.
+     *
      * @return value or default value.
      */
     public JSONObject getObject(String key) {
@@ -144,6 +154,7 @@ public class JSONObject implements JSONNode {
      * contains key.
      *
      * @param key key.
+     *
      * @return contains or not.
      */
     public boolean contains(String key) {
@@ -196,10 +207,12 @@ public class JSONObject implements JSONNode {
             key = entry.getKey();
             jb.objectItem(key);
             value = entry.getValue();
-            if (value == null)
+            if (value == null) {
                 jb.valueNull();
-            else
+            }
+            else {
                 jc.writeValue(value, jb, writeClass);
+            }
         }
         jb.objectEnd();
     }

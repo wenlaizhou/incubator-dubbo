@@ -19,4 +19,5 @@ package com.alibaba.dubbo.common.store;
 
 @Deprecated
 public interface DataStore extends org.apache.dubbo.common.store.DataStore {
+
 }

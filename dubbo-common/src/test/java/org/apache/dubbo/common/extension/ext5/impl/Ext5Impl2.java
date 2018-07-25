@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ext5.NoAdaptiveMethodExt;
 
 public class Ext5Impl2 implements NoAdaptiveMethodExt {
+
     public String echo(URL url, String s) {
         return "Ext5Impl2-echo";
     }

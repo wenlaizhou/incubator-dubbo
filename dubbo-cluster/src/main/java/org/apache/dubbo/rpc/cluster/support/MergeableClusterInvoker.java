@@ -50,7 +50,9 @@ import java.util.concurrent.TimeUnit;
 public class MergeableClusterInvoker<T> implements Invoker<T> {
 
     private static final Logger log = LoggerFactory.getLogger(MergeableClusterInvoker.class);
+
     private final Directory<T> directory;
+
     private ExecutorService executor = Executors.newCachedThreadPool(new NamedThreadFactory("mergeable-cluster-executor", true));
 
     public MergeableClusterInvoker(Directory<T> directory) {
@@ -76,7 +78,8 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
         try {
             returnType = getInterface().getMethod(
                     invocation.getMethodName(), invocation.getParameterTypes()).getReturnType();
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             returnType = null;
         }
 
@@ -101,20 +104,23 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
             try {
                 Result r = future.get(timeout, TimeUnit.MILLISECONDS);
                 if (r.hasException()) {
-                    log.error("Invoke " + getGroupDescFromServiceKey(entry.getKey()) + 
-                                    " failed: " + r.getException().getMessage(), 
+                    log.error("Invoke " + getGroupDescFromServiceKey(entry.getKey()) +
+                                    " failed: " + r.getException().getMessage(),
                             r.getException());
-                } else {
+                }
+                else {
                     resultList.add(r);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RpcException("Failed to invoke service " + entry.getKey() + ": " + e.getMessage(), e);
             }
         }
 
         if (resultList.isEmpty()) {
             return new RpcResult((Object) null);
-        } else if (resultList.size() == 1) {
+        }
+        else if (resultList.size() == 1) {
             return resultList.iterator().next();
         }
 
@@ -127,8 +133,9 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
             Method method;
             try {
                 method = returnType.getMethod(merger, returnType);
-            } catch (NoSuchMethodException e) {
-                throw new RpcException("Can not merge result because missing method [ " + merger + " ] in class [ " + 
+            }
+            catch (NoSuchMethodException e) {
+                throw new RpcException("Can not merge result because missing method [ " + merger + " ] in class [ " +
                         returnType.getClass().getName() + " ]");
             }
             if (!Modifier.isPublic(method.getModifiers())) {
@@ -141,19 +148,23 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
                     for (Result r : resultList) {
                         result = method.invoke(result, r.getValue());
                     }
-                } else {
+                }
+                else {
                     for (Result r : resultList) {
                         method.invoke(result, r.getValue());
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RpcException("Can not merge result: " + e.getMessage(), e);
             }
-        } else {
+        }
+        else {
             Merger resultMerger;
             if (ConfigUtils.isDefault(merger)) {
                 resultMerger = MergerFactory.getMerger(returnType);
-            } else {
+            }
+            else {
                 resultMerger = ExtensionLoader.getExtensionLoader(Merger.class).getExtension(merger);
             }
             if (resultMerger != null) {
@@ -163,7 +174,8 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
                 }
                 result = resultMerger.merge(
                         rets.toArray((Object[]) Array.newInstance(returnType, 0)));
-            } else {
+            }
+            else {
                 throw new RpcException("There is no merger to merge result.");
             }
         }

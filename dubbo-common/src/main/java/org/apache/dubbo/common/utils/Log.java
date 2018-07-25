@@ -21,10 +21,15 @@ import org.apache.log4j.Level;
 import java.io.Serializable;
 
 public class Log implements Serializable {
+
     private static final long serialVersionUID = -534113138054377073L;
+
     private String logName;
+
     private Level logLevel;
+
     private String logMessage;
+
     private String logThread;
 
     public String getLogName() {
@@ -72,22 +77,48 @@ public class Log implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         Log other = (Log) obj;
         if (logLevel == null) {
-            if (other.logLevel != null) return false;
-        } else if (!logLevel.equals(other.logLevel)) return false;
+            if (other.logLevel != null) {
+                return false;
+            }
+        }
+        else if (!logLevel.equals(other.logLevel)) {
+            return false;
+        }
         if (logMessage == null) {
-            if (other.logMessage != null) return false;
-        } else if (!logMessage.equals(other.logMessage)) return false;
+            if (other.logMessage != null) {
+                return false;
+            }
+        }
+        else if (!logMessage.equals(other.logMessage)) {
+            return false;
+        }
         if (logName == null) {
-            if (other.logName != null) return false;
-        } else if (!logName.equals(other.logName)) return false;
+            if (other.logName != null) {
+                return false;
+            }
+        }
+        else if (!logName.equals(other.logName)) {
+            return false;
+        }
         if (logThread == null) {
-            if (other.logThread != null) return false;
-        } else if (!logThread.equals(other.logThread)) return false;
+            if (other.logThread != null) {
+                return false;
+            }
+        }
+        else if (!logThread.equals(other.logThread)) {
+            return false;
+        }
         return true;
     }
 

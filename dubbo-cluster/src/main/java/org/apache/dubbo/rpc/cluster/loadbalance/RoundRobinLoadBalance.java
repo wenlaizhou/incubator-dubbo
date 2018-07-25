@@ -29,7 +29,6 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * Round robin load balance.
- *
  */
 public class RoundRobinLoadBalance extends AbstractLoadBalance {
 
@@ -81,6 +80,7 @@ public class RoundRobinLoadBalance extends AbstractLoadBalance {
     }
 
     private static final class IntegerWrapper {
+
         private int value;
 
         public IntegerWrapper(int value) {

@@ -27,7 +27,9 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     private static final int DEFAULT_MAX_CAPACITY = 1000;
+
     private final Lock lock = new ReentrantLock();
+
     private volatile int maxCapacity;
 
     public LRUCache() {
@@ -49,7 +51,8 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
         lock.lock();
         try {
             return super.containsKey(key);
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
     }
@@ -59,7 +62,8 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
         lock.lock();
         try {
             return super.get(key);
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
     }
@@ -69,7 +73,8 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
         lock.lock();
         try {
             return super.put(key, value);
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
     }
@@ -79,7 +84,8 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
         lock.lock();
         try {
             return super.remove(key);
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
     }
@@ -89,7 +95,8 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
         lock.lock();
         try {
             return super.size();
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
     }
@@ -99,7 +106,8 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
         lock.lock();
         try {
             super.clear();
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
     }

@@ -26,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class FailsafeLoggerTest {
+
     @Test
     public void testFailSafeForLoggingMethod() {
         Logger failLogger = mock(Logger.class);

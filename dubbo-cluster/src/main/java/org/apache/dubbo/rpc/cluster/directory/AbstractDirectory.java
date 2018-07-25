@@ -35,7 +35,6 @@ import java.util.List;
 
 /**
  * Abstract implementation of Directory: Invoker list returned from this Directory's list method have been filtered by Routers
- *
  */
 public abstract class AbstractDirectory<T> implements Directory<T> {
 
@@ -59,8 +58,9 @@ public abstract class AbstractDirectory<T> implements Directory<T> {
     }
 
     public AbstractDirectory(URL url, URL consumerUrl, List<Router> routers) {
-        if (url == null)
+        if (url == null) {
             throw new IllegalArgumentException("url == null");
+        }
         this.url = url;
         this.consumerUrl = consumerUrl;
         setRouters(routers);
@@ -79,7 +79,8 @@ public abstract class AbstractDirectory<T> implements Directory<T> {
                     if (router.getUrl() == null || router.getUrl().getParameter(Constants.RUNTIME_KEY, false)) {
                         invokers = router.route(invokers, getConsumerUrl(), invocation);
                     }
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.error("Failed to execute router: " + getUrl() + ", cause: " + t.getMessage(), t);
                 }
             }

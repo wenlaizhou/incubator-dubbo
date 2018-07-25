@@ -63,7 +63,8 @@ public class InternalThreadLocal<V> {
                     tlv.remove(threadLocalMap);
                 }
             }
-        } finally {
+        }
+        finally {
             InternalThreadLocalMap.remove();
         }
     }
@@ -75,7 +76,8 @@ public class InternalThreadLocal<V> {
         InternalThreadLocalMap threadLocalMap = InternalThreadLocalMap.getIfSet();
         if (threadLocalMap == null) {
             return 0;
-        } else {
+        }
+        else {
             return threadLocalMap.size();
         }
     }
@@ -91,7 +93,8 @@ public class InternalThreadLocal<V> {
         if (v == InternalThreadLocalMap.UNSET || v == null) {
             variablesToRemove = Collections.newSetFromMap(new IdentityHashMap<InternalThreadLocal<?>, Boolean>());
             threadLocalMap.setIndexedVariable(variablesToRemoveIndex, variablesToRemove);
-        } else {
+        }
+        else {
             variablesToRemove = (Set<InternalThreadLocal<?>>) v;
         }
 
@@ -129,7 +132,8 @@ public class InternalThreadLocal<V> {
         V v = null;
         try {
             v = initialValue();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -144,7 +148,8 @@ public class InternalThreadLocal<V> {
     public final void set(V value) {
         if (value == null || value == InternalThreadLocalMap.UNSET) {
             remove();
-        } else {
+        }
+        else {
             InternalThreadLocalMap threadLocalMap = InternalThreadLocalMap.get();
             if (threadLocalMap.setIndexedVariable(index, value)) {
                 addToVariablesToRemove(threadLocalMap, this);
@@ -177,7 +182,8 @@ public class InternalThreadLocal<V> {
         if (v != InternalThreadLocalMap.UNSET) {
             try {
                 onRemoval((V) v);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }

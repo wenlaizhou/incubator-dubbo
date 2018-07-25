@@ -39,7 +39,6 @@ import java.util.Set;
  * Note that retry causes latency.
  * <p>
  * <a href="http://en.wikipedia.org/wiki/Failover">Failover</a>
- *
  */
 public class FailoverClusterInvoker<T> extends AbstractClusterInvoker<T> {
 
@@ -88,14 +87,17 @@ public class FailoverClusterInvoker<T> extends AbstractClusterInvoker<T> {
                             + le.getMessage(), le);
                 }
                 return result;
-            } catch (RpcException e) {
+            }
+            catch (RpcException e) {
                 if (e.isBiz()) { // biz exception.
                     throw e;
                 }
                 le = e;
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 le = new RpcException(e.getMessage(), e);
-            } finally {
+            }
+            finally {
                 providers.add(invoker.getUrl().getAddress());
             }
         }

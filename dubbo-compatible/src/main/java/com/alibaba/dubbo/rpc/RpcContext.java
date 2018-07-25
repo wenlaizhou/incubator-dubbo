@@ -19,4 +19,5 @@ package com.alibaba.dubbo.rpc;
 
 @Deprecated
 public class RpcContext extends org.apache.dubbo.rpc.RpcContext {
+
 }

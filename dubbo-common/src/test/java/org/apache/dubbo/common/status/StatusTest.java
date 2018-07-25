@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.junit.Assert.assertThat;
 
 public class StatusTest {
+
     @Test
     public void testConstructor1() throws Exception {
         Status status = new Status(OK, "message", "description");

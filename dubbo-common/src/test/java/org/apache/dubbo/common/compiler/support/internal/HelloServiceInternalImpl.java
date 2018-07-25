@@ -17,4 +17,5 @@
 package org.apache.dubbo.common.compiler.support.internal;
 
 final class HelloServiceInternalImpl {
+
 }

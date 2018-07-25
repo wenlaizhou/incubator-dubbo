@@ -45,15 +45,21 @@ import static org.mockito.Mockito.mock;
 public class MergeableClusterInvokerTest {
 
     private Directory directory = mock(Directory.class);
+
     private Invoker firstInvoker = mock(Invoker.class);
+
     private Invoker secondInvoker = mock(Invoker.class);
+
     private Invocation invocation = mock(Invocation.class);
 
     private MergeableClusterInvoker<MenuService> mergeableClusterInvoker;
 
     private String[] list1 = {"10", "11", "12"};
+
     private String[] list2 = {"20", "21", "22"};
+
     private String[] list3 = {"23", "24", "25"};
+
     private String[] list4 = {"30", "31", "32"};
 
     private Map<String, List<String>> firstMenuMap = new HashMap<String, List<String>>() {
@@ -71,6 +77,7 @@ public class MergeableClusterInvokerTest {
     };
 
     private Menu firstMenu = new Menu(firstMenuMap);
+
     private Menu secondMenu = new Menu(secondMenuMap);
 
     private URL url = URL.valueOf("test://test/" + MenuService.class.getName());
@@ -80,7 +87,8 @@ public class MergeableClusterInvokerTest {
             List<String> value = first.get(entry.getKey());
             if (value != null) {
                 value.addAll(entry.getValue());
-            } else {
+            }
+            else {
                 first.put(entry.getKey(), new ArrayList<String>(entry.getValue()));
             }
         }
@@ -106,7 +114,7 @@ public class MergeableClusterInvokerTest {
         given(invocation.getParameterTypes()).willReturn(new Class<?>[]{});
         given(invocation.getArguments()).willReturn(new Object[]{});
         given(invocation.getAttachments()).willReturn(new HashMap<String, String>())
-                ;
+        ;
         given(invocation.getInvoker()).willReturn(firstInvoker);
 
         firstInvoker = (Invoker) Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[]{Invoker.class}, new InvocationHandler() {
@@ -187,23 +195,23 @@ public class MergeableClusterInvokerTest {
         given(invocation.getParameterTypes()).willReturn(
                 new Class<?>[]{String.class, List.class});
         given(invocation.getArguments()).willReturn(new Object[]{menu, menuItems})
-                ;
+        ;
         given(invocation.getAttachments()).willReturn(new HashMap<String, String>())
-                ;
+        ;
         given(invocation.getInvoker()).willReturn(firstInvoker);
 
         given(firstInvoker.getUrl()).willReturn(
                 url.addParameter(Constants.GROUP_KEY, "first"));
         given(firstInvoker.getInterface()).willReturn(MenuService.class);
         given(firstInvoker.invoke(invocation)).willReturn(new RpcResult())
-                ;
+        ;
         given(firstInvoker.isAvailable()).willReturn(true);
 
         given(secondInvoker.getUrl()).willReturn(
                 url.addParameter(Constants.GROUP_KEY, "second"));
         given(secondInvoker.getInterface()).willReturn(MenuService.class);
         given(secondInvoker.invoke(invocation)).willReturn(new RpcResult())
-                ;
+        ;
         given(secondInvoker.isAvailable()).willReturn(true);
 
         given(directory.list(invocation)).willReturn(new ArrayList() {

@@ -19,4 +19,5 @@ package com.alibaba.dubbo.remoting;
 
 @Deprecated
 public interface Transporter extends org.apache.dubbo.remoting.Transporter {
+
 }

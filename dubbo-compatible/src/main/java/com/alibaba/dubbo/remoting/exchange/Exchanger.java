@@ -19,4 +19,5 @@ package com.alibaba.dubbo.remoting.exchange;
 
 @Deprecated
 public interface Exchanger extends org.apache.dubbo.remoting.exchange.Exchanger {
+
 }

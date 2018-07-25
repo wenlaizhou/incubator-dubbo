@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.adaptive.HasAdaptiveExt;
 
 public class HasAdaptiveExtImpl1 implements HasAdaptiveExt {
+
     public String echo(URL url, String s) {
         return this.getClass().getSimpleName();
     }

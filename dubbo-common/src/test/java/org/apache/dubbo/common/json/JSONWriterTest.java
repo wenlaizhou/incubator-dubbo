@@ -21,6 +21,7 @@ import junit.framework.TestCase;
 import java.io.StringWriter;
 
 public class JSONWriterTest extends TestCase {
+
     public void testWriteJson() throws Exception {
         StringWriter w = new StringWriter();
         JSONWriter writer = new JSONWriter(w);

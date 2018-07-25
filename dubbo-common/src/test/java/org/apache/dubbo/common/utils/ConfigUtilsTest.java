@@ -37,6 +37,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class ConfigUtilsTest {
+
     @Before
     public void setUp() throws Exception {
         ConfigUtils.setProperties(null);
@@ -124,7 +125,8 @@ public class ConfigUtilsTest {
             assertThat((String) p.get("a"), equalTo("12"));
             assertThat((String) p.get("b"), equalTo("34"));
             assertThat((String) p.get("c"), equalTo("56"));
-        } finally {
+        }
+        finally {
             System.clearProperty(Constants.DUBBO_PROPERTIES_KEY);
         }
     }
@@ -169,7 +171,8 @@ public class ConfigUtilsTest {
         try {
             System.setProperty("dubbo", "system");
             assertThat(ConfigUtils.getProperty("dubbo"), equalTo("system"));
-        } finally {
+        }
+        finally {
             System.clearProperty("dubbo");
         }
     }
@@ -179,7 +182,8 @@ public class ConfigUtilsTest {
         try {
             System.setProperty("dubbo", "system-only");
             assertThat(ConfigUtils.getSystemProperty("dubbo"), equalTo("system-only"));
-        } finally {
+        }
+        finally {
             System.clearProperty("dubbo");
         }
     }
@@ -187,7 +191,7 @@ public class ConfigUtilsTest {
     @Test
     public void testLoadProperties() throws Exception {
         Properties p = ConfigUtils.loadProperties("dubbo.properties");
-        assertThat((String)p.get("dubbo"), equalTo("properties"));
+        assertThat((String) p.get("dubbo"), equalTo("properties"));
     }
 
     @Test
@@ -234,7 +238,8 @@ public class ConfigUtilsTest {
         try {
             ConfigUtils.loadProperties("META-INF/services/org.apache.dubbo.common.status.StatusChecker", false);
             Assert.fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("only 1 META-INF/services/org.apache.dubbo.common.status.StatusChecker file is expected, but 2 dubbo.properties files found on class path:"));
         }
     }
@@ -262,7 +267,8 @@ public class ConfigUtilsTest {
         System.setProperty(Constants.SHUTDOWN_WAIT_KEY, "1234");
         try {
             assertThat(ConfigUtils.getServerShutdownTimeout(), equalTo(1234));
-        } finally {
+        }
+        finally {
             System.clearProperty(Constants.SHUTDOWN_WAIT_KEY);
         }
     }
@@ -272,7 +278,8 @@ public class ConfigUtilsTest {
         System.setProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY, "1234");
         try {
             assertThat(ConfigUtils.getServerShutdownTimeout(), equalTo(1234 * 1000));
-        } finally {
+        }
+        finally {
             System.clearProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY);
         }
     }

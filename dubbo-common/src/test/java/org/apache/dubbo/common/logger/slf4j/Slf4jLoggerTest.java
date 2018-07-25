@@ -29,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class Slf4jLoggerTest {
+
     @Test
     public void testLocationAwareLogger() {
         LocationAwareLogger locationAwareLogger = mock(LocationAwareLogger.class);

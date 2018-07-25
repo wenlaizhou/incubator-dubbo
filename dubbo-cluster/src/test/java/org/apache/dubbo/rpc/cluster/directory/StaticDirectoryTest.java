@@ -35,6 +35,7 @@ import java.util.List;
  * StaticDirectory Test
  */
 public class StaticDirectoryTest {
+
     private URL SCRIPT_URL = URL.valueOf("condition://0.0.0.0/com.foo.BarService");
 
     private URL getRouteUrl(String rule) {

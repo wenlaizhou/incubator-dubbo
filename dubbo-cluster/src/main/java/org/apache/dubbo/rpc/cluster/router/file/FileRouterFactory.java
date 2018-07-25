@@ -57,7 +57,8 @@ public class FileRouterFactory implements RouterFactory {
             URL script = url.setProtocol(protocol).addParameter(Constants.TYPE_KEY, type).addParameter(Constants.RUNTIME_KEY, runtime).addParameterAndEncoded(Constants.RULE_KEY, rule);
 
             return routerFactory.getRouter(script);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }

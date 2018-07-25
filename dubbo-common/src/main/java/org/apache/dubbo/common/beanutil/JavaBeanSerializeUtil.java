@@ -34,9 +34,13 @@ import java.util.Map;
 public final class JavaBeanSerializeUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(JavaBeanSerializeUtil.class);
+
     private static final Map<String, Class<?>> TYPES = new HashMap<String, Class<?>>();
+
     private static final String ARRAY_PREFIX = "[";
+
     private static final String REFERENCE_TYPE_PREFIX = "L";
+
     private static final String REFERENCE_TYPE_SUFFIX = ";";
 
     static {
@@ -81,17 +85,23 @@ public final class JavaBeanSerializeUtil {
     private static JavaBeanDescriptor createDescriptorForSerialize(Class<?> cl) {
         if (cl.isEnum()) {
             return new JavaBeanDescriptor(cl.getName(), JavaBeanDescriptor.TYPE_ENUM);
-        } else if (cl.isArray()) {
+        }
+        else if (cl.isArray()) {
             return new JavaBeanDescriptor(cl.getComponentType().getName(), JavaBeanDescriptor.TYPE_ARRAY);
-        } else if (ReflectUtils.isPrimitive(cl)) {
+        }
+        else if (ReflectUtils.isPrimitive(cl)) {
             return new JavaBeanDescriptor(cl.getName(), JavaBeanDescriptor.TYPE_PRIMITIVE);
-        } else if (Class.class.equals(cl)) {
+        }
+        else if (Class.class.equals(cl)) {
             return new JavaBeanDescriptor(Class.class.getName(), JavaBeanDescriptor.TYPE_CLASS);
-        } else if (Collection.class.isAssignableFrom(cl)) {
+        }
+        else if (Collection.class.isAssignableFrom(cl)) {
             return new JavaBeanDescriptor(cl.getName(), JavaBeanDescriptor.TYPE_COLLECTION);
-        } else if (Map.class.isAssignableFrom(cl)) {
+        }
+        else if (Map.class.isAssignableFrom(cl)) {
             return new JavaBeanDescriptor(cl.getName(), JavaBeanDescriptor.TYPE_MAP);
-        } else {
+        }
+        else {
             return new JavaBeanDescriptor(cl.getName(), JavaBeanDescriptor.TYPE_BEAN);
         }
     }
@@ -99,9 +109,11 @@ public final class JavaBeanSerializeUtil {
     private static JavaBeanDescriptor createDescriptorIfAbsent(Object obj, JavaBeanAccessor accessor, IdentityHashMap<Object, JavaBeanDescriptor> cache) {
         if (cache.containsKey(obj)) {
             return cache.get(obj);
-        } else if (obj instanceof JavaBeanDescriptor) {
+        }
+        else if (obj instanceof JavaBeanDescriptor) {
             return (JavaBeanDescriptor) obj;
-        } else {
+        }
+        else {
             JavaBeanDescriptor result = createDescriptorForSerialize(obj.getClass());
             cache.put(obj, result);
             serializeInternal(result, obj, accessor, cache);
@@ -116,33 +128,40 @@ public final class JavaBeanSerializeUtil {
 
         if (obj.getClass().isEnum()) {
             descriptor.setEnumNameProperty(((Enum<?>) obj).name());
-        } else if (ReflectUtils.isPrimitive(obj.getClass())) {
+        }
+        else if (ReflectUtils.isPrimitive(obj.getClass())) {
             descriptor.setPrimitiveProperty(obj);
-        } else if (Class.class.equals(obj.getClass())) {
+        }
+        else if (Class.class.equals(obj.getClass())) {
             descriptor.setClassNameProperty(((Class<?>) obj).getName());
-        } else if (obj.getClass().isArray()) {
+        }
+        else if (obj.getClass().isArray()) {
             int len = Array.getLength(obj);
             for (int i = 0; i < len; i++) {
                 Object item = Array.get(obj, i);
                 if (item == null) {
                     descriptor.setProperty(i, null);
-                } else {
+                }
+                else {
                     JavaBeanDescriptor itemDescriptor = createDescriptorIfAbsent(item, accessor, cache);
                     descriptor.setProperty(i, itemDescriptor);
                 }
             }
-        } else if (obj instanceof Collection) {
+        }
+        else if (obj instanceof Collection) {
             Collection collection = (Collection) obj;
             int index = 0;
             for (Object item : collection) {
                 if (item == null) {
                     descriptor.setProperty(index++, null);
-                } else {
+                }
+                else {
                     JavaBeanDescriptor itemDescriptor = createDescriptorIfAbsent(item, accessor, cache);
                     descriptor.setProperty(index++, itemDescriptor);
                 }
             }
-        } else if (obj instanceof Map) {
+        }
+        else if (obj instanceof Map) {
             Map map = (Map) obj;
             for (Object key : map.keySet()) {
                 Object value = map.get(key);
@@ -150,7 +169,8 @@ public final class JavaBeanSerializeUtil {
                 Object valueDescriptor = value == null ? null : createDescriptorIfAbsent(value, accessor, cache);
                 descriptor.setProperty(keyDescriptor, valueDescriptor);
             } // ~ end of loop map
-        } else {
+        }
+        else {
             if (JavaBeanAccessor.isAccessByMethod(accessor)) {
                 Map<String, Method> methods = ReflectUtils.getBeanPropertyReadMethods(obj.getClass());
                 for (Map.Entry<String, Method> entry : methods.entrySet()) {
@@ -161,7 +181,8 @@ public final class JavaBeanSerializeUtil {
                         }
                         JavaBeanDescriptor valueDescriptor = createDescriptorIfAbsent(value, accessor, cache);
                         descriptor.setProperty(entry.getKey(), valueDescriptor);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         throw new RuntimeException(e.getMessage(), e);
                     }
                 } // ~ end of loop method map
@@ -178,7 +199,8 @@ public final class JavaBeanSerializeUtil {
                             }
                             JavaBeanDescriptor valueDescriptor = createDescriptorIfAbsent(value, accessor, cache);
                             descriptor.setProperty(entry.getKey(), valueDescriptor);
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e) {
                             throw new RuntimeException(e.getMessage(), e);
                         }
                     }
@@ -222,7 +244,8 @@ public final class JavaBeanSerializeUtil {
                 }
                 Array.set(result, index++, item);
             }
-        } else if (beanDescriptor.isCollectionType()) {
+        }
+        else if (beanDescriptor.isCollectionType()) {
             Collection collection = (Collection) result;
             for (Map.Entry<Object, Object> entry : beanDescriptor) {
                 Object item = entry.getValue();
@@ -233,7 +256,8 @@ public final class JavaBeanSerializeUtil {
                 }
                 collection.add(item);
             }
-        } else if (beanDescriptor.isMapType()) {
+        }
+        else if (beanDescriptor.isMapType()) {
             Map map = (Map) result;
             for (Map.Entry<Object, Object> entry : beanDescriptor) {
                 Object key = entry.getKey();
@@ -250,7 +274,8 @@ public final class JavaBeanSerializeUtil {
                 }
                 map.put(key, value);
             }
-        } else if (beanDescriptor.isBeanType()) {
+        }
+        else if (beanDescriptor.isBeanType()) {
             for (Map.Entry<Object, Object> entry : beanDescriptor) {
                 String property = entry.getKey().toString();
                 Object value = entry.getValue();
@@ -271,7 +296,8 @@ public final class JavaBeanSerializeUtil {
                         method.invoke(result, value);
                         setByMethod = true;
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     LogHelper.warn(logger, "Failed to set property through method " + method, e);
                 }
 
@@ -281,14 +307,17 @@ public final class JavaBeanSerializeUtil {
                         if (field != null) {
                             field.set(result, value);
                         }
-                    } catch (NoSuchFieldException e1) {
+                    }
+                    catch (NoSuchFieldException e1) {
                         LogHelper.warn(logger, "Failed to set field value", e1);
-                    } catch (IllegalAccessException e1) {
+                    }
+                    catch (IllegalAccessException e1) {
                         LogHelper.warn(logger, "Failed to set field value", e1);
                     }
                 }
             }
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported type " + beanDescriptor.getClassName() + ":" + beanDescriptor.getType());
         }
     }
@@ -298,7 +327,8 @@ public final class JavaBeanSerializeUtil {
         Method method = null;
         try {
             method = cls.getMethod(name, valueCls);
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             for (Method m : cls.getMethods()) {
                 if (ReflectUtils.isBeanPropertyWriteMethod(m)
                         && m.getName().equals(name)) {
@@ -332,11 +362,14 @@ public final class JavaBeanSerializeUtil {
             try {
                 constructor.setAccessible(true);
                 return constructor.newInstance(constructorArgs);
-            } catch (InstantiationException e) {
+            }
+            catch (InstantiationException e) {
                 LogHelper.warn(logger, e.getMessage(), e);
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalAccessException e) {
                 LogHelper.warn(logger, e.getMessage(), e);
-            } catch (InvocationTargetException e) {
+            }
+            catch (InvocationTargetException e) {
                 LogHelper.warn(logger, e.getMessage(), e);
             }
         }
@@ -347,21 +380,29 @@ public final class JavaBeanSerializeUtil {
     public static Object getConstructorArg(Class<?> cl) {
         if (boolean.class.equals(cl) || Boolean.class.equals(cl)) {
             return Boolean.FALSE;
-        } else if (byte.class.equals(cl) || Byte.class.equals(cl)) {
+        }
+        else if (byte.class.equals(cl) || Byte.class.equals(cl)) {
             return Byte.valueOf((byte) 0);
-        } else if (short.class.equals(cl) || Short.class.equals(cl)) {
+        }
+        else if (short.class.equals(cl) || Short.class.equals(cl)) {
             return Short.valueOf((short) 0);
-        } else if (int.class.equals(cl) || Integer.class.equals(cl)) {
+        }
+        else if (int.class.equals(cl) || Integer.class.equals(cl)) {
             return Integer.valueOf(0);
-        } else if (long.class.equals(cl) || Long.class.equals(cl)) {
+        }
+        else if (long.class.equals(cl) || Long.class.equals(cl)) {
             return Long.valueOf(0L);
-        } else if (float.class.equals(cl) || Float.class.equals(cl)) {
+        }
+        else if (float.class.equals(cl) || Float.class.equals(cl)) {
             return Float.valueOf((float) 0);
-        } else if (double.class.equals(cl) || Double.class.equals(cl)) {
+        }
+        else if (double.class.equals(cl) || Double.class.equals(cl)) {
             return Double.valueOf((double) 0);
-        } else if (char.class.equals(cl) || Character.class.equals(cl)) {
+        }
+        else if (char.class.equals(cl) || Character.class.equals(cl)) {
             return new Character((char) 0);
-        } else {
+        }
+        else {
             return null;
         }
     }
@@ -375,38 +416,49 @@ public final class JavaBeanSerializeUtil {
             try {
                 result = name2Class(loader, beanDescriptor.getClassNameProperty());
                 return result;
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
-        } else if (beanDescriptor.isEnumType()) {
+        }
+        else if (beanDescriptor.isEnumType()) {
             try {
                 Class<?> enumType = name2Class(loader, beanDescriptor.getClassName());
                 Method method = getEnumValueOfMethod(enumType);
                 result = method.invoke(null, enumType, beanDescriptor.getEnumPropertyName());
                 return result;
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
-        } else if (beanDescriptor.isPrimitiveType()) {
+        }
+        else if (beanDescriptor.isPrimitiveType()) {
             result = beanDescriptor.getPrimitiveProperty();
             return result;
-        } else if (beanDescriptor.isArrayType()) {
+        }
+        else if (beanDescriptor.isArrayType()) {
             Class<?> componentType;
             try {
                 componentType = name2Class(loader, beanDescriptor.getClassName());
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
             result = Array.newInstance(componentType, beanDescriptor.propertySize());
             cache.put(beanDescriptor, result);
-        } else try {
-            Class<?> cl = name2Class(loader, beanDescriptor.getClassName());
-            result = instantiate(cl);
-            cache.put(beanDescriptor, result);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
+        }
+        else {
+            try {
+                Class<?> cl = name2Class(loader, beanDescriptor.getClassName());
+                result = instantiate(cl);
+                cache.put(beanDescriptor, result);
+            }
+            catch (ClassNotFoundException e) {
+                throw new RuntimeException(e.getMessage(), e);
+            }
+            catch (Exception e) {
+                throw new RuntimeException(e.getMessage(), e);
+            }
         }
 
         return result;
@@ -416,7 +468,9 @@ public final class JavaBeanSerializeUtil {
      * Transform the Class.forName String to Class Object.
      *
      * @param name Class.getName()
+     *
      * @return Class
+     *
      * @throws ClassNotFoundException Class.forName
      */
     public static Class<?> name2Class(ClassLoader loader, String name) throws ClassNotFoundException {

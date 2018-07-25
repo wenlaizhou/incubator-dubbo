@@ -135,7 +135,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.echo(null, "haha");
             fail();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             assertEquals("url == null", e.getMessage());
         }
     }
@@ -145,7 +146,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ExtensionLoader.getExtensionLoader(NoAdaptiveMethodExt.class).getAdaptiveExtension();
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(),
                     allOf(containsString("Can not create adaptive extension interface org.apache.dubbo.common.extension.ext5.NoAdaptiveMethodExt"),
                             containsString("No adaptive method on extension org.apache.dubbo.common.extension.ext5.NoAdaptiveMethodExt, refuse to create the adaptive class")));
@@ -154,7 +156,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ExtensionLoader.getExtensionLoader(NoAdaptiveMethodExt.class).getAdaptiveExtension();
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(),
                     allOf(containsString("Can not create adaptive extension interface org.apache.dubbo.common.extension.ext5.NoAdaptiveMethodExt"),
                             containsString("No adaptive method on extension org.apache.dubbo.common.extension.ext5.NoAdaptiveMethodExt, refuse to create the adaptive class")));
@@ -171,7 +174,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.bang(url, 33);
             fail();
-        } catch (UnsupportedOperationException expected) {
+        }
+        catch (UnsupportedOperationException expected) {
             assertThat(expected.getMessage(), containsString("method "));
             assertThat(
                     expected.getMessage(),
@@ -184,7 +188,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ExtensionLoader.getExtensionLoader(NoUrlParamExt.class).getAdaptiveExtension();
             fail();
-        } catch (Exception expected) {
+        }
+        catch (Exception expected) {
             assertThat(expected.getMessage(), containsString("fail to create adaptive class for interface "));
             assertThat(expected.getMessage(), containsString(": not found url parameter or url attribute in parameters of method "));
         }
@@ -217,7 +222,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.echo(holder, "haha");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Fail to get extension("));
         }
 
@@ -226,7 +232,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.echo(holder, "haha");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("No such extension"));
         }
     }
@@ -238,14 +245,16 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.echo(null, "haha");
             fail();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             assertEquals("org.apache.dubbo.common.extension.ext2.UrlHolder argument == null", e.getMessage());
         }
 
         try {
             ext.echo(new UrlHolder(), "haha");
             fail();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             assertEquals("org.apache.dubbo.common.extension.ext2.UrlHolder argument getUrl() == null", e.getMessage());
         }
     }
@@ -260,7 +269,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.bang(url, 33);
             fail();
-        } catch (UnsupportedOperationException expected) {
+        }
+        catch (UnsupportedOperationException expected) {
             assertThat(expected.getMessage(), containsString("method "));
             assertThat(
                     expected.getMessage(),
@@ -280,7 +290,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.echo(holder, "impl1");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Fail to get extension("));
         }
 
@@ -289,7 +300,8 @@ public class ExtensionLoader_Adaptive_Test {
         try {
             ext.echo(holder, "haha");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Fail to get extension(org.apache.dubbo.common.extension.ext2.Ext2) name from url"));
         }
     }

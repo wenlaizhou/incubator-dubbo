@@ -46,13 +46,21 @@ import static org.mockito.Mockito.mock;
 
 @SuppressWarnings("unchecked")
 public class FileRouterEngineTest {
+
     private static boolean isScriptUnsupported = new ScriptEngineManager().getEngineByName("javascript") == null;
+
     List<Invoker<FileRouterEngineTest>> invokers = new ArrayList<Invoker<FileRouterEngineTest>>();
+
     Invoker<FileRouterEngineTest> invoker1 = mock(Invoker.class);
+
     Invoker<FileRouterEngineTest> invoker2 = mock(Invoker.class);
+
     Invocation invocation;
+
     Directory<FileRouterEngineTest> dic;
+
     Result result = new RpcResult();
+
     private RouterFactory routerFactory = ExtensionLoader.getExtensionLoader(RouterFactory.class).getAdaptiveExtension();
 
     @BeforeClass
@@ -67,7 +75,9 @@ public class FileRouterEngineTest {
 
     @Test
     public void testRouteNotAvailable() {
-        if (isScriptUnsupported) return;
+        if (isScriptUnsupported) {
+            return;
+        }
         URL url = initUrl("notAvailablerule.javascript");
         initInvocation("method1");
         initDic(url);
@@ -84,7 +94,9 @@ public class FileRouterEngineTest {
 
     @Test
     public void testRouteAvailable() {
-        if (isScriptUnsupported) return;
+        if (isScriptUnsupported) {
+            return;
+        }
         URL url = initUrl("availablerule.javascript");
         initInvocation("method1");
         initDic(url);
@@ -101,7 +113,9 @@ public class FileRouterEngineTest {
 
     @Test
     public void testRouteByMethodName() {
-        if (isScriptUnsupported) return;
+        if (isScriptUnsupported) {
+            return;
+        }
         URL url = initUrl("methodrule.javascript");
         {
             initInvocation("method1");
@@ -163,6 +177,7 @@ public class FileRouterEngineTest {
     }
 
     static class MockClusterInvoker<T> extends AbstractClusterInvoker<T> {
+
         private Invoker<T> selectedInvoker;
 
         public MockClusterInvoker(Directory<T> directory) {

@@ -30,6 +30,7 @@ import java.io.Writer;
  */
 @Deprecated
 public class JSON {
+
     public static final char LBRACE = '{', RBRACE = '}';
 
     public static final char LSQUARE = '[', RSQUARE = ']';
@@ -37,8 +38,10 @@ public class JSON {
     public static final char COMMA = ',', COLON = ':', QUOTE = '"';
 
     public static final String NULL = "null";
+
     // state.
     public static final byte END = 0, START = 1, OBJECT_ITEM = 2, OBJECT_VALUE = 3, ARRAY_ITEM = 4;
+
     static final JSONConverter DEFAULT_CONVERTER = new GenericJSONConverter();
 
     private JSON() {
@@ -48,16 +51,21 @@ public class JSON {
      * json string.
      *
      * @param obj object.
+     *
      * @return json string.
+     *
      * @throws IOException
      */
     public static String json(Object obj) throws IOException {
-        if (obj == null) return NULL;
+        if (obj == null) {
+            return NULL;
+        }
         StringWriter sw = new StringWriter();
         try {
             json(obj, sw);
             return sw.getBuffer().toString();
-        } finally {
+        }
+        finally {
             sw.close();
         }
     }
@@ -67,6 +75,7 @@ public class JSON {
      *
      * @param obj    object.
      * @param writer writer.
+     *
      * @throws IOException
      */
     public static void json(Object obj, Writer writer) throws IOException {
@@ -74,10 +83,12 @@ public class JSON {
     }
 
     public static void json(Object obj, Writer writer, boolean writeClass) throws IOException {
-        if (obj == null)
+        if (obj == null) {
             writer.write(NULL);
-        else
+        }
+        else {
             json(obj, new JSONWriter(writer), writeClass);
+        }
     }
 
     /**
@@ -85,16 +96,21 @@ public class JSON {
      *
      * @param obj        object.
      * @param properties property name array.
+     *
      * @return json string.
+     *
      * @throws IOException
      */
     public static String json(Object obj, String[] properties) throws IOException {
-        if (obj == null) return NULL;
+        if (obj == null) {
+            return NULL;
+        }
         StringWriter sw = new StringWriter();
         try {
             json(obj, properties, sw);
             return sw.getBuffer().toString();
-        } finally {
+        }
+        finally {
             sw.close();
         }
     }
@@ -109,26 +125,32 @@ public class JSON {
      * @param obj        object.
      * @param properties property name array.
      * @param writer     writer.
+     *
      * @throws IOException
      */
     public static void json(Object obj, final String[] properties, Writer writer, boolean writeClass) throws IOException {
-        if (obj == null)
+        if (obj == null) {
             writer.write(NULL);
-        else
+        }
+        else {
             json(obj, properties, new JSONWriter(writer), writeClass);
+        }
     }
 
     private static void json(Object obj, JSONWriter jb, boolean writeClass) throws IOException {
-        if (obj == null)
+        if (obj == null) {
             jb.valueNull();
-        else
+        }
+        else {
             DEFAULT_CONVERTER.writeValue(obj, jb, writeClass);
+        }
     }
 
     private static void json(Object obj, String[] properties, JSONWriter jb, boolean writeClass) throws IOException {
         if (obj == null) {
             jb.valueNull();
-        } else {
+        }
+        else {
             Wrapper wrapper = Wrapper.getWrapper(obj.getClass());
 
             Object value;
@@ -136,10 +158,12 @@ public class JSON {
             for (String prop : properties) {
                 jb.objectItem(prop);
                 value = wrapper.getPropertyValue(obj, prop);
-                if (value == null)
+                if (value == null) {
                     jb.valueNull();
-                else
+                }
+                else {
                     DEFAULT_CONVERTER.writeValue(value, jb, writeClass);
+                }
             }
             jb.objectEnd();
         }
@@ -149,16 +173,20 @@ public class JSON {
      * parse json.
      *
      * @param json json source.
+     *
      * @return JSONObject or JSONArray or Boolean or Long or Double or String or null
+     *
      * @throws ParseException
      */
     public static Object parse(String json) throws ParseException {
         StringReader reader = new StringReader(json);
         try {
             return parse(reader);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new ParseException(e.getMessage());
-        } finally {
+        }
+        finally {
             reader.close();
         }
     }
@@ -167,7 +195,9 @@ public class JSON {
      * parse json.
      *
      * @param reader reader.
+     *
      * @return JSONObject or JSONArray or Boolean or Long or Double or String or null
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -180,16 +210,20 @@ public class JSON {
      *
      * @param json json string.
      * @param type target type.
+     *
      * @return result.
+     *
      * @throws ParseException
      */
     public static <T> T parse(String json, Class<T> type) throws ParseException {
         StringReader reader = new StringReader(json);
         try {
             return parse(reader, type);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new ParseException(e.getMessage());
-        } finally {
+        }
+        finally {
             reader.close();
         }
     }
@@ -199,7 +233,9 @@ public class JSON {
      *
      * @param reader json source.
      * @param type   target type.
+     *
      * @return result.
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -213,16 +249,20 @@ public class JSON {
      *
      * @param json  json string.
      * @param types target type array.
+     *
      * @return result.
+     *
      * @throws ParseException
      */
     public static Object[] parse(String json, Class<?>[] types) throws ParseException {
         StringReader reader = new StringReader(json);
         try {
             return (Object[]) parse(reader, types);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new ParseException(e.getMessage());
-        } finally {
+        }
+        finally {
             reader.close();
         }
     }
@@ -232,7 +272,9 @@ public class JSON {
      *
      * @param reader json source.
      * @param types  target type array.
+     *
      * @return result.
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -245,16 +287,20 @@ public class JSON {
      *
      * @param json    json string.
      * @param handler handler.
+     *
      * @return result.
+     *
      * @throws ParseException
      */
     public static Object parse(String json, JSONVisitor handler) throws ParseException {
         StringReader reader = new StringReader(json);
         try {
             return parse(reader, handler);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new ParseException(e.getMessage());
-        } finally {
+        }
+        finally {
             reader.close();
         }
     }
@@ -264,7 +310,9 @@ public class JSON {
      *
      * @param reader  json source.
      * @param handler handler.
+     *
      * @return resule.
+     *
      * @throws IOException
      * @throws ParseException
      */
@@ -326,7 +374,8 @@ public class JSON {
                         {
                             if (stack.isEmpty()) {
                                 state = END;
-                            } else {
+                            }
+                            else {
                                 Entry entry = stack.pop();
                                 state = entry.state;
                                 value = entry.value;
@@ -385,7 +434,8 @@ public class JSON {
                         {
                             if (stack.isEmpty()) {
                                 state = END;
-                            } else {
+                            }
+                            else {
                                 Entry entry = stack.pop();
                                 state = entry.state;
                                 value = entry.value;
@@ -556,7 +606,8 @@ public class JSON {
                             if (states.isEmpty()) {
                                 value = handler.arrayEnd(index);
                                 state = END;
-                            } else {
+                            }
+                            else {
                                 value = handler.arrayEnd(index);
                                 int[] tmp = states.pop();
                                 state = tmp[0];
@@ -606,7 +657,8 @@ public class JSON {
                             if (states.isEmpty()) {
                                 value = handler.objectEnd(index);
                                 state = END;
-                            } else {
+                            }
+                            else {
                                 value = handler.objectEnd(index);
                                 int[] tmp = states.pop();
                                 state = tmp[0];
@@ -690,7 +742,9 @@ public class JSON {
     }
 
     private static class Entry {
+
         byte state;
+
         Object value;
 
         Entry(byte s, Object v) {

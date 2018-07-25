@@ -80,6 +80,7 @@ import java.util.concurrent.RejectedExecutionException;
  * is more efficient and reliable to create a {@code ListenableFuture} directly.
  */
 public interface ListenableFuture<V> extends Future<V> {
+
     /**
      * Registers a listener to be {@linkplain Executor#execute(Runnable) run} on
      * the given executor.  The listener will run when the {@code Future}'s
@@ -123,6 +124,7 @@ public interface ListenableFuture<V> extends Future<V> {
      *
      * @param listener the listener to run when the computation is complete
      * @param executor the executor to run the listener in
+     *
      * @throws NullPointerException       if the executor or listener was null
      * @throws RejectedExecutionException if we tried to execute the listener
      *                                    immediately but the executor rejected it.

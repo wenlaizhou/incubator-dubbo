@@ -39,7 +39,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Invoke a specific number of invokers concurrently, usually used for demanding real-time operations, but need to waste more service resources.
  *
  * <a href="http://en.wikipedia.org/wiki/Fork_(topology)">Fork</a>
- *
  */
 public class ForkingClusterInvoker<T> extends AbstractClusterInvoker<T> {
 
@@ -63,7 +62,8 @@ public class ForkingClusterInvoker<T> extends AbstractClusterInvoker<T> {
         final int timeout = getUrl().getParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT);
         if (forks <= 0 || forks >= invokers.size()) {
             selected = invokers;
-        } else {
+        }
+        else {
             selected = new ArrayList<Invoker<T>>();
             for (int i = 0; i < forks; i++) {
                 // TODO. Add some comment here, refer chinese version for more details.
@@ -83,7 +83,8 @@ public class ForkingClusterInvoker<T> extends AbstractClusterInvoker<T> {
                     try {
                         Result result = invoker.invoke(invocation);
                         ref.offer(result);
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         int value = count.incrementAndGet();
                         if (value >= selected.size()) {
                             ref.offer(e);
@@ -99,7 +100,8 @@ public class ForkingClusterInvoker<T> extends AbstractClusterInvoker<T> {
                 throw new RpcException(e instanceof RpcException ? ((RpcException) e).getCode() : 0, "Failed to forking invoke provider " + selected + ", but no luck to perform the invocation. Last error is: " + e.getMessage(), e.getCause() != null ? e.getCause() : e);
             }
             return (Result) ret;
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             throw new RpcException("Failed to forking invoke provider " + selected + ", but no luck to perform the invocation. Last error is: " + e.getMessage(), e);
         }
     }

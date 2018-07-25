@@ -38,28 +38,33 @@ public abstract class AbstractCompiler implements Compiler {
         String pkg;
         if (matcher.find()) {
             pkg = matcher.group(1);
-        } else {
+        }
+        else {
             pkg = "";
         }
         matcher = CLASS_PATTERN.matcher(code);
         String cls;
         if (matcher.find()) {
             cls = matcher.group(1);
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("No such class name in " + code);
         }
         String className = pkg != null && pkg.length() > 0 ? pkg + "." + cls : cls;
         try {
             return Class.forName(className, true, ClassHelper.getCallerClassLoader(getClass()));
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             if (!code.endsWith("}")) {
                 throw new IllegalStateException("The java code not endsWith \"}\", code: \n" + code + "\n");
             }
             try {
                 return doCompile(className, code);
-            } catch (RuntimeException t) {
+            }
+            catch (RuntimeException t) {
                 throw t;
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 throw new IllegalStateException("Failed to compile class, cause: " + t.getMessage() + ", class: " + className + ", code: \n" + code + "\n, stack: " + ClassUtils.toString(t));
             }
         }

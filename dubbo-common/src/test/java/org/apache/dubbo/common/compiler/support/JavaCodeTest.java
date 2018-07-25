@@ -34,7 +34,7 @@ public class JavaCodeTest {
         return code.toString();
     }
 
-    String getSimleCodeWithoutPackage(){
+    String getSimleCodeWithoutPackage() {
         StringBuilder code = new StringBuilder();
         code.append("public class HelloServiceImpl" + SUBFIX.getAndIncrement() + "implements org.apache.dubbo.common.compiler.support.HelloService.HelloService {");
         code.append("   public String sayHello() { ");
@@ -44,7 +44,7 @@ public class JavaCodeTest {
         return code.toString();
     }
 
-    String getSimleCodeWithSyntax(){
+    String getSimleCodeWithSyntax() {
         StringBuilder code = new StringBuilder();
         code.append("package org.apache.dubbo.common.compiler.support;");
 
@@ -57,7 +57,7 @@ public class JavaCodeTest {
     }
 
     // only used for javassist
-    String getSimleCodeWithSyntax0(){
+    String getSimleCodeWithSyntax0() {
         StringBuilder code = new StringBuilder();
         code.append("package org.apache.dubbo.common.compiler.support;");
 

@@ -42,6 +42,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 public class ReflectUtilsTest {
+
     @Test
     public void testIsPrimitives() throws Exception {
         assertTrue(ReflectUtils.isPrimitives(boolean[].class));
@@ -348,7 +349,8 @@ public class ReflectUtilsTest {
         try {
             ReflectUtils.findMethodByMethodSignature(TestedClass.class, "overrideMethod", null);
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Not unique method for method name("));
         }
     }
@@ -358,7 +360,8 @@ public class ReflectUtilsTest {
         try {
             ReflectUtils.findMethodByMethodSignature(TestedClass.class, "notExsited", null);
             fail();
-        } catch (NoSuchMethodException expected) {
+        }
+        catch (NoSuchMethodException expected) {
             assertThat(expected.getMessage(), containsString("No such method "));
             assertThat(expected.getMessage(), containsString("in class"));
         }
@@ -396,9 +399,13 @@ public class ReflectUtilsTest {
     }
 
     public static class EmptyClass {
+
         private EmptyProperty property;
+
         public boolean set;
+
         public static String s;
+
         private transient int i;
 
         public EmptyProperty getProperty() {
@@ -431,9 +438,11 @@ public class ReflectUtilsTest {
     }
 
     public static class EmptyProperty {
+
     }
 
     static class TestedClass {
+
         public void method1(int x) {
         }
 
@@ -452,10 +461,12 @@ public class ReflectUtilsTest {
 
 
     interface Foo<A, B> {
+
         A hello(B b);
     }
 
     static class Foo1 implements Foo<String, Integer> {
+
         @Override
         public String hello(Integer integer) {
             return null;
@@ -463,6 +474,7 @@ public class ReflectUtilsTest {
     }
 
     static class Foo2 implements Foo<List<String>, int[]> {
+
         public Foo2(List<String> list, int[] ints) {
         }
 
@@ -473,6 +485,7 @@ public class ReflectUtilsTest {
     }
 
     static class Foo3 implements Foo<Foo1, Foo2> {
+
         public Foo3(Foo foo) {
         }
 

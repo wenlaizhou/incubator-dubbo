@@ -42,6 +42,7 @@ public interface LoadBalance {
      * @param invokers   invokers.
      * @param url        refer url
      * @param invocation invocation.
+     *
      * @return selected invoker.
      */
     @Adaptive("loadbalance")

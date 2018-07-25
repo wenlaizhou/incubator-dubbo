@@ -25,6 +25,7 @@ import java.io.File;
 public class Slf4jLoggerAdapter implements LoggerAdapter {
 
     private Level level;
+
     private File file;
 
     @Override

@@ -23,6 +23,7 @@ import org.apache.dubbo.common.extension.SPI;
 
 @SPI
 public interface HasAdaptiveExt {
+
     @Adaptive
     String echo(URL url, String s);
 }

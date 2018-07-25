@@ -19,4 +19,5 @@ package com.alibaba.dubbo.container;
 
 @Deprecated
 public interface Container extends org.apache.dubbo.container.Container {
+
 }

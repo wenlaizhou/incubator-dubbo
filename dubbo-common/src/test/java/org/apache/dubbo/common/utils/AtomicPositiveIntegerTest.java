@@ -27,6 +27,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class AtomicPositiveIntegerTest {
+
     private AtomicPositiveInteger i1 = new AtomicPositiveInteger();
 
     private AtomicPositiveInteger i2 = new AtomicPositiveInteger(127);
@@ -48,7 +49,8 @@ public class AtomicPositiveIntegerTest {
         try {
             i1.set(-1);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(),
                     allOf(containsString("new value"), containsString("< 0")));
         }
@@ -122,7 +124,8 @@ public class AtomicPositiveIntegerTest {
 
         try {
             i1.getAndSet(-1);
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(),
                     allOf(containsString("new value"), containsString("< 0")));
         }

@@ -19,4 +19,5 @@ package com.alibaba.dubbo.rpc.cluster;
 
 @Deprecated
 public interface Merger extends org.apache.dubbo.rpc.cluster.Merger {
+
 }

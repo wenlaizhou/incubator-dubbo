@@ -39,7 +39,8 @@ public class StatusUtils {
                     msg.append(",");
                 }
                 msg.append(key);
-            } else if (Level.WARN.equals(l)) {
+            }
+            else if (Level.WARN.equals(l)) {
                 if (!Level.ERROR.equals(level)) {
                     level = Level.WARN;
                 }

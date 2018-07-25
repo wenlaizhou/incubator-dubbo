@@ -21,6 +21,7 @@ package org.apache.dubbo.common.json;
  */
 @Deprecated
 public interface JSONVisitor {
+
     public static final String CLASS_PROPERTY = "class";
 
     /**
@@ -33,7 +34,9 @@ public interface JSONVisitor {
      *
      * @param obj     root obj.
      * @param isValue is json value.
+     *
      * @return parse result.
+     *
      * @throws ParseException
      */
     Object end(Object obj, boolean isValue) throws ParseException;
@@ -49,7 +52,9 @@ public interface JSONVisitor {
      * object end, return object value.
      *
      * @param count property count.
+     *
      * @return object value.
+     *
      * @throws ParseException
      */
     Object objectEnd(int count) throws ParseException;
@@ -58,6 +63,7 @@ public interface JSONVisitor {
      * object property name.
      *
      * @param name name.
+     *
      * @throws ParseException
      */
     void objectItem(String name) throws ParseException;
@@ -67,6 +73,7 @@ public interface JSONVisitor {
      *
      * @param obj     obj.
      * @param isValue is json value.
+     *
      * @throws ParseException
      */
     void objectItemValue(Object obj, boolean isValue) throws ParseException;
@@ -82,7 +89,9 @@ public interface JSONVisitor {
      * array end, return array value.
      *
      * @param count count.
+     *
      * @return array value.
+     *
      * @throws ParseException
      */
     Object arrayEnd(int count) throws ParseException;
@@ -91,6 +100,7 @@ public interface JSONVisitor {
      * array item.
      *
      * @param index index.
+     *
      * @throws ParseException
      */
     void arrayItem(int index) throws ParseException;
@@ -101,6 +111,7 @@ public interface JSONVisitor {
      * @param index   index.
      * @param obj     item.
      * @param isValue is json value.
+     *
      * @throws ParseException
      */
     void arrayItemValue(int index, Object obj, boolean isValue) throws ParseException;

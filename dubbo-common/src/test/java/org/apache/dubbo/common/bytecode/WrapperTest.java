@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class WrapperTest {
+
     @Test
     public void testMain() throws Exception {
         Wrapper w = Wrapper.getWrapper(I1.class);
@@ -50,7 +51,8 @@ public class WrapperTest {
             w.invokeMethod(obj, "hello", new Class<?>[]{String.class, String.class},
                     new Object[]{"qianlei", "badboy"});
             fail();
-        } catch (NoSuchMethodException expected) {
+        }
+        catch (NoSuchMethodException expected) {
         }
     }
 
@@ -126,10 +128,12 @@ public class WrapperTest {
     }
 
     public static interface I0 {
+
         String getName();
     }
 
     public static interface I1 extends I0 {
+
         void setName(String name);
 
         void hello(String name);
@@ -142,14 +146,17 @@ public class WrapperTest {
     }
 
     public static interface EmptyService {
+
     }
 
     public static interface Parent1 {
+
         void hello();
     }
 
 
     public static interface Parent2 {
+
         void world();
     }
 
@@ -158,10 +165,12 @@ public class WrapperTest {
     }
 
     public static class Impl0 {
+
         public float a, b, c;
     }
 
     public static class Impl1 implements I1 {
+
         private String name = "you name";
 
         private float fv = 0;
@@ -192,5 +201,6 @@ public class WrapperTest {
     }
 
     public static class EmptyServiceImpl implements EmptyService {
+
     }
 }

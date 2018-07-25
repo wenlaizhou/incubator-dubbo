@@ -19,4 +19,5 @@ package com.alibaba.dubbo.cache;
 
 @Deprecated
 public interface Cache extends org.apache.dubbo.cache.Cache {
+
 }

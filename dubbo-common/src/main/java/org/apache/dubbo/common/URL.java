@@ -68,7 +68,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @see java.net.URL
  * @see java.net.URI
  */
-public /**final**/ class URL implements Serializable {
+public /**final**/
+class URL implements Serializable {
 
     private static final long serialVersionUID = -1985165475234910535L;
 
@@ -163,7 +164,8 @@ public /**final**/ class URL implements Serializable {
         this.path = path;
         if (parameters == null) {
             parameters = new HashMap<String, String>();
-        } else {
+        }
+        else {
             parameters = new HashMap<String, String>(parameters);
         }
         this.parameters = Collections.unmodifiableMap(parameters);
@@ -173,7 +175,9 @@ public /**final**/ class URL implements Serializable {
      * Parse url string
      *
      * @param url URL string
+     *
      * @return URL instance
+     *
      * @see URL
      */
     public static URL valueOf(String url) {
@@ -197,7 +201,8 @@ public /**final**/ class URL implements Serializable {
                     int j = part.indexOf('=');
                     if (j >= 0) {
                         parameters.put(part.substring(0, j), part.substring(j + 1));
-                    } else {
+                    }
+                    else {
                         parameters.put(part, part);
                     }
                 }
@@ -206,14 +211,19 @@ public /**final**/ class URL implements Serializable {
         }
         i = url.indexOf("://");
         if (i >= 0) {
-            if (i == 0) throw new IllegalStateException("url missing protocol: \"" + url + "\"");
+            if (i == 0) {
+                throw new IllegalStateException("url missing protocol: \"" + url + "\"");
+            }
             protocol = url.substring(0, i);
             url = url.substring(i + 3);
-        } else {
+        }
+        else {
             // case: file:/path/to/file.txt
             i = url.indexOf(":/");
             if (i >= 0) {
-                if (i == 0) throw new IllegalStateException("url missing protocol: \"" + url + "\"");
+                if (i == 0) {
+                    throw new IllegalStateException("url missing protocol: \"" + url + "\"");
+                }
                 protocol = url.substring(0, i);
                 url = url.substring(i + 1);
             }
@@ -239,7 +249,9 @@ public /**final**/ class URL implements Serializable {
             port = Integer.parseInt(url.substring(i + 1));
             url = url.substring(0, i);
         }
-        if (url.length() > 0) host = url;
+        if (url.length() > 0) {
+            host = url;
+        }
         return new URL(protocol, username, password, host, port, path, parameters);
     }
 
@@ -249,7 +261,8 @@ public /**final**/ class URL implements Serializable {
         }
         try {
             return URLEncoder.encode(value, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
@@ -260,7 +273,8 @@ public /**final**/ class URL implements Serializable {
         }
         try {
             return URLDecoder.decode(value, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
@@ -308,7 +322,7 @@ public /**final**/ class URL implements Serializable {
 
     /**
      * Fetch IP address for this URL.
-     *
+     * <p>
      * Pls. note that IP should be used instead of Host when to compare with socket's address or to search in a map
      * which use address as its key.
      *
@@ -344,7 +358,8 @@ public /**final**/ class URL implements Serializable {
         if (i >= 0) {
             host = address.substring(0, i);
             port = Integer.parseInt(address.substring(i + 1));
-        } else {
+        }
+        else {
             host = address;
         }
         return new URL(protocol, username, password, host, port, path, getParameters());
@@ -384,7 +399,8 @@ public /**final**/ class URL implements Serializable {
             int i = address.indexOf(':');
             if (i < 0) {
                 return address + ":" + defaultPort;
-            } else if (Integer.parseInt(address.substring(i + 1)) == 0) {
+            }
+            else if (Integer.parseInt(address.substring(i + 1)) == 0) {
                 return address.substring(0, i + 1) + defaultPort;
             }
         }
@@ -908,17 +924,23 @@ public /**final**/ class URL implements Serializable {
     }
 
     public URL addParameter(String key, Enum<?> value) {
-        if (value == null) return this;
+        if (value == null) {
+            return this;
+        }
         return addParameter(key, String.valueOf(value));
     }
 
     public URL addParameter(String key, Number value) {
-        if (value == null) return this;
+        if (value == null) {
+            return this;
+        }
         return addParameter(key, String.valueOf(value));
     }
 
     public URL addParameter(String key, CharSequence value) {
-        if (value == null || value.length() == 0) return this;
+        if (value == null || value.length() == 0) {
+            return this;
+        }
         return addParameter(key, String.valueOf(value));
     }
 
@@ -954,6 +976,7 @@ public /**final**/ class URL implements Serializable {
      * Add parameters to a new url.
      *
      * @param parameters parameters in key-value pairs
+     *
      * @return A new URL
      */
     public URL addParameters(Map<String, String> parameters) {
@@ -969,7 +992,8 @@ public /**final**/ class URL implements Serializable {
                     hasAndEqual = false;
                     break;
                 }
-            } else {
+            }
+            else {
                 if (!value.equals(entry.getValue())) {
                     hasAndEqual = false;
                     break;
@@ -977,7 +1001,9 @@ public /**final**/ class URL implements Serializable {
             }
         }
         // return immediately if there's no change
-        if (hasAndEqual) return this;
+        if (hasAndEqual) {
+            return this;
+        }
 
         Map<String, String> map = new HashMap<String, String>(getParameters());
         map.putAll(parameters);
@@ -1048,35 +1074,47 @@ public /**final**/ class URL implements Serializable {
     }
 
     public String getRawParameter(String key) {
-        if ("protocol".equals(key))
+        if ("protocol".equals(key)) {
             return protocol;
-        if ("username".equals(key))
+        }
+        if ("username".equals(key)) {
             return username;
-        if ("password".equals(key))
+        }
+        if ("password".equals(key)) {
             return password;
-        if ("host".equals(key))
+        }
+        if ("host".equals(key)) {
             return host;
-        if ("port".equals(key))
+        }
+        if ("port".equals(key)) {
             return String.valueOf(port);
-        if ("path".equals(key))
+        }
+        if ("path".equals(key)) {
             return path;
+        }
         return getParameter(key);
     }
 
     public Map<String, String> toMap() {
         Map<String, String> map = new HashMap<String, String>(parameters);
-        if (protocol != null)
+        if (protocol != null) {
             map.put("protocol", protocol);
-        if (username != null)
+        }
+        if (username != null) {
             map.put("username", username);
-        if (password != null)
+        }
+        if (password != null) {
             map.put("password", password);
-        if (host != null)
+        }
+        if (host != null) {
             map.put("host", host);
-        if (port > 0)
+        }
+        if (port > 0) {
             map.put("port", String.valueOf(port));
-        if (path != null)
+        }
+        if (path != null) {
             map.put("path", path);
+        }
         return map;
     }
 
@@ -1139,7 +1177,8 @@ public /**final**/ class URL implements Serializable {
                             buf.append("?");
                         }
                         first = false;
-                    } else {
+                    }
+                    else {
                         buf.append("&");
                     }
                     buf.append(entry.getKey());
@@ -1171,7 +1210,8 @@ public /**final**/ class URL implements Serializable {
         String host;
         if (useIP) {
             host = getIp();
-        } else {
+        }
+        else {
             host = getHost();
         }
         if (host != null && host.length() > 0) {
@@ -1184,7 +1224,8 @@ public /**final**/ class URL implements Serializable {
         String path;
         if (useService) {
             path = getServiceKey();
-        } else {
+        }
+        else {
             path = getPath();
         }
         if (path != null && path.length() > 0) {
@@ -1200,7 +1241,8 @@ public /**final**/ class URL implements Serializable {
     public java.net.URL toJavaURL() {
         try {
             return new java.net.URL(toString());
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -1211,7 +1253,9 @@ public /**final**/ class URL implements Serializable {
 
     public String getServiceKey() {
         String inf = getServiceInterface();
-        if (inf == null) return null;
+        if (inf == null) {
+            return null;
+        }
         StringBuilder buf = new StringBuilder();
         String group = getParameter(Constants.GROUP_KEY);
         if (group != null && group.length() > 0) {
@@ -1352,45 +1396,67 @@ public /**final**/ class URL implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         URL other = (URL) obj;
         if (host == null) {
-            if (other.host != null)
+            if (other.host != null) {
                 return false;
-        } else if (!host.equals(other.host))
+            }
+        }
+        else if (!host.equals(other.host)) {
             return false;
+        }
         if (parameters == null) {
-            if (other.parameters != null)
+            if (other.parameters != null) {
                 return false;
-        } else if (!parameters.equals(other.parameters))
+            }
+        }
+        else if (!parameters.equals(other.parameters)) {
             return false;
+        }
         if (password == null) {
-            if (other.password != null)
+            if (other.password != null) {
                 return false;
-        } else if (!password.equals(other.password))
+            }
+        }
+        else if (!password.equals(other.password)) {
             return false;
+        }
         if (path == null) {
-            if (other.path != null)
+            if (other.path != null) {
                 return false;
-        } else if (!path.equals(other.path))
+            }
+        }
+        else if (!path.equals(other.path)) {
             return false;
-        if (port != other.port)
+        }
+        if (port != other.port) {
             return false;
+        }
         if (protocol == null) {
-            if (other.protocol != null)
+            if (other.protocol != null) {
                 return false;
-        } else if (!protocol.equals(other.protocol))
+            }
+        }
+        else if (!protocol.equals(other.protocol)) {
             return false;
+        }
         if (username == null) {
-            if (other.username != null)
+            if (other.username != null) {
                 return false;
-        } else if (!username.equals(other.username))
+            }
+        }
+        else if (!username.equals(other.username)) {
             return false;
+        }
         return true;
     }
 

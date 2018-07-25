@@ -104,7 +104,8 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
 
         if (!CollectionUtils.isEmpty(resolvedPackagesToScan)) {
             registerServiceBeans(resolvedPackagesToScan, registry);
-        } else {
+        }
+        else {
             if (logger.isWarnEnabled()) {
                 logger.warn("packagesToScan is empty , ServiceBean registry will be ignored!");
             }
@@ -151,7 +152,8 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
                             " } were scanned under package[" + packageToScan + "]");
                 }
 
-            } else {
+            }
+            else {
 
                 if (logger.isWarnEnabled()) {
                     logger.warn("No Spring Bean annotating Dubbo's @Service was found under package["
@@ -170,7 +172,9 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
      * thus it maybe a potential problem on bean name generation.
      *
      * @param registry {@link BeanDefinitionRegistry}
+     *
      * @return {@link BeanNameGenerator} instance
+     *
      * @see SingletonBeanRegistry
      * @see AnnotationConfigUtils#CONFIGURATION_BEAN_NAME_GENERATOR
      * @see ConfigurationClassPostProcessor#processConfigBeanDefinitions
@@ -211,7 +215,9 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
      * @param scanner       {@link ClassPathBeanDefinitionScanner}
      * @param packageToScan pachage to scan
      * @param registry      {@link BeanDefinitionRegistry}
+     *
      * @return non-null
+     *
      * @since 2.5.8
      */
     private Set<BeanDefinitionHolder> findServiceBeanDefinitionHolders(
@@ -240,6 +246,7 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
      * @param beanDefinitionHolder
      * @param registry
      * @param scanner
+     *
      * @see ServiceBean
      * @see BeanDefinition
      */
@@ -268,7 +275,8 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
                         "] of ServiceBean has been registered with name : " + beanName);
             }
 
-        } else {
+        }
+        else {
 
             if (logger.isWarnEnabled()) {
                 logger.warn("The Duplicated BeanDefinition[" + serviceBeanDefinition +
@@ -286,7 +294,9 @@ public class CompatibleServiceAnnotationBeanPostProcessor implements BeanDefinit
      * @param service
      * @param interfaceClass           the class of interface annotated {@link Service}
      * @param annotatedServiceBeanName the bean name of annotated {@link Service}
+     *
      * @return ServiceBean@interfaceClassName#annotatedServiceBeanName
+     *
      * @since 2.5.9
      */
     private String generateServiceBeanName(Service service, Class<?> interfaceClass, String annotatedServiceBeanName) {

@@ -27,7 +27,6 @@ import java.util.Random;
 
 /**
  * LeastActiveLoadBalance
- *
  */
 public class LeastActiveLoadBalance extends AbstractLoadBalance {
 
@@ -55,7 +54,8 @@ public class LeastActiveLoadBalance extends AbstractLoadBalance {
                 totalWeight = weight; // Reset
                 firstWeight = weight; // Record the weight the first invoker
                 sameWeight = true; // Reset, every invoker has the same weight value?
-            } else if (active == leastActive) { // If current invoker's active value equals with leaseActive, then accumulating.
+            }
+            else if (active == leastActive) { // If current invoker's active value equals with leaseActive, then accumulating.
                 leastIndexs[leastCount++] = i; // Record index number of this invoker
                 totalWeight += weight; // Add this invoker's weight to totalWeight.
                 // If every invoker has the same weight?
@@ -77,8 +77,9 @@ public class LeastActiveLoadBalance extends AbstractLoadBalance {
             for (int i = 0; i < leastCount; i++) {
                 int leastIndex = leastIndexs[i];
                 offsetWeight -= getWeight(invokers.get(leastIndex), invocation);
-                if (offsetWeight <= 0)
+                if (offsetWeight <= 0) {
                     return invokers.get(leastIndex);
+                }
             }
         }
         // If all invokers have the same weight value or totalWeight=0, return evenly.

@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 interface Builder<T> {
+
     T getName(Bean bean);
 
     void setName(Bean bean, T name);
@@ -37,8 +38,9 @@ public class ClassGeneratorTest extends TestCase {
         Field fname = null, fs[] = Bean.class.getDeclaredFields();
         for (Field f : fs) {
             f.setAccessible(true);
-            if (f.getName().equals("name"))
+            if (f.getName().equals("name")) {
                 fname = f;
+            }
         }
 
         ClassGenerator cg = ClassGenerator.newInstance();
@@ -67,8 +69,9 @@ public class ClassGeneratorTest extends TestCase {
         Field fname = null, fs[] = Bean.class.getDeclaredFields();
         for (Field f : fs) {
             f.setAccessible(true);
-            if (f.getName().equals("name"))
+            if (f.getName().equals("name")) {
                 fname = f;
+            }
         }
 
         ClassGenerator cg = ClassGenerator.newInstance();
@@ -93,6 +96,7 @@ public class ClassGeneratorTest extends TestCase {
 }
 
 class Bean {
+
     int age = 30;
 
     private String name = "qianlei";

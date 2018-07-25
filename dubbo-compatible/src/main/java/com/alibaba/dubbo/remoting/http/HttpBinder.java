@@ -19,4 +19,5 @@ package com.alibaba.dubbo.remoting.http;
 
 @Deprecated
 public interface HttpBinder extends org.apache.dubbo.remoting.http.HttpBinder {
+
 }

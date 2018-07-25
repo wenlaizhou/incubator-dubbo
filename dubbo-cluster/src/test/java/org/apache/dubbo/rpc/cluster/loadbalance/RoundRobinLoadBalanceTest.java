@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class RoundRobinLoadBalanceTest extends LoadBalanceBaseTest {
+
     @Test
     public void testRoundRobinLoadBalanceSelect() {
         int runs = 10000;

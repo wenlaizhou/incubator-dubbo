@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class LeastActiveBalanceTest extends LoadBalanceBaseTest {
+
     @Ignore
     @Test
     public void testLeastActiveLoadBalance_select() {

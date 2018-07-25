@@ -67,7 +67,9 @@ public class TaskQueue<R extends Runnable> extends LinkedBlockingQueue<Runnable>
      * retry offer task
      *
      * @param o task
+     *
      * @return offer success or not
+     *
      * @throws RejectedExecutionException if executor is terminated.
      */
     public boolean retryOffer(Runnable o, long timeout, TimeUnit unit) throws InterruptedException {

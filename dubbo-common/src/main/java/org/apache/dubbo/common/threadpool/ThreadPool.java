@@ -33,6 +33,7 @@ public interface ThreadPool {
      * Thread pool
      *
      * @param url URL contains thread parameter
+     *
      * @return thread pool
      */
     @Adaptive({Constants.THREADPOOL_KEY})

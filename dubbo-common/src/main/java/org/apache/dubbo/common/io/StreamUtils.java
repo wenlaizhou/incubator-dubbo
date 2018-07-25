@@ -23,6 +23,7 @@ import java.io.InputStream;
  * Stream utils.
  */
 public class StreamUtils {
+
     private StreamUtils() {
     }
 
@@ -41,20 +42,25 @@ public class StreamUtils {
 
             @Override
             public int read(byte b[], int off, int len) throws IOException {
-                if (b == null)
+                if (b == null) {
                     throw new NullPointerException();
+                }
 
-                if (off < 0 || len < 0 || len > b.length - off)
+                if (off < 0 || len < 0 || len > b.length - off) {
                     throw new IndexOutOfBoundsException();
+                }
 
-                if (mPosition >= mLimit)
+                if (mPosition >= mLimit) {
                     return -1;
+                }
 
-                if (mPosition + len > mLimit)
+                if (mPosition + len > mLimit) {
                     len = mLimit - mPosition;
+                }
 
-                if (len <= 0)
+                if (len <= 0) {
                     return 0;
+                }
 
                 is.read(b, off, len);
                 mPosition += len;
@@ -63,11 +69,13 @@ public class StreamUtils {
 
             @Override
             public long skip(long len) throws IOException {
-                if (mPosition + len > mLimit)
+                if (mPosition + len > mLimit) {
                     len = mLimit - mPosition;
+                }
 
-                if (len <= 0)
+                if (len <= 0) {
                     return 0;
+                }
 
                 is.skip(len);
                 mPosition += len;
@@ -111,23 +119,30 @@ public class StreamUtils {
             byte[] mMarkBuffer;
 
             boolean mInMarked = false;
+
             boolean mInReset = false;
+
             boolean mDry = false;
+
             private int mPosition = 0;
+
             private int mCount = 0;
 
             @Override
             public int read() throws IOException {
                 if (!mInMarked) {
                     return is.read();
-                } else {
+                }
+                else {
                     if (mPosition < mCount) {
                         byte b = mMarkBuffer[mPosition++];
                         return b & 0xFF;
                     }
 
                     if (!mInReset) {
-                        if (mDry) return -1;
+                        if (mDry) {
+                            return -1;
+                        }
 
                         if (null == mMarkBuffer) {
                             mMarkBuffer = new byte[markBufferSize];
@@ -146,7 +161,8 @@ public class StreamUtils {
                         mCount++;
 
                         return read;
-                    } else {
+                    }
+                    else {
                         // mark buffer is used, exit mark status!
                         mInMarked = false;
                         mInReset = false;
@@ -195,7 +211,9 @@ public class StreamUtils {
             public int available() throws IOException {
                 int available = is.available();
 
-                if (mInMarked && mInReset) available += mCount - mPosition;
+                if (mInMarked && mInReset) {
+                    available += mCount - mPosition;
+                }
 
                 return available;
             }

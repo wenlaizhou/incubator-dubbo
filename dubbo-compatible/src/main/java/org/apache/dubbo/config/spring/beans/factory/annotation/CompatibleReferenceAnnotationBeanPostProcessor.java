@@ -92,9 +92,11 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
         InjectionMetadata metadata = findReferenceMetadata(beanName, bean.getClass(), pvs);
         try {
             metadata.inject(bean, beanName, pvs);
-        } catch (BeanCreationException ex) {
+        }
+        catch (BeanCreationException ex) {
             throw ex;
-        } catch (Throwable ex) {
+        }
+        catch (Throwable ex) {
             throw new BeanCreationException(beanName, "Injection of @Reference dependencies failed", ex);
         }
         return pvs;
@@ -105,6 +107,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
      * Finds {@link InjectionMetadata.InjectedElement} Metadata from annotated {@link Reference @Reference} fields
      *
      * @param beanClass The {@link Class} of Bean
+     *
      * @return non-null {@link List}
      */
     private List<ReferenceFieldElement> findFieldReferenceMetadata(final Class<?> beanClass) {
@@ -140,6 +143,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
      * Finds {@link InjectionMetadata.InjectedElement} Metadata from annotated {@link Reference @Reference} methods
      *
      * @param beanClass The {@link Class} of Bean
+     *
      * @return non-null {@link List}
      */
     private List<ReferenceMethodElement> findMethodReferenceMetadata(final Class<?> beanClass) {
@@ -184,6 +188,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
 
     /**
      * @param beanClass
+     *
      * @return
      */
     private ReferenceInjectionMetadata buildReferenceMetadata(final Class<?> beanClass) {
@@ -208,7 +213,8 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
                     try {
                         metadata = buildReferenceMetadata(clazz);
                         this.injectionMetadataCache.put(cacheKey, metadata);
-                    } catch (NoClassDefFoundError err) {
+                    }
+                    catch (NoClassDefFoundError err) {
                         throw new IllegalStateException("Failed to introspect bean class [" + clazz.getName() +
                                 "] for reference metadata: could not find class that it depends on", err);
                     }
@@ -265,6 +271,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
      * Gets all beans of {@link ReferenceBean}
      *
      * @return non-null {@link Collection}
+     *
      * @since 2.5.9
      */
     public Collection<ReferenceBean<?>> getReferenceBeans() {
@@ -400,6 +407,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
      *
      * @param reference {@link Reference}
      * @param beanClass {@link Class}
+     *
      * @return
      */
     private String generateReferenceBeanCacheKey(Reference reference, Class<?> beanClass) {
@@ -424,11 +432,14 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
         String interfaceName;
         if (!"".equals(reference.interfaceName())) {
             interfaceName = reference.interfaceName();
-        } else if (!void.class.equals(reference.interfaceClass())) {
+        }
+        else if (!void.class.equals(reference.interfaceClass())) {
             interfaceName = reference.interfaceClass().getName();
-        } else if (beanClass.isInterface()) {
+        }
+        else if (beanClass.isInterface()) {
             interfaceName = beanClass.getName();
-        } else {
+        }
+        else {
             throw new IllegalStateException(
                     "The @Reference undefined interfaceClass or interfaceName, and the property type "
                             + beanClass.getName() + " is not a interface.");
@@ -443,6 +454,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
      * Get {@link ReferenceBean} {@link Map} in injected field.
      *
      * @return non-null {@link Map}
+     *
      * @since 2.5.11
      */
     public Map<InjectionMetadata.InjectedElement, ReferenceBean<?>> getInjectedFieldReferenceBeanMap() {
@@ -470,6 +482,7 @@ public class CompatibleReferenceAnnotationBeanPostProcessor extends Instantiatio
      * Get {@link ReferenceBean} {@link Map} in injected method.
      *
      * @return non-null {@link Map}
+     *
      * @since 2.5.11
      */
     public Map<InjectionMetadata.InjectedElement, ReferenceBean<?>> getInjectedMethodReferenceBeanMap() {

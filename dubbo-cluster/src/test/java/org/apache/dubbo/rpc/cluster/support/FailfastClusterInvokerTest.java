@@ -40,15 +40,20 @@ import static org.mockito.Mockito.mock;
 
 /**
  * FailfastClusterInvokerTest
- *
  */
 @SuppressWarnings("unchecked")
 public class FailfastClusterInvokerTest {
+
     List<Invoker<FailfastClusterInvokerTest>> invokers = new ArrayList<Invoker<FailfastClusterInvokerTest>>();
+
     URL url = URL.valueOf("test://test:11/test");
+
     Invoker<FailfastClusterInvokerTest> invoker1 = mock(Invoker.class);
+
     RpcInvocation invocation = new RpcInvocation();
+
     Directory<FailfastClusterInvokerTest> dic;
+
     Result result = new RpcResult();
 
     /**
@@ -117,7 +122,8 @@ public class FailfastClusterInvokerTest {
         try {
             invoker.invoke(invocation);
             fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             assertFalse(expected.getCause() instanceof RpcException);
         }
     }

@@ -31,7 +31,9 @@ import static org.junit.Assert.assertEquals;
 
 @Deprecated
 public class JSONTest {
+
     static byte[] DEFAULT_BYTES = {3, 12, 14, 41, 12, 2, 3, 12, 4, 67, 23};
+
     static int DEFAULT_$$ = 152;
 
     @Test
@@ -179,7 +181,9 @@ public class JSONTest {
     }
 
     public static class Bean1 {
+
         public int[] array;
+
         private String name, displayName;
 
         public String getDisplayName() {
@@ -200,10 +204,15 @@ public class JSONTest {
     }
 
     public static class Bean {
+
         public int[] array;
+
         public boolean $b;
+
         public int $$ = DEFAULT_$$;
+
         public byte[] bytes = DEFAULT_BYTES;
+
         private String name, displayName = "钱磊";
 
         public String getDisplayName() {

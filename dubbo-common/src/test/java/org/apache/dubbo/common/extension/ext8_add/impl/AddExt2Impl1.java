@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ext8_add.AddExt2;
 
 public class AddExt2Impl1 implements AddExt2 {
+
     public String echo(URL url, String s) {
         return this.getClass().getSimpleName();
     }

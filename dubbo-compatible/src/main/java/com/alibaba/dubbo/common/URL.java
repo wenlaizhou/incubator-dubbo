@@ -148,10 +148,10 @@ public class URL extends org.apache.dubbo.common.URL {
         return super.getBackupAddress(defaultPort);
     }
 
-//    public List<URL> getBackupUrls() {
-//        List<org.apache.dubbo.common.URL> res = super.getBackupUrls();
-//        return res.stream().map(url -> new URL(url)).collect(Collectors.toList());
-//    }
+    //    public List<URL> getBackupUrls() {
+    //        List<org.apache.dubbo.common.URL> res = super.getBackupUrls();
+    //        return res.stream().map(url -> new URL(url)).collect(Collectors.toList());
+    //    }
 
     public String getPath() {
         return super.getPath();
@@ -378,17 +378,23 @@ public class URL extends org.apache.dubbo.common.URL {
     }
 
     public URL addParameter(String key, Enum<?> value) {
-        if (value == null) return this;
+        if (value == null) {
+            return this;
+        }
         return addParameter(key, String.valueOf(value));
     }
 
     public URL addParameter(String key, Number value) {
-        if (value == null) return this;
+        if (value == null) {
+            return this;
+        }
         return addParameter(key, String.valueOf(value));
     }
 
     public URL addParameter(String key, CharSequence value) {
-        if (value == null || value.length() == 0) return this;
+        if (value == null || value.length() == 0) {
+            return this;
+        }
         return addParameter(key, String.valueOf(value));
     }
 

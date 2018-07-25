@@ -30,7 +30,6 @@ import java.util.List;
 
 /**
  * BroadcastClusterInvoker
- *
  */
 public class BroadcastClusterInvoker<T> extends AbstractClusterInvoker<T> {
 
@@ -50,10 +49,12 @@ public class BroadcastClusterInvoker<T> extends AbstractClusterInvoker<T> {
         for (Invoker<T> invoker : invokers) {
             try {
                 result = invoker.invoke(invocation);
-            } catch (RpcException e) {
+            }
+            catch (RpcException e) {
                 exception = e;
                 logger.warn(e.getMessage(), e);
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 exception = new RpcException(e.getMessage(), e);
                 logger.warn(e.getMessage(), e);
             }

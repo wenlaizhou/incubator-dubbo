@@ -64,7 +64,8 @@ public class EagerThreadPoolExecutor extends ThreadPoolExecutor {
         submittedTaskCount.incrementAndGet();
         try {
             super.execute(command);
-        } catch (RejectedExecutionException rx) {
+        }
+        catch (RejectedExecutionException rx) {
             // retry to offer the task into queue.
             final TaskQueue queue = (TaskQueue) super.getQueue();
             try {
@@ -72,11 +73,13 @@ public class EagerThreadPoolExecutor extends ThreadPoolExecutor {
                     submittedTaskCount.decrementAndGet();
                     throw new RejectedExecutionException("Queue capacity is full.", rx);
                 }
-            } catch (InterruptedException x) {
+            }
+            catch (InterruptedException x) {
                 submittedTaskCount.decrementAndGet();
                 throw new RejectedExecutionException(x);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             // decrease any way
             submittedTaskCount.decrementAndGet();
             throw t;

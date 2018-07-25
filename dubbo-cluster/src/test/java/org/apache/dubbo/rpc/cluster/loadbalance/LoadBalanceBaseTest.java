@@ -42,12 +42,19 @@ import static org.mockito.Mockito.mock;
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class LoadBalanceBaseTest {
+
     Invocation invocation;
+
     List<Invoker<LoadBalanceBaseTest>> invokers = new ArrayList<Invoker<LoadBalanceBaseTest>>();
+
     Invoker<LoadBalanceBaseTest> invoker1;
+
     Invoker<LoadBalanceBaseTest> invoker2;
+
     Invoker<LoadBalanceBaseTest> invoker3;
+
     Invoker<LoadBalanceBaseTest> invoker4;
+
     Invoker<LoadBalanceBaseTest> invoker5;
 
     /**

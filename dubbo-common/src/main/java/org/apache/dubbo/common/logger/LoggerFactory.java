@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentMap;
 public class LoggerFactory {
 
     private static final ConcurrentMap<String, FailsafeLogger> LOGGERS = new ConcurrentHashMap<String, FailsafeLogger>();
+
     private static volatile LoggerAdapter LOGGER_ADAPTER;
 
     // search common-used logging frameworks
@@ -41,22 +42,29 @@ public class LoggerFactory {
         String logger = System.getProperty("dubbo.application.logger");
         if ("slf4j".equals(logger)) {
             setLoggerAdapter(new Slf4jLoggerAdapter());
-        } else if ("jcl".equals(logger)) {
+        }
+        else if ("jcl".equals(logger)) {
             setLoggerAdapter(new JclLoggerAdapter());
-        } else if ("log4j".equals(logger)) {
+        }
+        else if ("log4j".equals(logger)) {
             setLoggerAdapter(new Log4jLoggerAdapter());
-        } else if ("jdk".equals(logger)) {
+        }
+        else if ("jdk".equals(logger)) {
             setLoggerAdapter(new JdkLoggerAdapter());
-        } else {
+        }
+        else {
             try {
                 setLoggerAdapter(new Log4jLoggerAdapter());
-            } catch (Throwable e1) {
+            }
+            catch (Throwable e1) {
                 try {
                     setLoggerAdapter(new Slf4jLoggerAdapter());
-                } catch (Throwable e2) {
+                }
+                catch (Throwable e2) {
                     try {
                         setLoggerAdapter(new JclLoggerAdapter());
-                    } catch (Throwable e3) {
+                    }
+                    catch (Throwable e3) {
                         setLoggerAdapter(new JdkLoggerAdapter());
                     }
                 }
@@ -93,6 +101,7 @@ public class LoggerFactory {
      * Get logger provider
      *
      * @param key the returned logger will be named after clazz
+     *
      * @return logger
      */
     public static Logger getLogger(Class<?> key) {
@@ -108,6 +117,7 @@ public class LoggerFactory {
      * Get logger provider
      *
      * @param key the returned logger will be named after key
+     *
      * @return logger provider
      */
     public static Logger getLogger(String key) {

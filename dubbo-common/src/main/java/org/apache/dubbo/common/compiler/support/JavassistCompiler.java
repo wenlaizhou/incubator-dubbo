@@ -62,7 +62,8 @@ public class JavassistCompiler extends AbstractCompiler {
                 String pkgName = pkg.substring(0, pkg.length() - 2);
                 pool.importPackage(pkgName);
                 importPackages.add(pkgName);
-            } else {
+            }
+            else {
                 int pi = pkg.lastIndexOf('.');
                 if (pi > 0) {
                     String pkgName = pkg.substring(0, pi);
@@ -80,13 +81,16 @@ public class JavassistCompiler extends AbstractCompiler {
             String extendClass;
             if (extend.contains(".")) {
                 extendClass = extend;
-            } else if (fullNames.containsKey(extend)) {
+            }
+            else if (fullNames.containsKey(extend)) {
                 extendClass = fullNames.get(extend);
-            } else {
+            }
+            else {
                 extendClass = ClassUtils.forName(packages, extend).getName();
             }
             cls = pool.makeClass(name, pool.get(extendClass));
-        } else {
+        }
+        else {
             cls = pool.makeClass(name);
         }
         matcher = IMPLEMENTS_PATTERN.matcher(source);
@@ -97,9 +101,11 @@ public class JavassistCompiler extends AbstractCompiler {
                 String ifaceClass;
                 if (iface.contains(".")) {
                     ifaceClass = iface;
-                } else if (fullNames.containsKey(iface)) {
+                }
+                else if (fullNames.containsKey(iface)) {
                     ifaceClass = fullNames.get(iface);
-                } else {
+                }
+                else {
                     ifaceClass = ClassUtils.forName(packages, iface).getName();
                 }
                 cls.addInterface(pool.get(ifaceClass));
@@ -112,9 +118,11 @@ public class JavassistCompiler extends AbstractCompiler {
             if (method.length() > 0) {
                 if (method.startsWith(className)) {
                     cls.addConstructor(CtNewConstructor.make("public " + method, cls));
-                } else if (FIELD_PATTERN.matcher(method).matches()) {
+                }
+                else if (FIELD_PATTERN.matcher(method).matches()) {
                     cls.addField(CtField.make("private " + method, cls));
-                } else {
+                }
+                else {
                     cls.addMethod(CtNewMethod.make("public " + method, cls));
                 }
             }

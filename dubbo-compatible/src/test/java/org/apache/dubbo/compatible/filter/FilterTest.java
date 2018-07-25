@@ -40,7 +40,8 @@ public class FilterTest {
             Invocation invocation = new MockInvocation("aa");
             myFilter.invoke(invoker, invocation);
             fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertTrue(e.getMessage().contains("arg0 illegal"));
         }
     }

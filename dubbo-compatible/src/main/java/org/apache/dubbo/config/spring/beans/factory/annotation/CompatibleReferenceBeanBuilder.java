@@ -99,7 +99,7 @@ class CompatibleReferenceBeanBuilder extends AbstractAnnotationConfigBeanBuilder
         dataBinder.setConversionService(getConversionService());
         // Ignore those fields
         String[] ignoreAttributeNames = of("application", "module", "consumer", "monitor", "registry");
-//        dataBinder.setDisallowedFields(ignoreAttributeNames);
+        //        dataBinder.setDisallowedFields(ignoreAttributeNames);
         // Bind annotation attributes
         dataBinder.bind(new AnnotationPropertyValuesAdapter(reference, applicationContext.getEnvironment(), ignoreAttributeNames));
     }

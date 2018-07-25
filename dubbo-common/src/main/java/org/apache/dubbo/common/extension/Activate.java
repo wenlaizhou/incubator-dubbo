@@ -43,11 +43,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Activate {
+
     /**
      * Activate the current extension when one of the groups matches. The group passed into
      * {@link ExtensionLoader#getActivateExtension(URL, String, String)} will be used for matching.
      *
      * @return group names to match
+     *
      * @see ExtensionLoader#getActivateExtension(URL, String, String)
      */
     String[] group() default {};
@@ -60,6 +62,7 @@ public @interface Activate {
      * </p>
      *
      * @return URL parameter keys
+     *
      * @see ExtensionLoader#getActivateExtension(URL, String)
      * @see ExtensionLoader#getActivateExtension(URL, String, String)
      */

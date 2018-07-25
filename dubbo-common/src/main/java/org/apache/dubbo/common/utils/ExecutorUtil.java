@@ -28,7 +28,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class ExecutorUtil {
+
     private static final Logger logger = LoggerFactory.getLogger(ExecutorUtil.class);
+
     private static final ThreadPoolExecutor shutdownExecutor = new ThreadPoolExecutor(0, 1,
             0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<Runnable>(100),
@@ -45,9 +47,10 @@ public class ExecutorUtil {
 
     /**
      * Use the shutdown pattern from:
-     *  https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html
+     * https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html
+     *
      * @param executor the Executor to shutdown
-     * @param timeout the timeout in milliseconds before termination
+     * @param timeout  the timeout in milliseconds before termination
      */
     public static void gracefulShutdown(Executor executor, int timeout) {
         if (!(executor instanceof ExecutorService) || isTerminated(executor)) {
@@ -57,9 +60,11 @@ public class ExecutorUtil {
         try {
             // Disable new tasks from being submitted
             es.shutdown();
-        } catch (SecurityException ex2) {
+        }
+        catch (SecurityException ex2) {
             return;
-        } catch (NullPointerException ex2) {
+        }
+        catch (NullPointerException ex2) {
             return;
         }
         try {
@@ -67,7 +72,8 @@ public class ExecutorUtil {
             if (!es.awaitTermination(timeout, TimeUnit.MILLISECONDS)) {
                 es.shutdownNow();
             }
-        } catch (InterruptedException ex) {
+        }
+        catch (InterruptedException ex) {
             es.shutdownNow();
             Thread.currentThread().interrupt();
         }
@@ -83,14 +89,17 @@ public class ExecutorUtil {
         final ExecutorService es = (ExecutorService) executor;
         try {
             es.shutdownNow();
-        } catch (SecurityException ex2) {
+        }
+        catch (SecurityException ex2) {
             return;
-        } catch (NullPointerException ex2) {
+        }
+        catch (NullPointerException ex2) {
             return;
         }
         try {
             es.awaitTermination(timeout, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException ex) {
+        }
+        catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
         if (!isTerminated(es)) {
@@ -110,9 +119,11 @@ public class ExecutorUtil {
                                 break;
                             }
                         }
-                    } catch (InterruptedException ex) {
+                    }
+                    catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         logger.warn(e.getMessage(), e);
                     }
                 }

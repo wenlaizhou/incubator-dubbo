@@ -21,6 +21,7 @@ import org.apache.dubbo.common.extension.ext2.Ext2;
 import org.apache.dubbo.common.extension.ext2.UrlHolder;
 
 public class Ext2Impl2 implements Ext2 {
+
     public String echo(UrlHolder holder, String s) {
         return "Ext2Impl2-echo";
     }

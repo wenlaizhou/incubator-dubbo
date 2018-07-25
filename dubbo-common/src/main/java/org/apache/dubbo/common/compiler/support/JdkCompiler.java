@@ -82,7 +82,8 @@ public class JdkCompiler extends AbstractCompiler {
                     files.add(new File(url.getFile()));
                 }
                 manager.setLocation(StandardLocation.CLASS_PATH, files);
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
         }
@@ -114,6 +115,7 @@ public class JdkCompiler extends AbstractCompiler {
     private static final class JavaFileObjectImpl extends SimpleJavaFileObject {
 
         private final CharSequence source;
+
         private ByteArrayOutputStream bytecode;
 
         public JavaFileObjectImpl(final String baseName, final CharSequence source) {
@@ -168,8 +170,9 @@ public class JdkCompiler extends AbstractCompiler {
         @Override
         public FileObject getFileForInput(Location location, String packageName, String relativeName) throws IOException {
             FileObject o = fileObjects.get(uri(location, packageName, relativeName));
-            if (o != null)
+            if (o != null) {
                 return o;
+            }
             return super.getFileForInput(location, packageName, relativeName);
         }
 
@@ -196,8 +199,9 @@ public class JdkCompiler extends AbstractCompiler {
 
         @Override
         public String inferBinaryName(Location loc, JavaFileObject file) {
-            if (file instanceof JavaFileObjectImpl)
+            if (file instanceof JavaFileObjectImpl) {
                 return file.getName();
+            }
             return super.inferBinaryName(loc, file);
         }
 
@@ -223,7 +227,8 @@ public class JdkCompiler extends AbstractCompiler {
                 }
 
                 files.addAll(classLoader.files());
-            } else if (location == StandardLocation.SOURCE_PATH && kinds.contains(JavaFileObject.Kind.SOURCE)) {
+            }
+            else if (location == StandardLocation.SOURCE_PATH && kinds.contains(JavaFileObject.Kind.SOURCE)) {
                 for (JavaFileObject file : fileObjects.values()) {
                     if (file.getKind() == Kind.SOURCE && file.getName().startsWith(packageName)) {
                         files.add(file);
@@ -260,7 +265,8 @@ public class JdkCompiler extends AbstractCompiler {
             }
             try {
                 return ClassHelper.forNameWithCallerClassLoader(qualifiedClassName, getClass());
-            } catch (ClassNotFoundException nf) {
+            }
+            catch (ClassNotFoundException nf) {
                 return super.findClass(qualifiedClassName);
             }
         }

@@ -29,6 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * RandomLoadBalance Test
  */
 public class RandomLoadBalanceTest extends LoadBalanceBaseTest {
+
     @Test
     public void testRandomLoadBalanceSelect() {
         int runs = 1000;

@@ -25,6 +25,7 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class AbortPolicyWithReportTest {
+
     @Test
     public void jStackDumpTest() throws InterruptedException {
         URL url = URL.valueOf("dubbo://admin:hello1234@10.20.130.230:20880/context/path?dump.directory=/tmp&version=1.0.0&application=morgan&noValue");
@@ -37,7 +38,8 @@ public class AbortPolicyWithReportTest {
                     System.out.println("hello");
                 }
             }, (ThreadPoolExecutor) Executors.newFixedThreadPool(1));
-        } catch (RejectedExecutionException rj) {
+        }
+        catch (RejectedExecutionException rj) {
             // ignore
         }
 

@@ -26,6 +26,7 @@ import java.io.File;
 public class JclLoggerAdapter implements LoggerAdapter {
 
     private Level level;
+
     private File file;
 
     @Override

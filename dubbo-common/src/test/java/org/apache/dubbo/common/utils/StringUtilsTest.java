@@ -37,6 +37,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class StringUtilsTest {
+
     @Test
     public void testLength() throws Exception {
         assertThat(StringUtils.length(null), equalTo(0));

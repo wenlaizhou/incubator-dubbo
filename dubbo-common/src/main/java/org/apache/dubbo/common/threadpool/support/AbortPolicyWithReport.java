@@ -88,9 +88,10 @@ public class AbortPolicyWithReport extends ThreadPoolExecutor.AbortPolicy {
                 String OS = System.getProperty("os.name").toLowerCase();
 
                 // window system don't support ":" in file name
-                if(OS.contains("win")){
+                if (OS.contains("win")) {
                     sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-                }else {
+                }
+                else {
                     sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                 }
 
@@ -99,15 +100,18 @@ public class AbortPolicyWithReport extends ThreadPoolExecutor.AbortPolicy {
                 try {
                     jstackStream = new FileOutputStream(new File(dumpPath, "Dubbo_JStack.log" + "." + dateStr));
                     JVMUtil.jstack(jstackStream);
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.error("dump jstack error", t);
-                } finally {
+                }
+                finally {
                     guard.release();
                     if (jstackStream != null) {
                         try {
                             jstackStream.flush();
                             jstackStream.close();
-                        } catch (IOException e) {
+                        }
+                        catch (IOException e) {
                         }
                     }
                 }

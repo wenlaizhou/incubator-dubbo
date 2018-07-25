@@ -21,6 +21,7 @@ package org.apache.dubbo.common.json;
  */
 @Deprecated
 public class ParseException extends Exception {
+
     private static final long serialVersionUID = 8611884051738966316L;
 
     public ParseException() {

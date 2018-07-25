@@ -48,7 +48,8 @@ public class Menu {
         List<String> menuItems = menus.get(menu);
         if (menuItems == null) {
             menus.put(menu, new ArrayList<String>(items));
-        } else {
+        }
+        else {
             menuItems.addAll(new ArrayList<String>(items));
         }
     }

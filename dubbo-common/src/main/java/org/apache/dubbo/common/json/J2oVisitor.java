@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Deprecated
 class J2oVisitor implements JSONVisitor {
+
     public static final boolean[] EMPTY_BOOL_ARRAY = new boolean[0];
 
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
@@ -81,7 +82,8 @@ class J2oVisitor implements JSONVisitor {
         if (c == String.class) {
             if (len == 0) {
                 return EMPTY_STRING_ARRAY;
-            } else {
+            }
+            else {
                 Object o;
                 String ss[] = new String[len];
                 for (int i = len - 1; i >= 0; i--) {
@@ -92,90 +94,114 @@ class J2oVisitor implements JSONVisitor {
             }
         }
         if (c == boolean.class) {
-            if (len == 0) return EMPTY_BOOL_ARRAY;
+            if (len == 0) {
+                return EMPTY_BOOL_ARRAY;
+            }
             Object o;
             boolean[] ret = new boolean[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Boolean)
+                if (o instanceof Boolean) {
                     ret[i] = ((Boolean) o).booleanValue();
+                }
             }
             return ret;
         }
         if (c == int.class) {
-            if (len == 0) return EMPTY_INT_ARRAY;
+            if (len == 0) {
+                return EMPTY_INT_ARRAY;
+            }
             Object o;
             int[] ret = new int[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Number)
+                if (o instanceof Number) {
                     ret[i] = ((Number) o).intValue();
+                }
             }
             return ret;
         }
         if (c == long.class) {
-            if (len == 0) return EMPTY_LONG_ARRAY;
+            if (len == 0) {
+                return EMPTY_LONG_ARRAY;
+            }
             Object o;
             long[] ret = new long[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Number)
+                if (o instanceof Number) {
                     ret[i] = ((Number) o).longValue();
+                }
             }
             return ret;
         }
         if (c == float.class) {
-            if (len == 0) return EMPTY_FLOAT_ARRAY;
+            if (len == 0) {
+                return EMPTY_FLOAT_ARRAY;
+            }
             Object o;
             float[] ret = new float[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Number)
+                if (o instanceof Number) {
                     ret[i] = ((Number) o).floatValue();
+                }
             }
             return ret;
         }
         if (c == double.class) {
-            if (len == 0) return EMPTY_DOUBLE_ARRAY;
+            if (len == 0) {
+                return EMPTY_DOUBLE_ARRAY;
+            }
             Object o;
             double[] ret = new double[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Number)
+                if (o instanceof Number) {
                     ret[i] = ((Number) o).doubleValue();
+                }
             }
             return ret;
         }
         if (c == byte.class) {
-            if (len == 0) return EMPTY_BYTE_ARRAY;
+            if (len == 0) {
+                return EMPTY_BYTE_ARRAY;
+            }
             Object o;
             byte[] ret = new byte[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Number)
+                if (o instanceof Number) {
                     ret[i] = ((Number) o).byteValue();
+                }
             }
             return ret;
         }
         if (c == char.class) {
-            if (len == 0) return EMPTY_CHAR_ARRAY;
+            if (len == 0) {
+                return EMPTY_CHAR_ARRAY;
+            }
             Object o;
             char[] ret = new char[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Character)
+                if (o instanceof Character) {
                     ret[i] = ((Character) o).charValue();
+                }
             }
             return ret;
         }
         if (c == short.class) {
-            if (len == 0) return EMPTY_SHORT_ARRAY;
+            if (len == 0) {
+                return EMPTY_SHORT_ARRAY;
+            }
             Object o;
             short[] ret = new short[len];
             for (int i = len - 1; i >= 0; i--) {
                 o = list.pop();
-                if (o instanceof Number)
+                if (o instanceof Number) {
                     ret[i] = ((Number) o).shortValue();
+                }
             }
             return ret;
         }
@@ -189,8 +215,9 @@ class J2oVisitor implements JSONVisitor {
     private static String name(Class<?>[] types) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < types.length; i++) {
-            if (i > 0)
+            if (i > 0) {
                 sb.append(", ");
+            }
             sb.append(types[i].getName());
         }
         return sb.toString();
@@ -205,7 +232,8 @@ class J2oVisitor implements JSONVisitor {
         mStack.clear();
         try {
             return mConverter.readValue(mType, obj);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -220,22 +248,28 @@ class J2oVisitor implements JSONVisitor {
             if (!mType.isInterface() && mType != Object.class) {
                 try {
                     mValue = mType.newInstance();
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     throw new IllegalStateException(e.getMessage(), e);
                 }
-            } else if (mType == ConcurrentMap.class) {
+            }
+            else if (mType == ConcurrentMap.class) {
                 mValue = new ConcurrentHashMap<String, Object>();
-            } else {
+            }
+            else {
                 mValue = new HashMap<String, Object>();
             }
             mWrapper = null;
-        } else {
+        }
+        else {
             try {
                 mValue = mType.newInstance();
                 mWrapper = Wrapper.getWrapper(mType);
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalAccessException e) {
                 throw new ParseException(StringUtils.toString(e));
-            } catch (InstantiationException e) {
+            }
+            catch (InstantiationException e) {
                 throw new ParseException(StringUtils.toString(e));
             }
         }
@@ -262,12 +296,14 @@ class J2oVisitor implements JSONVisitor {
         String name = (String) mStack.pop();  // pop name.
         if (mWrapper == null) {
             ((Map<String, Object>) mValue).put(name, obj);
-        } else {
+        }
+        else {
             if (mType != null) {
                 if (isValue && obj != null) {
                     try {
                         obj = mConverter.readValue(mType, obj);
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         throw new ParseException(StringUtils.toString(e));
                     }
                 }
@@ -278,12 +314,15 @@ class J2oVisitor implements JSONVisitor {
                             field.setAccessible(true);
                         }
                         field.set(mValue, obj);
-                    } catch (NoSuchFieldException e) {
-                        throw new ParseException(StringUtils.toString(e));
-                    } catch (IllegalAccessException e) {
+                    }
+                    catch (NoSuchFieldException e) {
                         throw new ParseException(StringUtils.toString(e));
                     }
-                } else if (!CLASS_PROPERTY.equals(name)) {
+                    catch (IllegalAccessException e) {
+                        throw new ParseException(StringUtils.toString(e));
+                    }
+                }
+                else if (!CLASS_PROPERTY.equals(name)) {
                     mWrapper.setPropertyValue(mValue, name, obj);
                 }
             }
@@ -294,12 +333,15 @@ class J2oVisitor implements JSONVisitor {
     public void arrayBegin() throws ParseException {
         mStack.push(mType);
 
-        if (mType.isArray())
+        if (mType.isArray()) {
             mType = mType.getComponentType();
-        else if (mType == Object.class || Collection.class.isAssignableFrom(mType))
+        }
+        else if (mType == Object.class || Collection.class.isAssignableFrom(mType)) {
             mType = Object.class;
-        else
+        }
+        else {
             throw new ParseException("Convert error, can not load json array data into class [" + mType.getName() + "].");
+        }
     }
 
     @Override
@@ -310,25 +352,32 @@ class J2oVisitor implements JSONVisitor {
 
         if (mType.isArray()) {
             ret = toArray(mType.getComponentType(), mStack, count);
-        } else {
+        }
+        else {
             Collection<Object> items;
             if (mType == Object.class || Collection.class.isAssignableFrom(mType)) {
                 if (!mType.isInterface() && mType != Object.class) {
                     try {
                         items = (Collection<Object>) mType.newInstance();
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         throw new IllegalStateException(e.getMessage(), e);
                     }
-                } else if (mType.isAssignableFrom(ArrayList.class)) { // List
-                    items = new ArrayList<Object>(count);
-                } else if (mType.isAssignableFrom(HashSet.class)) { // Set
-                    items = new HashSet<Object>(count);
-                } else if (mType.isAssignableFrom(LinkedList.class)) { // Queue
-                    items = new LinkedList<Object>();
-                } else { // Other
+                }
+                else if (mType.isAssignableFrom(ArrayList.class)) { // List
                     items = new ArrayList<Object>(count);
                 }
-            } else {
+                else if (mType.isAssignableFrom(HashSet.class)) { // Set
+                    items = new HashSet<Object>(count);
+                }
+                else if (mType.isAssignableFrom(LinkedList.class)) { // Queue
+                    items = new LinkedList<Object>();
+                }
+                else { // Other
+                    items = new ArrayList<Object>(count);
+                }
+            }
+            else {
                 throw new ParseException("Convert error, can not load json array data into class [" + mType.getName() + "].");
             }
             for (int i = 0; i < count; i++)
@@ -342,10 +391,12 @@ class J2oVisitor implements JSONVisitor {
     @Override
     public void arrayItem(int index) throws ParseException {
         if (mTypes != null && mStack.size() == index + 1) {
-            if (index < mTypes.length)
+            if (index < mTypes.length) {
                 mType = mTypes[index];
-            else
+            }
+            else {
                 throw new ParseException("Can not load json array data into [" + name(mTypes) + "].");
+            }
         }
     }
 
@@ -354,7 +405,8 @@ class J2oVisitor implements JSONVisitor {
         if (isValue && obj != null) {
             try {
                 obj = mConverter.readValue(mType, obj);
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 throw new ParseException(e.getMessage());
             }
         }

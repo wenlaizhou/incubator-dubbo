@@ -25,6 +25,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class LRUCacheTest {
+
     @Test
     public void testCache() throws Exception {
         LRUCache<String, Integer> cache = new LRUCache<String, Integer>(3);

@@ -25,6 +25,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class LoggerFactoryTest {
+
     @Test
     public void testLoggerLevel() {
         LoggerFactory.setLevel(Level.INFO);

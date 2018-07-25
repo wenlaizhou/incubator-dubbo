@@ -25,9 +25,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BytesTest {
+
     private final byte[] b1 = "adpfioha;eoh;aldfadl;kfadslkfdajfio123431241235123davas;odvwe;lmzcoqpwoewqogineopwqihwqetup\n\tejqf;lajsfd中文字符0da0gsaofdsf==adfasdfs".getBytes();
+
     private final String C64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="; //default base64.
+
     private byte[] bytes1 = {3, 12, 14, 41, 12, 2, 3, 12, 4, 67, 23};
+
     private byte[] bytes2 = {3, 12, 14, 41, 12, 2, 3, 12, 4, 67};
 
     @Test

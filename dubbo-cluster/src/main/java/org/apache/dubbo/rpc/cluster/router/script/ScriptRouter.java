@@ -40,7 +40,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * ScriptRouter
- *
  */
 public class ScriptRouter implements Router {
 
@@ -98,16 +97,19 @@ public class ScriptRouter implements Router {
             Object obj = function.eval(bindings);
             if (obj instanceof Invoker[]) {
                 invokersCopy = Arrays.asList((Invoker<T>[]) obj);
-            } else if (obj instanceof Object[]) {
+            }
+            else if (obj instanceof Object[]) {
                 invokersCopy = new ArrayList<Invoker<T>>();
                 for (Object inv : (Object[]) obj) {
                     invokersCopy.add((Invoker<T>) inv);
                 }
-            } else {
+            }
+            else {
                 invokersCopy = (List<Invoker<T>>) obj;
             }
             return invokersCopy;
-        } catch (ScriptException e) {
+        }
+        catch (ScriptException e) {
             //fail then ignore rule .invokers.
             logger.error("route error , rule has been ignored. rule: " + rule + ", method:" + invocation.getMethodName() + ", url: " + RpcContext.getContext().getUrl(), e);
             return invokers;

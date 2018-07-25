@@ -37,12 +37,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * AbstractClusterInvoker
- *
  */
 public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
 
     private static final Logger logger = LoggerFactory
             .getLogger(AbstractClusterInvoker.class);
+
     protected final Directory<T> directory;
 
     protected final boolean availablecheck;
@@ -56,8 +56,9 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
     }
 
     public AbstractClusterInvoker(Directory<T> directory, URL url) {
-        if (directory == null)
+        if (directory == null) {
             throw new IllegalArgumentException("service directory == null");
+        }
 
         this.directory = directory;
         //sticky: invoker.isAvailable() should always be checked before using when availablecheck is true.
@@ -92,22 +93,25 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
 
     /**
      * Select a invoker using loadbalance policy.</br>
-     * a)Firstly, select an invoker using loadbalance. If this invoker is in previously selected list, or, 
+     * a)Firstly, select an invoker using loadbalance. If this invoker is in previously selected list, or,
      * if this invoker is unavailable, then continue step b (reselect), otherwise return the first selected invoker</br>
      * b)Reslection, the validation rule for reselection: selected > available. This rule guarantees that
-     * the selected invoker has the minimum chance to be one in the previously selected list, and also 
+     * the selected invoker has the minimum chance to be one in the previously selected list, and also
      * guarantees this invoker is available.
      *
      * @param loadbalance load balance policy
      * @param invocation
-     * @param invokers invoker candidates
-     * @param selected  exclude selected invokers or not
+     * @param invokers    invoker candidates
+     * @param selected    exclude selected invokers or not
+     *
      * @return
+     *
      * @throws RpcException
      */
     protected Invoker<T> select(LoadBalance loadbalance, Invocation invocation, List<Invoker<T>> invokers, List<Invoker<T>> selected) throws RpcException {
-        if (invokers == null || invokers.isEmpty())
+        if (invokers == null || invokers.isEmpty()) {
             return null;
+        }
         String methodName = invocation == null ? "" : invocation.getMethodName();
 
         boolean sticky = invokers.get(0).getUrl().getMethodParameter(methodName, Constants.CLUSTER_STICKY_KEY, Constants.DEFAULT_CLUSTER_STICKY);
@@ -132,10 +136,12 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
     }
 
     private Invoker<T> doSelect(LoadBalance loadbalance, Invocation invocation, List<Invoker<T>> invokers, List<Invoker<T>> selected) throws RpcException {
-        if (invokers == null || invokers.isEmpty())
+        if (invokers == null || invokers.isEmpty()) {
             return null;
-        if (invokers.size() == 1)
+        }
+        if (invokers.size() == 1) {
             return invokers.get(0);
+        }
         if (loadbalance == null) {
             loadbalance = ExtensionLoader.getExtensionLoader(LoadBalance.class).getExtension(Constants.DEFAULT_LOADBALANCE);
         }
@@ -148,17 +154,20 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
                 Invoker<T> rinvoker = reselect(loadbalance, invocation, invokers, selected, availablecheck);
                 if (rinvoker != null) {
                     invoker = rinvoker;
-                } else {
+                }
+                else {
                     //Check the index of current selected invoker, if it's not the last one, choose the one at index+1.
                     int index = invokers.indexOf(invoker);
                     try {
                         //Avoid collision
                         invoker = index < invokers.size() - 1 ? invokers.get(index + 1) : invokers.get(0);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         logger.warn(e.getMessage() + " may because invokers list dynamic change, ignore.", e);
                     }
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error("cluster reselect fail reason is :" + t.getMessage() + " if can not solve, you can set cluster.availablecheck=false in url", t);
             }
         }
@@ -172,7 +181,9 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
      * @param invocation
      * @param invokers
      * @param selected
+     *
      * @return
+     *
      * @throws RpcException
      */
     private Invoker<T> reselect(LoadBalance loadbalance, Invocation invocation,
@@ -194,7 +205,8 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
             if (!reselectInvokers.isEmpty()) {
                 return loadbalance.select(reselectInvokers, getUrl(), invocation);
             }
-        } else { // do not check invoker.isAvailable()
+        }
+        else { // do not check invoker.isAvailable()
             for (Invoker<T> invoker : invokers) {
                 if (selected == null || !selected.contains(invoker)) {
                     reselectInvokers.add(invoker);

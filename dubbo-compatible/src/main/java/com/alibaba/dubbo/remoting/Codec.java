@@ -19,4 +19,5 @@ package com.alibaba.dubbo.remoting;
 
 @Deprecated
 public interface Codec extends org.apache.dubbo.remoting.Codec {
+
 }

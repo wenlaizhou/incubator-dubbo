@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ext1.SimpleExt;
 
 public class SimpleExtImpl1 implements SimpleExt {
+
     public String echo(URL url, String s) {
         return "Ext1Impl1-echo";
     }

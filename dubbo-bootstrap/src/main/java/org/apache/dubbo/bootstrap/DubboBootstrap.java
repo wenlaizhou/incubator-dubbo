@@ -59,7 +59,9 @@ public class DubboBootstrap {
 
     /**
      * Register service config to bootstrap, which will be called during {@link DubboBootstrap#stop()}
+     *
      * @param serviceConfig the service
+     *
      * @return the bootstrap instance
      */
     public DubboBootstrap registerServiceConfig(ServiceConfig serviceConfig) {
@@ -70,18 +72,19 @@ public class DubboBootstrap {
     public void start() {
         if (registerShutdownHookOnStart) {
             registerShutdownHook();
-        } else {
+        }
+        else {
             // DubboShutdown hook has been registered in AbstractConfig,
             // we need to remove it explicitly
             removeShutdownHook();
         }
-        for (ServiceConfig serviceConfig: serviceConfigList) {
+        for (ServiceConfig serviceConfig : serviceConfigList) {
             serviceConfig.export();
         }
     }
 
     public void stop() {
-        for (ServiceConfig serviceConfig: serviceConfigList) {
+        for (ServiceConfig serviceConfig : serviceConfigList) {
             serviceConfig.unexport();
         }
         shutdownHook.destroyAll();

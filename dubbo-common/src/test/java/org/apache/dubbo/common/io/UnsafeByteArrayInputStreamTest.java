@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UnsafeByteArrayInputStreamTest {
+
     @Test
     public void testMark() {
         UnsafeByteArrayInputStream stream = new UnsafeByteArrayInputStream("abc".getBytes(), 1);

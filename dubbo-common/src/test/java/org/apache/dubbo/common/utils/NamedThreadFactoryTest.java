@@ -28,6 +28,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class NamedThreadFactoryTest {
+
     @Test
     public void testNewThread() throws Exception {
         NamedThreadFactory factory = new NamedThreadFactory();

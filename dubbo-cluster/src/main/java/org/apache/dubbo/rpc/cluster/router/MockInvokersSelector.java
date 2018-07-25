@@ -29,7 +29,6 @@ import java.util.List;
 /**
  * A specific Router designed to realize mock feature.
  * If a request is configured to use mock, then this router guarantees that only the invokers with protocol MOCK appear in final the invoker list, all other invokers will be excluded.
- *
  */
 public class MockInvokersSelector implements Router {
 
@@ -38,10 +37,12 @@ public class MockInvokersSelector implements Router {
                                       URL url, final Invocation invocation) throws RpcException {
         if (invocation.getAttachments() == null) {
             return getNormalInvokers(invokers);
-        } else {
+        }
+        else {
             String value = invocation.getAttachments().get(Constants.INVOCATION_NEED_MOCK);
-            if (value == null)
+            if (value == null) {
                 return getNormalInvokers(invokers);
+            }
             else if (Boolean.TRUE.toString().equalsIgnoreCase(value)) {
                 return getMockedInvokers(invokers);
             }
@@ -65,7 +66,8 @@ public class MockInvokersSelector implements Router {
     private <T> List<Invoker<T>> getNormalInvokers(final List<Invoker<T>> invokers) {
         if (!hasMockProviders(invokers)) {
             return invokers;
-        } else {
+        }
+        else {
             List<Invoker<T>> sInvokers = new ArrayList<Invoker<T>>(invokers.size());
             for (Invoker<T> invoker : invokers) {
                 if (!invoker.getUrl().getProtocol().equals(Constants.MOCK_PROTOCOL)) {

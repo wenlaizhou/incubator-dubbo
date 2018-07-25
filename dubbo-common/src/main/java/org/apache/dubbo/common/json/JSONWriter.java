@@ -31,13 +31,16 @@ import java.io.Writer;
  */
 @Deprecated
 public class JSONWriter {
+
     private static final byte UNKNOWN = 0, ARRAY = 1, OBJECT = 2, OBJECT_VALUE = 3;
+
     private static final String[] CONTROL_CHAR_MAP = new String[]{
             "\\u0000", "\\u0001", "\\u0002", "\\u0003", "\\u0004", "\\u0005", "\\u0006", "\\u0007",
             "\\b", "\\t", "\\n", "\\u000b", "\\f", "\\r", "\\u000e", "\\u000f",
             "\\u0010", "\\u0011", "\\u0012", "\\u0013", "\\u0014", "\\u0015", "\\u0016", "\\u0017",
             "\\u0018", "\\u0019", "\\u001a", "\\u001b", "\\u001c", "\\u001d", "\\u001e", "\\u001f"
     };
+
     private Writer mWriter;
 
     private State mState = new State(UNKNOWN);
@@ -53,11 +56,13 @@ public class JSONWriter {
     }
 
     private static String escape(String str) {
-        if (str == null)
+        if (str == null) {
             return str;
+        }
         int len = str.length();
-        if (len == 0)
+        if (len == 0) {
             return str;
+        }
 
         char c;
         StringBuilder sb = null;
@@ -70,7 +75,8 @@ public class JSONWriter {
                     sb.append(str, 0, i);
                 }
                 sb.append(CONTROL_CHAR_MAP[c]);
-            } else {
+            }
+            else {
                 switch (c) {
                     case '\\':
                     case '/':
@@ -82,8 +88,9 @@ public class JSONWriter {
                         sb.append('\\').append(c);
                         break;
                     default:
-                        if (sb != null)
+                        if (sb != null) {
                             sb.append(c);
+                        }
                 }
             }
         }
@@ -94,6 +101,7 @@ public class JSONWriter {
      * object begin.
      *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter objectBegin() throws IOException {
@@ -109,6 +117,7 @@ public class JSONWriter {
      * object end.
      *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter objectEnd() throws IOException {
@@ -121,7 +130,9 @@ public class JSONWriter {
      * object item.
      *
      * @param name name.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter objectItem(String name) throws IOException {
@@ -138,6 +149,7 @@ public class JSONWriter {
      * array begin.
      *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter arrayBegin() throws IOException {
@@ -153,6 +165,7 @@ public class JSONWriter {
      * array end, return array value.
      *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter arrayEnd() throws IOException {
@@ -165,6 +178,7 @@ public class JSONWriter {
      * value.
      *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueNull() throws IOException {
@@ -178,7 +192,9 @@ public class JSONWriter {
      * value.
      *
      * @param value value.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueString(String value) throws IOException {
@@ -194,7 +210,9 @@ public class JSONWriter {
      * value.
      *
      * @param value value.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueBoolean(boolean value) throws IOException {
@@ -208,7 +226,9 @@ public class JSONWriter {
      * value.
      *
      * @param value value.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueInt(int value) throws IOException {
@@ -222,7 +242,9 @@ public class JSONWriter {
      * value.
      *
      * @param value value.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueLong(long value) throws IOException {
@@ -236,7 +258,9 @@ public class JSONWriter {
      * value.
      *
      * @param value value.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueFloat(float value) throws IOException {
@@ -250,7 +274,9 @@ public class JSONWriter {
      * value.
      *
      * @param value value.
+     *
      * @return this.
+     *
      * @throws IOException
      */
     public JSONWriter valueDouble(double value) throws IOException {
@@ -263,8 +289,9 @@ public class JSONWriter {
     private void beforeValue() throws IOException {
         switch (mState.type) {
             case ARRAY:
-                if (mState.itemCount++ > 0)
+                if (mState.itemCount++ > 0) {
                     mWriter.write(JSON.COMMA);
+                }
                 return;
             case OBJECT:
                 throw new IOException("Must call objectItem first.");
@@ -280,8 +307,9 @@ public class JSONWriter {
                 mWriter.write(JSON.NULL);
             case OBJECT:
                 mState.type = OBJECT_VALUE;
-                if (mState.itemCount++ > 0)
+                if (mState.itemCount++ > 0) {
                     mWriter.write(JSON.COMMA);
+                }
                 return;
             default:
                 throw new IOException("Must call objectBegin first.");
@@ -289,7 +317,9 @@ public class JSONWriter {
     }
 
     private static class State {
+
         private byte type;
+
         private int itemCount = 0;
 
         State(byte t) {

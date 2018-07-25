@@ -25,6 +25,7 @@ import org.apache.dubbo.common.extension.SPI;
  */
 @SPI
 public interface Ext2 {
+
     // one of the properties of an argument is an instance of URL.
     @Adaptive
     String echo(UrlHolder holder, String s);

@@ -36,7 +36,8 @@ public class Slf4jLogger implements Logger, Serializable {
     public Slf4jLogger(org.slf4j.Logger logger) {
         if (logger instanceof LocationAwareLogger) {
             locationAwareLogger = (LocationAwareLogger) logger;
-        } else {
+        }
+        else {
             locationAwareLogger = null;
         }
         this.logger = logger;

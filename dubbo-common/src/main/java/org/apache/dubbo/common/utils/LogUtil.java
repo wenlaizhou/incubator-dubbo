@@ -39,7 +39,8 @@ public class LogUtil {
     public static boolean checkNoError() {
         if (findLevel(Level.ERROR) == 0) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
 
@@ -50,7 +51,9 @@ public class LogUtil {
         List<Log> logList = DubboAppender.logList;
         for (int i = 0; i < logList.size(); i++) {
             String logName = logList.get(i).getLogName();
-            if (logName.contains(expectedLogName)) count++;
+            if (logName.contains(expectedLogName)) {
+                count++;
+            }
         }
         return count;
     }
@@ -60,7 +63,9 @@ public class LogUtil {
         List<Log> logList = DubboAppender.logList;
         for (int i = 0; i < logList.size(); i++) {
             Level logLevel = logList.get(i).getLogLevel();
-            if (logLevel.equals(expectedLevel)) count++;
+            if (logLevel.equals(expectedLevel)) {
+                count++;
+            }
         }
         return count;
     }
@@ -70,8 +75,9 @@ public class LogUtil {
         List<Log> logList = DubboAppender.logList;
         for (int i = 0; i < logList.size(); i++) {
             Log log = logList.get(i);
-            if (log.getLogLevel().equals(expectedLevel) && log.getLogThread().equals(threadName))
+            if (log.getLogLevel().equals(expectedLevel) && log.getLogThread().equals(threadName)) {
                 count++;
+            }
         }
         return count;
     }
@@ -81,7 +87,9 @@ public class LogUtil {
         List<Log> logList = DubboAppender.logList;
         for (int i = 0; i < logList.size(); i++) {
             String logThread = logList.get(i).getLogThread();
-            if (logThread.contains(expectedThread)) count++;
+            if (logThread.contains(expectedThread)) {
+                count++;
+            }
         }
         return count;
     }
@@ -91,7 +99,9 @@ public class LogUtil {
         List<Log> logList = DubboAppender.logList;
         for (int i = 0; i < logList.size(); i++) {
             String logMessage = logList.get(i).getLogMessage();
-            if (logMessage.contains(expectedMessage)) count++;
+            if (logMessage.contains(expectedMessage)) {
+                count++;
+            }
         }
         return count;
     }
@@ -103,7 +113,9 @@ public class LogUtil {
             Level logLevel = logList.get(i).getLogLevel();
             if (logLevel.equals(expectedLevel)) {
                 String logMessage = logList.get(i).getLogMessage();
-                if (logMessage.contains(expectedMessage)) count++;
+                if (logMessage.contains(expectedMessage)) {
+                    count++;
+                }
             }
         }
         return count;

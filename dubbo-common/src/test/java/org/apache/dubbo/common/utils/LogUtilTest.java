@@ -28,6 +28,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LogUtilTest {
+
     @After
     public void tearDown() throws Exception {
         DubboAppender.logList.clear();

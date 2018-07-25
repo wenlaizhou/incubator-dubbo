@@ -22,7 +22,6 @@ import org.apache.dubbo.common.extension.SPI;
 
 /**
  * ConfiguratorFactory. (SPI, Singleton, ThreadSafe)
- *
  */
 @SPI
 public interface ConfiguratorFactory {
@@ -31,6 +30,7 @@ public interface ConfiguratorFactory {
      * get the configurator instance.
      *
      * @param url - configurator url.
+     *
      * @return configurator instance.
      */
     @Adaptive("protocol")

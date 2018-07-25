@@ -30,6 +30,7 @@ public interface Compiler {
      *
      * @param code        Java source code
      * @param classLoader classloader
+     *
      * @return Compiled class
      */
     Class<?> compile(String code, ClassLoader classLoader);

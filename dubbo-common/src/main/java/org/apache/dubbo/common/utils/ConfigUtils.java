@@ -36,9 +36,12 @@ import java.util.regex.Pattern;
 public class ConfigUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(ConfigUtils.class);
+
     private static Pattern VARIABLE_PATTERN = Pattern.compile(
             "\\$\\s*\\{?\\s*([\\._0-9a-zA-Z]+)\\s*\\}?");
+
     private static volatile Properties PROPERTIES;
+
     private static int PID = -1;
 
     private ConfigUtils() {
@@ -72,6 +75,7 @@ public class ConfigUtils {
      * @param type Extension type
      * @param cfg  Extension name list
      * @param def  Default extension list
+     *
      * @return result extension list
      */
     public static List<String> mergeValues(Class<?> type, String cfg, List<String> def) {
@@ -100,11 +104,13 @@ public class ConfigUtils {
             int i = names.indexOf(Constants.DEFAULT_KEY);
             if (i > 0) {
                 names.addAll(i, defaults);
-            } else {
+            }
+            else {
                 names.addAll(0, defaults);
             }
             names.remove(Constants.DEFAULT_KEY);
-        } else {
+        }
+        else {
             names.remove(Constants.DEFAULT_KEY);
         }
 
@@ -185,6 +191,7 @@ public class ConfigUtils {
      * System environment -> System properties
      *
      * @param key key
+     *
      * @return value
      */
     public static String getSystemProperty(String key) {
@@ -209,10 +216,12 @@ public class ConfigUtils {
      * @param fileName       properties file name. for example: <code>dubbo.properties</code>, <code>METE-INF/conf/foo.properties</code>
      * @param allowMultiFile if <code>false</code>, throw {@link IllegalStateException} when found multi file on the class path.
      * @param optional       is optional. if <code>false</code>, log warn when properties config file not found!s
+     *
      * @return loaded {@link Properties} content. <ul>
      * <li>return empty Properties if no file found.
      * <li>merge multi properties file if found multi file
      * </ul>
+     *
      * @throws IllegalStateException not allow multi-file, but multi-file exsit on class path.
      */
     public static Properties loadProperties(String fileName, boolean allowMultiFile, boolean optional) {
@@ -222,10 +231,12 @@ public class ConfigUtils {
                 FileInputStream input = new FileInputStream(fileName);
                 try {
                     properties.load(input);
-                } finally {
+                }
+                finally {
                     input.close();
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn("Failed to load " + fileName + " file from " + fileName + "(ignore this file): " + e.getMessage(), e);
             }
             return properties;
@@ -238,7 +249,8 @@ public class ConfigUtils {
             while (urls.hasMoreElements()) {
                 list.add(urls.nextElement());
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn("Fail to load " + fileName + " file: " + t.getMessage(), t);
         }
 
@@ -260,7 +272,8 @@ public class ConfigUtils {
             // fall back to use method getResourceAsStream
             try {
                 properties.load(ClassHelper.getClassLoader().getResourceAsStream(fileName));
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn("Failed to load " + fileName + " file from " + fileName + "(ignore this file): " + e.getMessage(), e);
             }
             return properties;
@@ -276,14 +289,17 @@ public class ConfigUtils {
                     try {
                         p.load(input);
                         properties.putAll(p);
-                    } finally {
+                    }
+                    finally {
                         try {
                             input.close();
-                        } catch (Throwable t) {
+                        }
+                        catch (Throwable t) {
                         }
                     }
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn("Fail to load " + fileName + " file from " + url + "(ignore this file): " + e.getMessage(), e);
             }
         }
@@ -297,7 +313,8 @@ public class ConfigUtils {
                 RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
                 String name = runtime.getName(); // format: "pid@hostname"
                 PID = Integer.parseInt(name.substring(0, name.indexOf('@')));
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 PID = 0;
             }
         }
@@ -311,15 +328,18 @@ public class ConfigUtils {
         if (value != null && value.length() > 0) {
             try {
                 timeout = Integer.parseInt(value);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 // ignore
             }
-        } else {
+        }
+        else {
             value = ConfigUtils.getProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY);
             if (value != null && value.length() > 0) {
                 try {
                     timeout = Integer.parseInt(value) * 1000;
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     // ignore
                 }
             }

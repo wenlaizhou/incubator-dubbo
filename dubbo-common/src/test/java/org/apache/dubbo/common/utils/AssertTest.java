@@ -22,6 +22,7 @@ import org.junit.Test;
 import static org.apache.dubbo.common.utils.Assert.notNull;
 
 public class AssertTest {
+
     @Test(expected = IllegalArgumentException.class)
     public void testNotNull1() throws Exception {
         notNull(null, "null object");

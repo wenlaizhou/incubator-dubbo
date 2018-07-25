@@ -267,7 +267,8 @@ public class URLTest {
         try {
             URL.valueOf("://1.2.3.4:8080/path");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertEquals("url missing protocol: \"://1.2.3.4:8080/path\"", expected.getMessage());
         }
     }
@@ -569,7 +570,9 @@ public class URLTest {
     @Test
     public void test_windowAbsolutePathBeginWithSlashIsValid() throws Exception {
         final String osProperty = System.getProperties().getProperty("os.name");
-        if (!osProperty.toLowerCase().contains("windows")) return;
+        if (!osProperty.toLowerCase().contains("windows")) {
+            return;
+        }
 
         System.out.println("Test Windows valid path string.");
 
@@ -639,7 +642,7 @@ public class URLTest {
     }
 
     @Test
-    public void testUserNamePasswordContainsAt(){
+    public void testUserNamePasswordContainsAt() {
         // Test username or password contains "@"
         URL url = URL.valueOf("ad@min:hello@1234@10.20.130.230:20880/context/path?version=1.0.0&application=morgan");
         assertNull(url.getProtocol());

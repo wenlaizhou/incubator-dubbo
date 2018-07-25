@@ -34,7 +34,9 @@ import java.util.Map;
  */
 @Deprecated
 public class Parameters {
+
     protected static final Logger logger = LoggerFactory.getLogger(Parameters.class);
+
     private final Map<String, String> parameters;
 
     public Parameters(String... pairs) {
@@ -95,7 +97,8 @@ public class Parameters {
         if (value != null && value.length() > 0) {
             try {
                 value = URLDecoder.decode(value, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
+            }
+            catch (UnsupportedEncodingException e) {
                 logger.error(e.getMessage(), e);
             }
         }

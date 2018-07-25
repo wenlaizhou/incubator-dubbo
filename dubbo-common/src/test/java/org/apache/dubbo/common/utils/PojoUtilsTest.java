@@ -297,7 +297,8 @@ public class PojoUtilsTest {
         Method method;
         try {
             method = getClass().getDeclaredMethod(methodName, new Class<?>[]{});
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e);
         }
         Type gtype = method.getGenericReturnType();
@@ -651,11 +652,17 @@ public class PojoUtilsTest {
     }
 
     public static class Parent {
+
         public String gender;
+
         public String email;
+
         String name;
+
         int age;
+
         Child child;
+
         private String securityEmail;
 
         public static Parent getNewParent() {
@@ -696,10 +703,15 @@ public class PojoUtilsTest {
     }
 
     public static class Child {
+
         public String gender;
+
         public int age;
+
         String toy;
+
         Parent parent;
+
         private String name;
 
         public String getName() {
@@ -736,7 +748,9 @@ public class PojoUtilsTest {
     }
 
     public static class TestData {
+
         private Map<String, Child> children = new HashMap<String, Child>();
+
         private List<Child> list = new ArrayList<Child>();
 
         public List<Child> getList() {
@@ -765,6 +779,7 @@ public class PojoUtilsTest {
     }
 
     public static class InnerPojo<T> {
+
         private List<T> list;
 
         public List<T> getList() {
@@ -777,6 +792,7 @@ public class PojoUtilsTest {
     }
 
     public static class ListResult<T> {
+
         List<T> result;
 
         public List<T> getResult() {
@@ -789,6 +805,7 @@ public class PojoUtilsTest {
     }
 
     interface Message {
+
         String getContent();
 
         String getFrom();

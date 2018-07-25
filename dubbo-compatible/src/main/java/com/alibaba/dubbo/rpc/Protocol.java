@@ -19,4 +19,5 @@ package com.alibaba.dubbo.rpc;
 
 @Deprecated
 public interface Protocol extends org.apache.dubbo.rpc.Protocol {
+
 }

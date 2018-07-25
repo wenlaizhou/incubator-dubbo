@@ -19,4 +19,5 @@ package com.alibaba.dubbo.remoting.p2p;
 
 @Deprecated
 public interface Networker extends org.apache.dubbo.remoting.p2p.Networker {
+
 }

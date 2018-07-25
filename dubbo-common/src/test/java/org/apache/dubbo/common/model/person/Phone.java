@@ -85,33 +85,48 @@ public class Phone implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Phone other = (Phone) obj;
         if (area == null) {
-            if (other.area != null)
+            if (other.area != null) {
                 return false;
-        } else if (!area.equals(other.area))
+            }
+        }
+        else if (!area.equals(other.area)) {
             return false;
+        }
         if (country == null) {
-            if (other.country != null)
+            if (other.country != null) {
                 return false;
-        } else if (!country.equals(other.country))
+            }
+        }
+        else if (!country.equals(other.country)) {
             return false;
+        }
         if (extensionNumber == null) {
-            if (other.extensionNumber != null)
+            if (other.extensionNumber != null) {
                 return false;
-        } else if (!extensionNumber.equals(other.extensionNumber))
+            }
+        }
+        else if (!extensionNumber.equals(other.extensionNumber)) {
             return false;
+        }
         if (number == null) {
-            if (other.number != null)
+            if (other.number != null) {
                 return false;
-        } else if (!number.equals(other.number))
+            }
+        }
+        else if (!number.equals(other.number)) {
             return false;
+        }
         return true;
     }
 

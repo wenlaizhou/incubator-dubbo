@@ -33,6 +33,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 
 public class ClassHelperTest {
+
     @Test
     public void testForNameWithThreadContextClassLoader() throws Exception {
         ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
@@ -41,7 +42,8 @@ public class ClassHelperTest {
             Thread.currentThread().setContextClassLoader(classLoader);
             ClassHelper.forNameWithThreadContextClassLoader("a.b.c.D");
             verify(classLoader).loadClass("a.b.c.D");
-        } finally {
+        }
+        finally {
             Thread.currentThread().setContextClassLoader(oldClassLoader);
         }
     }
@@ -64,7 +66,8 @@ public class ClassHelperTest {
             assertThat(getClassLoader(ClassHelperTest.class), sameInstance(oldClassLoader));
             Thread.currentThread().setContextClassLoader(null);
             assertThat(getClassLoader(ClassHelperTest.class), sameInstance(ClassHelperTest.class.getClassLoader()));
-        } finally {
+        }
+        finally {
             Thread.currentThread().setContextClassLoader(oldClassLoader);
         }
     }

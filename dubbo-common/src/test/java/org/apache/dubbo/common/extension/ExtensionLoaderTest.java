@@ -65,12 +65,14 @@ import static org.junit.Assert.fail;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class ExtensionLoaderTest {
+
     @Test
     public void test_getExtensionLoader_Null() throws Exception {
         try {
             ExtensionLoader.getExtensionLoader(null);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(),
                     containsString("Extension type == null"));
         }
@@ -81,7 +83,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(ExtensionLoaderTest.class);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(),
                     containsString("Extension type(class org.apache.dubbo.common.extension.ExtensionLoaderTest) is not interface"));
         }
@@ -92,7 +95,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(NoSpiExt.class);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(),
                     allOf(containsString("org.apache.dubbo.common.extension.NoSpiExt"),
                             containsString("is not extension"),
@@ -147,7 +151,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(SimpleExt.class).getExtension("XXX");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("No such extension org.apache.dubbo.common.extension.ext1.SimpleExt by name XXX"));
         }
     }
@@ -157,7 +162,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(WrappedExt.class).getExtension("XXX");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("No such extension org.apache.dubbo.common.extension.ext6_wrap.WrappedExt by name XXX"));
         }
     }
@@ -167,7 +173,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(SimpleExt.class).getExtension(null);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(), containsString("Extension name == null"));
         }
     }
@@ -181,7 +188,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(SimpleExt.class).hasExtension(null);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(), containsString("Extension name == null"));
         }
     }
@@ -197,7 +205,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(WrappedExt.class).hasExtension(null);
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(), containsString("Extension name == null"));
         }
     }
@@ -230,7 +239,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(AddExt1.class).getExtension("Manual1");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("No such extension org.apache.dubbo.common.extension.ext8_add.AddExt1 by name Manual"));
         }
 
@@ -243,7 +253,7 @@ public class ExtensionLoaderTest {
 
     @Test
     public void test_AddExtension_NoExtend() throws Exception {
-//        ExtensionLoader.getExtensionLoader(Ext9Empty.class).getSupportedExtensions();
+        //        ExtensionLoader.getExtensionLoader(Ext9Empty.class).getSupportedExtensions();
         ExtensionLoader.getExtensionLoader(Ext9Empty.class).addExtension("ext9", Ext9EmptyImpl.class);
         Ext9Empty ext = ExtensionLoader.getExtensionLoader(Ext9Empty.class).getExtension("ext9");
 
@@ -258,7 +268,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(AddExt1.class).addExtension("impl1", AddExt1_ManualAdd1.class);
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Extension name impl1 already existed(Extension interface org.apache.dubbo.common.extension.ext8_add.AddExt1)!"));
         }
     }
@@ -281,7 +292,8 @@ public class ExtensionLoaderTest {
         try {
             loader.addExtension(null, AddExt1_ManualAdaptive.class);
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Adaptive Extension already existed(Extension interface org.apache.dubbo.common.extension.ext8_add.AddExt1)!"));
         }
     }
@@ -291,7 +303,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(AddExt1.class).getExtension("Manual2");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("No such extension org.apache.dubbo.common.extension.ext8_add.AddExt1 by name Manual"));
         }
 
@@ -330,7 +343,8 @@ public class ExtensionLoaderTest {
         try {
             ExtensionLoader.getExtensionLoader(AddExt1.class).replaceExtension("NotExistedExtension", AddExt1_ManualAdd1.class);
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Extension name NotExistedExtension not existed(Extension interface org.apache.dubbo.common.extension.ext8_add.AddExt1)"));
         }
     }
@@ -342,7 +356,8 @@ public class ExtensionLoaderTest {
         try {
             loader.replaceExtension(null, AddExt4_ManualAdaptive.class);
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Adaptive Extension not existed(Extension interface org.apache.dubbo.common.extension.ext8_add.AddExt4)"));
         }
     }
@@ -356,7 +371,8 @@ public class ExtensionLoaderTest {
         try {
             loader.getExtension("error");
             fail();
-        } catch (IllegalStateException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Failed to load extension class(interface: interface org.apache.dubbo.common.extension.ext7.InitErrorExt"));
             assertThat(expected.getCause(), instanceOf(ExceptionInInitializerError.class));
         }

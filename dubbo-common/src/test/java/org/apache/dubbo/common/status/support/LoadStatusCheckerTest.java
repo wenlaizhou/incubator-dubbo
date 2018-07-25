@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 public class LoadStatusCheckerTest {
+
     private static Logger logger = LoggerFactory.getLogger(LoadStatusCheckerTest.class);
 
     @Test

@@ -33,9 +33,9 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * ConsistentHashLoadBalance
- *
  */
 public class ConsistentHashLoadBalance extends AbstractLoadBalance {
+
     public static final String NAME = "consistenthash";
 
     private final ConcurrentMap<String, ConsistentHashSelector<?>> selectors = new ConcurrentHashMap<String, ConsistentHashSelector<?>>();
@@ -122,14 +122,16 @@ public class ConsistentHashLoadBalance extends AbstractLoadBalance {
             MessageDigest md5;
             try {
                 md5 = MessageDigest.getInstance("MD5");
-            } catch (NoSuchAlgorithmException e) {
+            }
+            catch (NoSuchAlgorithmException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
             md5.reset();
             byte[] bytes;
             try {
                 bytes = value.getBytes("UTF-8");
-            } catch (UnsupportedEncodingException e) {
+            }
+            catch (UnsupportedEncodingException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
             md5.update(bytes);

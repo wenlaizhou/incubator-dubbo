@@ -37,18 +37,24 @@ import static org.mockito.Mockito.mock;
 
 /**
  * ForkingClusterInvokerTest
- *
  */
 @SuppressWarnings("unchecked")
 public class ForkingClusterInvokerTest {
 
     List<Invoker<ForkingClusterInvokerTest>> invokers = new ArrayList<Invoker<ForkingClusterInvokerTest>>();
+
     URL url = URL.valueOf("test://test:11/test?forks=2");
+
     Invoker<ForkingClusterInvokerTest> invoker1 = mock(Invoker.class);
+
     Invoker<ForkingClusterInvokerTest> invoker2 = mock(Invoker.class);
+
     Invoker<ForkingClusterInvokerTest> invoker3 = mock(Invoker.class);
+
     RpcInvocation invocation = new RpcInvocation();
+
     Directory<ForkingClusterInvokerTest> dic;
+
     Result result = new RpcResult();
 
     /**
@@ -71,6 +77,7 @@ public class ForkingClusterInvokerTest {
         invokers.add(invoker3);
 
     }
+
     private void resetInvokerToException() {
         given(invoker1.invoke(invocation)).willThrow(new RuntimeException());
         given(invoker1.getUrl()).willReturn(url);
@@ -114,7 +121,8 @@ public class ForkingClusterInvokerTest {
         try {
             invoker.invoke(invocation);
             Assert.fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             Assert.assertTrue(expected.getMessage().contains("Failed to forking invoke provider"));
             assertFalse(expected.getCause() instanceof RpcException);
         }

@@ -25,6 +25,7 @@ import org.apache.dubbo.common.extension.SPI;
  */
 @SPI("impl1")
 public interface SimpleExt {
+
     // @Adaptive example, do not specify a explicit key.
     @Adaptive
     String echo(URL url, String s);

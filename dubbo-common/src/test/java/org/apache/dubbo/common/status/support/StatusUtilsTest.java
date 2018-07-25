@@ -30,6 +30,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class StatusUtilsTest {
+
     @Test
     public void testGetSummaryStatus1() throws Exception {
         Status status1 = new Status(Status.Level.ERROR);

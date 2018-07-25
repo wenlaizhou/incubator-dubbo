@@ -23,6 +23,7 @@ import java.util.Map;
 public interface Result extends org.apache.dubbo.rpc.Result {
 
     class CompatibleResult implements Result {
+
         private org.apache.dubbo.rpc.Result delegate;
 
         public CompatibleResult(org.apache.dubbo.rpc.Result result) {

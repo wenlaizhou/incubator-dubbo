@@ -31,6 +31,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 
 public class UnsafeByteArrayOutputStreamTest {
+
     @Test(expected = IllegalArgumentException.class)
     public void testWrongSize() {
         new UnsafeByteArrayOutputStream(-1);

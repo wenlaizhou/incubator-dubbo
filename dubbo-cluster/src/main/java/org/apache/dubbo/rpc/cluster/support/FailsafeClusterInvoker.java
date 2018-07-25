@@ -33,9 +33,9 @@ import java.util.List;
  * Usually used to write audit logs and other operations
  *
  * <a href="http://en.wikipedia.org/wiki/Fail-safe">Fail-safe</a>
- *
  */
 public class FailsafeClusterInvoker<T> extends AbstractClusterInvoker<T> {
+
     private static final Logger logger = LoggerFactory.getLogger(FailsafeClusterInvoker.class);
 
     public FailsafeClusterInvoker(Directory<T> directory) {
@@ -48,7 +48,8 @@ public class FailsafeClusterInvoker<T> extends AbstractClusterInvoker<T> {
             checkInvokers(invokers, invocation);
             Invoker<T> invoker = select(loadbalance, invocation, invokers, null);
             return invoker.invoke(invocation);
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.error("Failsafe ignore exception: " + e.getMessage(), e);
             return new RpcResult(); // ignore
         }

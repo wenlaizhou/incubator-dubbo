@@ -26,6 +26,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class StackTest {
+
     @Test
     public void testOps() throws Exception {
         Stack<String> stack = new Stack<String>();

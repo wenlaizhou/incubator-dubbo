@@ -41,6 +41,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class CollectionUtilsTest {
+
     @Test
     public void testSort() throws Exception {
         List<Integer> list = new ArrayList<Integer>();
@@ -126,8 +127,9 @@ public class CollectionUtilsTest {
 
         Map<String, List<String>> output = CollectionUtils.joinAll(input, ":");
         for (Map.Entry<String, List<String>> entry : output.entrySet()) {
-            if (entry.getValue() == null)
+            if (entry.getValue() == null) {
                 continue;
+            }
             Collections.sort(entry.getValue());
         }
 

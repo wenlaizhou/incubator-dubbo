@@ -40,6 +40,7 @@ public class ListenableFutureTask<V> extends FutureTask<V>
      * given {@code Callable}.
      *
      * @param callable the callable task
+     *
      * @since 10.0
      */
     public static <V> ListenableFutureTask<V> create(Callable<V> callable) {
@@ -56,6 +57,7 @@ public class ListenableFutureTask<V> extends FutureTask<V>
      *                 need a particular result, consider using constructions of the form:
      *                 {@code ListenableFuture<?> f = ListenableFutureTask.create(runnable,
      *                 null)}
+     *
      * @since 10.0
      */
     public static <V> ListenableFutureTask<V> create(

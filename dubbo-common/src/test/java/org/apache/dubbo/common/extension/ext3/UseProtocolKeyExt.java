@@ -22,6 +22,7 @@ import org.apache.dubbo.common.extension.SPI;
 
 @SPI("impl1")
 public interface UseProtocolKeyExt {
+
     // protocol key is the second
     @Adaptive({"key1", "protocol"})
     String echo(URL url, String s);

@@ -21,6 +21,7 @@ package org.apache.dubbo.rpc.cluster.filter;
  */
 
 public interface DemoService {
+
     String sayHello(String name);
 
     int plus(int a, int b);

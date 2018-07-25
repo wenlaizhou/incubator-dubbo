@@ -19,4 +19,5 @@ package com.alibaba.dubbo.common.serialize;
 
 @Deprecated
 public interface ObjectInput extends org.apache.dubbo.common.serialize.ObjectInput {
+
 }

@@ -26,12 +26,14 @@ import java.util.List;
  */
 @Deprecated
 public class JSONArray implements JSONNode {
+
     private List<Object> mArray = new ArrayList<Object>();
 
     /**
      * get.
      *
      * @param index index.
+     *
      * @return boolean or long or double or String or JSONArray or JSONObject or null.
      */
     public Object get(int index) {
@@ -43,6 +45,7 @@ public class JSONArray implements JSONNode {
      *
      * @param index index.
      * @param def   default value.
+     *
      * @return value or default value.
      */
     public boolean getBoolean(int index, boolean def) {
@@ -55,6 +58,7 @@ public class JSONArray implements JSONNode {
      *
      * @param index index.
      * @param def   default value.
+     *
      * @return value or default value.
      */
     public int getInt(int index, int def) {
@@ -67,6 +71,7 @@ public class JSONArray implements JSONNode {
      *
      * @param index index.
      * @param def   default value.
+     *
      * @return value or default value.
      */
     public long getLong(int index, long def) {
@@ -79,6 +84,7 @@ public class JSONArray implements JSONNode {
      *
      * @param index index.
      * @param def   default value.
+     *
      * @return value or default value.
      */
     public float getFloat(int index, float def) {
@@ -91,6 +97,7 @@ public class JSONArray implements JSONNode {
      *
      * @param index index.
      * @param def   default value.
+     *
      * @return value or default value.
      */
     public double getDouble(int index, double def) {
@@ -102,6 +109,7 @@ public class JSONArray implements JSONNode {
      * get string value.
      *
      * @param index index.
+     *
      * @return value or default value.
      */
     public String getString(int index) {
@@ -113,6 +121,7 @@ public class JSONArray implements JSONNode {
      * get JSONArray value.
      *
      * @param index index.
+     *
      * @return value or default value.
      */
     public JSONArray getArray(int index) {
@@ -124,6 +133,7 @@ public class JSONArray implements JSONNode {
      * get JSONObject value.
      *
      * @param index index.
+     *
      * @return value or default value.
      */
     public JSONObject getObject(int index) {
@@ -172,10 +182,12 @@ public class JSONArray implements JSONNode {
     public void writeJSON(JSONConverter jc, JSONWriter jb, boolean writeClass) throws IOException {
         jb.arrayBegin();
         for (Object item : mArray) {
-            if (item == null)
+            if (item == null) {
                 jb.valueNull();
-            else
+            }
+            else {
                 jc.writeValue(item, jb, writeClass);
+            }
         }
         jb.arrayEnd();
     }

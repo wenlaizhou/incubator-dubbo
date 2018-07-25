@@ -39,8 +39,11 @@ public class SerializationTest {
     private MySerialization mySerialization;
 
     private MyObjectOutput myObjectOutput;
+
     private MyObjectInput myObjectInput;
+
     private ByteArrayOutputStream byteArrayOutputStream;
+
     private ByteArrayInputStream byteArrayInputStream;
 
     @Before

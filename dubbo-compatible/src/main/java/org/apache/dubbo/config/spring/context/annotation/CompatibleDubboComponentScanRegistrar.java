@@ -39,6 +39,7 @@ import static org.springframework.beans.factory.support.BeanDefinitionBuilder.ro
 
 /**
  * Dubbo Bean Registrar
+ *
  * @see ImportBeanDefinitionRegistrar
  * @see CompatibleServiceAnnotationBeanPostProcessor
  * @see CompatibleReferenceAnnotationBeanPostProcessor
@@ -63,6 +64,7 @@ public class CompatibleDubboComponentScanRegistrar implements ImportBeanDefiniti
      *
      * @param packagesToScan packages to scan without resolving placeholders
      * @param registry       {@link BeanDefinitionRegistry}
+     *
      * @since 2.5.8 deprecated since 2.7.0
      */
     private void registerServiceAnnotationBeanPostProcessor(Set<String> packagesToScan, BeanDefinitionRegistry registry) {

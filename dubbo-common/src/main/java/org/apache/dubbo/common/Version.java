@@ -32,10 +32,12 @@ import java.util.Set;
  * Version
  */
 public final class Version {
+
     private static final Logger logger = LoggerFactory.getLogger(Version.class);
 
     // Dubbo RPC protocol version, for compatibility, it must not be between 2.0.10 ~ 2.6.2
     public static final String DEFAULT_DUBBO_PROTOCOL_VERSION = "2.0.1";
+
     // Dubbo implementation version, usually is jar version.
     private static final String VERSION = getVersion(Version.class, "");
 
@@ -44,6 +46,7 @@ public final class Version {
      * Because {@link #isSupportResponseAttatchment} is checked for every call, int compare expect to has higher performance than string.
      */
     private static final int LOWEST_VERSION_FOR_RESPONSE_ATTATCHMENT = 20001; // 2.0.1
+
     private static final Map<String, Integer> VERSION2INT = new HashMap<String, Integer>();
 
     static {
@@ -101,11 +104,13 @@ public final class Version {
             if (Character.isDigit(c)) {
                 if (i == v.length() - 1) {
                     index = i + 1;
-                } else {
+                }
+                else {
                     index = i;
                 }
                 continue;
-            } else {
+            }
+            else {
                 index = i;
                 break;
             }
@@ -116,7 +121,8 @@ public final class Version {
     private static boolean hasResource(String path) {
         try {
             return Version.class.getClassLoader().getResource(path) != null;
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             return false;
         }
     }
@@ -133,7 +139,8 @@ public final class Version {
                 CodeSource codeSource = cls.getProtectionDomain().getCodeSource();
                 if (codeSource == null) {
                     logger.info("No codeSource for class " + cls.getName() + " when getVersion, use default version " + defaultVersion);
-                } else {
+                }
+                else {
                     String file = codeSource.getLocation().getFile();
                     if (file != null && file.length() > 0 && file.endsWith(".jar")) {
                         file = file.substring(0, file.length() - 4);
@@ -149,7 +156,8 @@ public final class Version {
                             i = file.indexOf("-");
                             if (i >= 0) {
                                 file = file.substring(i + 1);
-                            } else {
+                            }
+                            else {
                                 break;
                             }
                         }
@@ -159,7 +167,8 @@ public final class Version {
             }
             // return default version if no version info is found
             return version == null || version.length() == 0 ? defaultVersion : version;
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             // return default version when any exception is thrown
             logger.error("return default version, ignore exception " + e.getMessage(), e);
             return defaultVersion;
@@ -193,11 +202,13 @@ public final class Version {
                 String error = "Duplicate class " + path + " in " + files.size() + " jar " + files;
                 if (failOnError) {
                     throw new IllegalStateException(error);
-                } else {
+                }
+                else {
                     logger.error(error);
                 }
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.error(e.getMessage(), e);
         }
     }

@@ -27,7 +27,6 @@ import java.util.Set;
 
 /**
  * AbstractOverrideConfigurator
- *
  */
 public abstract class AbstractConfigurator implements Configurator {
 
@@ -56,12 +55,14 @@ public abstract class AbstractConfigurator implements Configurator {
             if (url.getPort() == configuratorUrl.getPort()) {
                 return configureIfMatch(url.getHost(), url);
             }
-        } else {// override url don't have a port, means the ip override url specify is a consumer address or 0.0.0.0
+        }
+        else {// override url don't have a port, means the ip override url specify is a consumer address or 0.0.0.0
             // 1.If it is a consumer ip address, the intention is to control a specific consumer instance, it must takes effect at the consumer side, any provider received this override url should ignore;
             // 2.If the ip is 0.0.0.0, this override url can be used on consumer, and also can be used on provider
             if (url.getParameter(Constants.SIDE_KEY, Constants.PROVIDER).equals(Constants.CONSUMER)) {
                 return configureIfMatch(NetUtils.getLocalHost(), url);// NetUtils.getLocalHost is the ip address consumer registered to registry.
-            } else if (url.getParameter(Constants.SIDE_KEY, Constants.CONSUMER).equals(Constants.PROVIDER)) {
+            }
+            else if (url.getParameter(Constants.SIDE_KEY, Constants.CONSUMER).equals(Constants.PROVIDER)) {
                 return configureIfMatch(Constants.ANYHOST_VALUE, url);// take effect on all providers, so address must be 0.0.0.0, otherwise it won't flow to this if branch
             }
         }
@@ -103,6 +104,7 @@ public abstract class AbstractConfigurator implements Configurator {
      * 2. if two url has the same host, compare by priority value；
      *
      * @param o
+     *
      * @return
      */
     @Override
@@ -116,7 +118,8 @@ public abstract class AbstractConfigurator implements Configurator {
             int i = getUrl().getParameter(Constants.PRIORITY_KEY, 0),
                     j = o.getUrl().getParameter(Constants.PRIORITY_KEY, 0);
             return i < j ? -1 : (i == j ? 0 : 1);
-        } else {
+        }
+        else {
             return ipCompare;
         }
 

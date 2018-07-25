@@ -50,23 +50,34 @@ import static org.mockito.Mockito.mock;
 
 /**
  * AbstractClusterInvokerTest
- *
  */
 @SuppressWarnings("rawtypes")
 public class AbstractClusterInvokerTest {
+
     List<Invoker<IHelloService>> invokers = new ArrayList<Invoker<IHelloService>>();
+
     List<Invoker<IHelloService>> selectedInvokers = new ArrayList<Invoker<IHelloService>>();
+
     AbstractClusterInvoker<IHelloService> cluster;
+
     AbstractClusterInvoker<IHelloService> cluster_nocheck;
+
     Directory<IHelloService> dic;
+
     RpcInvocation invocation = new RpcInvocation();
+
     URL url = URL.valueOf("registry://localhost:9090");
 
     Invoker<IHelloService> invoker1;
+
     Invoker<IHelloService> invoker2;
+
     Invoker<IHelloService> invoker3;
+
     Invoker<IHelloService> invoker4;
+
     Invoker<IHelloService> invoker5;
+
     Invoker<IHelloService> mockedInvoker1;
 
 
@@ -396,9 +407,10 @@ public class AbstractClusterInvokerTest {
 
         for (Invoker minvoker : counter.keySet()) {
             Long count = counter.get(minvoker).get();
-//            System.out.println(count);
-            if (minvoker.isAvailable())
+            //            System.out.println(count);
+            if (minvoker.isAvailable()) {
                 Assert.assertTrue("count should > avg", count > runs / invokers.size());
+            }
         }
 
         Assert.assertEquals(runs, counter.get(invoker2).get() + counter.get(invoker4).get());
@@ -448,21 +460,24 @@ public class AbstractClusterInvokerTest {
         try {
             failoverClusterInvoker.invoke(new RpcInvocation("sayHello", new Class<?>[0], new Object[0]));
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertEquals(RpcException.TIMEOUT_EXCEPTION, e.getCode());
         }
         ForkingClusterInvoker<DemoService> forkingClusterInvoker = new ForkingClusterInvoker<DemoService>(directory);
         try {
             forkingClusterInvoker.invoke(new RpcInvocation("sayHello", new Class<?>[0], new Object[0]));
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertEquals(RpcException.TIMEOUT_EXCEPTION, e.getCode());
         }
         FailfastClusterInvoker<DemoService> failfastClusterInvoker = new FailfastClusterInvoker<DemoService>(directory);
         try {
             failfastClusterInvoker.invoke(new RpcInvocation("sayHello", new Class<?>[0], new Object[0]));
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertEquals(RpcException.TIMEOUT_EXCEPTION, e.getCode());
         }
     }
@@ -486,5 +501,6 @@ public class AbstractClusterInvokerTest {
     }
 
     public static interface IHelloService {
+
     }
 }

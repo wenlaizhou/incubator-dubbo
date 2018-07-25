@@ -39,15 +39,20 @@ import static org.mockito.Mockito.mock;
 
 /**
  * FailfastClusterInvokerTest
- *
  */
 @SuppressWarnings("unchecked")
 public class FailSafeClusterInvokerTest {
+
     List<Invoker<DemoService>> invokers = new ArrayList<Invoker<DemoService>>();
+
     URL url = URL.valueOf("test://test:11/test");
+
     Invoker<DemoService> invoker = mock(Invoker.class);
+
     RpcInvocation invocation = new RpcInvocation();
+
     Directory<DemoService> dic;
+
     Result result = new RpcResult();
 
     /**

@@ -34,6 +34,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(Parameterized.class)
 public class LoggerTest {
+
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{

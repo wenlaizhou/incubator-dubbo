@@ -37,6 +37,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 public class EagerThreadPoolTest {
+
     @Test
     public void getExecutor1() throws Exception {
         URL url = URL.valueOf("dubbo://10.20.130.230:20880/context/path?" +

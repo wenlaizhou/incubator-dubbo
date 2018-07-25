@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UnsafeStringReaderTest {
+
     @Test
     public void testRead() throws IOException {
         UnsafeStringReader reader = new UnsafeStringReader("abc");

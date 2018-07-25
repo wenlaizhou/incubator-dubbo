@@ -25,6 +25,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class LogTest {
+
     @Test
     public void testLogName() throws Exception {
         Log log = new Log();

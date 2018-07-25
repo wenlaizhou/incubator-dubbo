@@ -22,8 +22,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParametersTest extends TestCase {
+
     final String ServiceName = "org.apache.dubbo.rpc.service.GenericService";
+
     final String ServiceVersion = "1.0.15";
+
     final String LoadBalance = "lcr";
 
     public void testMap2Parameters() throws Exception {

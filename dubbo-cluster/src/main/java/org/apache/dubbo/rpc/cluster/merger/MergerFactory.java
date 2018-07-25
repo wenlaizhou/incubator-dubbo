@@ -42,7 +42,8 @@ public class MergerFactory {
             if (result == null && !type.isPrimitive()) {
                 result = ArrayMerger.INSTANCE;
             }
-        } else {
+        }
+        else {
             result = mergerCache.get(returnType);
             if (result == null) {
                 loadMergers();

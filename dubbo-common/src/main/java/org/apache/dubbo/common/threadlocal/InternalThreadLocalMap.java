@@ -54,7 +54,8 @@ public final class InternalThreadLocalMap {
         Thread thread = Thread.currentThread();
         if (thread instanceof InternalThread) {
             ((InternalThread) thread).setThreadLocalMap(null);
-        } else {
+        }
+        else {
             slowThreadLocalMap.remove();
         }
     }
@@ -94,7 +95,8 @@ public final class InternalThreadLocalMap {
             Object oldValue = lookup[index];
             lookup[index] = value;
             return oldValue == UNSET;
-        } else {
+        }
+        else {
             expandIndexedVariableTableAndSet(index, value);
             return true;
         }
@@ -106,7 +108,8 @@ public final class InternalThreadLocalMap {
             Object v = lookup[index];
             lookup[index] = UNSET;
             return v;
-        } else {
+        }
+        else {
             return UNSET;
         }
     }

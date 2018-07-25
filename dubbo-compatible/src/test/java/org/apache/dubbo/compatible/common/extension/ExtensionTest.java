@@ -37,7 +37,8 @@ public class ExtensionTest {
             ExtensionFactory spring = ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getExtension("spring");
             Assert.assertTrue(spring instanceof ExtensionFactory);
             Assert.assertFalse(spring instanceof com.alibaba.dubbo.common.extension.ExtensionFactory);
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             fail();
         }
     }

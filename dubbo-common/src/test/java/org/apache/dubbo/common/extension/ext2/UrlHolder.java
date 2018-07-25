@@ -19,6 +19,7 @@ package org.apache.dubbo.common.extension.ext2;
 import org.apache.dubbo.common.URL;
 
 public class UrlHolder {
+
     private Double Num;
 
     private URL url;

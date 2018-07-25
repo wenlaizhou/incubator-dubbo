@@ -23,7 +23,9 @@ import org.apache.dubbo.rpc.Result;
 import org.apache.dubbo.rpc.RpcException;
 
 public class MockInvoker<T> implements Invoker<T> {
+
     private boolean available = false;
+
     private URL url;
 
     public MockInvoker() {

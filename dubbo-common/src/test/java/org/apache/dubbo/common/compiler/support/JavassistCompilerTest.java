@@ -22,6 +22,7 @@ import org.junit.Test;
 import java.lang.reflect.Method;
 
 public class JavassistCompilerTest extends JavaCodeTest {
+
     @Test
     public void testCompileJavaClass() throws Exception {
         JavassistCompiler compiler = new JavassistCompiler();

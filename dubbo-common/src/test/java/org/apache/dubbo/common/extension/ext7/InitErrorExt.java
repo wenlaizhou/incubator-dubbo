@@ -26,6 +26,7 @@ import org.apache.dubbo.common.extension.SPI;
  */
 @SPI
 public interface InitErrorExt {
+
     @Adaptive
     String echo(URL url, String s);
 }

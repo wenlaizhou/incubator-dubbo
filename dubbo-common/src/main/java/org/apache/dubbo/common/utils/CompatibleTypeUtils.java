@@ -59,61 +59,85 @@ public class CompatibleTypeUtils {
                             " when convert String to char, the String MUST only 1 char.", string));
                 }
                 return string.charAt(0);
-            } else if (type.isEnum()) {
+            }
+            else if (type.isEnum()) {
                 return Enum.valueOf((Class<Enum>) type, string);
-            } else if (type == BigInteger.class) {
+            }
+            else if (type == BigInteger.class) {
                 return new BigInteger(string);
-            } else if (type == BigDecimal.class) {
+            }
+            else if (type == BigDecimal.class) {
                 return new BigDecimal(string);
-            } else if (type == Short.class || type == short.class) {
+            }
+            else if (type == Short.class || type == short.class) {
                 return new Short(string);
-            } else if (type == Integer.class || type == int.class) {
+            }
+            else if (type == Integer.class || type == int.class) {
                 return new Integer(string);
-            } else if (type == Long.class || type == long.class) {
+            }
+            else if (type == Long.class || type == long.class) {
                 return new Long(string);
-            } else if (type == Double.class || type == double.class) {
+            }
+            else if (type == Double.class || type == double.class) {
                 return new Double(string);
-            } else if (type == Float.class || type == float.class) {
+            }
+            else if (type == Float.class || type == float.class) {
                 return new Float(string);
-            } else if (type == Byte.class || type == byte.class) {
+            }
+            else if (type == Byte.class || type == byte.class) {
                 return new Byte(string);
-            } else if (type == Boolean.class || type == boolean.class) {
+            }
+            else if (type == Boolean.class || type == boolean.class) {
                 return new Boolean(string);
-            } else if (type == Date.class) {
+            }
+            else if (type == Date.class) {
                 try {
                     return new SimpleDateFormat(DATE_FORMAT).parse((String) value);
-                } catch (ParseException e) {
+                }
+                catch (ParseException e) {
                     throw new IllegalStateException("Failed to parse date " + value + " by format " + DATE_FORMAT + ", cause: " + e.getMessage(), e);
                 }
-            } else if (type == Class.class) {
+            }
+            else if (type == Class.class) {
                 try {
                     return ReflectUtils.name2class((String) value);
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new RuntimeException(e.getMessage(), e);
                 }
             }
-        } else if (value instanceof Number) {
+        }
+        else if (value instanceof Number) {
             Number number = (Number) value;
             if (type == byte.class || type == Byte.class) {
                 return number.byteValue();
-            } else if (type == short.class || type == Short.class) {
+            }
+            else if (type == short.class || type == Short.class) {
                 return number.shortValue();
-            } else if (type == int.class || type == Integer.class) {
+            }
+            else if (type == int.class || type == Integer.class) {
                 return number.intValue();
-            } else if (type == long.class || type == Long.class) {
+            }
+            else if (type == long.class || type == Long.class) {
                 return number.longValue();
-            } else if (type == float.class || type == Float.class) {
+            }
+            else if (type == float.class || type == Float.class) {
                 return number.floatValue();
-            } else if (type == double.class || type == Double.class) {
+            }
+            else if (type == double.class || type == Double.class) {
                 return number.doubleValue();
-            } else if (type == BigInteger.class) {
+            }
+            else if (type == BigInteger.class) {
                 return BigInteger.valueOf(number.longValue());
-            } else if (type == BigDecimal.class) {
+            }
+            else if (type == BigDecimal.class) {
                 return BigDecimal.valueOf(number.doubleValue());
-            } else if (type == Date.class) {
+            }
+            else if (type == Date.class) {
                 return new Date(number.longValue());
             }
-        } else if (value instanceof Collection) {
+        }
+        else if (value instanceof Collection) {
             Collection collection = (Collection) value;
             if (type.isArray()) {
                 int length = collection.size();
@@ -123,29 +147,37 @@ public class CompatibleTypeUtils {
                     Array.set(array, i++, item);
                 }
                 return array;
-            } else if (!type.isInterface()) {
+            }
+            else if (!type.isInterface()) {
                 try {
                     Collection result = (Collection) type.newInstance();
                     result.addAll(collection);
                     return result;
-                } catch (Throwable e) {
                 }
-            } else if (type == List.class) {
+                catch (Throwable e) {
+                }
+            }
+            else if (type == List.class) {
                 return new ArrayList<Object>(collection);
-            } else if (type == Set.class) {
+            }
+            else if (type == Set.class) {
                 return new HashSet<Object>(collection);
             }
-        } else if (value.getClass().isArray() && Collection.class.isAssignableFrom(type)) {
+        }
+        else if (value.getClass().isArray() && Collection.class.isAssignableFrom(type)) {
             Collection collection;
             if (!type.isInterface()) {
                 try {
                     collection = (Collection) type.newInstance();
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     collection = new ArrayList<Object>();
                 }
-            } else if (type == Set.class) {
+            }
+            else if (type == Set.class) {
                 collection = new HashSet<Object>();
-            } else {
+            }
+            else {
                 collection = new ArrayList<Object>();
             }
             int length = Array.getLength(value);

@@ -29,16 +29,21 @@ public class Yylex {
      * This character denotes the end of file
      */
     public static final int YYEOF = -1;
+
     /**
      * lexical states
      */
     public static final int STR2 = 4;
+
     public static final int STR1 = 2;
+
     public static final int YYINITIAL = 0;
+
     /**
      * initial size of the lookahead buffer
      */
     private static final int ZZ_BUFFERSIZE = 16384;
+
     /**
      * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
      * ZZ_LEXSTATE[l+1] is the state in the DFA for the lexical state l
@@ -65,6 +70,7 @@ public class Yylex {
      * Translates characters to character classes
      */
     private static final char[] ZZ_CMAP = zzUnpackCMap(ZZ_CMAP_PACKED);
+
     private static final String ZZ_ACTION_PACKED_0 =
             "\3\0\1\1\1\2\1\3\1\1\1\4\1\5\1\6" +
                     "\6\3\1\7\1\10\1\11\1\12\1\13\1\14\1\15" +
@@ -72,10 +78,12 @@ public class Yylex {
                     "\1\22\1\23\1\24\1\25\1\26\1\0\1\27\2\30" +
                     "\1\0\6\3\1\0\1\3\1\31\1\32\1\3\1\0" +
                     "\1\33\1\0\1\34";
+
     /**
      * Translates DFA states to action switch labels.
      */
     private static final int[] ZZ_ACTION = zzUnpackAction();
+
     private static final String ZZ_ROWMAP_PACKED_0 =
             "\0\0\0\45\0\112\0\157\0\224\0\271\0\336\0\157" +
                     "\0\157\0\u0103\0\u0128\0\u014d\0\u0172\0\u0197\0\u01bc\0\u01e1" +
@@ -85,10 +93,12 @@ public class Yylex {
                     "\0\157\0\157\0\157\0\u03c2\0\157\0\u03e7\0\u040c\0\u040c" +
                     "\0\u0431\0\u0456\0\u047b\0\u04a0\0\u04c5\0\u04ea\0\u050f\0\u0534" +
                     "\0\271\0\271\0\u0559\0\u057e\0\271\0\u05a3\0\157";
+
     /**
      * Translates a state to a row index in the transition table
      */
     private static final int[] ZZ_ROWMAP = zzUnpackRowMap();
+
     /**
      * The transition table of the DFA
      */
@@ -241,69 +251,85 @@ public class Yylex {
             -1, -1, -1, -1, -1, -1, 62, 62, -1, -1,
             -1, -1, 62, -1, -1, -1, 62, -1, -1, 62,
             62, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    };
+            };
+
     /* error codes */
     private static final int ZZ_UNKNOWN_ERROR = 0;
+
     private static final int ZZ_NO_MATCH = 1;
+
     private static final int ZZ_PUSHBACK_2BIG = 2;
+
     /* error messages for the codes above */
     private static final String ZZ_ERROR_MSG[] = {
             "Unkown internal scanner error",
             "Error: could not match input",
             "Error: pushback value was too large"
     };
+
     private static final String ZZ_ATTRIBUTE_PACKED_0 =
             "\3\0\1\11\3\1\2\11\7\1\6\11\1\1\1\11" +
                     "\1\0\1\1\3\0\6\1\10\11\1\0\1\11\2\1" +
                     "\1\0\6\1\1\0\4\1\1\0\1\1\1\0\1\11";
+
     /**
      * ZZ_ATTRIBUTE[aState] contains the attributes of state <code>aState</code>
      */
     private static final int[] ZZ_ATTRIBUTE = zzUnpackAttribute();
+
     /**
      * the input device
      */
     private java.io.Reader zzReader;
+
     /**
      * the current state of the DFA
      */
     private int zzState;
+
     /**
      * the current lexical state
      */
     private int zzLexicalState = YYINITIAL;
+
     /**
      * this buffer contains the current text to be matched and is
      * the source of the yytext() string
      */
     private char zzBuffer[] = new char[ZZ_BUFFERSIZE];
+
     /**
      * the textposition at the last accepting state
      */
     private int zzMarkedPos;
+
     /**
      * the current text position in the buffer
      */
     private int zzCurrentPos;
+
     /**
      * startRead marks the beginning of the yytext() string in the buffer
      */
     private int zzStartRead;
+
     /**
      * endRead marks the last character in the buffer, that has been read
      * from input
      */
     private int zzEndRead;
+
     /**
      * zzAtEOF == true <=> the scanner is at the EOF
      */
     private boolean zzAtEOF;
+
     /**
      * denotes if the user-EOF-code has already been executed
      */
     //private boolean zzEOFDone;
 
-  /* user code: */
+    /* user code: */
     private StringBuffer sb;
 
     /**
@@ -340,7 +366,10 @@ public class Yylex {
         while (i < l) {
             int count = packed.charAt(i++);
             int value = packed.charAt(i++);
-            do result[j++] = value; while (--count > 0);
+            do {
+                result[j++] = value;
+            }
+            while (--count > 0);
         }
         return j;
     }
@@ -393,7 +422,10 @@ public class Yylex {
         while (i < l) {
             int count = packed.charAt(i++);
             int value = packed.charAt(i++);
-            do result[j++] = value; while (--count > 0);
+            do {
+                result[j++] = value;
+            }
+            while (--count > 0);
         }
         return j;
     }
@@ -402,6 +434,7 @@ public class Yylex {
      * Unpacks the compressed character translation table.
      *
      * @param packed the packed character translation table
+     *
      * @return the unpacked character translation table
      */
     private static char[] zzUnpackCMap(String packed) {
@@ -411,7 +444,10 @@ public class Yylex {
         while (i < 122) {
             int count = packed.charAt(i++);
             char value = packed.charAt(i++);
-            do map[j++] = value; while (--count > 0);
+            do {
+                map[j++] = value;
+            }
+            while (--count > 0);
         }
         return map;
     }
@@ -421,32 +457,33 @@ public class Yylex {
      * Refills the input buffer.
      *
      * @return <code>false</code>, iff there was new input.
+     *
      * @throws java.io.IOException if any I/O-Error occurs
      */
     private boolean zzRefill() throws java.io.IOException {
 
-    /* first: make room (if you can) */
+        /* first: make room (if you can) */
         if (zzStartRead > 0) {
             System.arraycopy(zzBuffer, zzStartRead,
                     zzBuffer, 0,
                     zzEndRead - zzStartRead);
 
-      /* translate stored positions */
+            /* translate stored positions */
             zzEndRead -= zzStartRead;
             zzCurrentPos -= zzStartRead;
             zzMarkedPos -= zzStartRead;
             zzStartRead = 0;
         }
 
-    /* is the buffer big enough? */
+        /* is the buffer big enough? */
         if (zzCurrentPos >= zzBuffer.length) {
-      /* if not: blow it up */
+            /* if not: blow it up */
             char newBuffer[] = new char[zzCurrentPos * 2];
             System.arraycopy(zzBuffer, 0, newBuffer, 0, zzBuffer.length);
             zzBuffer = newBuffer;
         }
 
-    /* finally: fill the buffer with new input */
+        /* finally: fill the buffer with new input */
         int numRead = zzReader.read(zzBuffer, zzEndRead,
                 zzBuffer.length - zzEndRead);
 
@@ -459,7 +496,8 @@ public class Yylex {
             int c = zzReader.read();
             if (c == -1) {
                 return true;
-            } else {
+            }
+            else {
                 zzBuffer[zzEndRead++] = (char) c;
                 return false;
             }
@@ -477,8 +515,9 @@ public class Yylex {
         zzAtEOF = true;            /* indicate end of file */
         zzEndRead = zzStartRead;  /* invalidate buffer    */
 
-        if (zzReader != null)
+        if (zzReader != null) {
             zzReader.close();
+        }
     }
 
 
@@ -538,6 +577,7 @@ public class Yylex {
      *
      * @param pos the position of the character to fetch.
      *            A value from 0 to yylength()-1.
+     *
      * @return the character at position pos
      */
     public final char yycharat(int pos) {
@@ -571,7 +611,8 @@ public class Yylex {
         String message;
         try {
             message = ZZ_ERROR_MSG[errorCode];
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
             message = ZZ_ERROR_MSG[ZZ_UNKNOWN_ERROR];
         }
 
@@ -588,8 +629,9 @@ public class Yylex {
      *               This number must not be greater than yylength()!
      */
     public void yypushback(int number) {
-        if (number > yylength())
+        if (number > yylength()) {
             zzScanError(ZZ_PUSHBACK_2BIG);
+        }
 
         zzMarkedPos -= number;
     }
@@ -600,6 +642,7 @@ public class Yylex {
      * the end of input is encountered or an I/O-Error occurs.
      *
      * @return the next token
+     *
      * @throws java.io.IOException if any I/O-Error occurs
      */
     public JSONToken yylex() throws java.io.IOException, ParseException {
@@ -631,12 +674,14 @@ public class Yylex {
             {
                 while (true) {
 
-                    if (zzCurrentPosL < zzEndReadL)
+                    if (zzCurrentPosL < zzEndReadL) {
                         zzInput = zzBufferL[zzCurrentPosL++];
+                    }
                     else if (zzAtEOF) {
                         zzInput = YYEOF;
                         break zzForAction;
-                    } else {
+                    }
+                    else {
                         // store back cached positions
                         zzCurrentPos = zzCurrentPosL;
                         zzMarkedPos = zzMarkedPosL;
@@ -649,19 +694,24 @@ public class Yylex {
                         if (eof) {
                             zzInput = YYEOF;
                             break zzForAction;
-                        } else {
+                        }
+                        else {
                             zzInput = zzBufferL[zzCurrentPosL++];
                         }
                     }
                     int zzNext = zzTransL[zzRowMapL[zzState] + zzCMapL[zzInput]];
-                    if (zzNext == -1) break zzForAction;
+                    if (zzNext == -1) {
+                        break zzForAction;
+                    }
                     zzState = zzNext;
 
                     int zzAttributes = zzAttrL[zzState];
                     if ((zzAttributes & 1) == 1) {
                         zzAction = zzState;
                         zzMarkedPosL = zzCurrentPosL;
-                        if ((zzAttributes & 8) == 8) break zzForAction;
+                        if ((zzAttributes & 8) == 8) {
+                            break zzForAction;
+                        }
                     }
 
                 }
@@ -746,7 +796,8 @@ public class Yylex {
                 case 28: {
                     try {
                         sb.append((char) Integer.parseInt(yytext().substring(2), 16));
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         throw new ParseException(e.getMessage());
                     }
                 }
@@ -823,7 +874,8 @@ public class Yylex {
                     if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
                         zzAtEOF = true;
                         return null;
-                    } else {
+                    }
+                    else {
                         zzScanError(ZZ_NO_MATCH);
                     }
             }

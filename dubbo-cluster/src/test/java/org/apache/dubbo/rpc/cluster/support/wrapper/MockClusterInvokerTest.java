@@ -229,7 +229,8 @@ public class MockClusterInvokerTest {
         try {
             ret = cluster.invoke(invocation);
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
 
         }
     }
@@ -391,7 +392,8 @@ public class MockClusterInvokerTest {
         try {
             ret = cluster.invoke(invocation);
             Assert.fail("fail invoke");
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
 
         }
     }
@@ -570,7 +572,8 @@ public class MockClusterInvokerTest {
         invocation.setMethodName("getUsers");
         try {
             cluster.invoke(invocation);
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
         }
     }
 
@@ -586,7 +589,8 @@ public class MockClusterInvokerTest {
         try {
             cluster.invoke(invocation);
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertFalse("not custem exception", e.isBiz());
         }
     }
@@ -603,7 +607,8 @@ public class MockClusterInvokerTest {
         try {
             cluster.invoke(invocation).recreate();
             Assert.fail();
-        } catch (MyMockException e) {
+        }
+        catch (MyMockException e) {
 
         }
     }
@@ -620,7 +625,8 @@ public class MockClusterInvokerTest {
         try {
             cluster.invoke(invocation);
             Assert.fail();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Assert.assertTrue(e.getCause() instanceof IllegalStateException);
         }
     }
@@ -637,7 +643,8 @@ public class MockClusterInvokerTest {
         try {
             cluster.invoke(invocation);
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertTrue(e.isTimeout());
         }
     }
@@ -658,7 +665,8 @@ public class MockClusterInvokerTest {
                     throws RpcException {
                 if (durl.getParameter("invoke_return_error", false)) {
                     throw new RpcException(RpcException.TIMEOUT_EXCEPTION, "test rpc exception");
-                } else {
+                }
+                else {
                     return ((Invoker<?>) invokers.get(0)).invoke(invocation);
                 }
             }
@@ -667,6 +675,7 @@ public class MockClusterInvokerTest {
     }
 
     public static interface IHelloService {
+
         String getSomething();
 
         String getSomething2();
@@ -687,6 +696,7 @@ public class MockClusterInvokerTest {
     }
 
     public static class HelloService implements IHelloService {
+
         public String getSomething() {
             return "something";
         }
@@ -725,6 +735,7 @@ public class MockClusterInvokerTest {
     }
 
     public static class IHelloServiceMock implements IHelloService {
+
         public IHelloServiceMock() {
 
         }
@@ -767,7 +778,9 @@ public class MockClusterInvokerTest {
     }
 
     public static class User {
+
         private int id;
+
         private String name;
 
         public User() {

@@ -35,6 +35,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class NetUtilsTest {
+
     @Test
     public void testGetRandomPort() throws Exception {
         assertThat(NetUtils.getRandomPort(), greaterThanOrEqualTo(30000));

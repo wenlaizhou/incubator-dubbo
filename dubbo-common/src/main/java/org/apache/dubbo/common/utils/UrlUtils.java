@@ -34,7 +34,8 @@ public class UrlUtils {
         String url;
         if (address.indexOf("://") >= 0) {
             url = address;
-        } else {
+        }
+        else {
             String[] addresses = Constants.COMMA_SPLIT_PATTERN.split(address);
             url = addresses[0];
             if (addresses.length > 1) {
@@ -94,7 +95,8 @@ public class UrlUtils {
             if (defaultPort > 0) {
                 changed = true;
                 port = defaultPort;
-            } else {
+            }
+            else {
                 changed = true;
                 port = 9090;
             }
@@ -167,7 +169,8 @@ public class UrlUtils {
                     }
                     newUrls.put(serviceUrl, StringUtils.toQueryString(params));
                 }
-            } else {
+            }
+            else {
                 newRegister.put(serviceName, serviceUrls);
             }
         }
@@ -193,7 +196,8 @@ public class UrlUtils {
                     name = name + ":" + version;
                 }
                 newSubscribe.put(name, StringUtils.toQueryString(params));
-            } else {
+            }
+            else {
                 newSubscribe.put(serviceName, serviceQuery);
             }
         }
@@ -228,7 +232,8 @@ public class UrlUtils {
                     }
                     newUrls.put(serviceUrl, StringUtils.toQueryString(params));
                 }
-            } else {
+            }
+            else {
                 newRegister.put(serviceName, serviceUrls);
             }
         }
@@ -254,7 +259,8 @@ public class UrlUtils {
                     name = name.substring(0, i);
                 }
                 newSubscribe.put(name, StringUtils.toQueryString(params));
-            } else {
+            }
+            else {
                 newSubscribe.put(serviceName, serviceQuery);
             }
         }
@@ -292,7 +298,8 @@ public class UrlUtils {
                             newUrls.put(url, StringUtils.toQueryString(params));
                         }
                     }
-                } else {
+                }
+                else {
                     newNotify.put(serviceName, serviceUrls);
                 }
             }
@@ -313,7 +320,8 @@ public class UrlUtils {
                             break;
                         }
                     }
-                } else {
+                }
+                else {
                     newForbid.add(serviceName);
                 }
             }
@@ -344,11 +352,14 @@ public class UrlUtils {
     public static boolean isMatchCategory(String category, String categories) {
         if (categories == null || categories.length() == 0) {
             return Constants.DEFAULT_CATEGORY.equals(category);
-        } else if (categories.contains(Constants.ANY_VALUE)) {
+        }
+        else if (categories.contains(Constants.ANY_VALUE)) {
             return true;
-        } else if (categories.contains(Constants.REMOVE_VALUE_PREFIX)) {
+        }
+        else if (categories.contains(Constants.REMOVE_VALUE_PREFIX)) {
             return !categories.contains(Constants.REMOVE_VALUE_PREFIX + category);
-        } else {
+        }
+        else {
             return categories.contains(category);
         }
     }
@@ -356,8 +367,9 @@ public class UrlUtils {
     public static boolean isMatch(URL consumerUrl, URL providerUrl) {
         String consumerInterface = consumerUrl.getServiceInterface();
         String providerInterface = providerUrl.getServiceInterface();
-        if (!(Constants.ANY_VALUE.equals(consumerInterface) || StringUtils.isEquals(consumerInterface, providerInterface)))
+        if (!(Constants.ANY_VALUE.equals(consumerInterface) || StringUtils.isEquals(consumerInterface, providerInterface))) {
             return false;
+        }
 
         if (!isMatchCategory(providerUrl.getParameter(Constants.CATEGORY_KEY, Constants.DEFAULT_CATEGORY),
                 consumerUrl.getParameter(Constants.CATEGORY_KEY, Constants.DEFAULT_CATEGORY))) {
@@ -388,14 +400,17 @@ public class UrlUtils {
     }
 
     public static boolean isMatchGlobPattern(String pattern, String value) {
-        if ("*".equals(pattern))
+        if ("*".equals(pattern)) {
             return true;
+        }
         if ((pattern == null || pattern.length() == 0)
-                && (value == null || value.length() == 0))
+                && (value == null || value.length() == 0)) {
             return true;
+        }
         if ((pattern == null || pattern.length() == 0)
-                || (value == null || value.length() == 0))
+                || (value == null || value.length() == 0)) {
             return false;
+        }
 
         int i = pattern.lastIndexOf('*');
         // doesn't find "*"
@@ -432,12 +447,14 @@ public class UrlUtils {
      *
      * @param pattern pattern
      * @param value   value
+     *
      * @return true if match otherwise false
      */
     static boolean isItemMatch(String pattern, String value) {
         if (pattern == null) {
             return value == null;
-        } else {
+        }
+        else {
             return "*".equals(pattern) || pattern.equals(value);
         }
     }

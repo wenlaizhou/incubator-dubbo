@@ -40,10 +40,15 @@ import static org.mockito.Mockito.mock;
 public class FailbackClusterInvokerTest {
 
     List<Invoker<FailbackClusterInvokerTest>> invokers = new ArrayList<Invoker<FailbackClusterInvokerTest>>();
+
     URL url = URL.valueOf("test://test:11/test");
+
     Invoker<FailbackClusterInvokerTest> invoker = mock(Invoker.class);
+
     RpcInvocation invocation = new RpcInvocation();
+
     Directory<FailbackClusterInvokerTest> dic;
+
     Result result = new RpcResult();
 
     /**

@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.compatible.CompatibleExt;
 
 public class CompatibleExtImpl2 implements CompatibleExt {
+
     public String echo(URL url, String s) {
         return "Ext1Impl2-echo";
     }

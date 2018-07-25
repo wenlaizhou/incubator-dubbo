@@ -19,4 +19,5 @@ package com.alibaba.dubbo.validation;
 
 @Deprecated
 public interface Validator extends org.apache.dubbo.validation.Validator {
+
 }

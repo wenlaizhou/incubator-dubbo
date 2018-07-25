@@ -30,6 +30,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class ListenableFutureTaskTest {
+
     @Test
     public void testCreate() throws InterruptedException {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -51,7 +52,8 @@ public class ListenableFutureTaskTest {
             public void run() {
                 try {
                     Thread.sleep(500);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }

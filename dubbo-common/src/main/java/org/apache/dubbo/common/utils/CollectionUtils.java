@@ -102,7 +102,8 @@ public class CollectionUtils {
             int index = item.indexOf(separator);
             if (index == -1) {
                 map.put(item, "");
-            } else {
+            }
+            else {
                 map.put(item.substring(0, index), item.substring(index + 1));
             }
         }
@@ -122,7 +123,8 @@ public class CollectionUtils {
             String value = entry.getValue();
             if (value == null || value.length() == 0) {
                 list.add(key);
-            } else {
+            }
+            else {
                 list.add(key + separator + value);
             }
         }
@@ -187,7 +189,9 @@ public class CollectionUtils {
     @SuppressWarnings("unchecked")
     public static <K, V> Map<K, V> toMap(Object... pairs) {
         Map<K, V> ret = new HashMap<K, V>();
-        if (pairs == null || pairs.length == 0) return ret;
+        if (pairs == null || pairs.length == 0) {
+            return ret;
+        }
 
         if (pairs.length % 2 != 0) {
             throw new IllegalArgumentException("Map pairs can not be odd number.");

@@ -37,19 +37,29 @@ import java.util.regex.Pattern;
 public class NetUtils {
 
     public static final String LOCALHOST = "127.0.0.1";
+
     public static final String ANYHOST = "0.0.0.0";
+
     private static final Logger logger = LoggerFactory.getLogger(NetUtils.class);
+
     private static final int RND_PORT_START = 30000;
 
     private static final int RND_PORT_RANGE = 10000;
 
     private static final Random RANDOM = new Random(System.currentTimeMillis());
+
     private static final int MIN_PORT = 0;
+
     private static final int MAX_PORT = 65535;
+
     private static final Pattern ADDRESS_PATTERN = Pattern.compile("^\\d{1,3}(\\.\\d{1,3}){3}\\:\\d{1,5}$");
+
     private static final Pattern LOCAL_IP_PATTERN = Pattern.compile("127(\\.\\d{1,3}){3}$");
+
     private static final Pattern IP_PATTERN = Pattern.compile("\\d{1,3}(\\.\\d{1,3}){3,5}$");
+
     private static final Map<String, String> hostNameCache = new LRUCache<String, String>(1000);
+
     private static volatile InetAddress LOCAL_ADDRESS = null;
 
     public static int getRandomPort() {
@@ -62,13 +72,16 @@ public class NetUtils {
             ss = new ServerSocket();
             ss.bind(null);
             return ss.getLocalPort();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             return getRandomPort();
-        } finally {
+        }
+        finally {
             if (ss != null) {
                 try {
                     ss.close();
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                 }
             }
         }
@@ -83,13 +96,16 @@ public class NetUtils {
             try {
                 ss = new ServerSocket(i);
                 return i;
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 // continue
-            } finally {
+            }
+            finally {
                 if (ss != null) {
                     try {
                         ss.close();
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                     }
                 }
             }
@@ -133,8 +149,9 @@ public class NetUtils {
     }
 
     static boolean isValidAddress(InetAddress address) {
-        if (address == null || address.isLoopbackAddress())
+        if (address == null || address.isLoopbackAddress()) {
             return false;
+        }
         String name = address.getHostAddress();
         return (name != null
                 && !ANYHOST.equals(name)
@@ -156,12 +173,14 @@ public class NetUtils {
             if (NetUtils.isInvalidLocalHost(u.getHost())) {
                 return u.setHost(NetUtils.getLocalHost()).toFullString();
             }
-        } else if (host.contains(":")) {
+        }
+        else if (host.contains(":")) {
             int i = host.lastIndexOf(':');
             if (NetUtils.isInvalidLocalHost(host.substring(0, i))) {
                 return NetUtils.getLocalHost() + host.substring(i);
             }
-        } else {
+        }
+        else {
             if (NetUtils.isInvalidLocalHost(host)) {
                 return NetUtils.getLocalHost();
             }
@@ -175,8 +194,9 @@ public class NetUtils {
      * @return first valid local IP
      */
     public static InetAddress getLocalAddress() {
-        if (LOCAL_ADDRESS != null)
+        if (LOCAL_ADDRESS != null) {
             return LOCAL_ADDRESS;
+        }
         InetAddress localAddress = getLocalAddress0();
         LOCAL_ADDRESS = localAddress;
         return localAddress;
@@ -189,7 +209,8 @@ public class NetUtils {
             if (isValidAddress(localAddress)) {
                 return localAddress;
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e);
         }
         try {
@@ -206,17 +227,20 @@ public class NetUtils {
                                     if (isValidAddress(address)) {
                                         return address;
                                     }
-                                } catch (Throwable e) {
+                                }
+                                catch (Throwable e) {
                                     logger.warn(e);
                                 }
                             }
                         }
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         logger.warn(e);
                     }
                 }
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e);
         }
         return localAddress;
@@ -238,7 +262,8 @@ public class NetUtils {
                 hostNameCache.put(address, hostname);
                 return hostname;
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             // ignore
         }
         return address;
@@ -246,12 +271,14 @@ public class NetUtils {
 
     /**
      * @param hostName
+     *
      * @return ip address or hostName if UnknownHostException
      */
     public static String getIpByHost(String hostName) {
         try {
             return InetAddress.getByName(hostName).getHostAddress();
-        } catch (UnknownHostException e) {
+        }
+        catch (UnknownHostException e) {
             return hostName;
         }
     }
@@ -267,7 +294,8 @@ public class NetUtils {
         if (i > -1) {
             host = address.substring(0, i);
             port = Integer.parseInt(address.substring(i + 1));
-        } else {
+        }
+        else {
             host = address;
             port = 0;
         }
@@ -278,8 +306,9 @@ public class NetUtils {
         StringBuilder sb = new StringBuilder();
         sb.append(protocol).append("://");
         sb.append(host).append(':').append(port);
-        if (path.charAt(0) != '/')
+        if (path.charAt(0) != '/') {
             sb.append('/');
+        }
         sb.append(path);
         return sb.toString();
     }

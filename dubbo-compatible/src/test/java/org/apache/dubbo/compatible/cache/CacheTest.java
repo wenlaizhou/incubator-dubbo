@@ -48,6 +48,7 @@ public class CacheTest {
     }
 
     static class NullInvocation implements Invocation {
+
         @Override
         public String getMethodName() {
             return null;

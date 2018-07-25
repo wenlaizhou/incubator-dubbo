@@ -43,7 +43,6 @@ import java.util.concurrent.TimeUnit;
  * Especially useful for services of notification.
  *
  * <a href="http://en.wikipedia.org/wiki/Failback">Failback</a>
- *
  */
 public class FailbackClusterInvoker<T> extends AbstractClusterInvoker<T> {
 
@@ -59,6 +58,7 @@ public class FailbackClusterInvoker<T> extends AbstractClusterInvoker<T> {
             new NamedInternalThreadFactory("failback-cluster-timer", true));
 
     private final ConcurrentMap<Invocation, AbstractClusterInvoker<?>> failed = new ConcurrentHashMap<Invocation, AbstractClusterInvoker<?>>();
+
     private volatile ScheduledFuture<?> retryFuture;
 
     public FailbackClusterInvoker(Directory<T> directory) {
@@ -76,7 +76,8 @@ public class FailbackClusterInvoker<T> extends AbstractClusterInvoker<T> {
                             // collect retry statistics
                             try {
                                 retryFailed();
-                            } catch (Throwable t) { // Defensive fault tolerance
+                            }
+                            catch (Throwable t) { // Defensive fault tolerance
                                 logger.error("Unexpected error occur at collect statistic", t);
                             }
                         }
@@ -98,7 +99,8 @@ public class FailbackClusterInvoker<T> extends AbstractClusterInvoker<T> {
             try {
                 invoker.invoke(invocation);
                 failed.remove(invocation);
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.error("Failed retry to invoke method " + invocation.getMethodName() + ", waiting again.", e);
             }
         }
@@ -110,7 +112,8 @@ public class FailbackClusterInvoker<T> extends AbstractClusterInvoker<T> {
             checkInvokers(invokers, invocation);
             Invoker<T> invoker = select(loadbalance, invocation, invokers, null);
             return invoker.invoke(invocation);
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.error("Failback to invoke method " + invocation.getMethodName() + ", wait for retry in background. Ignored exception: "
                     + e.getMessage() + ", ", e);
             addFailed(invocation, this);

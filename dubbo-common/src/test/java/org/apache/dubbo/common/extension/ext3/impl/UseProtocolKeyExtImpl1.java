@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ext3.UseProtocolKeyExt;
 
 public class UseProtocolKeyExtImpl1 implements UseProtocolKeyExt {
+
     public String echo(URL url, String s) {
         return "Ext3Impl1-echo";
     }

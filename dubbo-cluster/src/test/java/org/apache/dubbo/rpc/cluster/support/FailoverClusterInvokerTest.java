@@ -44,17 +44,24 @@ import static org.mockito.Mockito.mock;
 
 /**
  * FailoverClusterInvokerTest
- *
  */
 @SuppressWarnings("unchecked")
 public class FailoverClusterInvokerTest {
+
     private List<Invoker<FailoverClusterInvokerTest>> invokers = new ArrayList<Invoker<FailoverClusterInvokerTest>>();
+
     private int retries = 5;
+
     private URL url = URL.valueOf("test://test:11/test?retries=" + retries);
+
     private Invoker<FailoverClusterInvokerTest> invoker1 = mock(Invoker.class);
+
     private Invoker<FailoverClusterInvokerTest> invoker2 = mock(Invoker.class);
+
     private RpcInvocation invocation = new RpcInvocation();
+
     private Directory<FailoverClusterInvokerTest> dic;
+
     private Result result = new RpcResult();
 
     /**
@@ -92,7 +99,8 @@ public class FailoverClusterInvokerTest {
         try {
             invoker.invoke(invocation);
             fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             assertEquals(0, expected.getCode());
             assertFalse(expected.getCause() instanceof RpcException);
         }
@@ -134,7 +142,8 @@ public class FailoverClusterInvokerTest {
             Result ret = invoker.invoke(invocation);
             assertSame(result, ret);
             fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             assertTrue((expected.isTimeout() || expected.getCode() == 0));
             assertTrue(expected.getMessage().indexOf((retries + 1) + " times") > 0);
         }
@@ -156,7 +165,8 @@ public class FailoverClusterInvokerTest {
         try {
             invoker.invoke(invocation);
             fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             assertFalse(expected.getCause() instanceof RpcException);
         }
     }
@@ -204,14 +214,21 @@ public class FailoverClusterInvokerTest {
     }
 
     public static interface Demo {
+
     }
 
     public static class MockInvoker<T> extends AbstractInvoker<T> {
+
         URL url;
+
         boolean available = true;
+
         boolean destoryed = false;
+
         Result result;
+
         RpcException exception;
+
         Callable<?> callable;
 
         public MockInvoker(Class<T> type, URL url) {
@@ -235,19 +252,22 @@ public class FailoverClusterInvokerTest {
             if (callable != null) {
                 try {
                     callable.call();
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     throw new RpcException(e);
                 }
             }
             if (exception != null) {
                 throw exception;
-            } else {
+            }
+            else {
                 return result;
             }
         }
     }
 
     public class MockDirectory<T> extends StaticDirectory<T> {
+
         public MockDirectory(URL url, List<Invoker<T>> invokers) {
             super(url, invokers);
         }

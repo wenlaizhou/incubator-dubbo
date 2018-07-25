@@ -24,7 +24,9 @@ import org.apache.dubbo.common.extension.ext6_inject.Ext6;
 import org.junit.Assert;
 
 public class Ext6Impl1 implements Ext6 {
+
     public Dao obj;
+
     SimpleExt ext1;
 
     public void setDao(Dao obj) {

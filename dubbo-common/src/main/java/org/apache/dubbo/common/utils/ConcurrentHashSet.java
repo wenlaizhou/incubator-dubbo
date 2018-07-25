@@ -44,6 +44,7 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
      * returned in no particular order.
      *
      * @return an Iterator over the elements in this set
+     *
      * @see ConcurrentModificationException
      */
     @Override
@@ -78,6 +79,7 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
      * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
      *
      * @param o element whose presence in this set is to be tested
+     *
      * @return <tt>true</tt> if this set contains the specified element
      */
     @Override
@@ -94,6 +96,7 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
      * returns <tt>false</tt>.
      *
      * @param e element to be added to this set
+     *
      * @return <tt>true</tt> if this set did not already contain the specified
      * element
      */
@@ -111,6 +114,7 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
      * call). (This set will not contain the element once the call returns.)
      *
      * @param o object to be removed from this set, if present
+     *
      * @return <tt>true</tt> if the set contained the specified element
      */
     @Override

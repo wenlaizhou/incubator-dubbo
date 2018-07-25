@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class UnsafeStringWriterTest {
+
     @Test
     public void testWrite() {
         UnsafeStringWriter writer = new UnsafeStringWriter();

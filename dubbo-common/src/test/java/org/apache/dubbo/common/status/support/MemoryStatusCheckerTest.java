@@ -29,6 +29,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class MemoryStatusCheckerTest {
+
     private static final Logger logger = LoggerFactory.getLogger(MemoryStatusCheckerTest.class);
 
     @Test

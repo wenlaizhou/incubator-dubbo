@@ -34,6 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ExecutorUtilTest {
+
     @Test
     public void testIsTerminated() throws Exception {
         ExecutorService executor = Mockito.mock(ExecutorService.class);

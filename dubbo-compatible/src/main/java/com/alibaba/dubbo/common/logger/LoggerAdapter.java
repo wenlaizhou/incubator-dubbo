@@ -19,4 +19,5 @@ package com.alibaba.dubbo.common.logger;
 
 @Deprecated
 public interface LoggerAdapter extends org.apache.dubbo.common.logger.LoggerAdapter {
+
 }

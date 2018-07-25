@@ -20,6 +20,7 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ext6_wrap.WrappedExt;
 
 public class Ext5Impl2 implements WrappedExt {
+
     public String echo(URL url, String s) {
         return "Ext5Impl2-echo";
     }

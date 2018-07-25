@@ -25,6 +25,7 @@ import org.apache.dubbo.common.extension.SPI;
  */
 @SPI
 public interface Ext6 {
+
     @Adaptive
     String echo(URL url, String s);
 }

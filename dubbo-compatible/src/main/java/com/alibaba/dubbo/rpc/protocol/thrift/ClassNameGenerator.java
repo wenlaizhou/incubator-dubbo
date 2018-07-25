@@ -19,4 +19,5 @@ package com.alibaba.dubbo.rpc.protocol.thrift;
 
 @Deprecated
 public interface ClassNameGenerator extends org.apache.dubbo.rpc.protocol.thrift.ClassNameGenerator {
+
 }

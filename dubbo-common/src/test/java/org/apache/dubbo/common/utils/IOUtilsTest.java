@@ -37,13 +37,18 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class IOUtilsTest {
+
     @Rule
     public TemporaryFolder tmpDir = new TemporaryFolder();
 
     private static String TEXT = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
     private InputStream is;
+
     private OutputStream os;
+
     private Reader reader;
+
     private Writer writer;
 
     @Before
