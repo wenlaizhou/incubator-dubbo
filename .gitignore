@@ -6,6 +6,8 @@ target/
 *.zip
 *.tar
 *.tar.gz
+test
+
 
 .github
 
