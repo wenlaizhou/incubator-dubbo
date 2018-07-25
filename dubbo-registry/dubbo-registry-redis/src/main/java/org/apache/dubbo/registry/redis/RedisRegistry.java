@@ -53,7 +53,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * RedisRegistry
- *
  */
 public class RedisRegistry extends FailbackRegistry {
 
@@ -90,22 +89,30 @@ public class RedisRegistry extends FailbackRegistry {
         config.setTestOnBorrow(url.getParameter("test.on.borrow", true));
         config.setTestOnReturn(url.getParameter("test.on.return", false));
         config.setTestWhileIdle(url.getParameter("test.while.idle", false));
-        if (url.getParameter("max.idle", 0) > 0)
+        if (url.getParameter("max.idle", 0) > 0) {
             config.setMaxIdle(url.getParameter("max.idle", 0));
-        if (url.getParameter("min.idle", 0) > 0)
+        }
+        if (url.getParameter("min.idle", 0) > 0) {
             config.setMinIdle(url.getParameter("min.idle", 0));
-        if (url.getParameter("max.active", 0) > 0)
+        }
+        if (url.getParameter("max.active", 0) > 0) {
             config.setMaxTotal(url.getParameter("max.active", 0));
-        if (url.getParameter("max.total", 0) > 0)
+        }
+        if (url.getParameter("max.total", 0) > 0) {
             config.setMaxTotal(url.getParameter("max.total", 0));
-        if (url.getParameter("max.wait", url.getParameter("timeout", 0)) > 0)
+        }
+        if (url.getParameter("max.wait", url.getParameter("timeout", 0)) > 0) {
             config.setMaxWaitMillis(url.getParameter("max.wait", url.getParameter("timeout", 0)));
-        if (url.getParameter("num.tests.per.eviction.run", 0) > 0)
+        }
+        if (url.getParameter("num.tests.per.eviction.run", 0) > 0) {
             config.setNumTestsPerEvictionRun(url.getParameter("num.tests.per.eviction.run", 0));
-        if (url.getParameter("time.between.eviction.runs.millis", 0) > 0)
+        }
+        if (url.getParameter("time.between.eviction.runs.millis", 0) > 0) {
             config.setTimeBetweenEvictionRunsMillis(url.getParameter("time.between.eviction.runs.millis", 0));
-        if (url.getParameter("min.evictable.idle.time.millis", 0) > 0)
+        }
+        if (url.getParameter("min.evictable.idle.time.millis", 0) > 0) {
             config.setMinEvictableIdleTimeMillis(url.getParameter("min.evictable.idle.time.millis", 0));
+        }
 
         String cluster = url.getParameter("cluster", "failover");
         if (!"failover".equals(cluster) && !"replicate".equals(cluster)) {
@@ -128,7 +135,8 @@ public class RedisRegistry extends FailbackRegistry {
             if (i > 0) {
                 host = address.substring(0, i);
                 port = Integer.parseInt(address.substring(i + 1));
-            } else {
+            }
+            else {
                 host = address;
                 port = DEFAULT_REDIS_PORT;
             }
@@ -136,7 +144,8 @@ public class RedisRegistry extends FailbackRegistry {
                 this.jedisPools.put(address, new JedisPool(config, host, port,
                         url.getParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT), null,
                         url.getParameter("db.index", 0)));
-            } else {
+            }
+            else {
                 this.jedisPools.put(address, new JedisPool(config, host, port,
                         url.getParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT), password,
                         url.getParameter("db.index", 0)));
@@ -159,7 +168,8 @@ public class RedisRegistry extends FailbackRegistry {
             public void run() {
                 try {
                     deferExpired(); // Extend the expiration time
-                } catch (Throwable t) { // Defensive fault tolerance
+                }
+                catch (Throwable t) { // Defensive fault tolerance
                     logger.error("Unexpected exception occur at defer expire time, cause: " + t.getMessage(), t);
                 }
             }
@@ -186,10 +196,12 @@ public class RedisRegistry extends FailbackRegistry {
                     if (!replicate) {
                         break;//  If the server side has synchronized data, just write a single machine
                     }
-                } finally {
+                }
+                finally {
                     jedis.close();
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn("Failed to write provider heartbeat to redis registry. registry: " + entry.getKey() + ", cause: " + t.getMessage(), t);
             }
         }
@@ -234,10 +246,12 @@ public class RedisRegistry extends FailbackRegistry {
                     if (jedis.isConnected()) {
                         return true; // At least one single machine is available.
                     }
-                } finally {
+                }
+                finally {
                     jedis.close();
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
             }
         }
         return false;
@@ -248,21 +262,24 @@ public class RedisRegistry extends FailbackRegistry {
         super.destroy();
         try {
             expireFuture.cancel(true);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         try {
             for (Notifier notifier : notifiers.values()) {
                 notifier.shutdown();
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         for (Map.Entry<String, JedisPool> entry : jedisPools.entrySet()) {
             JedisPool jedisPool = entry.getValue();
             try {
                 jedisPool.destroy();
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn("Failed to destroy the redis registry client. registry: " + entry.getKey() + ", cause: " + t.getMessage(), t);
             }
         }
@@ -287,17 +304,20 @@ public class RedisRegistry extends FailbackRegistry {
                     if (!replicate) {
                         break; //  If the server side has synchronized data, just write a single machine
                     }
-                } finally {
+                }
+                finally {
                     jedis.close();
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 exception = new RpcException("Failed to register service to redis registry. registry: " + entry.getKey() + ", service: " + url + ", cause: " + t.getMessage(), t);
             }
         }
         if (exception != null) {
             if (success) {
                 logger.warn(exception.getMessage(), exception);
-            } else {
+            }
+            else {
                 throw exception;
             }
         }
@@ -320,17 +340,20 @@ public class RedisRegistry extends FailbackRegistry {
                     if (!replicate) {
                         break; //  If the server side has synchronized data, just write a single machine
                     }
-                } finally {
+                }
+                finally {
                     jedis.close();
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 exception = new RpcException("Failed to unregister service to redis registry. registry: " + entry.getKey() + ", service: " + url + ", cause: " + t.getMessage(), t);
             }
         }
         if (exception != null) {
             if (success) {
                 logger.warn(exception.getMessage(), exception);
-            } else {
+            }
+            else {
                 throw exception;
             }
         }
@@ -373,22 +396,26 @@ public class RedisRegistry extends FailbackRegistry {
                                 doNotify(jedis, sk, url, Arrays.asList(listener));
                             }
                         }
-                    } else {
+                    }
+                    else {
                         doNotify(jedis, jedis.keys(service + Constants.PATH_SEPARATOR + Constants.ANY_VALUE), url, Arrays.asList(listener));
                     }
                     success = true;
                     break; // Just read one server's data
-                } finally {
+                }
+                finally {
                     jedis.close();
                 }
-            } catch (Throwable t) { // Try the next server
+            }
+            catch (Throwable t) { // Try the next server
                 exception = new RpcException("Failed to subscribe service from redis registry. registry: " + entry.getKey() + ", service: " + url + ", cause: " + t.getMessage(), t);
             }
         }
         if (exception != null) {
             if (success) {
                 logger.warn(exception.getMessage(), exception);
-            } else {
+            }
+            else {
                 throw exception;
             }
         }
@@ -470,7 +497,8 @@ public class RedisRegistry extends FailbackRegistry {
         int i;
         if (categoryPath.startsWith(root)) {
             i = categoryPath.indexOf(Constants.PATH_SEPARATOR, root.length());
-        } else {
+        }
+        else {
             i = categoryPath.indexOf(Constants.PATH_SEPARATOR);
         }
         return i > 0 ? categoryPath.substring(0, i) : categoryPath;
@@ -503,10 +531,12 @@ public class RedisRegistry extends FailbackRegistry {
                     Jedis jedis = jedisPool.getResource();
                     try {
                         doNotify(jedis, key);
-                    } finally {
+                    }
+                    finally {
                         jedis.close();
                     }
-                } catch (Throwable t) { // TODO Notification failure does not restore mechanism guarantee
+                }
+                catch (Throwable t) { // TODO Notification failure does not restore mechanism guarantee
                     logger.error(t.getMessage(), t);
                 }
             }
@@ -538,12 +568,19 @@ public class RedisRegistry extends FailbackRegistry {
     private class Notifier extends Thread {
 
         private final String service;
+
         private final AtomicInteger connectSkip = new AtomicInteger();
+
         private final AtomicInteger connectSkiped = new AtomicInteger();
+
         private final Random random = new Random();
+
         private volatile Jedis jedis;
+
         private volatile boolean first = true;
+
         private volatile boolean running = true;
+
         private volatile int connectRandom;
 
         public Notifier(String service) {
@@ -598,7 +635,8 @@ public class RedisRegistry extends FailbackRegistry {
                                                 resetSkip();
                                             }
                                             jedis.psubscribe(new NotifySub(jedisPool), service); // blocking
-                                        } else {
+                                        }
+                                        else {
                                             if (!first) {
                                                 first = false;
                                                 doNotify(jedis, service);
@@ -607,21 +645,25 @@ public class RedisRegistry extends FailbackRegistry {
                                             jedis.psubscribe(new NotifySub(jedisPool), service + Constants.PATH_SEPARATOR + Constants.ANY_VALUE); // blocking
                                         }
                                         break;
-                                    } finally {
+                                    }
+                                    finally {
                                         jedis.close();
                                     }
-                                } catch (Throwable t) { // Retry another server
+                                }
+                                catch (Throwable t) { // Retry another server
                                     logger.warn("Failed to subscribe service from redis registry. registry: " + entry.getKey() + ", cause: " + t.getMessage(), t);
                                     // If you only have a single redis, you need to take a rest to avoid overtaking a lot of CPU resources
                                     sleep(reconnectPeriod);
                                 }
                             }
-                        } catch (Throwable t) {
+                        }
+                        catch (Throwable t) {
                             logger.error(t.getMessage(), t);
                             sleep(reconnectPeriod);
                         }
                     }
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.error(t.getMessage(), t);
                 }
             }
@@ -631,7 +673,8 @@ public class RedisRegistry extends FailbackRegistry {
             try {
                 running = false;
                 jedis.disconnect();
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn(t.getMessage(), t);
             }
         }

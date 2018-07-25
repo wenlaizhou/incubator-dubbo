@@ -23,6 +23,7 @@ import org.apache.dubbo.rpc.RpcException;
 import org.apache.dubbo.rpc.proxy.jdk.JdkProxyFactory;
 
 public class TestProxyFactory extends JdkProxyFactory {
+
     public static int count = 0;
 
     @Override

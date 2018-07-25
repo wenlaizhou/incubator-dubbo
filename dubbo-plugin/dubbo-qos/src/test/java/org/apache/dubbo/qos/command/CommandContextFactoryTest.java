@@ -25,6 +25,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class CommandContextFactoryTest {
+
     @Test
     public void testNewInstance() throws Exception {
         CommandContext context = CommandContextFactory.newInstance("test");

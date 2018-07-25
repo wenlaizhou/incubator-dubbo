@@ -31,6 +31,7 @@ import static org.mockito.Mockito.mock;
 public class LogTelnetHandlerTest {
 
     private static TelnetHandler log = new LogTelnetHandler();
+
     private Channel mockChannel;
 
     @Test

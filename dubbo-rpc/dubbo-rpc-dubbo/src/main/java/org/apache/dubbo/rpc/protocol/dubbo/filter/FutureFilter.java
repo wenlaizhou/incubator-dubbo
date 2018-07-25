@@ -56,7 +56,8 @@ public class FutureFilter implements PostProcessFilter {
                 return r;
             });
             return asyncResult;
-        } else {
+        }
+        else {
             syncCallback(invoker, invocation, result);
             return result;
         }
@@ -65,7 +66,8 @@ public class FutureFilter implements PostProcessFilter {
     private void syncCallback(final Invoker<?> invoker, final Invocation invocation, final Result result) {
         if (result.hasException()) {
             fireThrowCallback(invoker, invocation, result.getException());
-        } else {
+        }
+        else {
             fireReturnCallback(invoker, invocation, result.getValue());
         }
     }
@@ -73,7 +75,8 @@ public class FutureFilter implements PostProcessFilter {
     private void asyncCallback(final Invoker<?> invoker, final Invocation invocation, Result result) {
         if (result.hasException()) {
             fireThrowCallback(invoker, invocation, result.getException());
-        } else {
+        }
+        else {
             fireReturnCallback(invoker, invocation, result.getValue());
         }
     }
@@ -95,9 +98,11 @@ public class FutureFilter implements PostProcessFilter {
         Object[] params = invocation.getArguments();
         try {
             onInvokeMethod.invoke(onInvokeInst, params);
-        } catch (InvocationTargetException e) {
+        }
+        catch (InvocationTargetException e) {
             fireThrowCallback(invoker, invocation, e.getTargetException());
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             fireThrowCallback(invoker, invocation, e);
         }
     }
@@ -126,19 +131,23 @@ public class FutureFilter implements PostProcessFilter {
                 params = new Object[2];
                 params[0] = result;
                 params[1] = args;
-            } else {
+            }
+            else {
                 params = new Object[args.length + 1];
                 params[0] = result;
                 System.arraycopy(args, 0, params, 1, args.length);
             }
-        } else {
+        }
+        else {
             params = new Object[]{result};
         }
         try {
             onReturnMethod.invoke(onReturnInst, params);
-        } catch (InvocationTargetException e) {
+        }
+        catch (InvocationTargetException e) {
             fireThrowCallback(invoker, invocation, e.getTargetException());
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             fireThrowCallback(invoker, invocation, e);
         }
     }
@@ -168,19 +177,23 @@ public class FutureFilter implements PostProcessFilter {
                         params = new Object[2];
                         params[0] = exception;
                         params[1] = args;
-                    } else {
+                    }
+                    else {
                         params = new Object[args.length + 1];
                         params[0] = exception;
                         System.arraycopy(args, 0, params, 1, args.length);
                     }
-                } else {
+                }
+                else {
                     params = new Object[]{exception};
                 }
                 onthrowMethod.invoke(onthrowInst, params);
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.error(invocation.getMethodName() + ".call back method invoke error . callback method :" + onthrowMethod + ", url:" + invoker.getUrl(), e);
             }
-        } else {
+        }
+        else {
             logger.error(invocation.getMethodName() + ".call back method invoke error . callback method :" + onthrowMethod + ", url:" + invoker.getUrl(), exception);
         }
     }

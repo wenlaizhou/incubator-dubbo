@@ -28,6 +28,7 @@ public class ObjectUtils {
      *
      * @param values
      * @param <T>
+     *
      * @return
      */
     public static <T> T[] of(T... values) {

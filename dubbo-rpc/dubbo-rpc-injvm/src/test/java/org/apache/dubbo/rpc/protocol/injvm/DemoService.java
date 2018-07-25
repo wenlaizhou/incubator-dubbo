@@ -21,6 +21,7 @@ package org.apache.dubbo.rpc.protocol.injvm;
  */
 
 public interface DemoService {
+
     void sayHello(String name);
 
     String echo(String text);

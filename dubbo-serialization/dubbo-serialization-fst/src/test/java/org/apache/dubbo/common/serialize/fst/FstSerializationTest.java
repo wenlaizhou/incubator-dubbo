@@ -31,6 +31,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 
 public class FstSerializationTest {
+
     private FstSerialization fstSerialization;
 
     @Before

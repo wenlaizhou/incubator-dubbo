@@ -112,11 +112,13 @@ public class TraceFilter implements Filter {
                             if (count >= max - 1) {
                                 channels.remove(channel);
                             }
-                        } catch (Throwable e) {
+                        }
+                        catch (Throwable e) {
                             channels.remove(channel);
                             logger.warn(e.getMessage(), e);
                         }
-                    } else {
+                    }
+                    else {
                         channels.remove(channel);
                     }
                 }

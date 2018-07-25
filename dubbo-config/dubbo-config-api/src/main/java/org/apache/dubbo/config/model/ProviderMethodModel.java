@@ -19,9 +19,13 @@ package org.apache.dubbo.config.model;
 import java.lang.reflect.Method;
 
 public class ProviderMethodModel {
+
     private transient final Method method;
+
     private final String methodName;
+
     private final String[] methodArgTypes;
+
     private final String serviceName;
 
 

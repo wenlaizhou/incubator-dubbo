@@ -43,14 +43,21 @@ import java.util.concurrent.TimeUnit;
 public class ImplicitCallBackTest {
 
     protected Exporter<IDemoService> exporter = null;
+
     protected Invoker<IDemoService> reference = null;
 
     protected URL serviceURL = null;
+
     protected URL consumerUrl = null;
+
     Method onReturnMethod;
+
     Method onThrowMethod;
+
     Method onInvokeMethod;
+
     NofifyImpl notify = new NofifyImpl();
+
     //================================================================================================
     IDemoService demoProxy = null;
 
@@ -75,9 +82,14 @@ public class ImplicitCallBackTest {
     public void destroyService() {
         demoProxy = null;
         try {
-            if (exporter != null) exporter.unexport();
-            if (reference != null) reference.destroy();
-        } catch (Exception e) {
+            if (exporter != null) {
+                exporter.unexport();
+            }
+            if (reference != null) {
+                reference.destroy();
+            }
+        }
+        catch (Exception e) {
         }
     }
 
@@ -137,7 +149,8 @@ public class ImplicitCallBackTest {
         for (int i = 0; i < 10; i++) {
             if (!notify.ret.containsKey(requestId)) {
                 Thread.sleep(200);
-            } else {
+            }
+            else {
                 break;
             }
         }
@@ -160,7 +173,8 @@ public class ImplicitCallBackTest {
         for (int i = 0; i < 10; i++) {
             if (!notify.errors.containsKey(requestId)) {
                 Thread.sleep(200);
-            } else {
+            }
+            else {
                 break;
             }
         }
@@ -183,7 +197,8 @@ public class ImplicitCallBackTest {
         for (int i = 0; i < 10; i++) {
             if (!notify.inv.contains(requestId)) {
                 Thread.sleep(200);
-            } else {
+            }
+            else {
                 break;
             }
         }
@@ -206,7 +221,8 @@ public class ImplicitCallBackTest {
         for (int i = 0; i < 10; i++) {
             if (!notify.errors.containsKey(requestId)) {
                 Thread.sleep(200);
-            } else {
+            }
+            else {
                 break;
             }
         }
@@ -285,9 +301,11 @@ public class ImplicitCallBackTest {
             Future<Person> pFuture = RpcContext.getContext().getFuture();
             ret = pFuture.get(1000 * 1000, TimeUnit.MICROSECONDS);
             Assert.assertEquals(requestId, ret.getId());
-        } catch (ExecutionException e) {
+        }
+        catch (ExecutionException e) {
             throw e.getCause();
-        } finally {
+        }
+        finally {
             destroyService();
         }
     }
@@ -305,6 +323,7 @@ public class ImplicitCallBackTest {
     }
 
     interface Nofify {
+
         public void onreturn(Person msg, Integer id);
 
         public void onthrow(Throwable ex, Integer id);
@@ -313,13 +332,18 @@ public class ImplicitCallBackTest {
     }
 
     interface IDemoService {
+
         public Person get(int id);
     }
 
     public static class Person implements Serializable {
+
         private static final long serialVersionUID = 1L;
+
         private int id;
+
         private String name;
+
         private int age;
 
         public Person(int id, String name, int age) {
@@ -359,9 +383,13 @@ public class ImplicitCallBackTest {
     }
 
     class NofifyImpl implements Nofify {
+
         public List<Integer> inv = new ArrayList<Integer>();
+
         public Map<Integer, Person> ret = new HashMap<Integer, Person>();
+
         public Map<Integer, Throwable> errors = new HashMap<Integer, Throwable>();
+
         public boolean exd = false;
 
         public void onreturn(Person msg, Integer id) {
@@ -371,7 +399,7 @@ public class ImplicitCallBackTest {
 
         public void onthrow(Throwable ex, Integer id) {
             errors.put(id, ex);
-//            ex.printStackTrace();
+            //            ex.printStackTrace();
         }
 
         public void oninvoke(Integer id) {
@@ -380,12 +408,14 @@ public class ImplicitCallBackTest {
     }
 
     class NormalDemoService implements IDemoService {
+
         public Person get(int id) {
             return new Person(id, "charles", 4);
         }
     }
 
     class ExceptionDemoExService implements IDemoService {
+
         public Person get(int id) {
             throw new RuntimeException("request persion id is :" + id);
         }

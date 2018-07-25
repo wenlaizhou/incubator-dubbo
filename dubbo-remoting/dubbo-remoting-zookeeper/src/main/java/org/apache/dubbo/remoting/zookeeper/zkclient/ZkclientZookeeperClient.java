@@ -44,7 +44,8 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
                 ZkclientZookeeperClient.this.state = state;
                 if (state == KeeperState.Disconnected) {
                     stateChanged(StateListener.DISCONNECTED);
-                } else if (state == KeeperState.SyncConnected) {
+                }
+                else if (state == KeeperState.SyncConnected) {
                     stateChanged(StateListener.CONNECTED);
                 }
             }
@@ -62,7 +63,8 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
     public void createPersistent(String path) {
         try {
             client.createPersistent(path);
-        } catch (ZkNodeExistsException e) {
+        }
+        catch (ZkNodeExistsException e) {
         }
     }
 
@@ -70,7 +72,8 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
     public void createEphemeral(String path) {
         try {
             client.createEphemeral(path);
-        } catch (ZkNodeExistsException e) {
+        }
+        catch (ZkNodeExistsException e) {
         }
     }
 
@@ -78,7 +81,8 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
     public void delete(String path) {
         try {
             client.delete(path);
-        } catch (ZkNoNodeException e) {
+        }
+        catch (ZkNoNodeException e) {
         }
     }
 
@@ -86,7 +90,8 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
     public List<String> getChildren(String path) {
         try {
             return client.getChildren(path);
-        } catch (ZkNoNodeException e) {
+        }
+        catch (ZkNoNodeException e) {
             return null;
         }
     }
@@ -95,7 +100,8 @@ public class ZkclientZookeeperClient extends AbstractZookeeperClient<IZkChildLis
     public boolean checkExists(String path) {
         try {
             return client.exists(path);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
         }
         return false;
     }

@@ -43,7 +43,9 @@ import static org.mockito.Mockito.mock;
 public class InvokerTelnetHandlerTest {
 
     private static TelnetHandler invoke = new InvokeTelnetHandler();
+
     private Channel mockChannel;
+
     private Invoker<DemoService> mockInvoker;
 
     @After

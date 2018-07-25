@@ -51,12 +51,17 @@ public class HeaderExchangeServer implements ExchangeServer {
             new NamedThreadFactory(
                     "dubbo-remoting-server-heartbeat",
                     true));
+
     private final Server server;
+
     // heartbeat timer
     private ScheduledFuture<?> heartbeatTimer;
+
     // heartbeat timeout (ms), default value is 0 , won't execute a heartbeat.
     private int heartbeat;
+
     private int heartbeatTimeout;
+
     private AtomicBoolean closed = new AtomicBoolean(false);
 
     public HeaderExchangeServer(Server server) {
@@ -116,7 +121,8 @@ public class HeaderExchangeServer implements ExchangeServer {
                     && System.currentTimeMillis() - start < max) {
                 try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     logger.warn(e.getMessage(), e);
                 }
             }
@@ -139,9 +145,11 @@ public class HeaderExchangeServer implements ExchangeServer {
         Collection<Channel> channels = getChannels();
         for (Channel channel : channels) {
             try {
-                if (channel.isConnected())
+                if (channel.isConnected()) {
                     channel.send(request, getUrl().getParameter(Constants.CHANNEL_READONLYEVENT_SENT_KEY, true));
-            } catch (RemotingException e) {
+                }
+            }
+            catch (RemotingException e) {
                 logger.warn("send cannot write message error.", e);
             }
         }
@@ -154,7 +162,8 @@ public class HeaderExchangeServer implements ExchangeServer {
         stopHeartbeatTimer();
         try {
             scheduled.shutdown();
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
     }
@@ -225,7 +234,8 @@ public class HeaderExchangeServer implements ExchangeServer {
                     startHeartbeatTimer();
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
     }
@@ -273,9 +283,11 @@ public class HeaderExchangeServer implements ExchangeServer {
             if (timer != null && !timer.isCancelled()) {
                 timer.cancel(true);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
-        } finally {
+        }
+        finally {
             heartbeatTimer = null;
         }
     }

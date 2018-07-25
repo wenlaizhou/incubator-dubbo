@@ -28,7 +28,8 @@ public class ClassLoaderFilterTest {
             public Class<?> loadClass(String name) throws ClassNotFoundException {
                 try {
                     return findClass(name);
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     return super.loadClass(name);
                 }
             }

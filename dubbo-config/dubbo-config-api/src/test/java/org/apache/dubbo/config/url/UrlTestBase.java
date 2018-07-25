@@ -39,26 +39,47 @@ public class UrlTestBase {
     //   data column definition
     // ======================================================
     protected static final int KEY = 0;
+
     protected static final int URL_KEY = 1;
+
     protected static final int TESTVALUE1 = 4;
+
     private static final Logger log = LoggerFactory.getLogger(UrlTestBase.class);
+
     private static final int TYPE = 2;
+
     private static final int DEFAULT = 3;
+
     private static final int TESTVALUE2 = 5;
+
     private static final int TESTVALUE3 = 6;
+
     private static final int TESTVALUE4 = 7;
+
     private static final int TESTVALUE5 = 8;
+
     private static final int TESTVALUE6 = 9;
+
     private static final int TESTVALUE7 = 10;
+
     protected ApplicationConfig appConfForProvider;
+
     protected ApplicationConfig appConfForService;
+
     protected RegistryConfig regConfForProvider;
+
     protected RegistryConfig regConfForService;
+
     protected ProviderConfig provConf;
+
     protected ProtocolConfig protoConfForProvider;
+
     protected ProtocolConfig protoConfForService;
+
     protected MethodConfig methodConfForService;
+
     protected ServiceConfig<DemoService> servConf;
+
     protected Object servConfTable[][] = {
             {"proxy", "proxy", "string", "javassist", "jdk", "javassist", "", "", "", ""},
             {"actives", "actives", "int", 0, 90, "", "", "", "", ""},
@@ -73,6 +94,7 @@ public class UrlTestBase {
             //{"listener", "listener", "string", "", "", "", "", "", "", ""},
 
     };
+
     protected Object regConfForServiceTable[][] = {
             //            {"timeout", "registry.timeout", "int", 5000, 9000, "", "", "", "", ""},
             //            {"file", "registry.file", "string", "", "regConfForServiceTable.log", "", "", "", "", ""},
@@ -80,7 +102,8 @@ public class UrlTestBase {
             //            {"transport", "registry.transporter", "string", "netty", "mina", "", "", "", "", ""},
             //            {"subscribe", "subscribe", "boolean", true, false, "", "", "", "", ""},
             {"dynamic", "dynamic", "boolean", true, false, "", "", "", "", ""},
-    };
+            };
+
     protected Object provConfTable[][] = {
             {"cluster", "default.cluster", "string", "string", "failover", "failfast", "failsafe", "", "", ""},
             {"async", "default.async", "boolean", false, true, "", "", "", "", ""},
@@ -93,29 +116,36 @@ public class UrlTestBase {
             //{"filter", "service.filter", "string", "", "", "", "", "", "", ""},
 
     };
+
     protected Object methodConfForServiceTable[][] = {
             {"actives", "sayName.actives", "int", 0, 90, "", "", "", "", ""},
             {"executes", "sayName.executes", "int", 0, 90, "", "", "", "", ""},
             {"deprecated", "sayName.deprecated", "boolean", false, true, "", "", "", "", ""},
             {"async", "sayName.async", "boolean", false, true, "", "", "", "", ""},
             {"timeout", "sayName.timeout", "int", 0, 90, "", "", "", "", ""},
-    };
+            };
+
     protected DemoService demoService = new DemoServiceImpl();
+
     private Object appConfForProviderTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
+
     private Object appConfForServiceTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
+
     private Object regConfForProviderTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
+
     private Object protoConfForProviderTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
+
     private Object protoConfForServiceTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
 
     // ======================================================
     //   data table manipulation utils
@@ -198,7 +228,8 @@ public class UrlTestBase {
             log.warn("Checking " + (String) row[KEY] + "for" + targetString);
             if (paramStringFromDb.contains(targetString)) {
                 log.warn((String) row[KEY] + " --> " + targetString + " OK!");
-            } else {
+            }
+            else {
                 failLog += targetString + ", ";
             }
         }

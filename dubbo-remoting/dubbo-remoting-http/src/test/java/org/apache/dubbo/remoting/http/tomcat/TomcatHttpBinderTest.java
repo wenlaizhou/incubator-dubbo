@@ -32,6 +32,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class TomcatHttpBinderTest {
+
     @Test
     public void shouldAbleHandleRequestForTomcatBinder() throws Exception {
         int port = NetUtils.getAvailablePort();

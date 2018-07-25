@@ -29,12 +29,15 @@ import org.junit.Test;
 public class ThreadNameTest {
 
     private NettyServer server;
+
     private NettyClient client;
 
     private URL serverURL;
+
     private URL clientURL;
 
     private ThreadNameVerifyHandler serverHandler;
+
     private ThreadNameVerifyHandler clientHandler;
 
     @Before
@@ -75,7 +78,9 @@ public class ThreadNameTest {
     class ThreadNameVerifyHandler implements ChannelHandler {
 
         private String message;
+
         private boolean success;
+
         private boolean client;
 
         ThreadNameVerifyHandler(String msg, boolean client) {

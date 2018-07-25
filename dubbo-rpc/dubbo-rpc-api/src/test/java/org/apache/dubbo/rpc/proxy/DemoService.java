@@ -17,6 +17,7 @@
 package org.apache.dubbo.rpc.proxy;
 
 public interface DemoService {
+
     void sayHello(String name);
 
     String echo(String text);

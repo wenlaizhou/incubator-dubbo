@@ -35,7 +35,8 @@ public class DubboApplicationListenerTest {
         try {
             spyHook.start();
             spyHook.join();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         Mockito.verify(spyHook, Mockito.times(2)).destroyAll();

@@ -41,6 +41,7 @@ public class HeartbeatHandlerTest {
     private static final Logger logger = LoggerFactory.getLogger(HeartbeatHandlerTest.class);
 
     private ExchangeServer server;
+
     private ExchangeClient client;
 
     @After
@@ -107,6 +108,7 @@ public class HeartbeatHandlerTest {
     class TestHeartbeatHandler implements ExchangeHandler {
 
         public int disconnectCount = 0;
+
         public int connectCount = 0;
 
         public CompletableFuture<Object> reply(ExchangeChannel channel, Object request) throws RemotingException {

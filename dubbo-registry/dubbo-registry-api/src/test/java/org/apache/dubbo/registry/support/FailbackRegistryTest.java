@@ -33,12 +33,19 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.junit.Assert.assertEquals;
 
 public class FailbackRegistryTest {
+
     static String service;
+
     static URL serviceUrl;
+
     static URL registryUrl;
+
     MockRegistry registry;
+
     private int FAILED_PERIOD = 200;
+
     private int sleeptime = 100;
+
     private int trytimes = 5;
 
     /**
@@ -85,11 +92,12 @@ public class FailbackRegistryTest {
         for (int i = 0; i < trytimes; i++) {
             System.out.println("failback registry retry ,times:" + i);
             //System.out.println(latch.getCount());
-            if (latch.getCount() == 0)
+            if (latch.getCount() == 0) {
                 break;
+            }
             Thread.sleep(sleeptime);
         }
-//        Thread.sleep(100000);//for debug
+        //        Thread.sleep(100000);//for debug
         assertEquals(0, latch.getCount());
         //The failedsubcribe corresponding key will be cleared when unsubscribing
         assertEquals(false, notified.get());
@@ -108,8 +116,9 @@ public class FailbackRegistryTest {
 
         for (int i = 0; i < trytimes; i++) {
             System.out.println("failback registry retry ,times:" + i);
-            if (latch.getCount() == 0)
+            if (latch.getCount() == 0) {
                 break;
+            }
             Thread.sleep(sleeptime);
         }
         assertEquals(0, latch.getCount());
@@ -140,11 +149,12 @@ public class FailbackRegistryTest {
         for (int i = 0; i < trytimes; i++) {
             System.out.println("failback registry retry ,times:" + i);
             //System.out.println(latch.getCount());
-            if (latch.getCount() == 0)
+            if (latch.getCount() == 0) {
                 break;
+            }
             Thread.sleep(sleeptime);
         }
-//        Thread.sleep(100000);
+        //        Thread.sleep(100000);
         assertEquals(0, latch.getCount());
         //The failedsubcribe corresponding key will be cleared when unsubscribing
         assertEquals(true, notified.get());
@@ -173,8 +183,9 @@ public class FailbackRegistryTest {
         //Wait for the timer.
         for (int i = 0; i < trytimes; i++) {
             System.out.println("failback notify retry ,times:" + i);
-            if (count.get() == 2)
+            if (count.get() == 2) {
                 break;
+            }
             Thread.sleep(sleeptime);
         }
         assertEquals(2, count.get());
@@ -182,7 +193,9 @@ public class FailbackRegistryTest {
 
 
     private static class MockRegistry extends FailbackRegistry {
+
         CountDownLatch latch;
+
         private boolean bad = false;
 
         /**

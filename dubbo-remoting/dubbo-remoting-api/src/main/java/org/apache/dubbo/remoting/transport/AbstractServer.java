@@ -40,11 +40,17 @@ import java.util.concurrent.ThreadPoolExecutor;
 public abstract class AbstractServer extends AbstractEndpoint implements Server {
 
     protected static final String SERVER_THREAD_POOL_NAME = "DubboServerHandler";
+
     private static final Logger logger = LoggerFactory.getLogger(AbstractServer.class);
+
     ExecutorService executor;
+
     private InetSocketAddress localAddress;
+
     private InetSocketAddress bindAddress;
+
     private int accepts;
+
     private int idleTimeout = 600; //600 seconds
 
     public AbstractServer(URL url, ChannelHandler handler) throws RemotingException {
@@ -64,7 +70,8 @@ public abstract class AbstractServer extends AbstractEndpoint implements Server 
             if (logger.isInfoEnabled()) {
                 logger.info("Start " + getClass().getSimpleName() + " bind " + getBindAddress() + ", export " + getLocalAddress());
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new RemotingException(url.toInetSocketAddress(), null, "Failed to bind " + getClass().getSimpleName()
                     + " on " + getLocalAddress() + ", cause: " + t.getMessage(), t);
         }
@@ -89,7 +96,8 @@ public abstract class AbstractServer extends AbstractEndpoint implements Server 
                     this.accepts = a;
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
         try {
@@ -99,7 +107,8 @@ public abstract class AbstractServer extends AbstractEndpoint implements Server 
                     this.idleTimeout = t;
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
         try {
@@ -115,7 +124,8 @@ public abstract class AbstractServer extends AbstractEndpoint implements Server 
                         if (core == max) {
                             threadPoolExecutor.setMaximumPoolSize(threads);
                         }
-                    } else {
+                    }
+                    else {
                         threadPoolExecutor.setMaximumPoolSize(threads);
                         if (core == max) {
                             threadPoolExecutor.setCorePoolSize(threads);
@@ -123,7 +133,8 @@ public abstract class AbstractServer extends AbstractEndpoint implements Server 
                     }
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
         super.setUrl(getUrl().addParameters(url.getParameters()));
@@ -147,12 +158,14 @@ public abstract class AbstractServer extends AbstractEndpoint implements Server 
         ExecutorUtil.shutdownNow(executor, 100);
         try {
             super.close();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             doClose();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }

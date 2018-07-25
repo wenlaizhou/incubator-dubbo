@@ -29,7 +29,8 @@ public class DelegateExporter<T> implements Exporter<T> {
     public DelegateExporter(Exporter<T> exporter) {
         if (exporter == null) {
             throw new IllegalArgumentException("exporter can not be null");
-        } else {
+        }
+        else {
             this.exporter = exporter;
         }
 

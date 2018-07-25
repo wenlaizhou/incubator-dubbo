@@ -72,7 +72,8 @@ public class TransportCodec extends AbstractCodec {
     protected Object decodeData(ObjectInput input) throws IOException {
         try {
             return input.readObject();
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             throw new IOException("ClassNotFoundException: " + StringUtils.toString(e));
         }
     }

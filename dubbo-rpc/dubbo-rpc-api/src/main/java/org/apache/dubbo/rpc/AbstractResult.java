@@ -23,6 +23,7 @@ import java.util.Map;
  *
  */
 public abstract class AbstractResult implements Result {
+
     protected Map<String, String> attachments = new HashMap<String, String>();
 
     protected Object result;

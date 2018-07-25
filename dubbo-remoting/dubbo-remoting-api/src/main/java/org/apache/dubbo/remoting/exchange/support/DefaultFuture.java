@@ -55,14 +55,23 @@ public class DefaultFuture implements ResponseFuture {
 
     // invoke id.
     private final long id;
+
     private final Channel channel;
+
     private final Request request;
+
     private final int timeout;
+
     private final Lock lock = new ReentrantLock();
+
     private final Condition done = lock.newCondition();
+
     private final long start = System.currentTimeMillis();
+
     private volatile long sent;
+
     private volatile Response response;
+
     private volatile ResponseCallback callback;
 
     public DefaultFuture(Channel channel, Request request, int timeout) {
@@ -95,14 +104,16 @@ public class DefaultFuture implements ResponseFuture {
             DefaultFuture future = FUTURES.remove(response.getId());
             if (future != null) {
                 future.doReceived(response);
-            } else {
+            }
+            else {
                 logger.warn("The timeout response finally returned at "
                         + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()))
                         + ", response " + response
                         + (channel == null ? "" : ", channel: " + channel.getLocalAddress()
                         + " -> " + channel.getRemoteAddress()));
             }
-        } finally {
+        }
+        finally {
             CHANNELS.remove(response.getId());
         }
     }
@@ -127,9 +138,11 @@ public class DefaultFuture implements ResponseFuture {
                         break;
                     }
                 }
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 throw new RuntimeException(e);
-            } finally {
+            }
+            finally {
                 lock.unlock();
             }
             if (!isDone()) {
@@ -156,16 +169,19 @@ public class DefaultFuture implements ResponseFuture {
     public void setCallback(ResponseCallback callback) {
         if (isDone()) {
             invokeCallback(callback);
-        } else {
+        }
+        else {
             boolean isdone = false;
             lock.lock();
             try {
                 if (!isDone()) {
                     this.callback = callback;
-                } else {
+                }
+                else {
                     isdone = true;
                 }
-            } finally {
+            }
+            finally {
                 lock.unlock();
             }
             if (isdone) {
@@ -188,21 +204,26 @@ public class DefaultFuture implements ResponseFuture {
         if (res.getStatus() == Response.OK) {
             try {
                 callbackCopy.done(res.getResult());
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.error("callback invoke error .reasult:" + res.getResult() + ",url:" + channel.getUrl(), e);
             }
-        } else if (res.getStatus() == Response.CLIENT_TIMEOUT || res.getStatus() == Response.SERVER_TIMEOUT) {
+        }
+        else if (res.getStatus() == Response.CLIENT_TIMEOUT || res.getStatus() == Response.SERVER_TIMEOUT) {
             try {
                 TimeoutException te = new TimeoutException(res.getStatus() == Response.SERVER_TIMEOUT, channel, res.getErrorMessage());
                 callbackCopy.caught(te);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.error("callback invoke error ,url:" + channel.getUrl(), e);
             }
-        } else {
+        }
+        else {
             try {
                 RuntimeException re = new RuntimeException(res.getErrorMessage());
                 callbackCopy.caught(re);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.error("callback invoke error ,url:" + channel.getUrl(), e);
             }
         }
@@ -257,7 +278,8 @@ public class DefaultFuture implements ResponseFuture {
             if (done != null) {
                 done.signal();
             }
-        } finally {
+        }
+        finally {
             lock.unlock();
         }
         if (callback != null) {
@@ -299,7 +321,8 @@ public class DefaultFuture implements ResponseFuture {
                         }
                     }
                     Thread.sleep(30);
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     logger.error("Exception when scan the timeout invocation of remoting.", e);
                 }
             }

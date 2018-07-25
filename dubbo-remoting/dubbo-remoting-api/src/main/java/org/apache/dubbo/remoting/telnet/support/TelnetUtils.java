@@ -126,9 +126,9 @@ public class TelnetUtils {
                     if (rowbuf.length() >= totalWidth) {
                         buf.append(rowbuf.toString());
                         rowbuf = new StringBuffer();
-//                        for(int m = 0;m < maxcountbefore && maxcountbefore < totalWidth ; m++){
-//                            rowbuf.append(" ");
-//                        }
+                        //                        for(int m = 0;m < maxcountbefore && maxcountbefore < totalWidth ; m++){
+                        //                            rowbuf.append(" ");
+                        //                        }
                     }
 
                     rowbuf.append(cell.substring(cell.length() - remaing, cell.length() - remaing + 1));

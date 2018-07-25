@@ -55,19 +55,25 @@ import static org.apache.dubbo.common.Constants.VALIDATION_KEY;
 
 /**
  * RegistryProtocol
- *
  */
 public class RegistryProtocol implements Protocol {
 
     private final static Logger logger = LoggerFactory.getLogger(RegistryProtocol.class);
+
     private static RegistryProtocol INSTANCE;
+
     private final Map<URL, NotifyListener> overrideListeners = new ConcurrentHashMap<URL, NotifyListener>();
+
     //To solve the problem of RMI repeated exposure port conflicts, the services that have been exposed are no longer exposed.
     //providerurl <--> exporter
     private final Map<String, ExporterChangeableWrapper<?>> bounds = new ConcurrentHashMap<String, ExporterChangeableWrapper<?>>();
+
     private Cluster cluster;
+
     private Protocol protocol;
+
     private RegistryFactory registryFactory;
+
     private ProxyFactory proxyFactory;
 
     public RegistryProtocol() {
@@ -92,7 +98,8 @@ public class RegistryProtocol implements Protocol {
                 }
             }
             return filteredKeys.toArray(new String[filteredKeys.size()]);
-        } else {
+        }
+        else {
             return new String[]{};
         }
     }
@@ -187,7 +194,8 @@ public class RegistryProtocol implements Protocol {
         final ExporterChangeableWrapper<T> exporter = (ExporterChangeableWrapper<T>) bounds.get(key);
         if (exporter == null) {
             logger.warn(new IllegalStateException("error state, exporter should not be null"));
-        } else {
+        }
+        else {
             final Invoker<T> invokerDelegete = new InvokerDelegete<T>(originInvoker, newInvokerUrl);
             exporter.setExporter(protocol.export(invokerDelegete));
         }
@@ -197,6 +205,7 @@ public class RegistryProtocol implements Protocol {
      * Get an instance of registry based on the address of invoker
      *
      * @param originInvoker
+     *
      * @return
      */
     private Registry getRegistry(final Invoker<?> originInvoker) {
@@ -218,6 +227,7 @@ public class RegistryProtocol implements Protocol {
      * Return the url that is registered to the registry and filter the url parameter once
      *
      * @param originInvoker
+     *
      * @return
      */
     private URL getRegistedProviderUrl(final Invoker<?> originInvoker) {
@@ -245,6 +255,7 @@ public class RegistryProtocol implements Protocol {
      * Get the address of the providerUrl through the url of the invoker
      *
      * @param origininvoker
+     *
      * @return
      */
     private URL getProviderUrl(final Invoker<?> origininvoker) {
@@ -261,6 +272,7 @@ public class RegistryProtocol implements Protocol {
      * Get the key cached in bounds by invoker
      *
      * @param originInvoker
+     *
      * @return
      */
     private String getCacheKey(final Invoker<?> originInvoker) {
@@ -326,6 +338,7 @@ public class RegistryProtocol implements Protocol {
     }
 
     public static class InvokerDelegete<T> extends InvokerWrapper<T> {
+
         private final Invoker<T> invoker;
 
         /**
@@ -340,7 +353,8 @@ public class RegistryProtocol implements Protocol {
         public Invoker<T> getInvoker() {
             if (invoker instanceof InvokerDelegete) {
                 return ((InvokerDelegete<T>) invoker).getInvoker();
-            } else {
+            }
+            else {
                 return invoker;
             }
         }
@@ -355,6 +369,7 @@ public class RegistryProtocol implements Protocol {
     private class OverrideListener implements NotifyListener {
 
         private final URL subscribeUrl;
+
         private final Invoker originInvoker;
 
         public OverrideListener(URL subscribeUrl, Invoker originalInvoker) {
@@ -380,7 +395,8 @@ public class RegistryProtocol implements Protocol {
             final Invoker<?> invoker;
             if (originInvoker instanceof InvokerDelegete) {
                 invoker = ((InvokerDelegete<?>) originInvoker).getInvoker();
-            } else {
+            }
+            else {
                 invoker = originInvoker;
             }
             //The origin invoker
@@ -436,6 +452,7 @@ public class RegistryProtocol implements Protocol {
     private class ExporterChangeableWrapper<T> implements Exporter<T> {
 
         private final Invoker<T> originInvoker;
+
         private Exporter<T> exporter;
 
         public ExporterChangeableWrapper(Exporter<T> exporter, Invoker<T> originInvoker) {
@@ -469,8 +486,11 @@ public class RegistryProtocol implements Protocol {
         public static final ExecutorService executor = Executors.newSingleThreadExecutor(new NamedThreadFactory("Exporter-Unexport", true));
 
         private Exporter<T> exporter;
+
         private Invoker<T> originInvoker;
+
         private URL subscribeUrl;
+
         private URL registerUrl;
 
         public DestroyableExporter(Exporter<T> exporter, Invoker<T> originInvoker, URL subscribeUrl, URL registerUrl) {
@@ -490,13 +510,15 @@ public class RegistryProtocol implements Protocol {
             Registry registry = RegistryProtocol.INSTANCE.getRegistry(originInvoker);
             try {
                 registry.unregister(registerUrl);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn(t.getMessage(), t);
             }
             try {
                 NotifyListener listener = RegistryProtocol.INSTANCE.overrideListeners.remove(subscribeUrl);
                 registry.unsubscribe(subscribeUrl, listener);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn(t.getMessage(), t);
             }
 
@@ -510,7 +532,8 @@ public class RegistryProtocol implements Protocol {
                             Thread.sleep(timeout);
                         }
                         exporter.unexport();
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn(t.getMessage(), t);
                     }
                 }

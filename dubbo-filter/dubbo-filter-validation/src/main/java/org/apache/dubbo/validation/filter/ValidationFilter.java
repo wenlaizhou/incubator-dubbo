@@ -49,9 +49,11 @@ public class ValidationFilter implements Filter {
                 if (validator != null) {
                     validator.validate(invocation.getMethodName(), invocation.getParameterTypes(), invocation.getArguments());
                 }
-            } catch (RpcException e) {
+            }
+            catch (RpcException e) {
                 throw e;
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 return new RpcResult(t);
             }
         }

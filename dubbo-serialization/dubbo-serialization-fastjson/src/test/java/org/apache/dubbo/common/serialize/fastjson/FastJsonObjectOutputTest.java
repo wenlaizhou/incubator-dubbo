@@ -28,9 +28,13 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class FastJsonObjectOutputTest {
+
     private FastJsonObjectOutput fastJsonObjectOutput;
+
     private FastJsonObjectInput fastJsonObjectInput;
+
     private ByteArrayOutputStream byteArrayOutputStream;
+
     private ByteArrayInputStream byteArrayInputStream;
 
     @Before

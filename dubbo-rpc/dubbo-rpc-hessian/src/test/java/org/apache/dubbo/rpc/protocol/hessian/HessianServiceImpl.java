@@ -46,7 +46,8 @@ public class HessianServiceImpl implements HessianService {
     public void timeOut(int millis) {
         try {
             Thread.sleep(millis);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

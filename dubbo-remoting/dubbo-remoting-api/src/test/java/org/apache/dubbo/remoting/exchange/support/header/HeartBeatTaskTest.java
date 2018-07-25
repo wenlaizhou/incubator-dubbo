@@ -35,6 +35,7 @@ public class HeartBeatTaskTest {
     private URL url = URL.valueOf("dubbo://localhost:20880");
 
     private MockChannel channel;
+
     private HeartBeatTask task;
 
     @Before

@@ -41,7 +41,8 @@ public class DubboConfigConfigurationSelector implements ImportSelector, Ordered
 
         if (multiple) {
             return of(DubboConfigConfiguration.Multiple.class.getName());
-        } else {
+        }
+        else {
             return of(DubboConfigConfiguration.Single.class.getName());
         }
     }

@@ -58,6 +58,7 @@ public interface ValidationService {
      * optional
      */
     @interface Save {
+
     }
 
     /**
@@ -66,5 +67,6 @@ public interface ValidationService {
      * optional
      */
     @interface Update {
+
     }
 }

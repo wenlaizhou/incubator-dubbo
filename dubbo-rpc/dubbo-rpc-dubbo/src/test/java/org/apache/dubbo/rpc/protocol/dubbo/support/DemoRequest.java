@@ -23,6 +23,7 @@ import java.io.Serializable;
  */
 
 class DemoRequest implements Serializable {
+
     private static final long serialVersionUID = -2579095288792344869L;
 
     private String mServiceName;

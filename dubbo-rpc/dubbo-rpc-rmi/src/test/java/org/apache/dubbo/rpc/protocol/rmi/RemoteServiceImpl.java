@@ -21,6 +21,7 @@ import org.apache.dubbo.rpc.RpcContext;
 import java.rmi.RemoteException;
 
 public class RemoteServiceImpl implements RemoteService {
+
     public String getThreadName() throws RemoteException {
         System.out.println("RpcContext.getContext().getRemoteHost()=" + RpcContext.getContext().getRemoteHost());
         return Thread.currentThread().getName();

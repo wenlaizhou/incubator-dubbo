@@ -87,7 +87,8 @@ public abstract class AbstractPeer implements Endpoint, ChannelHandler {
     public ChannelHandler getChannelHandler() {
         if (handler instanceof ChannelHandlerDelegate) {
             return ((ChannelHandlerDelegate) handler).getHandler();
-        } else {
+        }
+        else {
             return handler;
         }
     }

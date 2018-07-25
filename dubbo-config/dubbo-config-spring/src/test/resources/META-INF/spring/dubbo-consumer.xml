@@ -22,9 +22,9 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <!-- 当前应用信息配置 -->
-    <dubbo:application name="dubbo-consumer"/>
+    <dubbo:application name="dubbo-consumer" />
 
     <!-- 连接注册中心配置 -->
-    <dubbo:registry address="N/A"/>
+    <dubbo:registry address="N/A" />
 
 </beans>

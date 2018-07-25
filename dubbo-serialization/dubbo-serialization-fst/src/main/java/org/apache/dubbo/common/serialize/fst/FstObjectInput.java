@@ -73,9 +73,11 @@ public class FstObjectInput implements ObjectInput {
         int len = input.readInt();
         if (len < 0) {
             return null;
-        } else if (len == 0) {
+        }
+        else if (len == 0) {
             return new byte[]{};
-        } else {
+        }
+        else {
             byte[] b = new byte[len];
             input.readFully(b);
             return b;
@@ -98,7 +100,8 @@ public class FstObjectInput implements ObjectInput {
     public <T> T readObject(Class<T> clazz) throws IOException, ClassNotFoundException {
         try {
             return (T) input.readObject(clazz);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IOException(e);
         }
     }
@@ -108,7 +111,8 @@ public class FstObjectInput implements ObjectInput {
     public <T> T readObject(Class<T> clazz, Type type) throws IOException, ClassNotFoundException {
         try {
             return (T) input.readObject(clazz);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IOException(e);
         }
     }

@@ -23,6 +23,7 @@ import org.junit.Test;
 import javax.validation.ConstraintViolationException;
 
 public class JValidatorTest {
+
     @Test(expected = NoSuchMethodException.class)
     public void testItWithNonExistMethod() throws Exception {
         URL url = URL.valueOf("test://test:11/org.apache.dubbo.validation.support.jvalidation.mock.JValidatorTestTarget");

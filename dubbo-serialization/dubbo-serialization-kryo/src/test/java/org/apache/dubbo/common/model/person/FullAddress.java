@@ -133,48 +133,72 @@ public class FullAddress implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         FullAddress other = (FullAddress) obj;
         if (cityId == null) {
-            if (other.cityId != null)
+            if (other.cityId != null) {
                 return false;
-        } else if (!cityId.equals(other.cityId))
+            }
+        }
+        else if (!cityId.equals(other.cityId)) {
             return false;
+        }
         if (cityName == null) {
-            if (other.cityName != null)
+            if (other.cityName != null) {
                 return false;
-        } else if (!cityName.equals(other.cityName))
+            }
+        }
+        else if (!cityName.equals(other.cityName)) {
             return false;
+        }
         if (countryId == null) {
-            if (other.countryId != null)
+            if (other.countryId != null) {
                 return false;
-        } else if (!countryId.equals(other.countryId))
+            }
+        }
+        else if (!countryId.equals(other.countryId)) {
             return false;
+        }
         if (countryName == null) {
-            if (other.countryName != null)
+            if (other.countryName != null) {
                 return false;
-        } else if (!countryName.equals(other.countryName))
+            }
+        }
+        else if (!countryName.equals(other.countryName)) {
             return false;
+        }
         if (provinceName == null) {
-            if (other.provinceName != null)
+            if (other.provinceName != null) {
                 return false;
-        } else if (!provinceName.equals(other.provinceName))
+            }
+        }
+        else if (!provinceName.equals(other.provinceName)) {
             return false;
+        }
         if (streetAddress == null) {
-            if (other.streetAddress != null)
+            if (other.streetAddress != null) {
                 return false;
-        } else if (!streetAddress.equals(other.streetAddress))
+            }
+        }
+        else if (!streetAddress.equals(other.streetAddress)) {
             return false;
+        }
         if (zipCode == null) {
-            if (other.zipCode != null)
+            if (other.zipCode != null) {
                 return false;
-        } else if (!zipCode.equals(other.zipCode))
+            }
+        }
+        else if (!zipCode.equals(other.zipCode)) {
             return false;
+        }
         return true;
     }
 

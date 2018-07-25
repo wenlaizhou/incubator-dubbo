@@ -30,6 +30,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class ProviderConfigTest {
+
     @Test
     public void testProtocol() throws Exception {
         ProviderConfig provider = new ProviderConfig();

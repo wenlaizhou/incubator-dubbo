@@ -51,7 +51,8 @@ public class DubboMonitorFactory extends AbstractMonitorFactory {
         String filter = url.getParameter(Constants.REFERENCE_FILTER_KEY);
         if (filter == null || filter.length() == 0) {
             filter = "";
-        } else {
+        }
+        else {
             filter = filter + ",";
         }
         url = url.addParameters(Constants.CLUSTER_KEY, "failsafe", Constants.CHECK_KEY, String.valueOf(false),

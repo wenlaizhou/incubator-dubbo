@@ -27,10 +27,15 @@ import org.apache.dubbo.rpc.RpcException;
  * @date 2017/11/23
  */
 public class ConsumerInvokerWrapper<T> implements Invoker {
+
     private Invoker<T> invoker;
+
     private URL originUrl;
+
     private URL registryUrl;
+
     private URL consumerUrl;
+
     private RegistryDirectory registryDirectory;
 
     public ConsumerInvokerWrapper(Invoker<T> invoker, URL registryUrl, URL consumerUrl, RegistryDirectory registryDirectory) {

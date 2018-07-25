@@ -22,18 +22,18 @@
     ">
 
     <!-- current application configuration -->
-    <dubbo:application name="demo-provider"/>
+    <dubbo:application name="demo-provider" />
 
     <!-- registry center configuration -->
-    <dubbo:registry address="127.0.0.1"/>
+    <dubbo:registry address="127.0.0.1" />
 
     <!-- protocol configuration -->
-    <dubbo:protocol name="rmi" port="20813"/>
+    <dubbo:protocol name="rmi" port="20813" />
 
     <!-- service configuration -->
     <dubbo:service id="demoServiceConfig" register="true" interface="org.apache.dubbo.config.spring.api.DemoService"
-                   ref="demoService"/>
+                   ref="demoService" />
 
-    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl" />
 
 </beans>

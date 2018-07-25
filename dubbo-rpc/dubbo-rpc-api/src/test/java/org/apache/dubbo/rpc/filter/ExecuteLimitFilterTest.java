@@ -80,7 +80,8 @@ public class ExecuteLimitFilterTest {
 
         try {
             executeLimitFilter.invoke(invoker, invocation);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Assert.assertTrue(e instanceof RpcException);
         }
         Assert.assertEquals(1, RpcStatus.getStatus(url, invocation.getMethodName()).getFailed());
@@ -105,12 +106,14 @@ public class ExecuteLimitFilterTest {
                 public void run() {
                     try {
                         latch.await();
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     try {
                         executeLimitFilter.invoke(invoker, invocation);
-                    } catch (RpcException expected) {
+                    }
+                    catch (RpcException expected) {
                         failed.incrementAndGet();
                     }
 
@@ -122,7 +125,8 @@ public class ExecuteLimitFilterTest {
 
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
 

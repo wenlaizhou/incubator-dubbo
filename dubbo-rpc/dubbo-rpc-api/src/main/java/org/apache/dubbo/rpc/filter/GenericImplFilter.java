@@ -71,7 +71,8 @@ public class GenericImplFilter implements Filter {
                 for (int i = 0; i < arguments.length; i++) {
                     args[i] = JavaBeanSerializeUtil.serialize(arguments[i], JavaBeanAccessor.METHOD);
                 }
-            } else {
+            }
+            else {
                 args = PojoUtils.generalize(arguments);
             }
 
@@ -87,9 +88,11 @@ public class GenericImplFilter implements Filter {
                     if (ProtocolUtils.isBeanGenericSerialization(generic)) {
                         if (value == null) {
                             return new RpcResult(value);
-                        } else if (value instanceof JavaBeanDescriptor) {
+                        }
+                        else if (value instanceof JavaBeanDescriptor) {
                             return new RpcResult(JavaBeanSerializeUtil.deserialize((JavaBeanDescriptor) value));
-                        } else {
+                        }
+                        else {
                             throw new RpcException(
                                     "The type of result value is " +
                                             value.getClass().getName() +
@@ -98,13 +101,16 @@ public class GenericImplFilter implements Filter {
                                             ", and the result is " +
                                             value);
                         }
-                    } else {
+                    }
+                    else {
                         return new RpcResult(PojoUtils.realize(value, method.getReturnType(), method.getGenericReturnType()));
                     }
-                } catch (NoSuchMethodException e) {
+                }
+                catch (NoSuchMethodException e) {
                     throw new RpcException(e.getMessage(), e);
                 }
-            } else if (result.getException() instanceof GenericException) {
+            }
+            else if (result.getException() instanceof GenericException) {
                 GenericException exception = (GenericException) result.getException();
                 try {
                     String className = exception.getExceptionClass();
@@ -113,13 +119,15 @@ public class GenericImplFilter implements Filter {
                     Throwable lastException = null;
                     try {
                         targetException = (Throwable) clazz.newInstance();
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         lastException = e;
                         for (Constructor<?> constructor : clazz.getConstructors()) {
                             try {
                                 targetException = (Throwable) constructor.newInstance(new Object[constructor.getParameterTypes().length]);
                                 break;
-                            } catch (Throwable e1) {
+                            }
+                            catch (Throwable e1) {
                                 lastException = e1;
                             }
                         }
@@ -131,14 +139,17 @@ public class GenericImplFilter implements Filter {
                                 field.setAccessible(true);
                             }
                             field.set(targetException, exception.getExceptionMessage());
-                        } catch (Throwable e) {
+                        }
+                        catch (Throwable e) {
                             logger.warn(e.getMessage(), e);
                         }
                         result = new RpcResult(targetException);
-                    } else if (lastException != null) {
+                    }
+                    else if (lastException != null) {
                         throw lastException;
                     }
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     throw new RpcException("Can not deserialize exception " + exception.getExceptionClass() + ", message: " + exception.getExceptionMessage(), e);
                 }
             }
@@ -158,7 +169,8 @@ public class GenericImplFilter implements Filter {
                         error(generic, byte[].class.getName(), arg.getClass().getName());
                     }
                 }
-            } else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
+            }
+            else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
                 for (Object arg : args) {
                     if (!(arg instanceof JavaBeanDescriptor)) {
                         error(generic, JavaBeanDescriptor.class.getName(), arg.getClass().getName());

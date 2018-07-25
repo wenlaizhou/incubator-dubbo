@@ -21,6 +21,7 @@ import org.apache.dubbo.common.status.Status;
 import org.apache.dubbo.common.status.StatusChecker;
 
 public class MockStatusChecker implements StatusChecker {
+
     @Override
     public Status check() {
         return null;

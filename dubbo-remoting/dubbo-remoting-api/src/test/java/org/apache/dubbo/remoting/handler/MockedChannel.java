@@ -26,10 +26,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MockedChannel implements Channel {
+
     private boolean isClosed;
+
     private volatile boolean closing = false;
+
     private URL url;
+
     private ChannelHandler handler;
+
     private Map<String, Object> map = new HashMap<String, Object>();
 
     public MockedChannel() {

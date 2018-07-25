@@ -30,7 +30,9 @@ import static junit.framework.Assert.assertEquals;
  */
 
 public class WebserviceProtocolTest {
+
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     @Test
@@ -46,7 +48,7 @@ public class WebserviceProtocolTest {
         DemoService service = new DemoServiceImpl();
         protocol.export(proxy.getInvoker(service, DemoService.class, URL.valueOf("webservice://127.0.0.1:9019/" + DemoService.class.getName())));
         service = proxy.getProxy(protocol.refer(DemoService.class, URL.valueOf("webservice://127.0.0.1:9019/" + DemoService.class.getName())));
-        assertEquals(service.create(1,"kk").getName(), "kk");
+        assertEquals(service.create(1, "kk").getName(), "kk");
         assertEquals(service.getSize(null), -1);
         assertEquals(service.getSize(new String[]{"", "", ""}), 3);
         Object object = service.invoke("webservice://127.0.0.1:9019/" + DemoService.class.getName() + "", "invoke");
@@ -56,15 +58,15 @@ public class WebserviceProtocolTest {
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < 1024 * 32 + 32; i++)
             buf.append('A');
-        assertEquals(32800,service.stringLength(buf.toString()));
+        assertEquals(32800, service.stringLength(buf.toString()));
 
-//  a method start with $ is illegal in soap
-//        // cast to EchoService
-//        EchoService echo = proxy.getProxy(protocol.refer(EchoService.class, URL.valueOf("webservice://127.0.0.1:9010/" + DemoService.class.getName() + "?client=netty")));
-//        assertEquals(echo.echo(buf.toString()), buf.toString());
-//        assertEquals(echo.$echo("test"), "test");
-//        assertEquals(echo.$echo("abcdefg"), "abcdefg");
-//        assertEquals(echo.$echo(1234), 1234);
+        //  a method start with $ is illegal in soap
+        //        // cast to EchoService
+        //        EchoService echo = proxy.getProxy(protocol.refer(EchoService.class, URL.valueOf("webservice://127.0.0.1:9010/" + DemoService.class.getName() + "?client=netty")));
+        //        assertEquals(echo.echo(buf.toString()), buf.toString());
+        //        assertEquals(echo.$echo("test"), "test");
+        //        assertEquals(echo.$echo("abcdefg"), "abcdefg");
+        //        assertEquals(echo.$echo(1234), 1234);
     }
 
 

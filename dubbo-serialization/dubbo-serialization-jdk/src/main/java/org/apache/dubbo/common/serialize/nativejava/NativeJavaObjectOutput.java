@@ -90,7 +90,8 @@ public class NativeJavaObjectOutput implements ObjectOutput {
     public void writeBytes(byte[] v) throws IOException {
         if (v == null) {
             outputStream.writeInt(-1);
-        } else {
+        }
+        else {
             writeBytes(v, 0, v.length);
         }
     }
@@ -99,7 +100,8 @@ public class NativeJavaObjectOutput implements ObjectOutput {
     public void writeBytes(byte[] v, int off, int len) throws IOException {
         if (v == null) {
             outputStream.writeInt(-1);
-        } else {
+        }
+        else {
             outputStream.writeInt(len);
             outputStream.write(v, off, len);
         }

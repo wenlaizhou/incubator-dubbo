@@ -34,6 +34,7 @@ import static org.apache.dubbo.config.spring.util.BeanFactoryUtils.getOptionalBe
 
 /**
  * Abstract Configurable {@link Annotation} Bean Builder
+ *
  * @since 2.5.7
  */
 abstract class AbstractAnnotationConfigBeanBuilder<A extends Annotation, B extends AbstractInterfaceConfig> {
@@ -65,6 +66,7 @@ abstract class AbstractAnnotationConfigBeanBuilder<A extends Annotation, B exten
      * Build {@link B}
      *
      * @return non-null
+     *
      * @throws Exception
      */
     public final B build() throws Exception {
@@ -160,6 +162,7 @@ abstract class AbstractAnnotationConfigBeanBuilder<A extends Annotation, B exten
      * Resolves the bean name of {@link ModuleConfig}
      *
      * @param annotation {@link A}
+     *
      * @return
      */
     protected abstract String resolveModuleConfigBeanName(A annotation);
@@ -168,6 +171,7 @@ abstract class AbstractAnnotationConfigBeanBuilder<A extends Annotation, B exten
      * Resolves the bean name of {@link ApplicationConfig}
      *
      * @param annotation {@link A}
+     *
      * @return
      */
     protected abstract String resolveApplicationConfigBeanName(A annotation);
@@ -177,6 +181,7 @@ abstract class AbstractAnnotationConfigBeanBuilder<A extends Annotation, B exten
      * Resolves the bean ids of {@link org.apache.dubbo.config.RegistryConfig}
      *
      * @param annotation {@link A}
+     *
      * @return non-empty array
      */
     protected abstract String[] resolveRegistryConfigBeanNames(A annotation);
@@ -185,6 +190,7 @@ abstract class AbstractAnnotationConfigBeanBuilder<A extends Annotation, B exten
      * Resolves the bean name of {@link MonitorConfig}
      *
      * @param annotation {@link A}
+     *
      * @return
      */
     protected abstract String resolveMonitorConfigBeanName(A annotation);

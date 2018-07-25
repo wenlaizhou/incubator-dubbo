@@ -37,10 +37,13 @@ import static org.junit.Assert.fail;
 public abstract class AbstractChannelBufferTest {
 
     private static final int CAPACITY = 4096; // Must be even
+
     private static final int BLOCK_SIZE = 128;
 
     private long seed;
+
     private Random random;
+
     private ChannelBuffer buffer;
 
     protected abstract ChannelBuffer newBuffer(int capacity);
@@ -74,7 +77,8 @@ public abstract class AbstractChannelBufferTest {
     public void readerIndexBoundaryCheck1() {
         try {
             buffer.writerIndex(0);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             fail();
         }
         buffer.readerIndex(-1);
@@ -84,7 +88,8 @@ public abstract class AbstractChannelBufferTest {
     public void readerIndexBoundaryCheck2() {
         try {
             buffer.writerIndex(buffer.capacity());
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             fail();
         }
         buffer.readerIndex(buffer.capacity() + 1);
@@ -94,7 +99,8 @@ public abstract class AbstractChannelBufferTest {
     public void readerIndexBoundaryCheck3() {
         try {
             buffer.writerIndex(CAPACITY / 2);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             fail();
         }
         buffer.readerIndex(CAPACITY * 3 / 2);
@@ -118,7 +124,8 @@ public abstract class AbstractChannelBufferTest {
         try {
             buffer.writerIndex(CAPACITY);
             buffer.readerIndex(CAPACITY);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             fail();
         }
         buffer.writerIndex(buffer.capacity() + 1);
@@ -129,7 +136,8 @@ public abstract class AbstractChannelBufferTest {
         try {
             buffer.writerIndex(CAPACITY);
             buffer.readerIndex(CAPACITY / 2);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             fail();
         }
         buffer.writerIndex(CAPACITY / 4);
@@ -865,7 +873,8 @@ public abstract class AbstractChannelBufferTest {
         try {
             buffer.skipBytes(CAPACITY / 4 + 1);
             fail();
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             // Expected
         }
 

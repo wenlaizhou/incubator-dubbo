@@ -99,7 +99,8 @@ public class HeapChannelBuffer extends AbstractChannelBuffer {
     public void getBytes(int index, ChannelBuffer dst, int dstIndex, int length) {
         if (dst instanceof HeapChannelBuffer) {
             getBytes(index, ((HeapChannelBuffer) dst).array, dstIndex, length);
-        } else {
+        }
+        else {
             dst.setBytes(dstIndex, array, index, length);
         }
     }
@@ -134,7 +135,8 @@ public class HeapChannelBuffer extends AbstractChannelBuffer {
     public void setBytes(int index, ChannelBuffer src, int srcIndex, int length) {
         if (src instanceof HeapChannelBuffer) {
             setBytes(index, ((HeapChannelBuffer) src).array, srcIndex, length);
-        } else {
+        }
+        else {
             src.getBytes(srcIndex, array, index, length);
         }
     }
@@ -157,14 +159,16 @@ public class HeapChannelBuffer extends AbstractChannelBuffer {
             if (localReadBytes < 0) {
                 if (readBytes == 0) {
                     return -1;
-                } else {
+                }
+                else {
                     break;
                 }
             }
             readBytes += localReadBytes;
             index += localReadBytes;
             length -= localReadBytes;
-        } while (length > 0);
+        }
+        while (length > 0);
 
         return readBytes;
     }
@@ -177,20 +181,24 @@ public class HeapChannelBuffer extends AbstractChannelBuffer {
             int localReadBytes;
             try {
                 localReadBytes = in.read(buf);
-            } catch (ClosedChannelException e) {
+            }
+            catch (ClosedChannelException e) {
                 localReadBytes = -1;
             }
             if (localReadBytes < 0) {
                 if (readBytes == 0) {
                     return -1;
-                } else {
+                }
+                else {
                     break;
                 }
-            } else if (localReadBytes == 0) {
+            }
+            else if (localReadBytes == 0) {
                 break;
             }
             readBytes += localReadBytes;
-        } while (readBytes < length);
+        }
+        while (readBytes < length);
 
         return readBytes;
     }

@@ -73,22 +73,30 @@ public class RedisProtocol extends AbstractProtocol {
             config.setTestOnBorrow(url.getParameter("test.on.borrow", true));
             config.setTestOnReturn(url.getParameter("test.on.return", false));
             config.setTestWhileIdle(url.getParameter("test.while.idle", false));
-            if (url.getParameter("max.idle", 0) > 0)
+            if (url.getParameter("max.idle", 0) > 0) {
                 config.setMaxIdle(url.getParameter("max.idle", 0));
-            if (url.getParameter("min.idle", 0) > 0)
+            }
+            if (url.getParameter("min.idle", 0) > 0) {
                 config.setMinIdle(url.getParameter("min.idle", 0));
-            if (url.getParameter("max.active", 0) > 0)
+            }
+            if (url.getParameter("max.active", 0) > 0) {
                 config.setMaxTotal(url.getParameter("max.active", 0));
-            if (url.getParameter("max.total", 0) > 0)
+            }
+            if (url.getParameter("max.total", 0) > 0) {
                 config.setMaxTotal(url.getParameter("max.total", 0));
-            if (url.getParameter("max.wait", 0) > 0)
+            }
+            if (url.getParameter("max.wait", 0) > 0) {
                 config.setMaxWaitMillis(url.getParameter("max.wait", 0));
-            if (url.getParameter("num.tests.per.eviction.run", 0) > 0)
+            }
+            if (url.getParameter("num.tests.per.eviction.run", 0) > 0) {
                 config.setNumTestsPerEvictionRun(url.getParameter("num.tests.per.eviction.run", 0));
-            if (url.getParameter("time.between.eviction.runs.millis", 0) > 0)
+            }
+            if (url.getParameter("time.between.eviction.runs.millis", 0) > 0) {
                 config.setTimeBetweenEvictionRunsMillis(url.getParameter("time.between.eviction.runs.millis", 0));
-            if (url.getParameter("min.evictable.idle.time.millis", 0) > 0)
+            }
+            if (url.getParameter("min.evictable.idle.time.millis", 0) > 0) {
                 config.setMinEvictableIdleTimeMillis(url.getParameter("min.evictable.idle.time.millis", 0));
+            }
             final JedisPool jedisPool = new JedisPool(config, url.getHost(), url.getPort(DEFAULT_PORT),
                     url.getParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT));
             final int expiry = url.getParameter("expiry", 0);
@@ -112,7 +120,8 @@ public class RedisProtocol extends AbstractProtocol {
                             }
                             ObjectInput oin = getSerialization(url).deserialize(url, new ByteArrayInputStream(value));
                             return new RpcResult(oin.readObject());
-                        } else if (set.equals(invocation.getMethodName())) {
+                        }
+                        else if (set.equals(invocation.getMethodName())) {
                             if (invocation.getArguments().length != 2) {
                                 throw new IllegalArgumentException("The redis set method arguments mismatch, must be two arguments. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url);
                             }
@@ -125,30 +134,37 @@ public class RedisProtocol extends AbstractProtocol {
                                 jedis.expire(key, expiry / 1000);
                             }
                             return new RpcResult();
-                        } else if (delete.equals(invocation.getMethodName())) {
+                        }
+                        else if (delete.equals(invocation.getMethodName())) {
                             if (invocation.getArguments().length != 1) {
                                 throw new IllegalArgumentException("The redis delete method arguments mismatch, must only one arguments. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url);
                             }
                             jedis.del(String.valueOf(invocation.getArguments()[0]).getBytes());
                             return new RpcResult();
-                        } else {
+                        }
+                        else {
                             throw new UnsupportedOperationException("Unsupported method " + invocation.getMethodName() + " in redis service.");
                         }
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         RpcException re = new RpcException("Failed to invoke redis service method. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url + ", cause: " + t.getMessage(), t);
                         if (t instanceof TimeoutException || t instanceof SocketTimeoutException) {
                             re.setCode(RpcException.TIMEOUT_EXCEPTION);
-                        } else if (t instanceof JedisConnectionException || t instanceof IOException) {
+                        }
+                        else if (t instanceof JedisConnectionException || t instanceof IOException) {
                             re.setCode(RpcException.NETWORK_EXCEPTION);
-                        } else if (t instanceof JedisDataException) {
+                        }
+                        else if (t instanceof JedisDataException) {
                             re.setCode(RpcException.SERIALIZATION_EXCEPTION);
                         }
                         throw re;
-                    } finally {
+                    }
+                    finally {
                         if (jedis != null) {
                             try {
                                 jedis.close();
-                            } catch (Throwable t) {
+                            }
+                            catch (Throwable t) {
                                 logger.warn("returnResource error: " + t.getMessage(), t);
                             }
                         }
@@ -160,12 +176,14 @@ public class RedisProtocol extends AbstractProtocol {
                     super.destroy();
                     try {
                         jedisPool.destroy();
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         logger.warn(e.getMessage(), e);
                     }
                 }
             };
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new RpcException("Failed to refer redis service. interface: " + type.getName() + ", url: " + url + ", cause: " + t.getMessage(), t);
         }
     }

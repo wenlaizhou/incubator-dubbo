@@ -36,9 +36,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class RestProtocolTest {
+
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("rest");
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
     private final int availablePort = NetUtils.getAvailablePort();
+
     private final URL exportUrl = URL.valueOf("rest://127.0.0.1:" + availablePort + "/rest");
 
     @After

@@ -48,6 +48,7 @@ import io.netty.handler.codec.http.HttpVersion;
 public class HttpProcessHandler extends SimpleChannelInboundHandler<HttpRequest> {
 
     private static final Logger log = LoggerFactory.getLogger(HttpProcessHandler.class);
+
     private static CommandExecutor commandExecutor = new DefaultCommandExecutor();
 
 
@@ -59,17 +60,20 @@ public class HttpProcessHandler extends SimpleChannelInboundHandler<HttpRequest>
             log.warn("can not found commandContext url: " + msg.getUri());
             FullHttpResponse response = http_404();
             ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-        } else {
+        }
+        else {
             commandContext.setRemote(ctx.channel());
             try {
                 String result = commandExecutor.execute(commandContext);
                 FullHttpResponse response = http_200(result);
                 ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-            } catch (NoSuchCommandException ex) {
+            }
+            catch (NoSuchCommandException ex) {
                 log.error("can not find commandContext: " + commandContext, ex);
                 FullHttpResponse response = http_404();
                 ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-            } catch (Exception qosEx) {
+            }
+            catch (Exception qosEx) {
                 log.error("execute commandContext: " + commandContext + " got exception", qosEx);
                 FullHttpResponse response = http_500(qosEx.getMessage());
                 ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);

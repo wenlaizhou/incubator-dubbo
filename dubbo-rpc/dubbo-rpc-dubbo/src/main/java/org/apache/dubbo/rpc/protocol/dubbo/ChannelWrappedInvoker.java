@@ -40,7 +40,9 @@ import java.net.InetSocketAddress;
 class ChannelWrappedInvoker<T> extends AbstractInvoker<T> {
 
     private final Channel channel;
+
     private final String serviceKey;
+
     private final ExchangeClient currentClient;
 
     ChannelWrappedInvoker(Class<T> serviceType, Channel channel, URL url, String serviceKey) {
@@ -65,33 +67,39 @@ class ChannelWrappedInvoker<T> extends AbstractInvoker<T> {
             int timeout = getUrl().getMethodParameter(invocation.getMethodName(), Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT);
             if (timeout > 0) {
                 return (Result) currentClient.request(inv, timeout).get();
-            } else {
+            }
+            else {
                 return (Result) currentClient.request(inv).get();
             }
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             throw e;
-        } catch (TimeoutException e) {
+        }
+        catch (TimeoutException e) {
             throw new RpcException(RpcException.TIMEOUT_EXCEPTION, e.getMessage(), e);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException(RpcException.NETWORK_EXCEPTION, e.getMessage(), e);
-        } catch (Throwable e) { // here is non-biz exception, wrap it.
+        }
+        catch (Throwable e) { // here is non-biz exception, wrap it.
             throw new RpcException(e.getMessage(), e);
         }
     }
 
     @Override
     public void destroy() {
-//        super.destroy();
-//        try {
-//            channel.close();
-//        } catch (Throwable t) {
-//            logger.warn(t.getMessage(), t);
-//        }
+        //        super.destroy();
+        //        try {
+        //            channel.close();
+        //        } catch (Throwable t) {
+        //            logger.warn(t.getMessage(), t);
+        //        }
     }
 
     public static class ChannelWrapper extends ClientDelegate {
 
         private final Channel channel;
+
         private final URL url;
 
         ChannelWrapper(Channel channel) {

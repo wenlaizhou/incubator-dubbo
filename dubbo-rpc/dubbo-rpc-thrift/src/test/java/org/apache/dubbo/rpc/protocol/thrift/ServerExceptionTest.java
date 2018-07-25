@@ -93,7 +93,7 @@ public class ServerExceptionTest extends AbstractTest {
     @Override
     protected URL getUrl() {
         URL url = super.getUrl();
-//        url = url.addParameter( Constants.TIMEOUT_KEY, Integer.MAX_VALUE );
+        //        url = url.addParameter( Constants.TIMEOUT_KEY, Integer.MAX_VALUE );
         return url;
     }
 

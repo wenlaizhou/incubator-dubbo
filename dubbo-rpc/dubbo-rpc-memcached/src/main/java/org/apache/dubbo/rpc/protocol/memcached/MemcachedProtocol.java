@@ -78,26 +78,31 @@ public class MemcachedProtocol extends AbstractProtocol {
                                 throw new IllegalArgumentException("The memcached get method arguments mismatch, must only one arguments. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url);
                             }
                             return new RpcResult(memcachedClient.get(String.valueOf(invocation.getArguments()[0])));
-                        } else if (set.equals(invocation.getMethodName())) {
+                        }
+                        else if (set.equals(invocation.getMethodName())) {
                             if (invocation.getArguments().length != 2) {
                                 throw new IllegalArgumentException("The memcached set method arguments mismatch, must be two arguments. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url);
                             }
                             memcachedClient.set(String.valueOf(invocation.getArguments()[0]), expiry, invocation.getArguments()[1]);
                             return new RpcResult();
-                        } else if (delete.equals(invocation.getMethodName())) {
+                        }
+                        else if (delete.equals(invocation.getMethodName())) {
                             if (invocation.getArguments().length != 1) {
                                 throw new IllegalArgumentException("The memcached delete method arguments mismatch, must only one arguments. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url);
                             }
                             memcachedClient.delete(String.valueOf(invocation.getArguments()[0]));
                             return new RpcResult();
-                        } else {
+                        }
+                        else {
                             throw new UnsupportedOperationException("Unsupported method " + invocation.getMethodName() + " in memcached service.");
                         }
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         RpcException re = new RpcException("Failed to invoke memcached service method. interface: " + type.getName() + ", method: " + invocation.getMethodName() + ", url: " + url + ", cause: " + t.getMessage(), t);
                         if (t instanceof TimeoutException || t instanceof SocketTimeoutException) {
                             re.setCode(RpcException.TIMEOUT_EXCEPTION);
-                        } else if (t instanceof MemcachedException || t instanceof IOException) {
+                        }
+                        else if (t instanceof MemcachedException || t instanceof IOException) {
                             re.setCode(RpcException.NETWORK_EXCEPTION);
                         }
                         throw re;
@@ -109,12 +114,14 @@ public class MemcachedProtocol extends AbstractProtocol {
                     super.destroy();
                     try {
                         memcachedClient.shutdown();
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         logger.warn(e.getMessage(), e);
                     }
                 }
             };
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new RpcException("Failed to refer memcached service. interface: " + type.getName() + ", url: " + url + ", cause: " + t.getMessage(), t);
         }
     }

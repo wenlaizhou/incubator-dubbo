@@ -19,4 +19,5 @@ package org.apache.dubbo.rpc.protocol.thrift;
 import org.apache.dubbo.rpc.gen.thrift.Demo;
 
 public class ThriftDemoImpl extends DemoImpl implements Demo.Iface {
+
 }

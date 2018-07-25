@@ -38,19 +38,23 @@ public interface BucketCounter extends Metric {
 
     /**
      * Return the bucket count, keyed by timestamp
+     *
      * @return the bucket count, keyed by timestamp
      */
     Map<Long, Long> getBucketCounts();
 
     /**
      * Return the bucket count, keyed by timestamp, since (including) the startTime.
+     *
      * @param startTime the start time
+     *
      * @return the bucket count, keyed by timestamp
      */
     Map<Long, Long> getBucketCounts(long startTime);
 
     /**
      * Get the interval of the bucket
+     *
      * @return the interval of the bucket
      */
     int getBucketInterval();

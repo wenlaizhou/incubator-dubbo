@@ -39,6 +39,7 @@ import java.util.concurrent.TimeUnit;
 public class ConnectionOrderedChannelHandler extends WrappedChannelHandler {
 
     protected final ThreadPoolExecutor connectionExecutor;
+
     private final int queuewarninglimit;
 
     public ConnectionOrderedChannelHandler(ChannelHandler handler, URL url) {
@@ -58,7 +59,8 @@ public class ConnectionOrderedChannelHandler extends WrappedChannelHandler {
         try {
             checkQueueLength();
             connectionExecutor.execute(new ChannelEventRunnable(channel, handler, ChannelState.CONNECTED));
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new ExecutionException("connect event", channel, getClass() + " error when process connected event .", t);
         }
     }
@@ -68,7 +70,8 @@ public class ConnectionOrderedChannelHandler extends WrappedChannelHandler {
         try {
             checkQueueLength();
             connectionExecutor.execute(new ChannelEventRunnable(channel, handler, ChannelState.DISCONNECTED));
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new ExecutionException("disconnected event", channel, getClass() + " error when process disconnected event .", t);
         }
     }
@@ -78,7 +81,8 @@ public class ConnectionOrderedChannelHandler extends WrappedChannelHandler {
         ExecutorService cexecutor = getExecutorService();
         try {
             cexecutor.execute(new ChannelEventRunnable(channel, handler, ChannelState.RECEIVED, message));
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             //fix, reject exception can not be sent to consumer because thread pool is full, resulting in consumers waiting till timeout.
             if (message instanceof Request && t instanceof RejectedExecutionException) {
                 Request request = (Request) message;
@@ -100,7 +104,8 @@ public class ConnectionOrderedChannelHandler extends WrappedChannelHandler {
         ExecutorService cexecutor = getExecutorService();
         try {
             cexecutor.execute(new ChannelEventRunnable(channel, handler, ChannelState.CAUGHT, exception));
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new ExecutionException("caught event", channel, getClass() + " error when process caught event .", t);
         }
     }

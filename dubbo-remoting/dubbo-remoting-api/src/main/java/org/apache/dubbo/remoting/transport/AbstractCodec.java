@@ -55,9 +55,11 @@ public abstract class AbstractCodec implements Codec2 {
         String side = (String) channel.getAttribute(Constants.SIDE_KEY);
         if ("client".equals(side)) {
             return true;
-        } else if ("server".equals(side)) {
+        }
+        else if ("server".equals(side)) {
             return false;
-        } else {
+        }
+        else {
             InetSocketAddress address = channel.getRemoteAddress();
             URL url = channel.getUrl();
             boolean client = url.getPort() == address.getPort()

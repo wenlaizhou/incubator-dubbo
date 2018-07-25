@@ -40,10 +40,13 @@ import java.util.concurrent.TimeUnit;
 public class FileExchangeGroup extends AbstractExchangeGroup {
 
     private final File file;
+
     // scheduled executor service
     private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3, new NamedThreadFactory("FileGroupModifiedChecker", true));
+
     // Reconnect the timer to check whether the connection is available at a time, and when unavailable, an infinite reconnection
     private final ScheduledFuture<?> checkModifiedFuture;
+
     private volatile long last;
 
     public FileExchangeGroup(URL url) {
@@ -59,7 +62,8 @@ public class FileExchangeGroup extends AbstractExchangeGroup {
                 // check the file change
                 try {
                     check();
-                } catch (Throwable t) { // Defensive fault tolerance
+                }
+                catch (Throwable t) { // Defensive fault tolerance
                     logger.error("Unexpected error occur at reconnect, cause: " + t.getMessage(), t);
                 }
             }
@@ -73,7 +77,8 @@ public class FileExchangeGroup extends AbstractExchangeGroup {
             if (!checkModifiedFuture.isCancelled()) {
                 checkModifiedFuture.cancel(true);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
     }
@@ -92,7 +97,8 @@ public class FileExchangeGroup extends AbstractExchangeGroup {
             for (String line : lines) {
                 connect(URL.valueOf(line));
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RemotingException(new InetSocketAddress(NetUtils.getLocalHost(), 0), getUrl().toInetSocketAddress(), e.getMessage(), e);
         }
     }
@@ -108,7 +114,8 @@ public class FileExchangeGroup extends AbstractExchangeGroup {
                 }
             }
             IOUtils.appendLines(file, new String[]{full});
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RemotingException(new InetSocketAddress(NetUtils.getLocalHost(), 0), getUrl().toInetSocketAddress(), e.getMessage(), e);
         }
         return peer;
@@ -128,7 +135,8 @@ public class FileExchangeGroup extends AbstractExchangeGroup {
                 saves.add(line);
             }
             IOUtils.appendLines(file, saves.toArray(new String[0]));
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RemotingException(new InetSocketAddress(NetUtils.getLocalHost(), 0), getUrl().toInetSocketAddress(), e.getMessage(), e);
         }
     }

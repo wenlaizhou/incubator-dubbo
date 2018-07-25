@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanForContext2 {
+
     @Bean("bean1")
     public DemoService context2Bean() {
         return new DemoServiceImpl();

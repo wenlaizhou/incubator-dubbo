@@ -68,13 +68,15 @@ public class Main {
                             try {
                                 container.stop();
                                 logger.info("Dubbo " + container.getClass().getSimpleName() + " stopped!");
-                            } catch (Throwable t) {
+                            }
+                            catch (Throwable t) {
                                 logger.error(t.getMessage(), t);
                             }
                             try {
                                 LOCK.lock();
                                 STOP.signal();
-                            } finally {
+                            }
+                            finally {
                                 LOCK.unlock();
                             }
                         }
@@ -87,7 +89,8 @@ public class Main {
                 logger.info("Dubbo " + container.getClass().getSimpleName() + " started!");
             }
             System.out.println(new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss]").format(new Date()) + " Dubbo service server started!");
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);
             System.exit(1);
@@ -95,9 +98,11 @@ public class Main {
         try {
             LOCK.lock();
             STOP.await();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             logger.warn("Dubbo service server stopped, interrupted by other thread!", e);
-        } finally {
+        }
+        finally {
             LOCK.unlock();
         }
     }

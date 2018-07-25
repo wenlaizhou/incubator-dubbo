@@ -29,6 +29,7 @@ import java.util.Set;
 public class NOPMetricManager implements IMetricManager {
 
     private static final Map emptyMap = new HashMap();
+
     private static final Set emptySet = new HashSet();
 
     @Override

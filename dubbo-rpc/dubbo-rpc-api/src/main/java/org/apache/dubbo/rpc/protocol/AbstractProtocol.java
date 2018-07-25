@@ -63,7 +63,8 @@ public abstract class AbstractProtocol implements Protocol {
                         logger.info("Destroy reference: " + invoker.getUrl());
                     }
                     invoker.destroy();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }
@@ -76,7 +77,8 @@ public abstract class AbstractProtocol implements Protocol {
                         logger.info("Unexport service: " + exporter.getInvoker().getUrl());
                     }
                     exporter.unexport();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }

@@ -43,7 +43,9 @@ import java.util.regex.Pattern;
 public abstract class AbstractConfig implements Serializable {
 
     protected static final Logger logger = LoggerFactory.getLogger(AbstractConfig.class);
+
     private static final long serialVersionUID = 4267533505537413570L;
+
     private static final int MAX_LENGTH = 200;
 
     private static final int MAX_PATH_LENGTH = 200;
@@ -59,7 +61,9 @@ public abstract class AbstractConfig implements Serializable {
     private static final Pattern PATTERN_NAME_HAS_SYMBOL = Pattern.compile("[:*,/\\-._0-9a-zA-Z]+");
 
     private static final Pattern PATTERN_KEY = Pattern.compile("[*,\\-._0-9a-zA-Z]+");
+
     private static final Map<String, String> legacyProperties = new HashMap<String, String>();
+
     private static final String[] SUFFIXES = new String[]{"Config", "Bean"};
 
     static {
@@ -82,7 +86,8 @@ public abstract class AbstractConfig implements Serializable {
         if (value != null && value.length() > 0) {
             if ("dubbo.service.max.retry.providers".equals(key)) {
                 return String.valueOf(Integer.parseInt(value) - 1);
-            } else if ("dubbo.service.allow.no.provider".equals(key)) {
+            }
+            else if ("dubbo.service.allow.no.provider".equals(key)) {
                 return String.valueOf(!Boolean.parseBoolean(value));
             }
         }
@@ -121,10 +126,12 @@ public abstract class AbstractConfig implements Serializable {
                         Method getter;
                         try {
                             getter = config.getClass().getMethod("get" + name.substring(3));
-                        } catch (NoSuchMethodException e) {
+                        }
+                        catch (NoSuchMethodException e) {
                             try {
                                 getter = config.getClass().getMethod("is" + name.substring(3));
-                            } catch (NoSuchMethodException e2) {
+                            }
+                            catch (NoSuchMethodException e2) {
                                 getter = null;
                             }
                         }
@@ -150,7 +157,8 @@ public abstract class AbstractConfig implements Serializable {
                         method.invoke(config, convertPrimitive(method.getParameterTypes()[0], value));
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.error(e.getMessage(), e);
             }
         }
@@ -195,7 +203,8 @@ public abstract class AbstractConfig implements Serializable {
                     String key;
                     if (parameter != null && parameter.key().length() > 0) {
                         key = parameter.key();
-                    } else {
+                    }
+                    else {
                         key = prop;
                     }
                     Object value = method.invoke(config);
@@ -218,10 +227,12 @@ public abstract class AbstractConfig implements Serializable {
                             key = prefix + "." + key;
                         }
                         parameters.put(key, str);
-                    } else if (parameter != null && parameter.required()) {
+                    }
+                    else if (parameter != null && parameter.required()) {
                         throw new IllegalStateException(config.getClass().getSimpleName() + "." + key + " == null");
                     }
-                } else if ("getParameters".equals(name)
+                }
+                else if ("getParameters".equals(name)
                         && Modifier.isPublic(method.getModifiers())
                         && method.getParameterTypes().length == 0
                         && method.getReturnType() == Map.class) {
@@ -233,7 +244,8 @@ public abstract class AbstractConfig implements Serializable {
                         }
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
         }
@@ -257,12 +269,14 @@ public abstract class AbstractConfig implements Serializable {
                         && method.getParameterTypes().length == 0
                         && isPrimitive(method.getReturnType())) {
                     Parameter parameter = method.getAnnotation(Parameter.class);
-                    if (parameter == null || !parameter.attribute())
+                    if (parameter == null || !parameter.attribute()) {
                         continue;
+                    }
                     String key;
                     if (parameter.key().length() > 0) {
                         key = parameter.key();
-                    } else {
+                    }
+                    else {
                         int i = name.startsWith("get") ? 3 : 2;
                         key = name.substring(i, i + 1).toLowerCase() + name.substring(i + 1);
                     }
@@ -274,7 +288,8 @@ public abstract class AbstractConfig implements Serializable {
                         parameters.put(key, value);
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
         }
@@ -297,19 +312,26 @@ public abstract class AbstractConfig implements Serializable {
     private static Object convertPrimitive(Class<?> type, String value) {
         if (type == char.class || type == Character.class) {
             return value.length() > 0 ? value.charAt(0) : '\0';
-        } else if (type == boolean.class || type == Boolean.class) {
+        }
+        else if (type == boolean.class || type == Boolean.class) {
             return Boolean.valueOf(value);
-        } else if (type == byte.class || type == Byte.class) {
+        }
+        else if (type == byte.class || type == Byte.class) {
             return Byte.valueOf(value);
-        } else if (type == short.class || type == Short.class) {
+        }
+        else if (type == short.class || type == Short.class) {
             return Short.valueOf(value);
-        } else if (type == int.class || type == Integer.class) {
+        }
+        else if (type == int.class || type == Integer.class) {
             return Integer.valueOf(value);
-        } else if (type == long.class || type == Long.class) {
+        }
+        else if (type == long.class || type == Long.class) {
             return Long.valueOf(value);
-        } else if (type == float.class || type == Float.class) {
+        }
+        else if (type == float.class || type == Float.class) {
             return Float.valueOf(value);
-        } else if (type == double.class || type == Double.class) {
+        }
+        else if (type == double.class || type == Double.class) {
             return Double.valueOf(value);
         }
         return value;
@@ -427,18 +449,21 @@ public abstract class AbstractConfig implements Serializable {
                         if ("filter".equals(property) || "listener".equals(property)) {
                             parameterType = String.class;
                             value = StringUtils.join((String[]) value, ",");
-                        } else if ("parameters".equals(property)) {
+                        }
+                        else if ("parameters".equals(property)) {
                             parameterType = Map.class;
                             value = CollectionUtils.toStringMap((String[]) value);
                         }
                         try {
                             Method setterMethod = getClass().getMethod(setter, parameterType);
                             setterMethod.invoke(this, value);
-                        } catch (NoSuchMethodException e) {
+                        }
+                        catch (NoSuchMethodException e) {
                             // ignore
                         }
                     }
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     logger.error(e.getMessage(), e);
                 }
             }
@@ -471,13 +496,15 @@ public abstract class AbstractConfig implements Serializable {
                             buf.append("\"");
                         }
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     logger.warn(e.getMessage(), e);
                 }
             }
             buf.append(" />");
             return buf.toString();
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
             return super.toString();
         }

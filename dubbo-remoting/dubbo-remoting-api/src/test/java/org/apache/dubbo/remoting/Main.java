@@ -33,6 +33,7 @@ import java.util.concurrent.Executors;
  */
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
         startServer(9010);
         mutliThreadTest(10, 9010);
@@ -74,7 +75,8 @@ public class Main {
                 public void run() {
                     try {
                         test(port);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -102,6 +104,7 @@ public class Main {
     }
 
     static class Data implements Serializable {
+
         private static final long serialVersionUID = -4666580993978548778L;
 
         private String mData = "";
@@ -119,6 +122,7 @@ public class Main {
     }
 
     static class StringMessage implements Serializable {
+
         private static final long serialVersionUID = 7193122183120113947L;
 
         private String mText;

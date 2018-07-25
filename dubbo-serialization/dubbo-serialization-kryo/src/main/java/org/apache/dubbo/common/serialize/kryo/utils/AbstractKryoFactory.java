@@ -69,8 +69,8 @@ public abstract class AbstractKryoFactory implements KryoFactory {
 
     /**
      * only supposed to be called at startup time
-     *
-     *  later may consider adding support for custom serializer, custom id, etc
+     * <p>
+     * later may consider adding support for custom serializer, custom id, etc
      */
     public void registerClass(Class clazz) {
 
@@ -89,7 +89,7 @@ public abstract class AbstractKryoFactory implements KryoFactory {
         Kryo kryo = new CompatibleKryo();
 
         // TODO
-//        kryo.setReferences(false);
+        //        kryo.setReferences(false);
         kryo.setRegistrationRequired(registrationRequired);
 
         kryo.register(Arrays.asList("").getClass(), new ArraysAsListSerializer());

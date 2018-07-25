@@ -31,11 +31,13 @@ import java.util.List;
         "help online"
 })
 public class Help implements BaseCommand {
+
     @Override
     public String execute(CommandContext commandContext, String[] args) {
         if (args != null && args.length > 0) {
             return commandHelp(args[0]);
-        } else {
+        }
+        else {
             return mainHelp();
         }
 

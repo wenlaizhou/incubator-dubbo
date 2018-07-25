@@ -17,6 +17,7 @@
 package org.apache.dubbo.rpc.protocol.redis;
 
 public interface IDemoService {
+
     void set(String key, String value);
 
     String get(String key);

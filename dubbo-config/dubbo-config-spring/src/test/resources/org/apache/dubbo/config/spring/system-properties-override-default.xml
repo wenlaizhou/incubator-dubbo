@@ -23,8 +23,8 @@
 
     <!-- service configuration -->
     <dubbo:service id="demoServiceConfig" interface="org.apache.dubbo.config.spring.api.DemoService"
-                   ref="demoService"/>
+                   ref="demoService" />
 
-    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl" />
 
 </beans>

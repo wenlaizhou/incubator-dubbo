@@ -63,10 +63,12 @@ public abstract class AbstractInvoker<T> implements Invoker<T> {
     }
 
     public AbstractInvoker(Class<T> type, URL url, Map<String, String> attachment) {
-        if (type == null)
+        if (type == null) {
             throw new IllegalArgumentException("service type == null");
-        if (url == null)
+        }
+        if (url == null) {
             throw new IllegalArgumentException("service url == null");
+        }
         this.type = type;
         this.url = url;
         this.attachment = attachment == null ? null : Collections.unmodifiableMap(attachment);
@@ -152,23 +154,28 @@ public abstract class AbstractInvoker<T> implements Invoker<T> {
 
         try {
             return doInvoke(invocation);
-        } catch (InvocationTargetException e) { // biz exception
+        }
+        catch (InvocationTargetException e) { // biz exception
             Throwable te = e.getTargetException();
             if (te == null) {
                 return new RpcResult(e);
-            } else {
+            }
+            else {
                 if (te instanceof RpcException) {
                     ((RpcException) te).setCode(RpcException.BIZ_EXCEPTION);
                 }
                 return new RpcResult(te);
             }
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             if (e.isBiz()) {
                 return new RpcResult(e);
-            } else {
+            }
+            else {
                 throw e;
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             return new RpcResult(e);
         }
     }

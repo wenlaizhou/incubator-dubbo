@@ -29,6 +29,7 @@ import java.io.StreamCorruptedException;
  * Compacted java object input stream.
  */
 public class CompactedObjectInputStream extends ObjectInputStream {
+
     private ClassLoader mClassLoader;
 
     public CompactedObjectInputStream(InputStream in) throws IOException {
@@ -43,8 +44,9 @@ public class CompactedObjectInputStream extends ObjectInputStream {
     @Override
     protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
         int type = read();
-        if (type < 0)
+        if (type < 0) {
             throw new EOFException();
+        }
         switch (type) {
             case 0:
                 return super.readClassDescriptor();

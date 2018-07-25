@@ -18,6 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class HttpProcessHandlerTest {
+
     @Test
     public void test1() throws Exception {
         ChannelHandlerContext context = mock(ChannelHandlerContext.class);

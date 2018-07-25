@@ -37,6 +37,7 @@ public interface ResponseFuture {
      * get result with the specified timeout.
      *
      * @param timeoutInMillis timeout.
+     *
      * @return result.
      */
     Object get(int timeoutInMillis) throws RemotingException;

@@ -18,6 +18,7 @@ package org.apache.dubbo.rpc.protocol.thrift.io;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 @Deprecated
 public class InputStreamWrapper extends InputStream {
 
@@ -34,7 +35,8 @@ public class InputStreamWrapper extends InputStream {
     public int read(byte[] b) throws IOException {
         if (is.available() >= b.length) {
             return is.read(b);
-        } else {
+        }
+        else {
             return -1;
         }
     }
@@ -43,7 +45,8 @@ public class InputStreamWrapper extends InputStream {
     public int read(byte[] b, int off, int len) throws IOException {
         if (is.available() >= len) {
             return is.read(b, off, len);
-        } else {
+        }
+        else {
             return -1;
         }
     }

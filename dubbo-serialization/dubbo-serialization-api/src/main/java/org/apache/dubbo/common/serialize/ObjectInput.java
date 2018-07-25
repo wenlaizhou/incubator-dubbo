@@ -35,6 +35,7 @@ public interface ObjectInput extends DataInput {
      * read object.
      *
      * @param cls object type.
+     *
      * @return object.
      */
     <T> T readObject(Class<T> cls) throws IOException, ClassNotFoundException;
@@ -43,6 +44,7 @@ public interface ObjectInput extends DataInput {
      * read object.
      *
      * @param cls object type.
+     *
      * @return object.
      */
     <T> T readObject(Class<T> cls, Type type) throws IOException, ClassNotFoundException;

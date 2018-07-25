@@ -51,7 +51,8 @@ public class HelpTelnetHandler implements TelnetHandler {
             buf.append("\r\nDetail:\r\n    ");
             buf.append(help.detail().replace("\r\n", "    \r\n").replace("\n", "    \n"));
             return buf.toString();
-        } else {
+        }
+        else {
             List<List<String>> table = new ArrayList<List<String>>();
             List<TelnetHandler> handlers = extensionLoader.getActivateExtension(channel.getUrl(), "telnet");
             if (handlers != null && !handlers.isEmpty()) {

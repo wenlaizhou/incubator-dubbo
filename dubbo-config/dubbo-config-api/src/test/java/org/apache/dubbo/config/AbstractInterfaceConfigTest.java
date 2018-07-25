@@ -48,8 +48,10 @@ import java.util.List;
 import java.util.Properties;
 
 public class AbstractInterfaceConfigTest {
+
     @ClassRule
     public static TemporaryFolder tempDir = new TemporaryFolder();
+
     private static File dubboProperties;
 
     @BeforeClass
@@ -70,7 +72,8 @@ public class AbstractInterfaceConfigTest {
             InterfaceConfig interfaceConfig = new InterfaceConfig();
             interfaceConfig.checkRegistry();
             TestCase.assertEquals(2, interfaceConfig.getRegistries().size());
-        } finally {
+        }
+        finally {
             System.clearProperty("dubbo.registry.address");
         }
     }
@@ -103,7 +106,8 @@ public class AbstractInterfaceConfigTest {
             interfaceConfig = new InterfaceConfig();
             interfaceConfig.checkApplication();
             TestCase.assertEquals("1000", System.getProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY));
-        } finally {
+        }
+        finally {
             ConfigUtils.setProperties(null);
             System.clearProperty("dubbo.application.name");
             System.clearProperty(Constants.SHUTDOWN_WAIT_KEY);
@@ -394,11 +398,13 @@ public class AbstractInterfaceConfigTest {
             properties.put(key, value);
             properties.store(os, "");
             os.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             if (os != null) {
                 try {
                     os.close();
-                } catch (IOException ioe) {
+                }
+                catch (IOException ioe) {
                     // ignore
                 }
             }

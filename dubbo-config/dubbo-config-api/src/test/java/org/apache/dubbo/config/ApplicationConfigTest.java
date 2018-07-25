@@ -33,6 +33,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
 public class ApplicationConfigTest {
+
     @Test
     public void testName() throws Exception {
         ApplicationConfig application = new ApplicationConfig();

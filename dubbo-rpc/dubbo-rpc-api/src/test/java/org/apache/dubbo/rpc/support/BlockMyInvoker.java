@@ -42,11 +42,13 @@ public class BlockMyInvoker<T> extends MyInvoker<T> {
         if (hasException == false) {
             try {
                 Thread.sleep(blockTime);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
             }
             result.setValue("alibaba");
             return result;
-        } else {
+        }
+        else {
             result.setException(new RuntimeException("mocked exception"));
             return result;
         }

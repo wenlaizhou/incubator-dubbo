@@ -31,6 +31,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class Hessian2SerializationTest extends AbstractSerializationPersionFailTest {
+
     {
         serialization = new Hessian2Serialization();
     }
@@ -54,7 +55,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(boolean[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }
@@ -81,7 +83,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(short[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }
@@ -103,7 +106,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(int[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }
@@ -125,7 +129,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(long[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }
@@ -147,7 +152,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(float[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }
@@ -169,7 +175,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(double[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }
@@ -193,7 +200,8 @@ public class Hessian2SerializationTest extends AbstractSerializationPersionFailT
         try {
             deserialize.readObject(String[].class);
             fail();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
         }
         // NOTE: Hessian2 throws ArrayIndexOutOfBoundsException instead of IOException, let's live with this.
     }

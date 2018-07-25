@@ -23,6 +23,7 @@ import java.io.Serializable;
  */
 
 public class RpcMessage implements Serializable {
+
     private static final long serialVersionUID = -5148079121106659095L;
 
     private String mClassName;

@@ -23,6 +23,7 @@ import java.util.concurrent.CompletableFuture;
  * TODO AsyncRpcResult, AsyncNormalRpcResult should not be a parent-child hierarchy.
  */
 public class SimpleAsyncRpcResult extends AsyncRpcResult {
+
     public SimpleAsyncRpcResult(CompletableFuture<Object> future, boolean registerCallback) {
         super(future, registerCallback);
     }

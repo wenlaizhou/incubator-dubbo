@@ -27,6 +27,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class FstObjectInputTest {
+
     private FstObjectInput fstObjectInput;
 
     @Test(expected = IOException.class)

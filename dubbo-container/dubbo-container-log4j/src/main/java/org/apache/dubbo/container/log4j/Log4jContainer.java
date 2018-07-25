@@ -76,7 +76,8 @@ public class Log4jContainer implements Container {
                                 String path;
                                 if (i == -1) {
                                     path = subdirectory;
-                                } else {
+                                }
+                                else {
                                     path = f.substring(0, i);
                                     if (!path.endsWith(subdirectory)) {
                                         path = path + "/" + subdirectory;

@@ -26,6 +26,7 @@ import javax.ws.rs.QueryParam;
 @Path("/demoService")
 @Api(value = "SwaggerService")
 public interface SwaggerService {
+
     @GET
     @Path("/hello")
     @ApiOperation(value = "hello")

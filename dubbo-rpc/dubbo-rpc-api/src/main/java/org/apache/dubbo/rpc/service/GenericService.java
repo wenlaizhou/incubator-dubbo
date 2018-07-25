@@ -30,7 +30,9 @@ public interface GenericService {
      *                       required, e.g. findPerson(java.lang.String)
      * @param parameterTypes Parameter types
      * @param args           Arguments
+     *
      * @return invocation return value
+     *
      * @throws Throwable potential exception thrown from the invocation
      */
     Object $invoke(String method, String[] parameterTypes, Object[] args) throws GenericException;

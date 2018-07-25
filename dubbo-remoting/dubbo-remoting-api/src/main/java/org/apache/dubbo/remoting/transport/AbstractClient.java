@@ -49,19 +49,31 @@ import java.util.concurrent.locks.ReentrantLock;
 public abstract class AbstractClient extends AbstractEndpoint implements Client {
 
     protected static final String CLIENT_THREAD_POOL_NAME = "DubboClientHandler";
+
     private static final Logger logger = LoggerFactory.getLogger(AbstractClient.class);
+
     private static final AtomicInteger CLIENT_THREAD_POOL_ID = new AtomicInteger();
+
     private static final ScheduledThreadPoolExecutor reconnectExecutorService = new ScheduledThreadPoolExecutor(2, new NamedThreadFactory("DubboClientReconnectTimer", true));
+
     private final Lock connectLock = new ReentrantLock();
+
     private final boolean send_reconnect;
+
     private final AtomicInteger reconnect_count = new AtomicInteger(0);
+
     // Reconnection error log has been called before?
     private final AtomicBoolean reconnect_error_log_flag = new AtomicBoolean(false);
+
     // reconnect warning period. Reconnect warning interval (log warning after how many times) //for test
     private final int reconnect_warning_period;
+
     private final long shutdown_timeout;
+
     protected volatile ExecutorService executor;
+
     private volatile ScheduledFuture<?> reconnectExecutorFuture = null;
+
     // the last successed connected time
     private long lastConnectedTime = System.currentTimeMillis();
 
@@ -78,7 +90,8 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
 
         try {
             doOpen();
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             close();
             throw new RemotingException(url.toInetSocketAddress(), null,
                     "Failed to start " + getClass().getSimpleName() + " " + NetUtils.getLocalAddress()
@@ -90,15 +103,18 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
             if (logger.isInfoEnabled()) {
                 logger.info("Start " + getClass().getSimpleName() + " " + NetUtils.getLocalAddress() + " connect to the server " + getRemoteAddress());
             }
-        } catch (RemotingException t) {
+        }
+        catch (RemotingException t) {
             if (url.getParameter(Constants.CHECK_KEY, true)) {
                 close();
                 throw t;
-            } else {
+            }
+            else {
                 logger.warn("Failed to start " + getClass().getSimpleName() + " " + NetUtils.getLocalAddress()
                         + " connect to the server " + getRemoteAddress() + " (check == false, ignore and retry later!), cause: " + t.getMessage(), t);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             close();
             throw new RemotingException(url.toInetSocketAddress(), null,
                     "Failed to start " + getClass().getSimpleName() + " " + NetUtils.getLocalAddress()
@@ -119,6 +135,7 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
 
     /**
      * @param url
+     *
      * @return 0-false
      */
     private static int getReconnectParam(URL url) {
@@ -126,12 +143,15 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
         String param = url.getParameter(Constants.RECONNECT_KEY);
         if (param == null || param.length() == 0 || "true".equalsIgnoreCase(param)) {
             reconnect = Constants.DEFAULT_RECONNECT_PERIOD;
-        } else if ("false".equalsIgnoreCase(param)) {
+        }
+        else if ("false".equalsIgnoreCase(param)) {
             reconnect = 0;
-        } else {
+        }
+        else {
             try {
                 reconnect = Integer.parseInt(param);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new IllegalArgumentException("reconnect param must be nonnegative integer or false/true. input is:" + param);
             }
             if (reconnect < 0) {
@@ -154,10 +174,12 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
                     try {
                         if (!isConnected()) {
                             connect();
-                        } else {
+                        }
+                        else {
                             lastConnectedTime = System.currentTimeMillis();
                         }
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         String errorMsg = "client reconnect to " + getUrl().getAddress() + " find error . url: " + getUrl();
                         // wait registry sync provider list
                         if (System.currentTimeMillis() - lastConnectedTime > shutdown_timeout) {
@@ -183,7 +205,8 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
                 reconnectExecutorFuture.cancel(true);
                 reconnectExecutorService.purge();
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -199,56 +222,63 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
     @Override
     public InetSocketAddress getRemoteAddress() {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return getUrl().toInetSocketAddress();
+        }
         return channel.getRemoteAddress();
     }
 
     @Override
     public InetSocketAddress getLocalAddress() {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return InetSocketAddress.createUnresolved(NetUtils.getLocalHost(), 0);
+        }
         return channel.getLocalAddress();
     }
 
     @Override
     public boolean isConnected() {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return false;
+        }
         return channel.isConnected();
     }
 
     @Override
     public Object getAttribute(String key) {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return null;
+        }
         return channel.getAttribute(key);
     }
 
     @Override
     public void setAttribute(String key, Object value) {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return;
+        }
         channel.setAttribute(key, value);
     }
 
     @Override
     public void removeAttribute(String key) {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return;
+        }
         channel.removeAttribute(key);
     }
 
     @Override
     public boolean hasAttribute(String key) {
         Channel channel = getChannel();
-        if (channel == null)
+        if (channel == null) {
             return false;
+        }
         return channel.hasAttribute(key);
     }
 
@@ -277,7 +307,8 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
                 throw new RemotingException(this, "Failed connect to server " + getRemoteAddress() + " from " + getClass().getSimpleName() + " "
                         + NetUtils.getLocalHost() + " using dubbo version " + Version.getVersion()
                         + ", cause: Connect wait timeout: " + getTimeout() + "ms.");
-            } else {
+            }
+            else {
                 if (logger.isInfoEnabled()) {
                     logger.info("Successed connect to server " + getRemoteAddress() + " from " + getClass().getSimpleName() + " "
                             + NetUtils.getLocalHost() + " using dubbo version " + Version.getVersion()
@@ -286,13 +317,16 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
             }
             reconnect_count.set(0);
             reconnect_error_log_flag.set(false);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw e;
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RemotingException(this, "Failed connect to server " + getRemoteAddress() + " from " + getClass().getSimpleName() + " "
                     + NetUtils.getLocalHost() + " using dubbo version " + Version.getVersion()
                     + ", cause: " + e.getMessage(), e);
-        } finally {
+        }
+        finally {
             connectLock.unlock();
         }
     }
@@ -306,15 +340,18 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
                 if (channel != null) {
                     channel.close();
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn(e.getMessage(), e);
             }
             try {
                 doDisConnect();
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn(e.getMessage(), e);
             }
-        } finally {
+        }
+        finally {
             connectLock.unlock();
         }
     }
@@ -331,22 +368,26 @@ public abstract class AbstractClient extends AbstractEndpoint implements Client 
             if (executor != null) {
                 ExecutorUtil.shutdownNow(executor, 100);
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             super.close();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             disconnect();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             doClose();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }

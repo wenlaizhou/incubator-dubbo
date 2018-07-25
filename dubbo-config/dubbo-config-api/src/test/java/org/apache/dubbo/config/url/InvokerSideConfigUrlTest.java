@@ -37,35 +37,42 @@ import java.util.Arrays;
 
 
 public class InvokerSideConfigUrlTest extends UrlTestBase {
+
     private static final Logger log = LoggerFactory.getLogger(InvokerSideConfigUrlTest.class);
 
     // ======================================================
     //   invoker related data preparing
     // ======================================================  
     private ApplicationConfig appConfForConsumer;
+
     private ApplicationConfig appConfForReference;
+
     private RegistryConfig regConfForConsumer;
+
     private RegistryConfig regConfForReference;
+
     private MethodConfig methodConfForReference;
+
     private ConsumerConfig consumerConf;
+
     private ReferenceConfig<DemoService> refConf;
 
     private Object appConfForConsumerTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
 
     private Object appConfForReferenceTable[][] = {
             {"", "", "", "", "", "", "", "", "", ""},
-    };
+            };
 
     private Object regConfForConsumerTable[][] = {
-//            {"timeout", "registry.timeout", "int", 5000, 9000, "", "", "", "", ""}, 
-//            {"file", "registry.file", "string", "", "regConfForServiceTable.log", "", "", "", "", ""}, 
-//            {"wait", "registry.wait", "int", 0, 9000, "", "", "", "", ""}, 
-//            {"transport", "registry.transporter", "string", "netty", "mina", "", "", "", "", ""}, 
+            //            {"timeout", "registry.timeout", "int", 5000, 9000, "", "", "", "", ""},
+            //            {"file", "registry.file", "string", "", "regConfForServiceTable.log", "", "", "", "", ""},
+            //            {"wait", "registry.wait", "int", 0, 9000, "", "", "", "", ""},
+            //            {"transport", "registry.transporter", "string", "netty", "mina", "", "", "", "", ""},
             {"subscribe", "subscribe", "boolean", true, false, "", "", "", "", ""},
             {"dynamic", "dynamic", "boolean", true, false, "", "", "", "", ""},
-    };
+            };
 
     private Object regConfForReferenceTable[][] = {
             {"timeout", "registry.timeout", "int", 5000, 9000, "", "", "", "", ""},
@@ -74,7 +81,7 @@ public class InvokerSideConfigUrlTest extends UrlTestBase {
             {"transport", "registry.transporter", "string", "netty", "mina", "", "", "", "", ""},
             {"subscribe", "subscribe", "boolean", true, false, "", "", "", "", ""},
             {"dynamic", "dynamic", "boolean", true, false, "", "", "", "", ""},
-    };
+            };
 
     private Object methodConfForReferenceTable[][] = {
             {"actives", "eatTiger.actives", "int", 0, 90, "", "", "", "", ""},
@@ -82,20 +89,20 @@ public class InvokerSideConfigUrlTest extends UrlTestBase {
             {"deprecated", "eatTiger.deprecated", "boolean", false, true, "", "", "", "", ""},
             {"async", "eatTiger.async", "boolean", false, true, "", "", "", "", ""},
             {"timeout", "eatTiger.timeout", "int", 0, 90, "", "", "", "", ""},
-    };
+            };
 
     private Object refConfTable[][] = {
-//            {"version", "version", "string", "0.0.0", "1.2.3", "", "", "", "", ""}, 
-//            {"group", "group", "string", "", "HaominTest", "", "", "", "", ""}, 
+            //            {"version", "version", "string", "0.0.0", "1.2.3", "", "", "", "", ""},
+            //            {"group", "group", "string", "", "HaominTest", "", "", "", "", ""},
 
-//            {"delay", "delay", "int", 0, 5, "", "", "", "", ""}, // not boolean 
+            //            {"delay", "delay", "int", 0, 5, "", "", "", "", ""}, // not boolean
             {"timeout", "timeout", "int", 5000, 3000, "", "", "", "", ""},
             {"retries", "retries", "int", 2, 5, "", "", "", "", ""},
             {"connections", "connections", "boolean", 100, 20, "", "", "", "", ""},
             {"loadbalance", "loadbalance", "string", "random", "roundrobin", "leastactive", "", "", ""},
             {"async", "async", "boolean", false, true, "", "", "", "", ""},
             //excluded = true
-//            {"generic", "generic", "boolean", false, true, "", "", "", "", ""},  
+            //            {"generic", "generic", "boolean", false, true, "", "", "", "", ""},
             {"check", "check", "boolean", false, true, "", "", "", "", ""},
             //{"local", "local", "string", "false", "HelloServiceLocal", "true", "", "", "", ""}, 
             //{"local", "local", "string", "false", "true", "", "", "", "", ""}, 
@@ -108,9 +115,9 @@ public class InvokerSideConfigUrlTest extends UrlTestBase {
             {"actives", "actives", "int", 0, 30, "", "", "", "", ""},
             {"cluster", "cluster", "string", "failover", "failfast", "failsafe", "failback", "forking", "", ""},
             //excluded = true
-//            {"filter", "service.filter", "string", "default", "-generic", "", "", "", "", ""}, 
+            //            {"filter", "service.filter", "string", "default", "-generic", "", "", "", "", ""},
             //excluded = true
-//            {"listener", "exporter.listener", "string", "default", "-deprecated", "", "", "", "", ""}, 
+            //            {"listener", "exporter.listener", "string", "default", "-deprecated", "", "", "", "", ""},
             //{"", "", "", "", "", "", "", "", "", ""}, 
     };
 
@@ -120,7 +127,7 @@ public class InvokerSideConfigUrlTest extends UrlTestBase {
             {"loadbalance", "default.loadbalance", "string", "random", "leastactive", "", "", "", "", ""},
             {"async", "default.async", "boolean", false, true, "", "", "", "", ""},
             {"connections", "default.connections", "int", 100, 5, "", "", "", "", ""},
-//            {"generic", "generic", "boolean", false, false, "", "", "", "", ""}, 
+            //            {"generic", "generic", "boolean", false, false, "", "", "", "", ""},
             {"check", "check", "boolean", true, false, "", "", "", "", ""},
             {"proxy", "proxy", "string", "javassist", "jdk", "javassist", "", "", "", ""},
             {"owner", "owner", "string", "", "haomin", "", "", "", "", ""},
@@ -128,7 +135,7 @@ public class InvokerSideConfigUrlTest extends UrlTestBase {
             {"cluster", "default.cluster", "string", "failover", "forking", "", "", "", "", ""},
             {"filter", "", "string", "", "", "", "", "", "", ""},
             {"listener", "", "string", "", "", "", "", "", "", ""},
-//            {"", "", "", "", "", "", "", "", "", ""}, 
+            //            {"", "", "", "", "", "", "", "", "", ""},
     };
 
     // ======================================================
@@ -218,7 +225,8 @@ public class InvokerSideConfigUrlTest extends UrlTestBase {
 
         try {
             refConf.destroy();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
         }
     }
 

@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.apache.dubbo.remoting.zookeeper.curator;
+
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.utils.NetUtils;
 import org.apache.dubbo.remoting.zookeeper.ChildListener;
@@ -34,7 +35,9 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class CuratorZookeeperClientTest {
+
     private TestingServer zkServer;
+
     private CuratorZookeeperClient curatorClient;
 
     @Before

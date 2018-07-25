@@ -21,6 +21,7 @@ package org.apache.dubbo.registry.dubbo;
  */
 
 public interface DemoService {
+
     void sayHello(String name);
 
     int plus(int a, int b);

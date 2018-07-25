@@ -51,6 +51,7 @@ public class NettyClient extends AbstractClient {
     private static final ChannelFactory channelFactory = new NioClientSocketChannelFactory(Executors.newCachedThreadPool(new NamedThreadFactory("NettyClientBoss", true)),
             Executors.newCachedThreadPool(new NamedThreadFactory("NettyClientWorker", true)),
             Constants.DEFAULT_IO_THREADS);
+
     private ClientBootstrap bootstrap;
 
     private volatile Channel channel; // volatile, please copy reference to use
@@ -101,35 +102,42 @@ public class NettyClient extends AbstractClient {
                                 logger.info("Close old netty channel " + oldChannel + " on create new netty channel " + newChannel);
                             }
                             oldChannel.close();
-                        } finally {
+                        }
+                        finally {
                             NettyChannel.removeChannelIfDisconnected(oldChannel);
                         }
                     }
-                } finally {
+                }
+                finally {
                     if (NettyClient.this.isClosed()) {
                         try {
                             if (logger.isInfoEnabled()) {
                                 logger.info("Close new netty channel " + newChannel + ", because the client closed.");
                             }
                             newChannel.close();
-                        } finally {
+                        }
+                        finally {
                             NettyClient.this.channel = null;
                             NettyChannel.removeChannelIfDisconnected(newChannel);
                         }
-                    } else {
+                    }
+                    else {
                         NettyClient.this.channel = newChannel;
                     }
                 }
-            } else if (future.getCause() != null) {
+            }
+            else if (future.getCause() != null) {
                 throw new RemotingException(this, "client(url: " + getUrl() + ") failed to connect to server "
                         + getRemoteAddress() + ", error message is:" + future.getCause().getMessage(), future.getCause());
-            } else {
+            }
+            else {
                 throw new RemotingException(this, "client(url: " + getUrl() + ") failed to connect to server "
                         + getRemoteAddress() + " client-side timeout "
                         + getConnectTimeout() + "ms (elapsed: " + (System.currentTimeMillis() - start) + "ms) from netty client "
                         + NetUtils.getLocalHost() + " using dubbo version " + Version.getVersion());
             }
-        } finally {
+        }
+        finally {
             if (!isConnected()) {
                 future.cancel();
             }
@@ -140,7 +148,8 @@ public class NettyClient extends AbstractClient {
     protected void doDisConnect() throws Throwable {
         try {
             NettyChannel.removeChannelIfDisconnected(channel);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage());
         }
     }
@@ -157,8 +166,9 @@ public class NettyClient extends AbstractClient {
     @Override
     protected org.apache.dubbo.remoting.Channel getChannel() {
         Channel c = channel;
-        if (c == null || !c.isConnected())
+        if (c == null || !c.isConnected()) {
             return null;
+        }
         return NettyChannel.getOrAddChannel(c, getUrl(), this);
     }
 

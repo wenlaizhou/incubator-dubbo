@@ -25,6 +25,7 @@ import org.apache.dubbo.remoting.exchange.ExchangeServer;
 import org.apache.dubbo.remoting.exchange.Exchanger;
 
 public class MockExchanger implements Exchanger {
+
     @Override
     public ExchangeServer bind(URL url, ExchangeHandler handler) throws RemotingException {
         return null;

@@ -107,7 +107,8 @@ public abstract class AbstractTest {
                 // release port if used
                 serverTransport.close();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             // ignore
         }
 

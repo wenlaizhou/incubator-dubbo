@@ -30,7 +30,9 @@ import org.junit.Test;
  * Time: 4:13 PM
  */
 public class NettyStringTest {
+
     static ExchangeServer server;
+
     static ExchangeChannel client;
 
     @BeforeClass
@@ -45,11 +47,14 @@ public class NettyStringTest {
     @AfterClass
     public static void tearDown() throws Exception {
         try {
-            if (server != null)
+            if (server != null) {
                 server.close();
-        } finally {
-            if (client != null)
+            }
+        }
+        finally {
+            if (client != null) {
                 client.close();
+            }
         }
     }
 

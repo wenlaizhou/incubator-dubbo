@@ -22,6 +22,7 @@ import org.apache.dubbo.registry.Registry;
 import org.apache.dubbo.registry.RegistryFactory;
 
 public class MockRegistryFactory2 implements RegistryFactory {
+
     public static Registry registry;
 
     @Override

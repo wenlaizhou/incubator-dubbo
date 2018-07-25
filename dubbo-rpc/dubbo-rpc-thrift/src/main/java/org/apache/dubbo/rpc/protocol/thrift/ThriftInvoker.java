@@ -32,6 +32,7 @@ import org.apache.dubbo.rpc.protocol.AbstractInvoker;
 
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * @since 2.7.0, use https://github.com/dubbo/dubbo-rpc-native-thrift instead
  */
@@ -53,7 +54,7 @@ public class ThriftInvoker<T> extends AbstractInvoker<T> {
     public ThriftInvoker(Class<T> type, URL url, ExchangeClient[] clients, Set<Invoker<?>> invokers) {
         super(type, url,
                 new String[]{Constants.INTERFACE_KEY, Constants.GROUP_KEY,
-                        Constants.TOKEN_KEY, Constants.TIMEOUT_KEY});
+                             Constants.TOKEN_KEY, Constants.TIMEOUT_KEY});
         this.clients = clients;
         this.invokers = invokers;
     }
@@ -77,7 +78,8 @@ public class ThriftInvoker<T> extends AbstractInvoker<T> {
 
         if (clients.length == 1) {
             currentClient = clients[0];
-        } else {
+        }
+        else {
             currentClient = clients[index.getAndIncrement() % clients.length];
         }
 
@@ -89,9 +91,11 @@ public class ThriftInvoker<T> extends AbstractInvoker<T> {
 
             return (Result) currentClient.request(inv, timeout).get();
 
-        } catch (TimeoutException e) {
+        }
+        catch (TimeoutException e) {
             throw new RpcException(RpcException.TIMEOUT_EXCEPTION, e.getMessage(), e);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException(RpcException.NETWORK_EXCEPTION, e.getMessage(), e);
         }
 
@@ -121,7 +125,8 @@ public class ThriftInvoker<T> extends AbstractInvoker<T> {
         // closed.
         if (super.isDestroyed()) {
             return;
-        } else {
+        }
+        else {
             // double check to avoid dup close
             destroyLock.lock();
 
@@ -141,13 +146,15 @@ public class ThriftInvoker<T> extends AbstractInvoker<T> {
 
                     try {
                         client.close();
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn(t.getMessage(), t);
                     }
 
                 }
 
-            } finally {
+            }
+            finally {
                 destroyLock.unlock();
             }
 

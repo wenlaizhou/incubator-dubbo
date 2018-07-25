@@ -21,8 +21,9 @@ import org.apache.dubbo.qos.command.CommandContext;
 import org.apache.dubbo.qos.command.annotation.Cmd;
 import org.apache.dubbo.qos.common.QosConstants;
 
-@Cmd(name = "quit",summary = "quit telnet console")
+@Cmd(name = "quit", summary = "quit telnet console")
 public class Quit implements BaseCommand {
+
     @Override
     public String execute(CommandContext commandContext, String[] args) {
         return QosConstants.CLOSE;

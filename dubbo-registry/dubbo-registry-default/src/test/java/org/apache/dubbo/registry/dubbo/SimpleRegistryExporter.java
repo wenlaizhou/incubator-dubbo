@@ -30,7 +30,6 @@ import java.net.ServerSocket;
 
 /**
  * SimpleRegistryExporter
- *
  */
 public class SimpleRegistryExporter {
 
@@ -42,7 +41,8 @@ public class SimpleRegistryExporter {
         try {
             new ServerSocket(port).close();
             return export(port);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             return null;
         }
     }

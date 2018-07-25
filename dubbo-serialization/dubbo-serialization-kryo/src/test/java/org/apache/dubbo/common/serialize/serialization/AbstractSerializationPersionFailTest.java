@@ -34,14 +34,17 @@ import static org.junit.Assert.fail;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
 public abstract class AbstractSerializationPersionFailTest extends AbstractSerializationTest {
+
     @Test
     public void test_Person() throws Exception {
         try {
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(new Person());
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }
@@ -54,8 +57,10 @@ public abstract class AbstractSerializationPersionFailTest extends AbstractSeria
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(args);
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }
@@ -68,8 +73,10 @@ public abstract class AbstractSerializationPersionFailTest extends AbstractSeria
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(args);
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }
@@ -82,8 +89,10 @@ public abstract class AbstractSerializationPersionFailTest extends AbstractSeria
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(args);
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }
@@ -96,8 +105,10 @@ public abstract class AbstractSerializationPersionFailTest extends AbstractSeria
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(args);
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }
@@ -113,8 +124,10 @@ public abstract class AbstractSerializationPersionFailTest extends AbstractSeria
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(args);
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }
@@ -129,8 +142,10 @@ public abstract class AbstractSerializationPersionFailTest extends AbstractSeria
             ObjectOutput objectOutput = serialization.serialize(url, byteArrayOutputStream);
             objectOutput.writeObject(args);
             fail();
-        } catch (NotSerializableException expected) {
-        } catch (IllegalStateException expected) {
+        }
+        catch (NotSerializableException expected) {
+        }
+        catch (IllegalStateException expected) {
             assertThat(expected.getMessage(), containsString("Serialized class org.apache.dubbo.common.model.Person must implement java.io.Serializable"));
         }
     }

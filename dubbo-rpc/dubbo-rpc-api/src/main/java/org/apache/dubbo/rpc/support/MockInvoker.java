@@ -39,8 +39,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 final public class MockInvoker<T> implements Invoker<T> {
+
     private final static ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
     private final static Map<String, Invoker<?>> mocks = new ConcurrentHashMap<String, Invoker<?>>();
+
     private final static Map<String, Throwable> throwables = new ConcurrentHashMap<String, Throwable>();
 
     private final URL url;
@@ -57,24 +60,33 @@ final public class MockInvoker<T> implements Invoker<T> {
         Object value = null;
         if ("empty".equals(mock)) {
             value = ReflectUtils.getEmptyObject(returnTypes != null && returnTypes.length > 0 ? (Class<?>) returnTypes[0] : null);
-        } else if ("null".equals(mock)) {
+        }
+        else if ("null".equals(mock)) {
             value = null;
-        } else if ("true".equals(mock)) {
+        }
+        else if ("true".equals(mock)) {
             value = true;
-        } else if ("false".equals(mock)) {
+        }
+        else if ("false".equals(mock)) {
             value = false;
-        } else if (mock.length() >= 2 && (mock.startsWith("\"") && mock.endsWith("\"")
+        }
+        else if (mock.length() >= 2 && (mock.startsWith("\"") && mock.endsWith("\"")
                 || mock.startsWith("\'") && mock.endsWith("\'"))) {
             value = mock.subSequence(1, mock.length() - 1);
-        } else if (returnTypes != null && returnTypes.length > 0 && returnTypes[0] == String.class) {
+        }
+        else if (returnTypes != null && returnTypes.length > 0 && returnTypes[0] == String.class) {
             value = mock;
-        } else if (StringUtils.isNumeric(mock)) {
+        }
+        else if (StringUtils.isNumeric(mock)) {
             value = JSON.parse(mock);
-        } else if (mock.startsWith("{")) {
+        }
+        else if (mock.startsWith("{")) {
             value = JSON.parseObject(mock, Map.class);
-        } else if (mock.startsWith("[")) {
+        }
+        else if (mock.startsWith("[")) {
             value = JSON.parseObject(mock, List.class);
-        } else {
+        }
+        else {
             value = mock;
         }
         if (returnTypes != null && returnTypes.length > 0) {
@@ -101,30 +113,36 @@ final public class MockInvoker<T> implements Invoker<T> {
             RpcResult result = new RpcResult();
             result.setValue(null);
             return result;
-        } else if (mock.startsWith(Constants.RETURN_PREFIX)) {
+        }
+        else if (mock.startsWith(Constants.RETURN_PREFIX)) {
             mock = mock.substring(Constants.RETURN_PREFIX.length()).trim();
             mock = mock.replace('`', '"');
             try {
                 Type[] returnTypes = RpcUtils.getReturnTypes(invocation);
                 Object value = parseMockValue(mock, returnTypes);
                 return new RpcResult(value);
-            } catch (Exception ew) {
+            }
+            catch (Exception ew) {
                 throw new RpcException("mock return invoke error. method :" + invocation.getMethodName() + ", mock:" + mock + ", url: " + url, ew);
             }
-        } else if (mock.startsWith(Constants.THROW_PREFIX)) {
+        }
+        else if (mock.startsWith(Constants.THROW_PREFIX)) {
             mock = mock.substring(Constants.THROW_PREFIX.length()).trim();
             mock = mock.replace('`', '"');
             if (StringUtils.isBlank(mock)) {
                 throw new RpcException(" mocked exception for Service degradation. ");
-            } else { // user customized class
+            }
+            else { // user customized class
                 Throwable t = getThrowable(mock);
                 throw new RpcException(RpcException.BIZ_EXCEPTION, t);
             }
-        } else { //impl mock
+        }
+        else { //impl mock
             try {
                 Invoker<T> invoker = getInvoker(mock);
                 return invoker.invoke(invocation);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 throw new RpcException("Failed to create mock implemention class " + mock, t);
             }
         }
@@ -134,7 +152,8 @@ final public class MockInvoker<T> implements Invoker<T> {
         Throwable throwable = (Throwable) throwables.get(throwstr);
         if (throwable != null) {
             return throwable;
-        } else {
+        }
+        else {
             Throwable t = null;
             try {
                 Class<?> bizException = ReflectUtils.forName(throwstr);
@@ -144,7 +163,8 @@ final public class MockInvoker<T> implements Invoker<T> {
                 if (throwables.size() < 1000) {
                     throwables.put(throwstr, t);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RpcException("mock throw error :" + throwstr + " argument error.", e);
             }
             return t;
@@ -156,7 +176,8 @@ final public class MockInvoker<T> implements Invoker<T> {
         Invoker<T> invoker = (Invoker<T>) mocks.get(mockService);
         if (invoker != null) {
             return invoker;
-        } else {
+        }
+        else {
             Class<T> serviceType = (Class<T>) ReflectUtils.forName(url.getServiceInterface());
             if (ConfigUtils.isDefault(mockService)) {
                 mockService = serviceType.getName() + "Mock";
@@ -177,9 +198,11 @@ final public class MockInvoker<T> implements Invoker<T> {
                     mocks.put(mockService, invoker);
                 }
                 return invoker;
-            } catch (InstantiationException e) {
+            }
+            catch (InstantiationException e) {
                 throw new IllegalStateException("No such empty constructor \"public " + mockClass.getSimpleName() + "()\" in mock implemention class " + mockClass.getName(), e);
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalAccessException e) {
                 throw new IllegalStateException(e);
             }
         }
@@ -191,12 +214,14 @@ final public class MockInvoker<T> implements Invoker<T> {
     private String normallizeMock(String mock) {
         if (mock == null || mock.trim().length() == 0) {
             return mock;
-        } else if (ConfigUtils.isDefault(mock) || "fail".equalsIgnoreCase(mock.trim()) || "force".equalsIgnoreCase(mock.trim())) {
+        }
+        else if (ConfigUtils.isDefault(mock) || "fail".equalsIgnoreCase(mock.trim()) || "force".equalsIgnoreCase(mock.trim())) {
             mock = url.getServiceInterface() + "Mock";
         }
         if (mock.startsWith(Constants.FAIL_PREFIX)) {
             mock = mock.substring(Constants.FAIL_PREFIX.length()).trim();
-        } else if (mock.startsWith(Constants.FORCE_PREFIX)) {
+        }
+        else if (mock.startsWith(Constants.FORCE_PREFIX)) {
             mock = mock.substring(Constants.FORCE_PREFIX.length()).trim();
         }
         return mock;

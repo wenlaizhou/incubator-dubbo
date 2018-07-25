@@ -25,7 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RmiRemoteInvocation extends RemoteInvocation {
+
     private static final long serialVersionUID = 1L;
+
     private static final String dubboAttachmentsAttrName = "dubbo.attachments";
 
     /**
@@ -49,7 +51,8 @@ public class RmiRemoteInvocation extends RemoteInvocation {
         context.setAttachments((Map<String, String>) getAttribute(dubboAttachmentsAttrName));
         try {
             return super.invoke(targetObject);
-        } finally {
+        }
+        finally {
             context.setAttachments(null);
         }
     }

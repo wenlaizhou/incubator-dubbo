@@ -31,7 +31,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RmiProtocolTest {
+
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     /*
@@ -50,11 +52,13 @@ public class RmiProtocolTest {
         try {
             try {
                 service.throwTimeout();
-            } catch (RpcException e) {
+            }
+            catch (RpcException e) {
                 assertEquals(true, e.isTimeout());
                 assertEquals(true, e.getMessage().contains("Read timed out"));
             }
-        } finally {
+        }
+        finally {
             rpcExporter.unexport();
         }
     }
@@ -116,6 +120,7 @@ public class RmiProtocolTest {
     }
 
     public static interface NonStdRmiInterface {
+
         void bark();
     }
 

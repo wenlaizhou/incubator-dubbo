@@ -28,7 +28,9 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class ZkClientWrapperTest {
+
     private TestingServer zkServer;
+
     private ZkClientWrapper zkClientWrapper;
 
     @Before

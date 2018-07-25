@@ -72,12 +72,15 @@ public class PerformanceClientFixedTest extends TestCase {
                     arrays.add(client);
                     s++;
                     System.out.println("open client success " + s);
-                } else {
+                }
+                else {
                     System.out.println("open client failed, try again.");
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 t.printStackTrace();
-            } finally {
+            }
+            finally {
                 if (client != null && client.isConnected() == false) {
                     f++;
                     System.out.println("open client failed, try again " + f);
@@ -102,7 +105,8 @@ public class PerformanceClientFixedTest extends TestCase {
                 int request_size = 10;
                 try {
                     request_size = Integer.parseInt(size);
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     request_size = 10;
                 }
 
@@ -123,11 +127,14 @@ public class PerformanceClientFixedTest extends TestCase {
                 if (output.lastIndexOf(messageBlock) < 0) {
                     System.out.println("send messageBlock;get " + output);
                     throw new Throwable("return results invalid");
-                } else {
-                    if (j % 100 == 0)
-                        System.out.println("OK: " + j);
                 }
-            } catch (Throwable t) {
+                else {
+                    if (j % 100 == 0) {
+                        System.out.println("OK: " + j);
+                    }
+                }
+            }
+            catch (Throwable t) {
                 t.printStackTrace();
             }
         }

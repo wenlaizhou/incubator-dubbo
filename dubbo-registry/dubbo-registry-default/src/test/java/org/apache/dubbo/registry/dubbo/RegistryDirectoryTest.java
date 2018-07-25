@@ -52,14 +52,23 @@ import static org.junit.Assert.fail;
 public class RegistryDirectoryTest {
 
     private static boolean isScriptUnsupported = new ScriptEngineManager().getEngineByName("javascript") == null;
+
     RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getAdaptiveExtension();
+
     Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     String service = DemoService.class.getName();
+
     RpcInvocation invocation = new RpcInvocation();
+
     URL noMeaningUrl = URL.valueOf("notsupport:/" + service + "?refer=" + URL.encode("interface=" + service));
+
     URL SERVICEURL = URL.valueOf("dubbo://127.0.0.1:9091/" + service + "?lazy=true&side=consumer");
+
     URL SERVICEURL2 = URL.valueOf("dubbo://127.0.0.1:9092/" + service + "?lazy=true&side=consumer");
+
     URL SERVICEURL3 = URL.valueOf("dubbo://127.0.0.1:9093/" + service + "?lazy=true&side=consumer");
+
     URL SERVICEURL_DUBBO_NOPATH = URL.valueOf("dubbo://127.0.0.1:9092" + "?lazy=true&side=consumer");
 
     @Before
@@ -85,21 +94,24 @@ public class RegistryDirectoryTest {
         try {
             new RegistryDirectory(null, null);
             fail();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
 
         }
         try {
             // null url
             new RegistryDirectory(null, noMeaningUrl);
             fail();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
 
         }
         try {
             // no servicekey
             new RegistryDirectory(RegistryDirectoryTest.class, URL.valueOf("dubbo://10.20.30.40:9090"));
             fail();
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
 
         }
     }
@@ -180,7 +192,8 @@ public class RegistryDirectoryTest {
         try {
             registryDirectory.list(invocation);
             fail("forbid must throw RpcException");
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertEquals(RpcException.FORBIDDEN_EXCEPTION, e.getCode());
         }
     }
@@ -423,7 +436,8 @@ public class RegistryDirectoryTest {
         try {
             registryDirectory.list(inv);
             fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertTrue(e.getMessage().contains("already destroyed"));
         }
     }
@@ -505,7 +519,8 @@ public class RegistryDirectoryTest {
         RpcInvocation inv = new RpcInvocation();
         try {
             invokers = registryDirectory.list(inv);
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertEquals(RpcException.FORBIDDEN_EXCEPTION, e.getCode());
             Assert.assertEquals(false, registryDirectory.isAvailable());
         }
@@ -528,7 +543,9 @@ public class RegistryDirectoryTest {
      */
     @Test
     public void testNotifyRouterUrls() {
-        if (isScriptUnsupported) return;
+        if (isScriptUnsupported) {
+            return;
+        }
         RegistryDirectory registryDirectory = getRegistryDirectory();
         URL routerurl = URL.valueOf(Constants.ROUTE_PROTOCOL + "://127.0.0.1:9096/");
         URL routerurl2 = URL.valueOf(Constants.ROUTE_PROTOCOL + "://127.0.0.1:9097/");
@@ -910,7 +927,9 @@ public class RegistryDirectoryTest {
 
     @Test
     public void testNotifyRouterUrls_Clean() {
-        if (isScriptUnsupported) return;
+        if (isScriptUnsupported) {
+            return;
+        }
         RegistryDirectory registryDirectory = getRegistryDirectory();
         URL routerurl = URL.valueOf(Constants.ROUTE_PROTOCOL + "://127.0.0.1:9096/").addParameter(Constants.ROUTER_KEY,
                 "javascript").addParameter(Constants.RULE_KEY,
@@ -1020,11 +1039,13 @@ public class RegistryDirectoryTest {
     }
 
     private static interface DemoService {
+
     }
 
     private static class MockRegistry implements Registry {
 
         CountDownLatch latch;
+
         boolean destroyWithError;
 
         public MockRegistry(CountDownLatch latch) {
@@ -1052,7 +1073,9 @@ public class RegistryDirectoryTest {
 
         @Override
         public void unsubscribe(URL url, NotifyListener listener) {
-            if (latch != null) latch.countDown();
+            if (latch != null) {
+                latch.countDown();
+            }
         }
 
         @Override

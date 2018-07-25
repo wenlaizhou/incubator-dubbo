@@ -36,7 +36,7 @@ public class ProtocolTest {
         }
     };
 
-    static{
+    static {
         InjvmProtocol injvm = InjvmProtocol.getInjvmProtocol();
     }
 
@@ -52,7 +52,7 @@ public class ProtocolTest {
 
         Protocol InjvmProtocol = ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("injvm");
 
-        assertEquals(0,InjvmProtocol.getDefaultPort());
+        assertEquals(0, InjvmProtocol.getDefaultPort());
 
         InjvmProtocol.export(invoker);
 
@@ -63,7 +63,8 @@ public class ProtocolTest {
 
         try {
             autowireProtocol.destroy();
-        } catch (UnsupportedOperationException expected) {
+        }
+        catch (UnsupportedOperationException expected) {
             assertThat(expected.getMessage(), containsString("of interface org.apache.dubbo.rpc.Protocol is not adaptive method!"));
         }
 

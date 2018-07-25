@@ -35,7 +35,9 @@ import org.springframework.context.annotation.Configuration;
 public class SpringExtensionFactoryTest {
 
     private SpringExtensionFactory springExtensionFactory = new SpringExtensionFactory();
+
     private AnnotationConfigApplicationContext context1;
+
     private AnnotationConfigApplicationContext context2;
 
     @Before
@@ -66,7 +68,8 @@ public class SpringExtensionFactoryTest {
     public void testGetExtensionByTypeMultiple() {
         try {
             springExtensionFactory.getExtension(DemoService.class, "beanname-not-exist");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(e instanceof NoUniqueBeanDefinitionException);
         }

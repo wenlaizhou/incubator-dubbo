@@ -192,9 +192,11 @@ public class HessianProtocolTest {
         try {
             client.timeOut(6000);
             fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             Assert.assertTrue(expected.isTimeout());
-        } finally {
+        }
+        finally {
             invoker.destroy();
             exporter.unexport();
         }
@@ -213,7 +215,8 @@ public class HessianProtocolTest {
         try {
             client.customException();
             fail();
-        } catch (MyException expected) {
+        }
+        catch (MyException expected) {
 
         }
         invoker.destroy();

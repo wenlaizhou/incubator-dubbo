@@ -66,6 +66,7 @@ public class DubboComponentScanRegistrar implements ImportBeanDefinitionRegistra
      *
      * @param packagesToScan packages to scan without resolving placeholders
      * @param registry       {@link BeanDefinitionRegistry}
+     *
      * @since 2.5.8
      */
     private void registerServiceAnnotationBeanPostProcessor(Set<String> packagesToScan, BeanDefinitionRegistry registry) {

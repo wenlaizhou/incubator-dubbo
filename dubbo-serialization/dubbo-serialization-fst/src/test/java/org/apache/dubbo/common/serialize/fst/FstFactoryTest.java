@@ -23,6 +23,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class FstFactoryTest {
+
     @Test
     public void testDefaultFactory() {
         FstFactory factory = FstFactory.getDefaultFactory();

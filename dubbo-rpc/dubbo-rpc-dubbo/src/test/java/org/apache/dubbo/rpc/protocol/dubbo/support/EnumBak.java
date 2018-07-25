@@ -35,6 +35,7 @@ import java.util.Map;
 public class EnumBak {
 
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     @Test
@@ -51,10 +52,10 @@ public class EnumBak {
         URL consumerurl = serviceurl;
         Invoker<DemoService> reference = protocol.refer(DemoService.class, consumerurl);
         DemoService demoProxy = (DemoService) proxy.getProxy(reference);
-//        System.out.println(demoProxy.getThreadName());
+        //        System.out.println(demoProxy.getThreadName());
         Assert.assertEquals((byte) -128, demoProxy.getbyte((byte) -128));
 
-//        invoker.destroy();
+        //        invoker.destroy();
         reference.destroy();
     }
 
@@ -71,14 +72,14 @@ public class EnumBak {
             EnumBak.class.wait();
         }
 
-//        URL consumerurl = serviceurl;
-//        Invoker<DemoService> reference = protocol.refer(DemoService.class, consumerurl);
-//        DemoService demoProxy = (DemoService)proxyFactory.createProxy(reference);
-////        System.out.println(demoProxy.getThreadName());
-//        System.out.println("byte:"+demoProxy.getbyte((byte)-128));
-//
-//        invoker.destroy();
-//        reference.destroy();
+        //        URL consumerurl = serviceurl;
+        //        Invoker<DemoService> reference = protocol.refer(DemoService.class, consumerurl);
+        //        DemoService demoProxy = (DemoService)proxyFactory.createProxy(reference);
+        ////        System.out.println(demoProxy.getThreadName());
+        //        System.out.println("byte:"+demoProxy.getbyte((byte)-128));
+        //
+        //        invoker.destroy();
+        //        reference.destroy();
     }
 
     @Test

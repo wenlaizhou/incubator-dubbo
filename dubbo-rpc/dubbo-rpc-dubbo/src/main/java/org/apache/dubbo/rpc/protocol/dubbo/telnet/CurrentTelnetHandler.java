@@ -37,7 +37,8 @@ public class CurrentTelnetHandler implements TelnetHandler {
         StringBuilder buf = new StringBuilder();
         if (service == null || service.length() == 0) {
             buf.append("/");
-        } else {
+        }
+        else {
             buf.append(service);
         }
         return buf.toString();

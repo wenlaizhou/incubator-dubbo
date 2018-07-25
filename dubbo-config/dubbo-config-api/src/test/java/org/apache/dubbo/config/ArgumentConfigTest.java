@@ -28,6 +28,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ArgumentConfigTest {
+
     @Test
     public void testIndex() throws Exception {
         ArgumentConfig argument = new ArgumentConfig();

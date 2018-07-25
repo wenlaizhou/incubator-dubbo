@@ -24,7 +24,7 @@ import org.apache.dubbo.common.URL;
  * ExpiringCacheFactory
  */
 public class ExpiringCacheFactory extends AbstractCacheFactory {
-    
+
     @Override
     protected Cache createCache(URL url) {
         return new ExpiringCache(url);

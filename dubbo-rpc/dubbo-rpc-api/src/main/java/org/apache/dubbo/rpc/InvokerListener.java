@@ -29,6 +29,7 @@ public interface InvokerListener {
      * The invoker referred
      *
      * @param invoker
+     *
      * @throws RpcException
      * @see org.apache.dubbo.rpc.Protocol#refer(Class, URL)
      */
@@ -38,6 +39,7 @@ public interface InvokerListener {
      * The invoker destroyed.
      *
      * @param invoker
+     *
      * @see org.apache.dubbo.rpc.Invoker#destroy()
      */
     void destroyed(Invoker<?> invoker);

@@ -18,6 +18,7 @@ package org.apache.dubbo.rpc.protocol.rest;
 
 
 public class DemoService implements IDemoService {
+
     @Override
     public Integer hello(Integer a, Integer b) {
         return a + b;

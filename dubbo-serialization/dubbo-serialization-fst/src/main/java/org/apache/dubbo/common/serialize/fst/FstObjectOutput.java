@@ -71,7 +71,8 @@ public class FstObjectOutput implements ObjectOutput {
     public void writeBytes(byte[] v) throws IOException {
         if (v == null) {
             output.writeInt(-1);
-        } else {
+        }
+        else {
             writeBytes(v, 0, v.length);
         }
     }
@@ -80,7 +81,8 @@ public class FstObjectOutput implements ObjectOutput {
     public void writeBytes(byte[] v, int off, int len) throws IOException {
         if (v == null) {
             output.writeInt(-1);
-        } else {
+        }
+        else {
             output.writeInt(len);
             output.write(v, off, len);
         }

@@ -18,6 +18,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class OnlineTest {
+
     @Test
     public void testExecute() throws Exception {
         ProviderModel providerModel = mock(ProviderModel.class);

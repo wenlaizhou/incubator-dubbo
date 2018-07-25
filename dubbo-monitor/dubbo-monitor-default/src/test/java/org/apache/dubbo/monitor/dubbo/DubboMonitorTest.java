@@ -75,7 +75,9 @@ public class DubboMonitorTest {
         public void destroy() {
         }
     };
+
     private volatile URL lastStatistics;
+
     private final MonitorService monitorService = new MonitorService() {
 
         public void collect(URL statistics) {
@@ -160,13 +162,15 @@ public class DubboMonitorTest {
                     URL result = monitorService.getStatistics();
                     Assert.assertEquals(1, result.getParameter(MonitorService.SUCCESS, 0));
                     Assert.assertEquals(3, result.getParameter(MonitorService.ELAPSED, 0));
-                } finally {
+                }
+                finally {
                     monitor.destroy();
                 }
                 break;
             }
             Assert.assertNotNull(monitor);
-        } finally {
+        }
+        finally {
             exporter.unexport();
         }
     }

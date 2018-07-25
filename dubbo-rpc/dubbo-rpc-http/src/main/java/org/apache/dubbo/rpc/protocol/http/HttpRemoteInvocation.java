@@ -30,6 +30,7 @@ import java.util.Map;
 public class HttpRemoteInvocation extends RemoteInvocation {
 
     private static final long serialVersionUID = 1L;
+
     private static final String dubboAttachmentsAttrName = "dubbo.attachments";
 
     public HttpRemoteInvocation(MethodInvocation methodInvocation) {
@@ -49,7 +50,8 @@ public class HttpRemoteInvocation extends RemoteInvocation {
         }
         try {
             return super.invoke(targetObject);
-        } finally {
+        }
+        finally {
             context.setAttachments(null);
 
         }

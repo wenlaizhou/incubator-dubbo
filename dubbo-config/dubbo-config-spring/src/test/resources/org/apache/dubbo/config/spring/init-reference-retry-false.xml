@@ -22,13 +22,13 @@
     ">
 
     <!-- current application configuration -->
-    <dubbo:application name="demo-consumer"/>
+    <dubbo:application name="demo-consumer" />
 
     <!-- service reference configuration -->
     <dubbo:reference id="demoService" interface="org.apache.dubbo.config.spring.api.DemoService"
                      url="dubbo://127.0.0.1:20813;dubbo://127.0.0.1:20814" init="true" timeout="100" scope="remote">
-        <dubbo:parameter key="connec.timeout" value="1000"/>
-        <dubbo:method name="sayName" retry="false"/>
+        <dubbo:parameter key="connec.timeout" value="1000" />
+        <dubbo:method name="sayName" retry="false" />
     </dubbo:reference>
 
 </beans>

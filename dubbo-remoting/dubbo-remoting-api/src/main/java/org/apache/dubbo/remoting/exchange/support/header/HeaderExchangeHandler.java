@@ -83,9 +83,15 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
             Object data = req.getData();
 
             String msg;
-            if (data == null) msg = null;
-            else if (data instanceof Throwable) msg = StringUtils.toString((Throwable) data);
-            else msg = data.toString();
+            if (data == null) {
+                msg = null;
+            }
+            else if (data instanceof Throwable) {
+                msg = StringUtils.toString((Throwable) data);
+            }
+            else {
+                msg = data.toString();
+            }
             res.setErrorMessage("Fail to decode request due to: " + msg);
             res.setStatus(Response.BAD_REQUEST);
 
@@ -108,18 +114,22 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
                     if (t == null) {
                         res.setStatus(Response.OK);
                         res.setResult(result);
-                    } else {
+                    }
+                    else {
                         res.setStatus(Response.SERVICE_ERROR);
                         res.setErrorMessage(StringUtils.toString(t));
                     }
                     channel.send(res);
-                } catch (RemotingException e) {
+                }
+                catch (RemotingException e) {
                     logger.warn("Send result to consumer failed, channel is " + channel + ", msg is " + e);
-                } finally {
+                }
+                finally {
                     // HeaderExchangeChannel.removeChannelIfDisconnected(channel);
                 }
             });
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             res.setStatus(Response.SERVICE_ERROR);
             res.setErrorMessage(StringUtils.toString(e));
             channel.send(res);
@@ -133,7 +143,8 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
         ExchangeChannel exchangeChannel = HeaderExchangeChannel.getOrAddChannel(channel);
         try {
             handler.connected(exchangeChannel);
-        } finally {
+        }
+        finally {
             HeaderExchangeChannel.removeChannelIfDisconnected(channel);
         }
     }
@@ -145,7 +156,8 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
         ExchangeChannel exchangeChannel = HeaderExchangeChannel.getOrAddChannel(channel);
         try {
             handler.disconnected(exchangeChannel);
-        } finally {
+        }
+        finally {
             HeaderExchangeChannel.removeChannelIfDisconnected(channel);
         }
     }
@@ -158,10 +170,12 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
             ExchangeChannel exchangeChannel = HeaderExchangeChannel.getOrAddChannel(channel);
             try {
                 handler.sent(exchangeChannel, message);
-            } finally {
+            }
+            finally {
                 HeaderExchangeChannel.removeChannelIfDisconnected(channel);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             exception = t;
         }
         if (message instanceof Request) {
@@ -171,9 +185,11 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
         if (exception != null) {
             if (exception instanceof RuntimeException) {
                 throw (RuntimeException) exception;
-            } else if (exception instanceof RemotingException) {
+            }
+            else if (exception instanceof RemotingException) {
                 throw (RemotingException) exception;
-            } else {
+            }
+            else {
                 throw new RemotingException(channel.getLocalAddress(), channel.getRemoteAddress(),
                         exception.getMessage(), exception);
             }
@@ -190,29 +206,36 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
                 Request request = (Request) message;
                 if (request.isEvent()) {
                     handlerEvent(channel, request);
-                } else {
+                }
+                else {
                     if (request.isTwoWay()) {
                         handleRequest(exchangeChannel, request);
-                    } else {
+                    }
+                    else {
                         handler.received(exchangeChannel, request.getData());
                     }
                 }
-            } else if (message instanceof Response) {
+            }
+            else if (message instanceof Response) {
                 handleResponse(channel, (Response) message);
-            } else if (message instanceof String) {
+            }
+            else if (message instanceof String) {
                 if (isClientSide(channel)) {
                     Exception e = new Exception("Dubbo client can not supported string message: " + message + " in channel: " + channel + ", url: " + channel.getUrl());
                     logger.error(e.getMessage(), e);
-                } else {
+                }
+                else {
                     String echo = handler.telnet(channel, (String) message);
                     if (echo != null && echo.length() > 0) {
                         channel.send(echo);
                     }
                 }
-            } else {
+            }
+            else {
                 handler.received(exchangeChannel, message);
             }
-        } finally {
+        }
+        finally {
             HeaderExchangeChannel.removeChannelIfDisconnected(channel);
         }
     }
@@ -236,7 +259,8 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
         ExchangeChannel exchangeChannel = HeaderExchangeChannel.getOrAddChannel(channel);
         try {
             handler.caught(exchangeChannel, exception);
-        } finally {
+        }
+        finally {
             HeaderExchangeChannel.removeChannelIfDisconnected(channel);
         }
     }
@@ -245,7 +269,8 @@ public class HeaderExchangeHandler implements ChannelHandlerDelegate {
     public ChannelHandler getHandler() {
         if (handler instanceof ChannelHandlerDelegate) {
             return ((ChannelHandlerDelegate) handler).getHandler();
-        } else {
+        }
+        else {
             return handler;
         }
     }

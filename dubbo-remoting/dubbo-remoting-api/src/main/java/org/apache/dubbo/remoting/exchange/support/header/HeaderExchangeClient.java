@@ -45,12 +45,17 @@ public class HeaderExchangeClient implements ExchangeClient {
     private static final Logger logger = LoggerFactory.getLogger(HeaderExchangeClient.class);
 
     private static final ScheduledThreadPoolExecutor scheduled = new ScheduledThreadPoolExecutor(2, new NamedThreadFactory("dubbo-remoting-client-heartbeat", true));
+
     private final Client client;
+
     private final ExchangeChannel channel;
+
     // heartbeat timer
     private ScheduledFuture<?> heartbeatTimer;
+
     // heartbeat(ms), default value is 0 , won't execute a heartbeat.
     private int heartbeat;
+
     private int heartbeatTimeout;
 
     public HeaderExchangeClient(Client client, boolean needHeartbeat) {
@@ -199,7 +204,8 @@ public class HeaderExchangeClient implements ExchangeClient {
             try {
                 heartbeatTimer.cancel(true);
                 scheduled.purge();
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 if (logger.isWarnEnabled()) {
                     logger.warn(e.getMessage(), e);
                 }

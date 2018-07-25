@@ -59,6 +59,7 @@ public class NettyServer extends AbstractServer implements Server {
     private io.netty.channel.Channel channel;
 
     private EventLoopGroup bossGroup;
+
     private EventLoopGroup workerGroup;
 
     public NettyServer(URL url, ChannelHandler handler) throws RemotingException {
@@ -105,7 +106,8 @@ public class NettyServer extends AbstractServer implements Server {
                 // unbind.
                 channel.close();
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
@@ -114,12 +116,14 @@ public class NettyServer extends AbstractServer implements Server {
                 for (org.apache.dubbo.remoting.Channel channel : channels) {
                     try {
                         channel.close();
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                         logger.warn(e.getMessage(), e);
                     }
                 }
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
@@ -127,14 +131,16 @@ public class NettyServer extends AbstractServer implements Server {
                 bossGroup.shutdownGracefully();
                 workerGroup.shutdownGracefully();
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             if (channels != null) {
                 channels.clear();
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -145,7 +151,8 @@ public class NettyServer extends AbstractServer implements Server {
         for (Channel channel : this.channels.values()) {
             if (channel.isConnected()) {
                 chs.add(channel);
-            } else {
+            }
+            else {
                 channels.remove(NetUtils.toAddressString(channel.getRemoteAddress()));
             }
         }

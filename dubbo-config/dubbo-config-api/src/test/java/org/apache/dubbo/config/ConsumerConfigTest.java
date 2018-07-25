@@ -24,6 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ConsumerConfigTest {
+
     @Test
     public void testTimeout() throws Exception {
         try {
@@ -32,7 +33,8 @@ public class ConsumerConfigTest {
             consumer.setTimeout(10);
             assertThat(consumer.getTimeout(), is(10));
             assertThat(System.getProperty("sun.rmi.transport.tcp.responseTimeout"), equalTo("10"));
-        } finally {
+        }
+        finally {
             System.clearProperty("sun.rmi.transport.tcp.responseTimeout");
         }
     }

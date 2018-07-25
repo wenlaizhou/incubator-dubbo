@@ -27,11 +27,14 @@ import java.lang.reflect.Method;
 public class RpcConfigGetSetProxy {
 
     private static final String RPC_CONFIG_BASECLASS = AbstractConfig.class.getName();
+
     private static final Logger log = LoggerFactory.getLogger(RpcConfigGetSetProxy.class);
 
 
     private Object proxiee = null;
+
     private Class<?> proxieeClass = null;
+
     private Boolean isOk = false;
 
     public RpcConfigGetSetProxy(Object p) {
@@ -58,13 +61,16 @@ public class RpcConfigGetSetProxy {
         Class<?> tClass;
         try {
             tClass = Class.forName(type);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             return false;
         }
 
         // check against type and superclasses
         while (c != null) {
-            if (c == tClass) return true;
+            if (c == tClass) {
+                return true;
+            }
             c = c.getSuperclass();
         }
 
@@ -104,16 +110,20 @@ public class RpcConfigGetSetProxy {
         try {
             if (value == null) {
                 return m.invoke(proxiee, (Object[]) null);
-            } else {
+            }
+            else {
                 return m.invoke(proxiee, value);
             }
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             log.error("IllegalArgumentException", e);
             return null;
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e) {
             log.error("IllegalAccessException", e);
             return null;
-        } catch (InvocationTargetException e) {
+        }
+        catch (InvocationTargetException e) {
             log.error("InvocationTargetException", e);
             return null;
         }
@@ -139,13 +149,16 @@ public class RpcConfigGetSetProxy {
         try {
             if (value == null) {
                 return clazz.getMethod(methodName, (Class<?>[]) null);
-            } else {
+            }
+            else {
                 return clazz.getMethod(methodName, value.getClass());
             }
-        } catch (SecurityException e) {
+        }
+        catch (SecurityException e) {
             log.error("SecurityException: " + e.getMessage());
             return null;
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             log.error("NoSuchMethodException: " + e.getMessage());
             return null;
         }

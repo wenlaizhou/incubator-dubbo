@@ -104,9 +104,11 @@ public class NativeJavaObjectInput implements ObjectInput {
         int len = inputStream.readInt();
         if (len < 0) {
             return null;
-        } else if (len == 0) {
+        }
+        else if (len == 0) {
             return new byte[]{};
-        } else {
+        }
+        else {
             byte[] result = new byte[len];
             inputStream.readFully(result);
             return result;

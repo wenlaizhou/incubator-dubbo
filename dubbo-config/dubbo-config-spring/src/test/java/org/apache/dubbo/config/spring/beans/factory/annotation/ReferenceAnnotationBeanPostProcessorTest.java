@@ -192,7 +192,7 @@ public class ReferenceAnnotationBeanPostProcessorTest {
         for (Map.Entry<InjectionMetadata.InjectedElement, ReferenceBean<?>> entry : referenceBeanMap.entrySet()) {
             ReferenceBean<?> referenceBean = entry.getValue();
 
-            assertThat(referenceBean.getModule().getName(),is("defaultModule"));
+            assertThat(referenceBean.getModule().getName(), is("defaultModule"));
             assertThat(referenceBean.getMonitor(), not(nullValue()));
         }
     }

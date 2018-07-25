@@ -22,6 +22,7 @@ import javax.ws.rs.QueryParam;
 
 @Path("/demoService")
 public interface IDemoService {
+
     @GET
     @Path("/hello")
     Integer hello(@QueryParam("a") Integer a, @QueryParam("b") Integer b);

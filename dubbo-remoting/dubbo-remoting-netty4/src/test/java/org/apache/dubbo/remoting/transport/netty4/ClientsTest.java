@@ -24,12 +24,14 @@ import static org.junit.Assert.*;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class ClientsTest {
+
     @Test
     public void testGetTransportEmpty() {
         try {
             ExtensionLoader.getExtensionLoader(Transporter.class).getExtension("");
             fail();
-        } catch (IllegalArgumentException expected) {
+        }
+        catch (IllegalArgumentException expected) {
             assertThat(expected.getMessage(), containsString("Extension name == null"));
         }
     }

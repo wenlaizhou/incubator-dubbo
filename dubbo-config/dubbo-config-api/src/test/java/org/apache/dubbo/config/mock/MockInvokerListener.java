@@ -21,6 +21,7 @@ import org.apache.dubbo.rpc.InvokerListener;
 import org.apache.dubbo.rpc.RpcException;
 
 public class MockInvokerListener implements InvokerListener {
+
     @Override
     public void referred(Invoker<?> invoker) throws RpcException {
 

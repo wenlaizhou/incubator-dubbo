@@ -73,7 +73,8 @@ public class GenericFilter implements Filter {
                 if (StringUtils.isEmpty(generic)
                         || ProtocolUtils.isDefaultGenericSerialization(generic)) {
                     args = PojoUtils.realize(args, params, method.getGenericParameterTypes());
-                } else if (ProtocolUtils.isJavaGenericSerialization(generic)) {
+                }
+                else if (ProtocolUtils.isJavaGenericSerialization(generic)) {
                     for (int i = 0; i < args.length; i++) {
                         if (byte[].class == args[i].getClass()) {
                             try {
@@ -81,10 +82,12 @@ public class GenericFilter implements Filter {
                                 args[i] = ExtensionLoader.getExtensionLoader(Serialization.class)
                                         .getExtension(Constants.GENERIC_SERIALIZATION_NATIVE_JAVA)
                                         .deserialize(null, is).readObject();
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 throw new RpcException("Deserialize argument [" + (i + 1) + "] failed.", e);
                             }
-                        } else {
+                        }
+                        else {
                             throw new RpcException(
                                     "Generic serialization [" +
                                             Constants.GENERIC_SERIALIZATION_NATIVE_JAVA +
@@ -94,11 +97,13 @@ public class GenericFilter implements Filter {
                                             args[i].getClass());
                         }
                     }
-                } else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
+                }
+                else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
                     for (int i = 0; i < args.length; i++) {
                         if (args[i] instanceof JavaBeanDescriptor) {
                             args[i] = JavaBeanSerializeUtil.deserialize((JavaBeanDescriptor) args[i]);
-                        } else {
+                        }
+                        else {
                             throw new RpcException(
                                     "Generic serialization [" +
                                             Constants.GENERIC_SERIALIZATION_BEAN +
@@ -121,17 +126,22 @@ public class GenericFilter implements Filter {
                                 .getExtension(Constants.GENERIC_SERIALIZATION_NATIVE_JAVA)
                                 .serialize(null, os).writeObject(result.getValue());
                         return new RpcResult(os.toByteArray());
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         throw new RpcException("Serialize result failed.", e);
                     }
-                } else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
+                }
+                else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
                     return new RpcResult(JavaBeanSerializeUtil.serialize(result.getValue(), JavaBeanAccessor.METHOD));
-                } else {
+                }
+                else {
                     return new RpcResult(PojoUtils.generalize(result.getValue()));
                 }
-            } catch (NoSuchMethodException e) {
+            }
+            catch (NoSuchMethodException e) {
                 throw new RpcException(e.getMessage(), e);
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new RpcException(e.getMessage(), e);
             }
         }

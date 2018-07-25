@@ -60,7 +60,8 @@ public class AbstractConfigTest {
             TestCase.assertEquals(6, config.getS());
             TestCase.assertEquals("dubbo", config.getStr());
             TestCase.assertTrue(config.isBool());
-        } finally {
+        }
+        finally {
             System.clearProperty("dubbo.properties.i");
             System.clearProperty("dubbo.properties.c");
             System.clearProperty("dubbo.properties.b");
@@ -80,7 +81,8 @@ public class AbstractConfigTest {
             PropertiesConfig config = new PropertiesConfig("two");
             AbstractConfig.appendProperties(config);
             TestCase.assertEquals(2, config.getI());
-        } finally {
+        }
+        finally {
             System.clearProperty("dubbo.properties.two.i");
         }
     }
@@ -94,7 +96,8 @@ public class AbstractConfigTest {
             PropertiesConfig config = new PropertiesConfig();
             AbstractConfig.appendProperties(config);
             TestCase.assertEquals("dubbo", config.getStr());
-        } finally {
+        }
+        finally {
             System.clearProperty(Constants.DUBBO_PROPERTIES_KEY);
             ConfigUtils.setProperties(null);
         }
@@ -199,7 +202,8 @@ public class AbstractConfigTest {
     public void checkNameHasSymbol() throws Exception {
         try {
             AbstractConfig.checkNameHasSymbol("hello", ":*,/-0123abcdABCD");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             TestCase.fail("the value should be legal.");
         }
     }
@@ -208,7 +212,8 @@ public class AbstractConfigTest {
     public void checkKey() throws Exception {
         try {
             AbstractConfig.checkKey("hello", "*,-0123abcdABCD");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             TestCase.fail("the value should be legal.");
         }
     }
@@ -217,7 +222,8 @@ public class AbstractConfigTest {
     public void checkMultiName() throws Exception {
         try {
             AbstractConfig.checkMultiName("hello", ",-._0123abcdABCD");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             TestCase.fail("the value should be legal.");
         }
     }
@@ -226,7 +232,8 @@ public class AbstractConfigTest {
     public void checkPathName() throws Exception {
         try {
             AbstractConfig.checkPathName("hello", "/-$._0123abcdABCD");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             TestCase.fail("the value should be legal.");
         }
     }
@@ -235,14 +242,16 @@ public class AbstractConfigTest {
     public void checkMethodName() throws Exception {
         try {
             AbstractConfig.checkMethodName("hello", "abcdABCD0123abcd");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             TestCase.fail("the value should be legal.");
         }
 
         try {
             AbstractConfig.checkMethodName("hello", "0a");
             TestCase.fail("the value should be illegal.");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             // ignore
         }
     }
@@ -252,7 +261,8 @@ public class AbstractConfigTest {
         Map<String, String> parameters = Collections.singletonMap("hello", ":*,/-._0123abcdABCD");
         try {
             AbstractConfig.checkParameterName(parameters);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             TestCase.fail("the value should be legal.");
         }
     }
@@ -275,14 +285,23 @@ public class AbstractConfigTest {
     }
 
     private static class PropertiesConfig extends AbstractConfig {
+
         private char c;
+
         private boolean bool;
+
         private byte b;
+
         private int i;
+
         private long l;
+
         private float f;
+
         private double d;
+
         private short s;
+
         private String str;
 
         PropertiesConfig() {
@@ -366,9 +385,13 @@ public class AbstractConfigTest {
     }
 
     private static class ParameterConfig {
+
         private int number;
+
         private String name;
+
         private int age;
+
         private String secret;
 
         ParameterConfig() {
@@ -425,8 +448,11 @@ public class AbstractConfigTest {
     }
 
     private static class AttributeConfig {
+
         private char letter;
+
         private boolean activate;
+
         private byte flag;
 
         public AttributeConfig(char letter, boolean activate, byte flag) {
@@ -465,6 +491,7 @@ public class AbstractConfigTest {
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
     public @interface Config {
+
         Class<?> interfaceClass() default void.class;
 
         String interfaceName() default "";
@@ -477,9 +504,13 @@ public class AbstractConfigTest {
     }
 
     private static class AnnotationConfig extends AbstractConfig {
+
         private Class interfaceClass;
+
         private String filter;
+
         private String listener;
+
         private Map<String, String> parameters;
 
         public Class getInterface() {

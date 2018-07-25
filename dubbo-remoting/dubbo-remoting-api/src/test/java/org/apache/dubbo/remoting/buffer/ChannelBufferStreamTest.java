@@ -33,7 +33,8 @@ public class ChannelBufferStreamTest {
         try {
             new ChannelBufferOutputStream(null);
             fail();
-        } catch (NullPointerException e) {
+        }
+        catch (NullPointerException e) {
             // Expected
         }
 
@@ -47,26 +48,30 @@ public class ChannelBufferStreamTest {
         try {
             new ChannelBufferInputStream(null);
             fail();
-        } catch (NullPointerException e) {
+        }
+        catch (NullPointerException e) {
             // Expected
         }
 
         try {
             new ChannelBufferInputStream(null, 0);
             fail();
-        } catch (NullPointerException e) {
+        }
+        catch (NullPointerException e) {
             // Expected
         }
 
         try {
             new ChannelBufferInputStream(buf, -1);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             // Expected
         }
 
         try {
             new ChannelBufferInputStream(buf, buf.capacity() + 1);
-        } catch (IndexOutOfBoundsException e) {
+        }
+        catch (IndexOutOfBoundsException e) {
             // Expected
         }
 

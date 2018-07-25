@@ -22,15 +22,15 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd"
        default-autowire="byName">
 
-    <dubbo:application name="customize-parameter"/>
+    <dubbo:application name="customize-parameter" />
 
-    <dubbo:registry address="N/A" id="naRegistry"/>
+    <dubbo:registry address="N/A" id="naRegistry" />
 
-    <dubbo:protocol p:protocol-paramA="protocol-paramA"/>
+    <dubbo:protocol p:protocol-paramA="protocol-paramA" />
 
-    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl" />
 
     <dubbo:service id="demoServiceExport" p:service-paramA="service-paramA" registry="naRegistry" ref="demoService"
-                   interface="org.apache.dubbo.config.spring.api.DemoService"/>
+                   interface="org.apache.dubbo.config.spring.api.DemoService" />
 
 </beans>

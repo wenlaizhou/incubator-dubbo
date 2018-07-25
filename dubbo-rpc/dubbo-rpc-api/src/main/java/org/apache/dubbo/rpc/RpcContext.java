@@ -56,6 +56,7 @@ public class RpcContext {
             return new RpcContext();
         }
     };
+
     private static final InternalThreadLocal<RpcContext> SERVER_LOCAL = new InternalThreadLocal<RpcContext>() {
         @Override
         protected RpcContext initialValue() {
@@ -64,7 +65,9 @@ public class RpcContext {
     };
 
     private final Map<String, String> attachments = new HashMap<String, String>();
+
     private final Map<String, Object> values = new HashMap<String, Object>();
+
     private Future<?> future;
 
     private List<URL> urls;
@@ -80,17 +83,22 @@ public class RpcContext {
     private InetSocketAddress localAddress;
 
     private InetSocketAddress remoteAddress;
+
     @Deprecated
     private List<Invoker<?>> invokers;
+
     @Deprecated
     private Invoker<?> invoker;
+
     @Deprecated
     private Invocation invocation;
 
     // now we don't use the 'values' map to hold these objects
     // we want these objects to be as generic as possible
     private Object request;
+
     private Object response;
+
     private AsyncContext asyncContext;
 
     protected RpcContext() {
@@ -208,6 +216,7 @@ public class RpcContext {
      * get CompletableFuture.
      *
      * @param <T>
+     *
      * @return future
      */
     @SuppressWarnings("unchecked")
@@ -219,6 +228,7 @@ public class RpcContext {
      * get future.
      *
      * @param <T>
+     *
      * @return future
      */
     @SuppressWarnings("unchecked")
@@ -295,6 +305,7 @@ public class RpcContext {
      *
      * @param host
      * @param port
+     *
      * @return context
      */
     public RpcContext setLocalAddress(String host, int port) {
@@ -318,6 +329,7 @@ public class RpcContext {
      * set local address.
      *
      * @param address
+     *
      * @return context
      */
     public RpcContext setLocalAddress(InetSocketAddress address) {
@@ -347,6 +359,7 @@ public class RpcContext {
      *
      * @param host
      * @param port
+     *
      * @return context
      */
     public RpcContext setRemoteAddress(String host, int port) {
@@ -370,6 +383,7 @@ public class RpcContext {
      * set remote address.
      *
      * @param address
+     *
      * @return context
      */
     public RpcContext setRemoteAddress(InetSocketAddress address) {
@@ -443,6 +457,7 @@ public class RpcContext {
      * get attachment.
      *
      * @param key
+     *
      * @return attachment
      */
     public String getAttachment(String key) {
@@ -454,12 +469,14 @@ public class RpcContext {
      *
      * @param key
      * @param value
+     *
      * @return context
      */
     public RpcContext setAttachment(String key, String value) {
         if (value == null) {
             attachments.remove(key);
-        } else {
+        }
+        else {
             attachments.put(key, value);
         }
         return this;
@@ -469,6 +486,7 @@ public class RpcContext {
      * remove attachment.
      *
      * @param key
+     *
      * @return context
      */
     public RpcContext removeAttachment(String key) {
@@ -489,6 +507,7 @@ public class RpcContext {
      * set attachments
      *
      * @param attachment
+     *
      * @return context
      */
     public RpcContext setAttachments(Map<String, String> attachment) {
@@ -517,12 +536,14 @@ public class RpcContext {
      *
      * @param key
      * @param value
+     *
      * @return context
      */
     public RpcContext set(String key, Object value) {
         if (value == null) {
             values.remove(key);
-        } else {
+        }
+        else {
             values.put(key, value);
         }
         return this;
@@ -532,6 +553,7 @@ public class RpcContext {
      * remove value.
      *
      * @param key
+     *
      * @return value
      */
     public RpcContext remove(String key) {
@@ -543,6 +565,7 @@ public class RpcContext {
      * get value.
      *
      * @param key
+     *
      * @return value
      */
     public Object get(String key) {
@@ -624,6 +647,7 @@ public class RpcContext {
      * Async invocation. Timeout will be handled even if <code>Future.get()</code> is not called.
      *
      * @param callable
+     *
      * @return get the return result from <code>future.get()</code>
      */
     @SuppressWarnings("unchecked")
@@ -638,15 +662,19 @@ public class RpcContext {
                         return (CompletableFuture<T>) o;
                     }
                     CompletableFuture.completedFuture(o);
-                } else {
+                }
+                else {
                     // The service has a normal sync method signature, should get future from RpcContext.
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RpcException(e);
-            } finally {
+            }
+            finally {
                 removeAttachment(Constants.ASYNC_KEY);
             }
-        } catch (final RpcException e) {
+        }
+        catch (final RpcException e) {
             return new CompletableFuture<T>() {
                 @Override
                 public boolean cancel(boolean mayInterruptIfRunning) {
@@ -688,16 +716,19 @@ public class RpcContext {
         try {
             setAttachment(Constants.RETURN_KEY, Boolean.FALSE.toString());
             runnable.run();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             // FIXME should put exception in future?
             throw new RpcException("oneway call error ." + e.getMessage(), e);
-        } finally {
+        }
+        finally {
             removeAttachment(Constants.RETURN_KEY);
         }
     }
 
     /**
      * @return
+     *
      * @throws IllegalStateException
      */
     @SuppressWarnings("unchecked")
@@ -706,7 +737,8 @@ public class RpcContext {
         if (currentContext.asyncContext != null) {
             currentContext.asyncContext.start();
             return currentContext.asyncContext;
-        } else {
+        }
+        else {
             throw new IllegalStateException("This service does not support asynchronous operations, you should open async explicitly before use.");
         }
     }

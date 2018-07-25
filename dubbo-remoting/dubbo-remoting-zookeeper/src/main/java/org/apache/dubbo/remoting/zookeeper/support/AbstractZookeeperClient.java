@@ -63,7 +63,8 @@ public abstract class AbstractZookeeperClient<TargetChildListener> implements Zo
         }
         if (ephemeral) {
             createEphemeral(path);
-        } else {
+        }
+        else {
             createPersistent(path);
         }
     }
@@ -122,7 +123,8 @@ public abstract class AbstractZookeeperClient<TargetChildListener> implements Zo
         closed = true;
         try {
             doClose();
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
     }

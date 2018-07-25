@@ -29,6 +29,7 @@ public class DubboWebApplicationInitializer extends AbstractContextLoaderInitial
     /**
      * This method won't be triggered if running on spring-boot.
      * It only works when running under a servlet container.
+     *
      * @return a WebApplicationContext with DubboApplicationListener registered.
      */
     @Override

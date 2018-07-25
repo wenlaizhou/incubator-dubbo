@@ -34,7 +34,9 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class ZkclientZookeeperClientTest {
+
     private TestingServer zkServer;
+
     private ZkclientZookeeperClient zkclientZookeeperClient;
 
     @Before

@@ -66,7 +66,8 @@ public class DataSourceStatusChecker implements StatusChecker {
                         if (!resultSet.next()) {
                             level = Status.Level.ERROR;
                         }
-                    } finally {
+                    }
+                    finally {
                         resultSet.close();
                     }
                     buf.append(metaData.getURL());
@@ -75,10 +76,12 @@ public class DataSourceStatusChecker implements StatusChecker {
                     buf.append("-");
                     buf.append(metaData.getDatabaseProductVersion());
                     buf.append(")");
-                } finally {
+                }
+                finally {
                     connection.close();
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn(e.getMessage(), e);
                 return new Status(level, e.getMessage());
             }

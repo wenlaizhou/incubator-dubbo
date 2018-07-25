@@ -67,7 +67,8 @@ public class DubboMonitor implements Monitor {
                 // collect data
                 try {
                     send();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.error("Unexpected error occur at send statistic, cause: " + t.getMessage(), t);
                 }
             }
@@ -123,7 +124,8 @@ public class DubboMonitor implements Monitor {
                     update[3] = 0;
                     update[4] = 0;
                     update[5] = 0;
-                } else {
+                }
+                else {
                     update[0] = current[0] - success;
                     update[1] = current[1] - failure;
                     update[2] = current[2] - input;
@@ -131,7 +133,8 @@ public class DubboMonitor implements Monitor {
                     update[4] = current[4] - elapsed;
                     update[5] = current[5] - concurrent;
                 }
-            } while (!reference.compareAndSet(current, update));
+            }
+            while (!reference.compareAndSet(current, update));
         }
     }
 
@@ -167,7 +170,8 @@ public class DubboMonitor implements Monitor {
                 update[7] = output;
                 update[8] = elapsed;
                 update[9] = concurrent;
-            } else {
+            }
+            else {
                 update[0] = current[0] + success;
                 update[1] = current[1] + failure;
                 update[2] = current[2] + input;
@@ -179,7 +183,8 @@ public class DubboMonitor implements Monitor {
                 update[8] = current[8] > elapsed ? current[8] : elapsed;
                 update[9] = current[9] > concurrent ? current[9] : concurrent;
             }
-        } while (!reference.compareAndSet(current, update));
+        }
+        while (!reference.compareAndSet(current, update));
     }
 
     @Override
@@ -201,7 +206,8 @@ public class DubboMonitor implements Monitor {
     public void destroy() {
         try {
             sendFuture.cancel(true);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error("Unexpected error occur at cancel sender timer, cause: " + t.getMessage(), t);
         }
         monitorInvoker.destroy();

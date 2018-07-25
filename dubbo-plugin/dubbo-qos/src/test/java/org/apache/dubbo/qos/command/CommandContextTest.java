@@ -29,6 +29,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class CommandContextTest {
+
     @Test
     public void test() throws Exception {
         CommandContext context = new CommandContext("test", new String[]{"hello"}, true);

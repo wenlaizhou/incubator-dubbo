@@ -27,16 +27,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AbstractMockChannel implements Channel {
+
     public static final String LOCAL_ADDRESS = "local";
+
     public static final String REMOTE_ADDRESS = "remote";
+
     public static final String ERROR_WHEN_SEND = "error_when_send";
+
     InetSocketAddress localAddress;
+
     InetSocketAddress remoteAddress;
+
     private URL remoteUrl;
+
     private ChannelHandler handler;
+
     private boolean isClosed;
+
     private volatile boolean closing;
+
     private Map<String, Object> attributes = new HashMap<String, Object>(1);
+
     private volatile Object receivedMessage = null;
 
     public AbstractMockChannel() {
@@ -73,7 +84,8 @@ public class AbstractMockChannel implements Channel {
         if (remoteUrl.getParameter(ERROR_WHEN_SEND, Boolean.FALSE)) {
             receivedMessage = null;
             throw new RemotingException(localAddress, remoteAddress, "mock error");
-        } else {
+        }
+        else {
             receivedMessage = message;
         }
     }

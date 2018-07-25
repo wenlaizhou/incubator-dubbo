@@ -29,6 +29,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class MonitorConfigTest {
+
     @Test
     public void testAddress() throws Exception {
         MonitorConfig monitor = new MonitorConfig();

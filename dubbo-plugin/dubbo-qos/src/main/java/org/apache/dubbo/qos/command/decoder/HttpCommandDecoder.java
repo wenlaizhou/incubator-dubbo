@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HttpCommandDecoder {
+
     public static CommandContext decode(HttpRequest request) {
         CommandContext commandContext = null;
         if (request != null) {
@@ -45,14 +46,16 @@ public class HttpCommandDecoder {
                     if (queryStringDecoder.parameters().isEmpty()) {
                         commandContext = CommandContextFactory.newInstance(name);
                         commandContext.setHttp(true);
-                    } else {
+                    }
+                    else {
                         List<String> valueList = new ArrayList<String>();
                         for (List<String> values : queryStringDecoder.parameters().values()) {
                             valueList.addAll(values);
                         }
-                        commandContext = CommandContextFactory.newInstance(name, valueList.toArray(new String[]{}),true);
+                        commandContext = CommandContextFactory.newInstance(name, valueList.toArray(new String[]{}), true);
                     }
-                } else if (request.getMethod() == HttpMethod.POST) {
+                }
+                else if (request.getMethod() == HttpMethod.POST) {
                     HttpPostRequestDecoder httpPostRequestDecoder = new HttpPostRequestDecoder(request);
                     List<String> valueList = new ArrayList<String>();
                     for (InterfaceHttpData interfaceHttpData : httpPostRequestDecoder.getBodyHttpDatas()) {
@@ -60,7 +63,8 @@ public class HttpCommandDecoder {
                             Attribute attribute = (Attribute) interfaceHttpData;
                             try {
                                 valueList.add(attribute.getValue());
-                            } catch (IOException ex) {
+                            }
+                            catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
                         }
@@ -68,8 +72,9 @@ public class HttpCommandDecoder {
                     if (valueList.isEmpty()) {
                         commandContext = CommandContextFactory.newInstance(name);
                         commandContext.setHttp(true);
-                    } else {
-                        commandContext = CommandContextFactory.newInstance(name, valueList.toArray(new String[]{}),true);
+                    }
+                    else {
+                        commandContext = CommandContextFactory.newInstance(name, valueList.toArray(new String[]{}), true);
                     }
                 }
             }

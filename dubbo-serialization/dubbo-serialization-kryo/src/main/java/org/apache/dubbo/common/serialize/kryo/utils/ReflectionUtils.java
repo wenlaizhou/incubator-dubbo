@@ -22,7 +22,8 @@ public abstract class ReflectionUtils {
         try {
             clazz.getDeclaredConstructor();
             return true;
-        } catch (NoSuchMethodException e) {
+        }
+        catch (NoSuchMethodException e) {
             return false;
         }
     }

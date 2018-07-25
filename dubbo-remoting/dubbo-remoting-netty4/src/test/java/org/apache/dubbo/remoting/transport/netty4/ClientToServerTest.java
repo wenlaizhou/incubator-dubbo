@@ -54,11 +54,14 @@ public abstract class ClientToServerTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
         try {
-            if (server != null)
+            if (server != null) {
                 server.close();
-        } finally {
-            if (client != null)
+            }
+        }
+        finally {
+            if (client != null) {
                 client.close();
+            }
         }
     }
 

@@ -22,6 +22,7 @@ import org.apache.dubbo.qos.command.CommandContextFactory;
 
 
 public class TelnetCommandDecoder {
+
     public static final CommandContext decode(String str) {
         CommandContext commandContext = null;
         if (!StringUtils.isBlank(str)) {
@@ -30,7 +31,7 @@ public class TelnetCommandDecoder {
                 String name = array[0];
                 String[] targetArgs = new String[array.length - 1];
                 System.arraycopy(array, 1, targetArgs, 0, array.length - 1);
-                commandContext = CommandContextFactory.newInstance( name, targetArgs,false);
+                commandContext = CommandContextFactory.newInstance(name, targetArgs, false);
                 commandContext.setOrginRequest(str);
             }
         }

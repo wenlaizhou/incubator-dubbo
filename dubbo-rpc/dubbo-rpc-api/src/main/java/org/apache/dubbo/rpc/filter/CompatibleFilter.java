@@ -53,18 +53,21 @@ public class CompatibleFilter implements Filter {
                             || "fastjson".equals(serialization)) {
                         Type gtype = method.getGenericReturnType();
                         newValue = PojoUtils.realize(value, type, gtype);
-                    } else if (!type.isInstance(value)) {
+                    }
+                    else if (!type.isInstance(value)) {
                         newValue = PojoUtils.isPojo(type)
                                 ? PojoUtils.realize(value, type)
                                 : CompatibleTypeUtils.compatibleTypeConvert(value, type);
 
-                    } else {
+                    }
+                    else {
                         newValue = value;
                     }
                     if (newValue != value) {
                         result = new RpcResult(newValue);
                     }
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }

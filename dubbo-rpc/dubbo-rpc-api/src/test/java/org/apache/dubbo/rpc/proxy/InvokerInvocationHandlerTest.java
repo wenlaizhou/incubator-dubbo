@@ -32,6 +32,7 @@ public class InvokerInvocationHandlerTest {
 
     @Mock
     private Invoker<?> invoker;
+
     @InjectMocks
     private InvokerInvocationHandler invokerInvocationHandler;
 

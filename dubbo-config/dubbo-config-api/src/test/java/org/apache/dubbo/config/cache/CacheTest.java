@@ -88,10 +88,12 @@ public class CacheTest extends TestCase {
                     String result = cacheService.findCache("0");
                     assertFalse(fix == null || fix.equals(result));
                 }
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }

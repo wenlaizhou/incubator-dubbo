@@ -5,9 +5,9 @@
             xmlns="http://code.alibabatech.com/schema/dubbo"
             targetNamespace="http://code.alibabatech.com/schema/dubbo">
 
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:import namespace="http://www.springframework.org/schema/beans"/>
-    <xsd:import namespace="http://www.springframework.org/schema/tool"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.springframework.org/schema/beans" />
+    <xsd:import namespace="http://www.springframework.org/schema/tool" />
 
     <xsd:annotation>
         <xsd:documentation>
@@ -307,14 +307,14 @@
                         <xsd:documentation><![CDATA[ The serialization protocol of service. ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
-                <xsd:anyAttribute namespace="##other" processContents="lax"/>
+                <xsd:anyAttribute namespace="##other" processContents="lax" />
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
 
     <xsd:complexType name="applicationType">
         <xsd:sequence minOccurs="0" maxOccurs="unbounded">
-            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="id" type="xsd:ID">
             <xsd:annotation>
@@ -423,7 +423,7 @@
 
     <xsd:complexType name="registryType">
         <xsd:sequence minOccurs="0" maxOccurs="unbounded">
-            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="id" type="xsd:ID">
             <xsd:annotation>
@@ -542,7 +542,7 @@
 
     <xsd:complexType name="monitorType">
         <xsd:sequence minOccurs="0" maxOccurs="unbounded">
-            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="address" type="xsd:string" use="optional">
             <xsd:annotation>
@@ -608,8 +608,8 @@
         <xsd:complexContent>
             <xsd:extension base="abstractMethodType">
                 <xsd:choice minOccurs="0" maxOccurs="unbounded">
-                    <xsd:element ref="argument" minOccurs="0" maxOccurs="unbounded"/>
-                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element ref="argument" minOccurs="0" maxOccurs="unbounded" />
+                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
                 </xsd:choice>
                 <xsd:attribute name="name" type="xsd:string" use="required">
                     <xsd:annotation>
@@ -695,8 +695,8 @@
         <xsd:complexContent>
             <xsd:extension base="abstractReferenceType">
                 <xsd:sequence minOccurs="0" maxOccurs="unbounded">
-                    <xsd:element ref="reference" minOccurs="0" maxOccurs="unbounded"/>
-                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element ref="reference" minOccurs="0" maxOccurs="unbounded" />
+                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
                 </xsd:sequence>
                 <xsd:attribute name="default" type="xsd:string" use="optional">
                     <xsd:annotation>
@@ -708,7 +708,7 @@
                         <xsd:documentation><![CDATA[ Transporter layer framework: netty mina.... ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
-                <xsd:anyAttribute namespace="##other" processContents="lax"/>
+                <xsd:anyAttribute namespace="##other" processContents="lax" />
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
@@ -717,15 +717,15 @@
         <xsd:complexContent>
             <xsd:extension base="abstractReferenceType">
                 <xsd:choice minOccurs="0" maxOccurs="unbounded">
-                    <xsd:element ref="method" minOccurs="0" maxOccurs="unbounded"/>
-                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element ref="method" minOccurs="0" maxOccurs="unbounded" />
+                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
                 </xsd:choice>
                 <xsd:attribute name="interface" type="xsd:token" use="required">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[ The service interface class name. ]]></xsd:documentation>
                         <xsd:appinfo>
                             <tool:annotation>
-                                <tool:expected-type type="java.lang.Class"/>
+                                <tool:expected-type type="java.lang.Class" />
                             </tool:annotation>
                         </xsd:appinfo>
                     </xsd:annotation>
@@ -750,14 +750,14 @@
                         <xsd:documentation><![CDATA[ The service protocol. ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
-                <xsd:anyAttribute namespace="##other" processContents="lax"/>
+                <xsd:anyAttribute namespace="##other" processContents="lax" />
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
 
     <xsd:complexType name="protocolType">
         <xsd:sequence minOccurs="0" maxOccurs="unbounded">
-            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="id" type="xsd:ID">
             <xsd:annotation>
@@ -925,15 +925,15 @@
                 <xsd:documentation><![CDATA[ Is default. ]]></xsd:documentation>
             </xsd:annotation>
         </xsd:attribute>
-        <xsd:anyAttribute namespace="##other" processContents="lax"/>
+        <xsd:anyAttribute namespace="##other" processContents="lax" />
     </xsd:complexType>
 
     <xsd:complexType name="providerType">
         <xsd:complexContent>
             <xsd:extension base="abstractServiceType">
                 <xsd:choice minOccurs="0" maxOccurs="unbounded">
-                    <xsd:element ref="service" minOccurs="0" maxOccurs="unbounded"/>
-                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element ref="service" minOccurs="0" maxOccurs="unbounded" />
+                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
                 </xsd:choice>
                 <xsd:attribute name="host" type="xsd:string" use="optional">
                     <xsd:annotation>
@@ -1061,7 +1061,7 @@
                         <xsd:documentation><![CDATA[ Is default. ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
-                <xsd:anyAttribute namespace="##other" processContents="lax"/>
+                <xsd:anyAttribute namespace="##other" processContents="lax" />
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
@@ -1070,9 +1070,9 @@
         <xsd:complexContent>
             <xsd:extension base="abstractServiceType">
                 <xsd:choice minOccurs="0" maxOccurs="unbounded">
-                    <xsd:element ref="method" minOccurs="0" maxOccurs="unbounded"/>
-                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
-                    <xsd:element ref="beans:property" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element ref="method" minOccurs="0" maxOccurs="unbounded" />
+                    <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded" />
+                    <xsd:element ref="beans:property" minOccurs="0" maxOccurs="unbounded" />
                 </xsd:choice>
                 <xsd:attribute name="interface" type="xsd:token" use="required">
                     <xsd:annotation>
@@ -1080,7 +1080,7 @@
                             <![CDATA[ Defines the interface to advertise for this service in the service registry. ]]></xsd:documentation>
                         <xsd:appinfo>
                             <tool:annotation>
-                                <tool:expected-type type="java.lang.Class"/>
+                                <tool:expected-type type="java.lang.Class" />
                             </tool:annotation>
                         </xsd:appinfo>
                     </xsd:annotation>
@@ -1111,7 +1111,7 @@
                         <xsd:documentation><![CDATA[ Generic service. ]]></xsd:documentation>
                     </xsd:annotation>
                 </xsd:attribute>
-                <xsd:anyAttribute namespace="##other" processContents="lax"/>
+                <xsd:anyAttribute namespace="##other" processContents="lax" />
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
@@ -1134,8 +1134,8 @@
             <xsd:documentation><![CDATA[ The annotation config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ServiceConfig"/>
-                    <tool:exports type="org.apache.dubbo.config.ReferenceConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ServiceConfig" />
+                    <tool:exports type="org.apache.dubbo.config.ReferenceConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1146,7 +1146,7 @@
             <xsd:documentation><![CDATA[ The application config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ApplicationConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ApplicationConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1157,7 +1157,7 @@
             <xsd:documentation><![CDATA[ The module config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ModuleConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ModuleConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1168,7 +1168,7 @@
             <xsd:documentation><![CDATA[ The registry config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.RegistryConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.RegistryConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1179,7 +1179,7 @@
             <xsd:documentation><![CDATA[ The logstat monitor config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.MonitorConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.MonitorConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1190,7 +1190,7 @@
             <xsd:documentation><![CDATA[ Export service default config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ProviderConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ProviderConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1201,7 +1201,7 @@
             <xsd:documentation><![CDATA[ Service reference default config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ConsumerConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ConsumerConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1212,7 +1212,7 @@
             <xsd:documentation><![CDATA[ Service provider config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ProtocolConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ProtocolConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1223,7 +1223,7 @@
             <xsd:documentation><![CDATA[ Export service config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ServiceConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ServiceConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1234,7 +1234,7 @@
             <xsd:documentation><![CDATA[ Reference service config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ReferenceConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ReferenceConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1245,7 +1245,7 @@
             <xsd:documentation><![CDATA[ The service method config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.MethodConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.MethodConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>
@@ -1256,7 +1256,7 @@
             <xsd:documentation><![CDATA[ The service argument config ]]></xsd:documentation>
             <xsd:appinfo>
                 <tool:annotation>
-                    <tool:exports type="org.apache.dubbo.config.ArgumentConfig"/>
+                    <tool:exports type="org.apache.dubbo.config.ArgumentConfig" />
                 </tool:annotation>
             </xsd:appinfo>
         </xsd:annotation>

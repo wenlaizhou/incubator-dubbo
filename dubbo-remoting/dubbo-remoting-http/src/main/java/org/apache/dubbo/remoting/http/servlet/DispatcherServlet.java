@@ -32,7 +32,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DispatcherServlet extends HttpServlet {
 
     private static final long serialVersionUID = 5766349180380479888L;
+
     private static final Map<Integer, HttpHandler> handlers = new ConcurrentHashMap<Integer, HttpHandler>();
+
     private static DispatcherServlet INSTANCE;
 
     public DispatcherServlet() {
@@ -57,7 +59,8 @@ public class DispatcherServlet extends HttpServlet {
         HttpHandler handler = handlers.get(request.getLocalPort());
         if (handler == null) {// service not found.
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Service not found.");
-        } else {
+        }
+        else {
             handler.handle(request, response);
         }
     }

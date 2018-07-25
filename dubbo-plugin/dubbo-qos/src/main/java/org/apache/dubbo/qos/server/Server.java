@@ -41,6 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Server {
 
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
+
     private static final Server INSTANCE = new Server();
 
     public static final Server getInstance() {
@@ -98,7 +99,8 @@ public class Server {
         try {
             serverBootstrap.bind(port).sync();
             logger.info("qos-server bind localhost:" + port);
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable) {
             logger.error("qos-server can not bind localhost:" + port, throwable);
             throw throwable;
         }

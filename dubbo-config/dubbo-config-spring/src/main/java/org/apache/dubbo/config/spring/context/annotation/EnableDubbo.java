@@ -51,6 +51,7 @@ public @interface EnableDubbo {
      * package names.
      *
      * @return the base packages to scan
+     *
      * @see DubboComponentScan#basePackages()
      */
     @AliasFor(annotation = DubboComponentScan.class, attribute = "basePackages")
@@ -62,6 +63,7 @@ public @interface EnableDubbo {
      * scanned.
      *
      * @return classes from the base packages to scan
+     *
      * @see DubboComponentScan#basePackageClasses
      */
     @AliasFor(annotation = DubboComponentScan.class, attribute = "basePackageClasses")
@@ -72,6 +74,7 @@ public @interface EnableDubbo {
      * It indicates whether {@link AbstractConfig} binding to multiple Spring Beans.
      *
      * @return the default value is <code>false</code>
+     *
      * @see EnableDubboConfig#multiple()
      */
     @AliasFor(annotation = EnableDubboConfig.class, attribute = "multiple")

@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class HelpTest {
+
     @Test
     public void testMainHelp() throws Exception {
         Help help = new Help();

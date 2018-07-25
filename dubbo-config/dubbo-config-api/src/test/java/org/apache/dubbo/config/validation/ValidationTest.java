@@ -75,7 +75,8 @@ public class ValidationTest {
                     parameter.setExpiryDate(new Date(System.currentTimeMillis() + 1000000));
                     validationService.save(parameter);
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertNotNull(violations);
                 }
@@ -89,7 +90,8 @@ public class ValidationTest {
                     parameter.setExpiryDate(new Date(System.currentTimeMillis() + 1000000));
                     validationService.save(parameter);
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertNotNull(violations);
                 }
@@ -104,9 +106,10 @@ public class ValidationTest {
                     parameter.setExpiryDate(new Date(System.currentTimeMillis() + 1000000));
                     validationService.relatedQuery(parameter);
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
-                    Assert.assertEquals(violations.size(),2);
+                    Assert.assertEquals(violations.size(), 2);
                 }
 
                 // Save Error
@@ -114,7 +117,8 @@ public class ValidationTest {
                     parameter = new ValidationParameter();
                     validationService.save(parameter);
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertTrue(violations.size() == 3);
                     Assert.assertNotNull(violations);
@@ -127,7 +131,8 @@ public class ValidationTest {
                 try {
                     validationService.delete(2, "a");
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertNotNull(violations);
                     Assert.assertEquals(1, violations.size());
@@ -137,7 +142,8 @@ public class ValidationTest {
                 try {
                     validationService.delete(0, "abc");
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertNotNull(violations);
                     Assert.assertEquals(1, violations.size());
@@ -145,7 +151,8 @@ public class ValidationTest {
                 try {
                     validationService.delete(2, null);
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertNotNull(violations);
                     Assert.assertEquals(1, violations.size());
@@ -153,15 +160,18 @@ public class ValidationTest {
                 try {
                     validationService.delete(0, null);
                     Assert.fail();
-                } catch (ConstraintViolationException ve) {
+                }
+                catch (ConstraintViolationException ve) {
                     Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
                     Assert.assertNotNull(violations);
                     Assert.assertEquals(2, violations.size());
                 }
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }
@@ -197,7 +207,8 @@ public class ValidationTest {
                     parameter = new ValidationParameter();
                     validationService.save(parameter);
                     Assert.fail();
-                } catch (RpcException e) {
+                }
+                catch (RpcException e) {
                     Assert.assertTrue(e.getMessage().contains("ConstraintViolation"));
                 }
 
@@ -208,25 +219,30 @@ public class ValidationTest {
                 try {
                     validationService.delete(0, "abc");
                     Assert.fail();
-                } catch (RpcException e) {
+                }
+                catch (RpcException e) {
                     Assert.assertTrue(e.getMessage().contains("ConstraintViolation"));
                 }
                 try {
                     validationService.delete(2, null);
                     Assert.fail();
-                } catch (RpcException e) {
+                }
+                catch (RpcException e) {
                     Assert.assertTrue(e.getMessage().contains("ConstraintViolation"));
                 }
                 try {
                     validationService.delete(0, null);
                     Assert.fail();
-                } catch (RpcException e) {
+                }
+                catch (RpcException e) {
                     Assert.assertTrue(e.getMessage().contains("ConstraintViolation"));
                 }
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }
@@ -263,7 +279,8 @@ public class ValidationTest {
                     parameter = new HashMap<String, Object>();
                     validationService.$invoke("save", new String[]{ValidationParameter.class.getName()}, new Object[]{parameter});
                     Assert.fail();
-                } catch (GenericException e) {
+                }
+                catch (GenericException e) {
                     Assert.assertTrue(e.getMessage().contains("Failed to validate service"));
                 }
 
@@ -274,27 +291,33 @@ public class ValidationTest {
                 try {
                     validationService.$invoke("delete", new String[]{long.class.getName(), String.class.getName()}, new Object[]{0, "abc"});
                     Assert.fail();
-                } catch (GenericException e) {
+                }
+                catch (GenericException e) {
                     Assert.assertTrue(e.getMessage().contains("Failed to validate service"));
                 }
                 try {
                     validationService.$invoke("delete", new String[]{long.class.getName(), String.class.getName()}, new Object[]{2, null});
                     Assert.fail();
-                } catch (GenericException e) {
+                }
+                catch (GenericException e) {
                     Assert.assertTrue(e.getMessage().contains("Failed to validate service"));
                 }
                 try {
                     validationService.$invoke("delete", new String[]{long.class.getName(), String.class.getName()}, new Object[]{0, null});
                     Assert.fail();
-                } catch (GenericException e) {
+                }
+                catch (GenericException e) {
                     Assert.assertTrue(e.getMessage().contains("Failed to validate service"));
                 }
-            } catch (GenericException e) {
+            }
+            catch (GenericException e) {
                 Assert.assertTrue(e.getMessage().contains("Failed to validate service"));
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }

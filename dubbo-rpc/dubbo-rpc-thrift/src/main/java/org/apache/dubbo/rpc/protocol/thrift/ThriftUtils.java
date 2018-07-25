@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.apache.dubbo.rpc.protocol.thrift;
+
 /**
  * @since 2.7.0, use https://github.com/dubbo/dubbo-rpc-native-thrift instead
  */
@@ -25,7 +26,8 @@ public class ThriftUtils {
      * Generate class name which represents service arguments.
      *
      * @param serviceName service name
-     * @param methodName method name
+     * @param methodName  method name
+     *
      * @return method args class name or null
      */
     public static String generateMethodArgsClassName(String serviceName, String methodName) {
@@ -43,7 +45,8 @@ public class ThriftUtils {
                     .append("_args")
                     .toString();
 
-        } else {
+        }
+        else {
             return new StringBuffer(32)
                     .append("$__")
                     .append(serviceName)
@@ -70,7 +73,8 @@ public class ThriftUtils {
                     .append("_result")
                     .toString();
 
-        } else {
+        }
+        else {
             return new StringBuilder(32)
                     .append("$__")
                     .append(serviceName)

@@ -60,7 +60,8 @@ public class MulticastExchangeGroup extends AbstractExchangeGroup {
                         try {
                             mutilcastSocket.receive(recv);
                             MulticastExchangeGroup.this.receive(new String(recv.getData()).trim(), (InetSocketAddress) recv.getSocketAddress());
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e) {
                             logger.error(e.getMessage(), e);
                         }
                     }
@@ -68,7 +69,8 @@ public class MulticastExchangeGroup extends AbstractExchangeGroup {
             }, "MulticastGroupReceiver");
             thread.setDaemon(true);
             thread.start();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -89,7 +91,8 @@ public class MulticastExchangeGroup extends AbstractExchangeGroup {
         DatagramPacket hi = new DatagramPacket(msg.getBytes(), msg.length(), mutilcastAddress, mutilcastSocket.getLocalPort());
         try {
             mutilcastSocket.send(hi);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -98,7 +101,8 @@ public class MulticastExchangeGroup extends AbstractExchangeGroup {
         if (msg.startsWith(JOIN)) {
             String url = msg.substring(JOIN.length()).trim();
             connect(URL.valueOf(url));
-        } else if (msg.startsWith(LEAVE)) {
+        }
+        else if (msg.startsWith(LEAVE)) {
             String url = msg.substring(LEAVE.length()).trim();
             disconnect(URL.valueOf(url));
         }

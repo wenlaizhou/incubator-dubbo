@@ -27,9 +27,13 @@ import java.util.concurrent.ConcurrentMap;
  * System context, for internal use only
  */
 public class StaticContext extends ConcurrentHashMap<Object, Object> {
+
     private static final long serialVersionUID = 1L;
+
     private static final String SYSTEMNAME = "system";
+
     private static final ConcurrentMap<String, StaticContext> context_map = new ConcurrentHashMap<String, StaticContext>();
+
     private String name;
 
     private StaticContext(String name) {

@@ -29,9 +29,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 public class ValidationFilterTest {
+
     private Invoker<?> invoker = mock(Invoker.class);
+
     private Validation validation = mock(Validation.class);
+
     private Validator validator = mock(Validator.class);
+
     private RpcInvocation invocation = mock(RpcInvocation.class);
 
     private ValidationFilter validationFilter;

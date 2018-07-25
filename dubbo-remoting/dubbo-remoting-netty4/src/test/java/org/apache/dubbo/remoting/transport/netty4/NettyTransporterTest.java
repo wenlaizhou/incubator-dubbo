@@ -31,6 +31,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class NettyTransporterTest {
+
     @Test
     public void shouldAbleToBindNetty4() throws Exception {
         int port = NetUtils.getAvailablePort();

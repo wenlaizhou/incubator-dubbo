@@ -37,11 +37,16 @@ import static org.junit.Assert.assertTrue;
 public class MulticastRegistryTest {
 
     private String service = "org.apache.dubbo.test.injvmServie";
+
     private URL registryUrl = URL.valueOf("multicast://239.255.255.255/");
+
     private URL serviceUrl = URL.valueOf("dubbo://" + NetUtils.getLocalHost() + "/" + service
             + "?methods=test1,test2");
+
     private URL adminUrl = URL.valueOf("dubbo://" + NetUtils.getLocalHost() + "/*");
+
     private URL consumerUrl = URL.valueOf("subscribe://" + NetUtils.getLocalHost() + "/" + service + "?arg1=1&arg2=2");
+
     private MulticastRegistry registry = new MulticastRegistry(registryUrl);
 
     @Before
@@ -195,7 +200,8 @@ public class MulticastRegistryTest {
         try {
             MulticastSocket multicastSocket = multicastRegistry.getMutilcastSocket();
             Assert.assertEquals(1234, multicastSocket.getLocalPort());
-        } finally {
+        }
+        finally {
             multicastRegistry.destroy();
         }
     }
@@ -210,7 +216,8 @@ public class MulticastRegistryTest {
         try {
             MulticastSocket multicastSocket = multicastRegistry.getMutilcastSocket();
             assertEquals(port, multicastSocket.getLocalPort());
-        } finally {
+        }
+        finally {
             multicastRegistry.destroy();
         }
     }

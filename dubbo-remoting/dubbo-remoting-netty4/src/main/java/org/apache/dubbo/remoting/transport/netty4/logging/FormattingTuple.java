@@ -25,7 +25,9 @@ class FormattingTuple {
     static final FormattingTuple NULL = new FormattingTuple(null);
 
     private final String message;
+
     private final Throwable throwable;
+
     private final Object[] argArray;
 
     FormattingTuple(String message) {
@@ -37,7 +39,8 @@ class FormattingTuple {
         this.throwable = throwable;
         if (throwable == null) {
             this.argArray = argArray;
-        } else {
+        }
+        else {
             this.argArray = trimmedCopy(argArray);
         }
     }

@@ -53,7 +53,8 @@ public class NettyClientHandler extends ChannelDuplexHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);
         try {
             handler.connected(channel);
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.channel());
         }
     }
@@ -63,7 +64,8 @@ public class NettyClientHandler extends ChannelDuplexHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);
         try {
             handler.disconnected(channel);
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.channel());
         }
     }
@@ -73,7 +75,8 @@ public class NettyClientHandler extends ChannelDuplexHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);
         try {
             handler.received(channel, msg);
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.channel());
         }
     }
@@ -93,10 +96,12 @@ public class NettyClientHandler extends ChannelDuplexHandler {
                 response.setStatus(Response.BAD_REQUEST);
                 response.setErrorMessage(StringUtils.toString(promise.cause()));
                 handler.received(channel, response);
-            } else {
+            }
+            else {
                 handler.sent(channel, msg);
             }
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.channel());
         }
     }
@@ -107,7 +112,8 @@ public class NettyClientHandler extends ChannelDuplexHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.channel(), url, handler);
         try {
             handler.caught(channel, cause);
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.channel());
         }
     }

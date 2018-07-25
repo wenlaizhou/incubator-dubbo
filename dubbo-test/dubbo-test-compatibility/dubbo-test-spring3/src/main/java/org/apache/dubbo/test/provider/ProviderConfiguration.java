@@ -29,4 +29,5 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource("META-INF/spring/dubbo-provider.xml")
 @DubboComponentScan
 public class ProviderConfiguration {
+
 }

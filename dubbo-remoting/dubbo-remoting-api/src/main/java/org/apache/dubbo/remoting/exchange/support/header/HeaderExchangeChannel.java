@@ -87,7 +87,8 @@ final class HeaderExchangeChannel implements ExchangeChannel {
                 || message instanceof Response
                 || message instanceof String) {
             channel.send(message, sent);
-        } else {
+        }
+        else {
             Request request = new Request();
             request.setVersion(Version.getProtocolVersion());
             request.setTwoWay(false);
@@ -114,7 +115,8 @@ final class HeaderExchangeChannel implements ExchangeChannel {
         DefaultFuture future = new DefaultFuture(channel, req, timeout);
         try {
             channel.send(req);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             future.cancel();
             throw e;
         }
@@ -130,7 +132,8 @@ final class HeaderExchangeChannel implements ExchangeChannel {
     public void close() {
         try {
             channel.close();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -148,7 +151,8 @@ final class HeaderExchangeChannel implements ExchangeChannel {
                     && System.currentTimeMillis() - start < timeout) {
                 try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     logger.warn(e.getMessage(), e);
                 }
             }
@@ -221,13 +225,24 @@ final class HeaderExchangeChannel implements ExchangeChannel {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         HeaderExchangeChannel other = (HeaderExchangeChannel) obj;
         if (channel == null) {
-            if (other.channel != null) return false;
-        } else if (!channel.equals(other.channel)) return false;
+            if (other.channel != null) {
+                return false;
+            }
+        }
+        else if (!channel.equals(other.channel)) {
+            return false;
+        }
         return true;
     }
 

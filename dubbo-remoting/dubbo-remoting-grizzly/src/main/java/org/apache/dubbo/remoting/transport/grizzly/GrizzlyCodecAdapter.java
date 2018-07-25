@@ -72,7 +72,8 @@ public class GrizzlyCodecAdapter extends BaseFilter {
             buffer.flip();
             buffer.allowBufferDispose(true);
             context.setMessage(buffer);
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
         return context.getInvokeAction();
@@ -93,13 +94,15 @@ public class GrizzlyCodecAdapter extends BaseFilter {
                     if (previousData instanceof DynamicChannelBuffer) {
                         previousData.writeBytes(grizzlyBuffer.toByteBuffer());
                         frame = previousData;
-                    } else {
+                    }
+                    else {
                         int size = previousData.readableBytes() + grizzlyBuffer.remaining();
                         frame = ChannelBuffers.dynamicBuffer(size > bufferSize ? size : bufferSize);
                         frame.writeBytes(previousData, previousData.readableBytes());
                         frame.writeBytes(grizzlyBuffer.toByteBuffer());
                     }
-                } else {
+                }
+                else {
                     frame = ChannelBuffers.wrappedBuffer(grizzlyBuffer.toByteBuffer());
                 }
 
@@ -110,14 +113,16 @@ public class GrizzlyCodecAdapter extends BaseFilter {
                     savedReadIndex = frame.readerIndex();
                     try {
                         msg = codec.decode(channel, frame);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         previousData = ChannelBuffers.EMPTY_BUFFER;
                         throw new IOException(e.getMessage(), e);
                     }
                     if (msg == Codec2.DecodeResult.NEED_MORE_INPUT) {
                         frame.readerIndex(savedReadIndex);
                         return context.getStopAction();
-                    } else {
+                    }
+                    else {
                         if (savedReadIndex == frame.readerIndex()) {
                             previousData = ChannelBuffers.EMPTY_BUFFER;
                             throw new IOException("Decode without read data.");
@@ -125,15 +130,19 @@ public class GrizzlyCodecAdapter extends BaseFilter {
                         if (msg != null) {
                             context.setMessage(msg);
                             return context.getInvokeAction();
-                        } else {
+                        }
+                        else {
                             return context.getInvokeAction();
                         }
                     }
-                } while (frame.readable());
-            } else { // Other events are passed down directly
+                }
+                while (frame.readable());
+            }
+            else { // Other events are passed down directly
                 return context.getInvokeAction();
             }
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
     }

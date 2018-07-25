@@ -39,7 +39,9 @@ import static org.junit.Assert.fail;
  * Check available status for dubboInvoker
  */
 public class DubboInvokerAvilableTest {
+
     private static DubboProtocol protocol = DubboProtocol.getDubboProtocol();
+
     private static ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     @BeforeClass
@@ -88,11 +90,12 @@ public class DubboInvokerAvilableTest {
 
         long start = System.currentTimeMillis();
 
-        try{
+        try {
             System.setProperty(Constants.SHUTDOWN_WAIT_KEY, "2000");
             System.out.println("------------ConfigUtils.getServerShutdownTimeout(): " + ConfigUtils.getServerShutdownTimeout());
             protocol.destroy();
-        }finally {
+        }
+        finally {
             System.getProperties().remove(Constants.SHUTDOWN_WAIT_KEY);
         }
 
@@ -126,7 +129,8 @@ public class DubboInvokerAvilableTest {
         try {
             getClients(invoker)[0].setAttribute(Constants.CHANNEL_ATTRIBUTE_READONLY_KEY, Boolean.TRUE);
             fail();
-        } catch (IllegalStateException e) {
+        }
+        catch (IllegalStateException e) {
 
         }
         //invoke method --> init client
@@ -148,12 +152,14 @@ public class DubboInvokerAvilableTest {
     }
 
     public class DemoServiceImpl implements IDemoService {
+
         public String get() {
             return "ok";
         }
     }
 
     public class DemoServiceImpl0 implements IDemoService {
+
         public String get() {
             return "ok";
         }

@@ -62,7 +62,8 @@ public class WrappedChannelHandler implements ChannelHandlerDelegate {
             if (executor != null) {
                 executor.shutdown();
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn("fail to destroy thread pool of server: " + t.getMessage(), t);
         }
     }
@@ -100,7 +101,8 @@ public class WrappedChannelHandler implements ChannelHandlerDelegate {
     public ChannelHandler getHandler() {
         if (handler instanceof ChannelHandlerDelegate) {
             return ((ChannelHandlerDelegate) handler).getHandler();
-        } else {
+        }
+        else {
             return handler;
         }
     }

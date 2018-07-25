@@ -40,11 +40,13 @@ public class TelnetHandlerAdapter extends ChannelHandlerAdapter implements Telne
             if (i > 0) {
                 command = message.substring(0, i).trim();
                 message = message.substring(i + 1).trim();
-            } else {
+            }
+            else {
                 command = message;
                 message = "";
             }
-        } else {
+        }
+        else {
             command = "";
         }
         if (command.length() > 0) {
@@ -55,10 +57,12 @@ public class TelnetHandlerAdapter extends ChannelHandlerAdapter implements Telne
                         return null;
                     }
                     buf.append(result);
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     buf.append(t.getMessage());
                 }
-            } else {
+            }
+            else {
                 buf.append("Unsupported command: ");
                 buf.append(command);
             }

@@ -86,7 +86,7 @@ public class AnnotationPropertyValuesAdapterTest {
 
         dataBinder.bind(propertyValues);
 
-//        System.out.println(referenceBean);
+        //        System.out.println(referenceBean);
 
         Assert.assertEquals(DemoService.class, referenceBean.getInterfaceClass());
         Assert.assertEquals("org.apache.dubbo.config.spring.api.DemoService", referenceBean.getInterface());

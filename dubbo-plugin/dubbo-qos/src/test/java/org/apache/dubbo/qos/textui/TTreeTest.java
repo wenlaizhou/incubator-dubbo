@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class TTreeTest {
+
     @Test
     public void test() throws Exception {
         TTree tree = new TTree(false, "root");

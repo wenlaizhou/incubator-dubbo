@@ -23,14 +23,17 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AsyncContextImpl implements AsyncContext {
+
     private static final Logger logger = LoggerFactory.getLogger(AsyncContextImpl.class);
 
     private final AtomicBoolean started = new AtomicBoolean(false);
+
     private final AtomicBoolean stoped = new AtomicBoolean(false);
 
     private CompletableFuture<Object> future;
 
     private RpcContext storedContext;
+
     private RpcContext storedServerContext;
 
     public AsyncContextImpl() {
@@ -48,10 +51,12 @@ public class AsyncContextImpl implements AsyncContext {
             if (value instanceof Throwable) {
                 Throwable bizExe = (Throwable) value;
                 future.completeExceptionally(bizExe);
-            } else {
+            }
+            else {
                 future.complete(value);
             }
-        } else {
+        }
+        else {
             throw new IllegalStateException("The async response has probably been wrote back by another thread, or the asyncContext has been closed.");
         }
     }

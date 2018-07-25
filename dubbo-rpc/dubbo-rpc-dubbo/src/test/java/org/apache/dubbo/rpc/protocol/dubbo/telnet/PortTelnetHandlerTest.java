@@ -41,6 +41,7 @@ import static org.mockito.Mockito.mock;
 public class PortTelnetHandlerTest {
 
     private static TelnetHandler port = new PortTelnetHandler();
+
     private Invoker<DemoService> mockInvoker;
 
     @SuppressWarnings("unchecked")

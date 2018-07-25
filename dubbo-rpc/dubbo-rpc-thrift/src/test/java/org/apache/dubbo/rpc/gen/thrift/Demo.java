@@ -54,6 +54,7 @@ public class Demo {
     }
 
     public static class Client extends org.apache.thrift.TServiceClient implements Iface {
+
         public Client(org.apache.thrift.protocol.TProtocol prot) {
             super(prot, prot);
         }
@@ -203,6 +204,7 @@ public class Demo {
         }
 
         public static class Factory implements org.apache.thrift.TServiceClientFactory<Client> {
+
             public Factory() {
             }
 
@@ -218,6 +220,7 @@ public class Demo {
     }
 
     public static class AsyncClient extends org.apache.thrift.async.TAsyncClient implements AsyncIface {
+
         public AsyncClient(org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.async.TAsyncClientManager clientManager, org.apache.thrift.transport.TNonblockingTransport transport) {
             super(protocolFactory, clientManager, transport);
         }
@@ -272,7 +275,9 @@ public class Demo {
         }
 
         public static class Factory implements org.apache.thrift.async.TAsyncClientFactory<AsyncClient> {
+
             private org.apache.thrift.async.TAsyncClientManager clientManager;
+
             private org.apache.thrift.protocol.TProtocolFactory protocolFactory;
 
             public Factory(org.apache.thrift.async.TAsyncClientManager clientManager, org.apache.thrift.protocol.TProtocolFactory protocolFactory) {
@@ -286,6 +291,7 @@ public class Demo {
         }
 
         public static class echoBool_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private boolean arg;
 
             public echoBool_call(boolean arg, org.apache.thrift.async.AsyncMethodCallback<echoBool_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -312,6 +318,7 @@ public class Demo {
         }
 
         public static class echoByte_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private byte arg;
 
             public echoByte_call(byte arg, org.apache.thrift.async.AsyncMethodCallback<echoByte_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -338,6 +345,7 @@ public class Demo {
         }
 
         public static class echoI16_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private short arg;
 
             public echoI16_call(short arg, org.apache.thrift.async.AsyncMethodCallback<echoI16_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -364,6 +372,7 @@ public class Demo {
         }
 
         public static class echoI32_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private int arg;
 
             public echoI32_call(int arg, org.apache.thrift.async.AsyncMethodCallback<echoI32_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -390,6 +399,7 @@ public class Demo {
         }
 
         public static class echoI64_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private long arg;
 
             public echoI64_call(long arg, org.apache.thrift.async.AsyncMethodCallback<echoI64_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -416,6 +426,7 @@ public class Demo {
         }
 
         public static class echoDouble_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private double arg;
 
             public echoDouble_call(double arg, org.apache.thrift.async.AsyncMethodCallback<echoDouble_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -442,6 +453,7 @@ public class Demo {
         }
 
         public static class echoString_call extends org.apache.thrift.async.TAsyncMethodCall {
+
             private String arg;
 
             public echoString_call(String arg, org.apache.thrift.async.AsyncMethodCallback<echoString_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
@@ -470,6 +482,7 @@ public class Demo {
     }
 
     public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor implements org.apache.thrift.TProcessor {
+
         private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
 
         public Processor(I iface) {
@@ -492,6 +505,7 @@ public class Demo {
         }
 
         private static class echoBool<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoBool_args> {
+
             public echoBool() {
                 super("echoBool");
             }
@@ -509,6 +523,7 @@ public class Demo {
         }
 
         private static class echoByte<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoByte_args> {
+
             public echoByte() {
                 super("echoByte");
             }
@@ -526,6 +541,7 @@ public class Demo {
         }
 
         private static class echoI16<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoI16_args> {
+
             public echoI16() {
                 super("echoI16");
             }
@@ -543,6 +559,7 @@ public class Demo {
         }
 
         private static class echoI32<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoI32_args> {
+
             public echoI32() {
                 super("echoI32");
             }
@@ -560,6 +577,7 @@ public class Demo {
         }
 
         private static class echoI64<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoI64_args> {
+
             public echoI64() {
                 super("echoI64");
             }
@@ -577,6 +595,7 @@ public class Demo {
         }
 
         private static class echoDouble<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoDouble_args> {
+
             public echoDouble() {
                 super("echoDouble");
             }
@@ -594,6 +613,7 @@ public class Demo {
         }
 
         private static class echoString<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echoString_args> {
+
             public echoString() {
                 super("echoString");
             }
@@ -612,9 +632,13 @@ public class Demo {
     }
 
     public static class echoBool_args implements org.apache.thrift.TBase<echoBool_args, echoBool_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoBool_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.BOOL, (short) 1);
+
         // isset id assignments
         private static final int __ARG_ISSET_ID = 0;
 
@@ -627,6 +651,7 @@ public class Demo {
         }
 
         public boolean arg; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoBool_args() {
@@ -687,7 +712,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((Boolean) value);
                     }
                     break;
@@ -720,24 +746,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoBool_args)
+            }
+            if (that instanceof echoBool_args) {
                 return this.equals((echoBool_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoBool_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true;
             boolean that_present_arg = true;
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (this.arg != that.arg)
+                }
+                if (this.arg != that.arg) {
                     return false;
+                }
             }
 
             return true;
@@ -785,7 +816,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.BOOL) {
                             this.arg = iprot.readBool();
                             setArgIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -833,7 +865,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -843,7 +876,8 @@ public class Demo {
                 // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
                 __isset_bit_vector = new BitSet(1);
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -863,6 +897,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -888,7 +923,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -911,9 +948,13 @@ public class Demo {
     }
 
     public static class echoBool_result implements org.apache.thrift.TBase<echoBool_result, echoBool_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoBool_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short) 0);
+
         // isset id assignments
         private static final int __SUCCESS_ISSET_ID = 0;
 
@@ -926,6 +967,7 @@ public class Demo {
         }
 
         public boolean success; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoBool_result() {
@@ -986,7 +1028,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((Boolean) value);
                     }
                     break;
@@ -1019,24 +1062,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoBool_result)
+            }
+            if (that instanceof echoBool_result) {
                 return this.equals((echoBool_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoBool_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true;
             boolean that_present_success = true;
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (this.success != that.success)
+                }
+                if (this.success != that.success) {
                     return false;
+                }
             }
 
             return true;
@@ -1084,7 +1132,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.BOOL) {
                             this.success = iprot.readBool();
                             setSuccessIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -1129,7 +1178,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -1137,7 +1187,8 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -1157,6 +1208,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -1182,7 +1234,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -1205,9 +1259,13 @@ public class Demo {
     }
 
     public static class echoByte_args implements org.apache.thrift.TBase<echoByte_args, echoByte_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoByte_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.BYTE, (short) 1);
+
         // isset id assignments
         private static final int __ARG_ISSET_ID = 0;
 
@@ -1220,6 +1278,7 @@ public class Demo {
         }
 
         public byte arg; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoByte_args() {
@@ -1280,7 +1339,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((Byte) value);
                     }
                     break;
@@ -1313,24 +1373,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoByte_args)
+            }
+            if (that instanceof echoByte_args) {
                 return this.equals((echoByte_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoByte_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true;
             boolean that_present_arg = true;
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (this.arg != that.arg)
+                }
+                if (this.arg != that.arg) {
                     return false;
+                }
             }
 
             return true;
@@ -1378,7 +1443,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.BYTE) {
                             this.arg = iprot.readByte();
                             setArgIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -1426,7 +1492,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -1436,7 +1503,8 @@ public class Demo {
                 // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
                 __isset_bit_vector = new BitSet(1);
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -1456,6 +1524,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -1481,7 +1550,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -1504,9 +1575,13 @@ public class Demo {
     }
 
     public static class echoByte_result implements org.apache.thrift.TBase<echoByte_result, echoByte_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoByte_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BYTE, (short) 0);
+
         // isset id assignments
         private static final int __SUCCESS_ISSET_ID = 0;
 
@@ -1519,6 +1594,7 @@ public class Demo {
         }
 
         public byte success; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoByte_result() {
@@ -1579,7 +1655,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((Byte) value);
                     }
                     break;
@@ -1612,24 +1689,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoByte_result)
+            }
+            if (that instanceof echoByte_result) {
                 return this.equals((echoByte_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoByte_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true;
             boolean that_present_success = true;
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (this.success != that.success)
+                }
+                if (this.success != that.success) {
                     return false;
+                }
             }
 
             return true;
@@ -1677,7 +1759,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.BYTE) {
                             this.success = iprot.readByte();
                             setSuccessIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -1722,7 +1805,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -1730,7 +1814,8 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -1750,6 +1835,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -1775,7 +1861,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -1798,9 +1886,13 @@ public class Demo {
     }
 
     public static class echoI16_args implements org.apache.thrift.TBase<echoI16_args, echoI16_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoI16_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.I16, (short) 1);
+
         // isset id assignments
         private static final int __ARG_ISSET_ID = 0;
 
@@ -1813,6 +1905,7 @@ public class Demo {
         }
 
         public short arg; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoI16_args() {
@@ -1873,7 +1966,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((Short) value);
                     }
                     break;
@@ -1906,24 +2000,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoI16_args)
+            }
+            if (that instanceof echoI16_args) {
                 return this.equals((echoI16_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoI16_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true;
             boolean that_present_arg = true;
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (this.arg != that.arg)
+                }
+                if (this.arg != that.arg) {
                     return false;
+                }
             }
 
             return true;
@@ -1971,7 +2070,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.I16) {
                             this.arg = iprot.readI16();
                             setArgIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -2019,7 +2119,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -2029,12 +2130,15 @@ public class Demo {
                 // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
                 __isset_bit_vector = new BitSet(1);
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             ARG((short) 1, "arg");
 
@@ -2047,6 +2151,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -2072,7 +2177,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -2095,9 +2202,13 @@ public class Demo {
     }
 
     public static class echoI16_result implements org.apache.thrift.TBase<echoI16_result, echoI16_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoI16_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I16, (short) 0);
+
         // isset id assignments
         private static final int __SUCCESS_ISSET_ID = 0;
 
@@ -2110,6 +2221,7 @@ public class Demo {
         }
 
         public short success; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoI16_result() {
@@ -2154,7 +2266,9 @@ public class Demo {
             __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
         }
@@ -2168,7 +2282,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((Short) value);
                     }
                     break;
@@ -2201,24 +2316,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoI16_result)
+            }
+            if (that instanceof echoI16_result) {
                 return this.equals((echoI16_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoI16_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true;
             boolean that_present_success = true;
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (this.success != that.success)
+                }
+                if (this.success != that.success) {
                     return false;
+                }
             }
 
             return true;
@@ -2266,7 +2386,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.I16) {
                             this.success = iprot.readI16();
                             setSuccessIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -2311,7 +2432,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -2319,12 +2441,15 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             SUCCESS((short) 0, "success");
 
@@ -2337,6 +2462,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -2362,7 +2488,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -2385,9 +2513,13 @@ public class Demo {
     }
 
     public static class echoI32_args implements org.apache.thrift.TBase<echoI32_args, echoI32_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoI32_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.I32, (short) 1);
+
         // isset id assignments
         private static final int __ARG_ISSET_ID = 0;
 
@@ -2400,6 +2532,7 @@ public class Demo {
         }
 
         public int arg; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoI32_args() {
@@ -2444,7 +2577,9 @@ public class Demo {
             __isset_bit_vector.clear(__ARG_ISSET_ID);
         }
 
-        /** Returns true if field arg is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field arg is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetArg() {
             return __isset_bit_vector.get(__ARG_ISSET_ID);
         }
@@ -2458,7 +2593,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((Integer) value);
                     }
                     break;
@@ -2491,24 +2627,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoI32_args)
+            }
+            if (that instanceof echoI32_args) {
                 return this.equals((echoI32_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoI32_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true;
             boolean that_present_arg = true;
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (this.arg != that.arg)
+                }
+                if (this.arg != that.arg) {
                     return false;
+                }
             }
 
             return true;
@@ -2556,7 +2697,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.I32) {
                             this.arg = iprot.readI32();
                             setArgIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -2604,7 +2746,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -2614,12 +2757,15 @@ public class Demo {
                 // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
                 __isset_bit_vector = new BitSet(1);
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             ARG((short) 1, "arg");
 
@@ -2632,6 +2778,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -2657,7 +2804,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -2680,9 +2829,13 @@ public class Demo {
     }
 
     public static class echoI32_result implements org.apache.thrift.TBase<echoI32_result, echoI32_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoI32_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I32, (short) 0);
+
         // isset id assignments
         private static final int __SUCCESS_ISSET_ID = 0;
 
@@ -2695,6 +2848,7 @@ public class Demo {
         }
 
         public int success; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoI32_result() {
@@ -2739,7 +2893,9 @@ public class Demo {
             __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
         }
@@ -2753,7 +2909,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((Integer) value);
                     }
                     break;
@@ -2770,7 +2927,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -2784,24 +2943,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoI32_result)
+            }
+            if (that instanceof echoI32_result) {
                 return this.equals((echoI32_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoI32_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true;
             boolean that_present_success = true;
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (this.success != that.success)
+                }
+                if (this.success != that.success) {
                     return false;
+                }
             }
 
             return true;
@@ -2849,7 +3013,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.I32) {
                             this.success = iprot.readI32();
                             setSuccessIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -2894,7 +3059,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -2902,12 +3068,15 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             SUCCESS((short) 0, "success");
 
@@ -2920,6 +3089,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -2945,7 +3115,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -2968,9 +3140,13 @@ public class Demo {
     }
 
     public static class echoI64_args implements org.apache.thrift.TBase<echoI64_args, echoI64_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoI64_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.I64, (short) 1);
+
         // isset id assignments
         private static final int __ARG_ISSET_ID = 0;
 
@@ -2983,6 +3159,7 @@ public class Demo {
         }
 
         public long arg; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoI64_args() {
@@ -3027,7 +3204,9 @@ public class Demo {
             __isset_bit_vector.clear(__ARG_ISSET_ID);
         }
 
-        /** Returns true if field arg is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field arg is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetArg() {
             return __isset_bit_vector.get(__ARG_ISSET_ID);
         }
@@ -3041,7 +3220,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((Long) value);
                     }
                     break;
@@ -3058,7 +3238,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -3072,24 +3254,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoI64_args)
+            }
+            if (that instanceof echoI64_args) {
                 return this.equals((echoI64_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoI64_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true;
             boolean that_present_arg = true;
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (this.arg != that.arg)
+                }
+                if (this.arg != that.arg) {
                     return false;
+                }
             }
 
             return true;
@@ -3137,7 +3324,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.I64) {
                             this.arg = iprot.readI64();
                             setArgIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -3185,7 +3373,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -3195,12 +3384,15 @@ public class Demo {
                 // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
                 __isset_bit_vector = new BitSet(1);
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             ARG((short) 1, "arg");
 
@@ -3213,6 +3405,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -3238,7 +3431,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -3261,9 +3456,13 @@ public class Demo {
     }
 
     public static class echoI64_result implements org.apache.thrift.TBase<echoI64_result, echoI64_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoI64_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I64, (short) 0);
+
         // isset id assignments
         private static final int __SUCCESS_ISSET_ID = 0;
 
@@ -3276,6 +3475,7 @@ public class Demo {
         }
 
         public long success; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoI64_result() {
@@ -3320,7 +3520,9 @@ public class Demo {
             __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
         }
@@ -3334,7 +3536,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((Long) value);
                     }
                     break;
@@ -3351,7 +3554,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -3365,24 +3570,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoI64_result)
+            }
+            if (that instanceof echoI64_result) {
                 return this.equals((echoI64_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoI64_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true;
             boolean that_present_success = true;
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (this.success != that.success)
+                }
+                if (this.success != that.success) {
                     return false;
+                }
             }
 
             return true;
@@ -3430,7 +3640,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.I64) {
                             this.success = iprot.readI64();
                             setSuccessIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -3475,7 +3686,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -3483,12 +3695,15 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             SUCCESS((short) 0, "success");
 
@@ -3501,6 +3716,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -3526,7 +3742,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -3549,9 +3767,13 @@ public class Demo {
     }
 
     public static class echoDouble_args implements org.apache.thrift.TBase<echoDouble_args, echoDouble_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoDouble_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.DOUBLE, (short) 1);
+
         // isset id assignments
         private static final int __ARG_ISSET_ID = 0;
 
@@ -3564,6 +3786,7 @@ public class Demo {
         }
 
         public double arg; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoDouble_args() {
@@ -3608,7 +3831,9 @@ public class Demo {
             __isset_bit_vector.clear(__ARG_ISSET_ID);
         }
 
-        /** Returns true if field arg is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field arg is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetArg() {
             return __isset_bit_vector.get(__ARG_ISSET_ID);
         }
@@ -3622,7 +3847,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((Double) value);
                     }
                     break;
@@ -3639,7 +3865,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -3653,24 +3881,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoDouble_args)
+            }
+            if (that instanceof echoDouble_args) {
                 return this.equals((echoDouble_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoDouble_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true;
             boolean that_present_arg = true;
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (this.arg != that.arg)
+                }
+                if (this.arg != that.arg) {
                     return false;
+                }
             }
 
             return true;
@@ -3718,7 +3951,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.DOUBLE) {
                             this.arg = iprot.readDouble();
                             setArgIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -3766,7 +4000,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -3776,12 +4011,15 @@ public class Demo {
                 // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
                 __isset_bit_vector = new BitSet(1);
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             ARG((short) 1, "arg");
 
@@ -3794,6 +4032,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -3819,7 +4058,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -3842,9 +4083,13 @@ public class Demo {
     }
 
     public static class echoDouble_result implements org.apache.thrift.TBase<echoDouble_result, echoDouble_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoDouble_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.DOUBLE, (short) 0);
+
         // isset id assignments
         private static final int __SUCCESS_ISSET_ID = 0;
 
@@ -3857,6 +4102,7 @@ public class Demo {
         }
 
         public double success; // required
+
         private BitSet __isset_bit_vector = new BitSet(1);
 
         public echoDouble_result() {
@@ -3901,7 +4147,9 @@ public class Demo {
             __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
         }
@@ -3915,7 +4163,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((Double) value);
                     }
                     break;
@@ -3932,7 +4181,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -3946,24 +4197,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoDouble_result)
+            }
+            if (that instanceof echoDouble_result) {
                 return this.equals((echoDouble_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoDouble_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true;
             boolean that_present_success = true;
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (this.success != that.success)
+                }
+                if (this.success != that.success) {
                     return false;
+                }
             }
 
             return true;
@@ -4011,7 +4267,8 @@ public class Demo {
                         if (field.type == org.apache.thrift.protocol.TType.DOUBLE) {
                             this.success = iprot.readDouble();
                             setSuccessIsSet(true);
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -4056,7 +4313,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -4064,12 +4322,15 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             SUCCESS((short) 0, "success");
 
@@ -4082,6 +4343,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -4107,7 +4369,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -4130,8 +4394,11 @@ public class Demo {
     }
 
     public static class echoString_args implements org.apache.thrift.TBase<echoString_args, echoString_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoString_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.STRING, (short) 1);
 
         static {
@@ -4185,7 +4452,9 @@ public class Demo {
             this.arg = null;
         }
 
-        /** Returns true if field arg is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field arg is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetArg() {
             return this.arg != null;
         }
@@ -4201,7 +4470,8 @@ public class Demo {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((String) value);
                     }
                     break;
@@ -4218,7 +4488,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -4232,24 +4504,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoString_args)
+            }
+            if (that instanceof echoString_args) {
                 return this.equals((echoString_args) that);
+            }
             return false;
         }
 
         public boolean equals(echoString_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true && this.isSetArg();
             boolean that_present_arg = true && that.isSetArg();
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (!this.arg.equals(that.arg))
+                }
+                if (!this.arg.equals(that.arg)) {
                     return false;
+                }
             }
 
             return true;
@@ -4296,7 +4573,8 @@ public class Demo {
                     case 1: // ARG
                         if (field.type == org.apache.thrift.protocol.TType.STRING) {
                             this.arg = iprot.readString();
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -4331,7 +4609,8 @@ public class Demo {
             sb.append("arg:");
             if (this.arg == null) {
                 sb.append("null");
-            } else {
+            }
+            else {
                 sb.append(this.arg);
             }
             first = false;
@@ -4349,7 +4628,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -4357,12 +4637,15 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             ARG((short) 1, "arg");
 
@@ -4375,6 +4658,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -4400,7 +4684,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -4423,8 +4709,11 @@ public class Demo {
     }
 
     public static class echoString_result implements org.apache.thrift.TBase<echoString_result, echoString_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echoString_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short) 0);
 
         static {
@@ -4478,7 +4767,9 @@ public class Demo {
             this.success = null;
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return this.success != null;
         }
@@ -4494,7 +4785,8 @@ public class Demo {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((String) value);
                     }
                     break;
@@ -4511,7 +4803,9 @@ public class Demo {
             throw new IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new IllegalArgumentException();
@@ -4525,24 +4819,29 @@ public class Demo {
         }
 
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echoString_result)
+            }
+            if (that instanceof echoString_result) {
                 return this.equals((echoString_result) that);
+            }
             return false;
         }
 
         public boolean equals(echoString_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true && this.isSetSuccess();
             boolean that_present_success = true && that.isSetSuccess();
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (!this.success.equals(that.success))
+                }
+                if (!this.success.equals(that.success)) {
                     return false;
+                }
             }
 
             return true;
@@ -4589,7 +4888,8 @@ public class Demo {
                     case 0: // SUCCESS
                         if (field.type == org.apache.thrift.protocol.TType.STRING) {
                             this.success = iprot.readString();
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -4623,7 +4923,8 @@ public class Demo {
             sb.append("success:");
             if (this.success == null) {
                 sb.append("null");
-            } else {
+            }
+            else {
                 sb.append(this.success);
             }
             first = false;
@@ -4638,7 +4939,8 @@ public class Demo {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -4646,7 +4948,8 @@ public class Demo {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -4666,6 +4969,7 @@ public class Demo {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -4691,7 +4995,9 @@ public class Demo {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 

@@ -87,7 +87,8 @@ public class JValidator implements Validator {
         ValidatorFactory factory;
         if (jvalidation != null && jvalidation.length() > 0) {
             factory = Validation.byProvider((Class) ReflectUtils.forName(jvalidation)).configure().buildValidatorFactory();
-        } else {
+        }
+        else {
             factory = Validation.buildDefaultValidatorFactory();
         }
         this.validator = factory.getValidator();
@@ -115,7 +116,8 @@ public class JValidator implements Validator {
             Class<?> parameterClass;
             try {
                 parameterClass = (Class<?>) Class.forName(parameterClassName, true, clazz.getClassLoader());
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 ClassPool pool = ClassGenerator.getClassPool(clazz.getClassLoader());
                 CtClass ctClass = pool.makeClass(parameterClassName);
                 ClassFile classFile = ctClass.getClassFile();
@@ -161,7 +163,8 @@ public class JValidator implements Validator {
                 field.set(parameterBean, args[i]);
             }
             return parameterBean;
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
             return null;
         }
@@ -202,28 +205,39 @@ public class JValidator implements Validator {
     // Copy from javassist.bytecode.annotation.Annotation.createMemberValue(ConstPool, CtClass);
     private static MemberValue createMemberValue(ConstPool cp, CtClass type, Object value) throws NotFoundException {
         MemberValue memberValue = javassist.bytecode.annotation.Annotation.createMemberValue(cp, type);
-        if (memberValue instanceof BooleanMemberValue)
+        if (memberValue instanceof BooleanMemberValue) {
             ((BooleanMemberValue) memberValue).setValue((Boolean) value);
-        else if (memberValue instanceof ByteMemberValue)
+        }
+        else if (memberValue instanceof ByteMemberValue) {
             ((ByteMemberValue) memberValue).setValue((Byte) value);
-        else if (memberValue instanceof CharMemberValue)
+        }
+        else if (memberValue instanceof CharMemberValue) {
             ((CharMemberValue) memberValue).setValue((Character) value);
-        else if (memberValue instanceof ShortMemberValue)
+        }
+        else if (memberValue instanceof ShortMemberValue) {
             ((ShortMemberValue) memberValue).setValue((Short) value);
-        else if (memberValue instanceof IntegerMemberValue)
+        }
+        else if (memberValue instanceof IntegerMemberValue) {
             ((IntegerMemberValue) memberValue).setValue((Integer) value);
-        else if (memberValue instanceof LongMemberValue)
+        }
+        else if (memberValue instanceof LongMemberValue) {
             ((LongMemberValue) memberValue).setValue((Long) value);
-        else if (memberValue instanceof FloatMemberValue)
+        }
+        else if (memberValue instanceof FloatMemberValue) {
             ((FloatMemberValue) memberValue).setValue((Float) value);
-        else if (memberValue instanceof DoubleMemberValue)
+        }
+        else if (memberValue instanceof DoubleMemberValue) {
             ((DoubleMemberValue) memberValue).setValue((Double) value);
-        else if (memberValue instanceof ClassMemberValue)
+        }
+        else if (memberValue instanceof ClassMemberValue) {
             ((ClassMemberValue) memberValue).setValue(((Class<?>) value).getName());
-        else if (memberValue instanceof StringMemberValue)
+        }
+        else if (memberValue instanceof StringMemberValue) {
             ((StringMemberValue) memberValue).setValue((String) value);
-        else if (memberValue instanceof EnumMemberValue)
+        }
+        else if (memberValue instanceof EnumMemberValue) {
             ((EnumMemberValue) memberValue).setValue(((Enum<?>) value).name());
+        }
         /* else if (memberValue instanceof AnnotationMemberValue) */
         else if (memberValue instanceof ArrayMemberValue) {
             CtClass arrayType = type.getComponentType();
@@ -247,7 +261,7 @@ public class JValidator implements Validator {
         Set<ConstraintViolation<?>> violations = new HashSet<ConstraintViolation<?>>();
         Method method = clazz.getMethod(methodName, parameterTypes);
         Class<?>[] methodClasses = null;
-        if (method.isAnnotationPresent(MethodValidated.class)){
+        if (method.isAnnotationPresent(MethodValidated.class)) {
             methodClasses = method.getAnnotation(MethodValidated.class).value();
             groups.addAll(Arrays.asList(methodClasses));
         }
@@ -260,7 +274,7 @@ public class JValidator implements Validator {
 
         Object parameterBean = getMethodParameterBean(clazz, method, arguments);
         if (parameterBean != null) {
-            violations.addAll(validator.validate(parameterBean, classgroups ));
+            violations.addAll(validator.validate(parameterBean, classgroups));
         }
 
         for (Object arg : arguments) {
@@ -283,7 +297,8 @@ public class JValidator implements Validator {
         try {
             methodClass = Class.forName(methodClassName, false, Thread.currentThread().getContextClassLoader());
             methodClassMap.put(methodClassName, methodClass);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             methodClassMap.put(methodClassName, clazz);
         }
         return methodClass;
@@ -295,16 +310,19 @@ public class JValidator implements Validator {
                 for (Object item : (Object[]) arg) {
                     validate(violations, item, groups);
                 }
-            } else if (Collection.class.isInstance(arg)) {
+            }
+            else if (Collection.class.isInstance(arg)) {
                 for (Object item : (Collection<?>) arg) {
                     validate(violations, item, groups);
                 }
-            } else if (Map.class.isInstance(arg)) {
+            }
+            else if (Map.class.isInstance(arg)) {
                 for (Map.Entry<?, ?> entry : ((Map<?, ?>) arg).entrySet()) {
                     validate(violations, entry.getKey(), groups);
                     validate(violations, entry.getValue(), groups);
                 }
-            } else {
+            }
+            else {
                 violations.addAll(validator.validate(arg, groups));
             }
         }

@@ -64,7 +64,8 @@ public class InvokeTelnetHandler implements TelnetHandler {
                 if (!ReflectUtils.isPrimitive(type)) {
                     return false;
                 }
-            } else if (arg instanceof Map) {
+            }
+            else if (arg instanceof Map) {
                 String name = (String) ((Map<?, ?>) arg).get("class");
                 Class<?> cls = arg.getClass();
                 if (name != null && name.length() > 0) {
@@ -73,11 +74,13 @@ public class InvokeTelnetHandler implements TelnetHandler {
                 if (!type.isAssignableFrom(cls)) {
                     return false;
                 }
-            } else if (arg instanceof Collection) {
+            }
+            else if (arg instanceof Collection) {
                 if (!type.isArray() && !type.isAssignableFrom(arg.getClass())) {
                     return false;
                 }
-            } else {
+            }
+            else {
                 if (!type.isAssignableFrom(arg.getClass())) {
                     return false;
                 }
@@ -111,7 +114,8 @@ public class InvokeTelnetHandler implements TelnetHandler {
         List<Object> list;
         try {
             list = JSON.parseArray("[" + args + "]", Object.class);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             return "Invalid json argument, cause: " + t.getMessage();
         }
         Invoker<?> invoker = null;
@@ -123,7 +127,8 @@ public class InvokeTelnetHandler implements TelnetHandler {
                     invoker = exporter.getInvoker();
                     break;
                 }
-            } else {
+            }
+            else {
                 if (service.equals(exporter.getInvoker().getInterface().getSimpleName())
                         || service.equals(exporter.getInvoker().getInterface().getName())
                         || service.equals(exporter.getInvoker().getUrl().getPath())) {
@@ -145,13 +150,16 @@ public class InvokeTelnetHandler implements TelnetHandler {
                     buf.append("\r\nelapsed: ");
                     buf.append(end - start);
                     buf.append(" ms.");
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     return "Failed to invoke method " + invokeMethod.getName() + ", cause: " + StringUtils.toString(t);
                 }
-            } else {
+            }
+            else {
                 buf.append("No such method " + method + " in service " + service);
             }
-        } else {
+        }
+        else {
             buf.append("No such service " + service);
         }
         return buf.toString();

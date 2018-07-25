@@ -52,7 +52,7 @@ public class PerformanceClientCloseTest extends TestCase {
 
         final String url = "exchange://" + server + "?transporter=" + transporter
                 + "&serialization=" + serialization
-//            + "&"+Constants.CHANNEL_HANDLER_KEY+"=connection"
+                //            + "&"+Constants.CHANNEL_HANDLER_KEY+"=connection"
                 + "&timeout=" + timeout;
 
         final AtomicInteger count = new AtomicInteger();
@@ -68,21 +68,26 @@ public class PerformanceClientCloseTest extends TestCase {
                             if (c % 100 == 0) {
                                 System.out.println("count: " + count.get() + ", error: " + error.get());
                             }
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e) {
                             error.incrementAndGet();
                             e.printStackTrace();
                             System.out.println("count: " + count.get() + ", error: " + error.get());
                             if ("exit".equals(onerror)) {
                                 System.exit(-1);
-                            } else if ("break".equals(onerror)) {
+                            }
+                            else if ("break".equals(onerror)) {
                                 break;
-                            } else if ("sleep".equals(onerror)) {
+                            }
+                            else if ("sleep".equals(onerror)) {
                                 try {
                                     Thread.sleep(30000);
-                                } catch (InterruptedException e1) {
+                                }
+                                catch (InterruptedException e1) {
                                 }
                             }
-                        } finally {
+                        }
+                        finally {
                             if (client != null) {
                                 client.close();
                             }
@@ -95,7 +100,8 @@ public class PerformanceClientCloseTest extends TestCase {
             while (true) {
                 try {
                     PerformanceServerTest.class.wait();
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                 }
             }
         }

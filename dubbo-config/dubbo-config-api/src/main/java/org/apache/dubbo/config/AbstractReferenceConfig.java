@@ -98,6 +98,7 @@ public abstract class AbstractReferenceConfig extends AbstractInterfaceConfig {
 
     /**
      * @return
+     *
      * @deprecated instead, use scope to judge if it's in jvm, scope=local
      */
     @Deprecated
@@ -107,6 +108,7 @@ public abstract class AbstractReferenceConfig extends AbstractInterfaceConfig {
 
     /**
      * @param injvm
+     *
      * @deprecated instead, use scope to judge if it's in jvm, scope=local
      */
     @Deprecated

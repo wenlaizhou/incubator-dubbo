@@ -22,11 +22,11 @@
     ">
 
     <!-- current application configuration -->
-    <dubbo:application name="demo-consumer"/>
+    <dubbo:application name="demo-consumer" />
 
     <!-- service reference configuration -->
     <dubbo:reference id="demoService" interface="org.apache.dubbo.config.spring.api.DemoService">
-        <dubbo:method name="sayName" onreturn="notify.getBox" onthrow="notify.getBox" oninvoke="notify.getBox"/>
+        <dubbo:method name="sayName" onreturn="notify.getBox" onthrow="notify.getBox" oninvoke="notify.getBox" />
     </dubbo:reference>
 
 </beans>

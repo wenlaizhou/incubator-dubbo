@@ -24,6 +24,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
 public class SerializableClassRegistryTest {
+
     @Test
     public void testAddClasses() {
         SerializableClassRegistry.registerClass(A.class);
@@ -34,8 +35,10 @@ public class SerializableClassRegistryTest {
     }
 
     private class A {
+
     }
 
     private class B {
+
     }
 }

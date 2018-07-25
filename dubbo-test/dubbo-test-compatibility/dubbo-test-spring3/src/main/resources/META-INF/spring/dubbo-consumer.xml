@@ -22,9 +22,9 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <!-- application config -->
-    <dubbo:application name="dubbo-annotation-consumer"/>
+    <dubbo:application name="dubbo-annotation-consumer" />
 
     <!-- registry center config -->
-    <dubbo:registry address="N/A"/>
+    <dubbo:registry address="N/A" />
 
 </beans>

@@ -28,8 +28,11 @@ import java.net.InetSocketAddress;
 public class TimeoutException extends RemotingException {
 
     public static final int CLIENT_SIDE = 0;
+
     public static final int SERVER_SIDE = 1;
+
     private static final long serialVersionUID = 3122966731958222692L;
+
     private final int phase;
 
     public TimeoutException(boolean serverSide, Channel channel, String message) {

@@ -21,9 +21,11 @@ import org.apache.dubbo.config.ReferenceConfig;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class MockReferenceConfig extends ReferenceConfig<String> {
+
     static AtomicLong counter = new AtomicLong();
 
     String value;
+
     boolean destroyMethodRun = false;
 
     public static void setCounter(long c) {
@@ -40,7 +42,9 @@ public class MockReferenceConfig extends ReferenceConfig<String> {
 
     @Override
     public synchronized String get() {
-        if (value != null) return value;
+        if (value != null) {
+            return value;
+        }
 
         value = "" + counter.getAndIncrement();
         return value;

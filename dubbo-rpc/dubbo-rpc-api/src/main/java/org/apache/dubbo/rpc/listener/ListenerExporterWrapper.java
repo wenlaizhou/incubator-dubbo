@@ -47,7 +47,8 @@ public class ListenerExporterWrapper<T> implements Exporter<T> {
                 if (listener != null) {
                     try {
                         listener.exported(this);
-                    } catch (RuntimeException t) {
+                    }
+                    catch (RuntimeException t) {
                         logger.error(t.getMessage(), t);
                         exception = t;
                     }
@@ -68,14 +69,16 @@ public class ListenerExporterWrapper<T> implements Exporter<T> {
     public void unexport() {
         try {
             exporter.unexport();
-        } finally {
+        }
+        finally {
             if (listeners != null && !listeners.isEmpty()) {
                 RuntimeException exception = null;
                 for (ExporterListener listener : listeners) {
                     if (listener != null) {
                         try {
                             listener.unexported(this);
-                        } catch (RuntimeException t) {
+                        }
+                        catch (RuntimeException t) {
                             logger.error(t.getMessage(), t);
                             exception = t;
                         }

@@ -77,7 +77,8 @@ public abstract class AbstractProxyProtocol extends AbstractProtocol {
                 if (runnable != null) {
                     try {
                         runnable.run();
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn(t.getMessage(), t);
                     }
                 }
@@ -104,12 +105,14 @@ public abstract class AbstractProxyProtocol extends AbstractProtocol {
                         }
                     }
                     return result;
-                } catch (RpcException e) {
+                }
+                catch (RpcException e) {
                     if (e.getCode() == RpcException.UNKNOWN_EXCEPTION) {
                         e.setCode(getErrorCode(e.getCause()));
                     }
                     throw e;
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     throw getRpcException(type, url, invocation, e);
                 }
             }

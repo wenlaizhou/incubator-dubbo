@@ -73,7 +73,8 @@ public class TKv implements TComponent {
                 }
                 sb.append(line).append('\n');
             }
-        } finally {
+        }
+        finally {
             if (null != scanner) {
                 scanner.close();
             }

@@ -22,6 +22,7 @@ import org.apache.dubbo.rpc.ProxyFactory;
 import org.apache.dubbo.rpc.RpcException;
 
 public class MockProxyFactory implements ProxyFactory {
+
     @Override
     public <T> T getProxy(Invoker<T> invoker) throws RpcException {
         return null;

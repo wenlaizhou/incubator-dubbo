@@ -38,6 +38,7 @@ public class QosProcessHandler extends ByteToMessageDecoder {
     private ScheduledFuture<?> welcomeFuture;
 
     private String welcome;
+
     // true means to accept foreign IP
     private boolean acceptForeignIp;
 
@@ -83,7 +84,8 @@ public class QosProcessHandler extends ByteToMessageDecoder {
             p.addLast(new HttpObjectAggregator(1048576));
             p.addLast(new HttpProcessHandler());
             p.remove(this);
-        } else {
+        }
+        else {
             p.addLast(new LineBasedFrameDecoder(2048));
             p.addLast(new StringDecoder(CharsetUtil.UTF_8));
             p.addLast(new StringEncoder(CharsetUtil.UTF_8));

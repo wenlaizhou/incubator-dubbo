@@ -49,7 +49,9 @@ public interface Serialization {
      *
      * @param url
      * @param output
+     *
      * @return serializer
+     *
      * @throws IOException
      */
     @Adaptive
@@ -60,7 +62,9 @@ public interface Serialization {
      *
      * @param url
      * @param input
+     *
      * @return deserializer
+     *
      * @throws IOException
      */
     @Adaptive

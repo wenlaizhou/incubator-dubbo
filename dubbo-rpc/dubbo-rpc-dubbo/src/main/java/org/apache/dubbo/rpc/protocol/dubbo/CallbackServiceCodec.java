@@ -41,13 +41,19 @@ import java.util.Set;
  * callback service helper
  */
 class CallbackServiceCodec {
+
     private static final Logger logger = LoggerFactory.getLogger(CallbackServiceCodec.class);
 
     private static final ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
     private static final DubboProtocol protocol = DubboProtocol.getDubboProtocol();
+
     private static final byte CALLBACK_NONE = 0x0;
+
     private static final byte CALLBACK_CREATE = 0x1;
+
     private static final byte CALLBACK_DESTROY = 0x2;
+
     private static final String INV_ATT_CALLBACK_KEY = "sys_callback_arg-";
 
     private static byte isCallBack(URL url, String methodName, int argIndex) {
@@ -58,7 +64,8 @@ class CallbackServiceCodec {
             if (callback != null) {
                 if (callback.equalsIgnoreCase("true")) {
                     isCallback = CALLBACK_CREATE;
-                } else if (callback.equalsIgnoreCase("false")) {
+                }
+                else if (callback.equalsIgnoreCase("false")) {
                     isCallback = CALLBACK_DESTROY;
                 }
             }
@@ -74,6 +81,7 @@ class CallbackServiceCodec {
      * @param clazz
      * @param inst
      * @param export
+     *
      * @throws IOException
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -114,7 +122,8 @@ class CallbackServiceCodec {
                     increaseInstanceCount(channel, countkey);
                 }
             }
-        } else {
+        }
+        else {
             if (channel.hasAttribute(cacheKey)) {
                 Exporter<?> exporter = (Exporter<?>) channel.getAttribute(cacheKey);
                 exporter.unexport();
@@ -160,7 +169,8 @@ class CallbackServiceCodec {
                     logger.info("method " + inv.getMethodName() + " include a callback service :" + invoker.getUrl() + ", a proxy :" + invoker + " has been created.");
                 }
             }
-        } else {
+        }
+        else {
             if (proxy != null) {
                 Invoker<?> invoker = (Invoker<?>) channel.getAttribute(invokerCacheKey);
                 try {
@@ -169,7 +179,8 @@ class CallbackServiceCodec {
                         callbackInvokers.remove(invoker);
                     }
                     invoker.destroy();
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     logger.error(e.getMessage(), e);
                 }
                 // cancel refer, directly remove from the map
@@ -208,7 +219,8 @@ class CallbackServiceCodec {
             //client side error
             throw new IllegalStateException("interface " + interfaceClass + " `s callback instances num exceed providers limit :" + limit
                     + " ,current num: " + (count + 1) + ". The new callback service will not work !!! you can cancle the callback service which exported before. channel :" + channel);
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -219,11 +231,13 @@ class CallbackServiceCodec {
             Integer count = (Integer) channel.getAttribute(countkey);
             if (count == null) {
                 count = 1;
-            } else {
+            }
+            else {
                 count++;
             }
             channel.setAttribute(countkey, count);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
     }
@@ -233,11 +247,13 @@ class CallbackServiceCodec {
             Integer count = (Integer) channel.getAttribute(countkey);
             if (count == null || count <= 0) {
                 return;
-            } else {
+            }
+            else {
                 count--;
             }
             channel.setAttribute(countkey, count);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
     }
@@ -268,7 +284,8 @@ class CallbackServiceCodec {
         URL url = null;
         try {
             url = DubboProtocol.getDubboProtocol().getInvoker(channel, inv).getUrl();
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             if (logger.isInfoEnabled()) {
                 logger.info(e.getMessage(), e);
             }
@@ -281,14 +298,16 @@ class CallbackServiceCodec {
             case CallbackServiceCodec.CALLBACK_CREATE:
                 try {
                     return referOrdestroyCallbackService(channel, url, pts[paraIndex], inv, Integer.parseInt(inv.getAttachment(INV_ATT_CALLBACK_KEY + paraIndex)), true);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     logger.error(e.getMessage(), e);
                     throw new IOException(StringUtils.toString(e));
                 }
             case CallbackServiceCodec.CALLBACK_DESTROY:
                 try {
                     return referOrdestroyCallbackService(channel, url, pts[paraIndex], inv, Integer.parseInt(inv.getAttachment(INV_ATT_CALLBACK_KEY + paraIndex)), false);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     throw new IOException(StringUtils.toString(e));
                 }
             default:

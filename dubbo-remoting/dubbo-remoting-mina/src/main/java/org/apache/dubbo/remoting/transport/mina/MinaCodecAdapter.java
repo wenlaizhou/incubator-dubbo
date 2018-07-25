@@ -80,7 +80,8 @@ final class MinaCodecAdapter implements ProtocolCodecFactory {
             MinaChannel channel = MinaChannel.getOrAddChannel(session, url, handler);
             try {
                 codec.encode(channel, buffer, msg);
-            } finally {
+            }
+            finally {
                 MinaChannel.removeChannelIfDisconnected(session);
             }
             out.write(ByteBuffer.wrap(buffer.toByteBuffer()));
@@ -95,7 +96,9 @@ final class MinaCodecAdapter implements ProtocolCodecFactory {
         @Override
         public void decode(IoSession session, ByteBuffer in, ProtocolDecoderOutput out) throws Exception {
             int readable = in.limit();
-            if (readable <= 0) return;
+            if (readable <= 0) {
+                return;
+            }
 
             ChannelBuffer frame;
 
@@ -103,13 +106,15 @@ final class MinaCodecAdapter implements ProtocolCodecFactory {
                 if (buffer instanceof DynamicChannelBuffer) {
                     buffer.writeBytes(in.buf());
                     frame = buffer;
-                } else {
+                }
+                else {
                     int size = buffer.readableBytes() + in.remaining();
                     frame = ChannelBuffers.dynamicBuffer(size > bufferSize ? size : bufferSize);
                     frame.writeBytes(buffer, buffer.readableBytes());
                     frame.writeBytes(in.buf());
                 }
-            } else {
+            }
+            else {
                 frame = ChannelBuffers.wrappedBuffer(in.buf());
             }
 
@@ -122,14 +127,16 @@ final class MinaCodecAdapter implements ProtocolCodecFactory {
                     savedReadIndex = frame.readerIndex();
                     try {
                         msg = codec.decode(channel, frame);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         buffer = ChannelBuffers.EMPTY_BUFFER;
                         throw e;
                     }
                     if (msg == Codec2.DecodeResult.NEED_MORE_INPUT) {
                         frame.readerIndex(savedReadIndex);
                         break;
-                    } else {
+                    }
+                    else {
                         if (savedReadIndex == frame.readerIndex()) {
                             buffer = ChannelBuffers.EMPTY_BUFFER;
                             throw new Exception("Decode without read data.");
@@ -138,12 +145,15 @@ final class MinaCodecAdapter implements ProtocolCodecFactory {
                             out.write(msg);
                         }
                     }
-                } while (frame.readable());
-            } finally {
+                }
+                while (frame.readable());
+            }
+            finally {
                 if (frame.readable()) {
                     frame.discardReadBytes();
                     buffer = frame;
-                } else {
+                }
+                else {
                     buffer = ChannelBuffers.EMPTY_BUFFER;
                 }
                 MinaChannel.removeChannelIfDisconnected(session);

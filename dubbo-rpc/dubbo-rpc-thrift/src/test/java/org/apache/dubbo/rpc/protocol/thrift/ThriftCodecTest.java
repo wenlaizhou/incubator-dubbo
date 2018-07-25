@@ -46,6 +46,7 @@ import java.io.ByteArrayInputStream;
 public class ThriftCodecTest {
 
     private ThriftCodec codec = new ThriftCodec();
+
     private Channel channel = new MockedChannel(URL.valueOf("thrift://127.0.0.1"));
 
     static byte[] encodeFrame(byte[] content) {
@@ -164,7 +165,8 @@ public class ThriftCodecTest {
             protocol.writeI32(messageLength);
             bos.setWriteIndex(ThriftCodec.MESSAGE_HEADER_LENGTH_INDEX);
             protocol.writeI16((short) (0xffff & headerLength));
-        } finally {
+        }
+        finally {
             bos.setWriteIndex(oldIndex);
         }
         // prepare
@@ -237,7 +239,8 @@ public class ThriftCodecTest {
             protocol.writeI32(messageLength);
             bos.setWriteIndex(ThriftCodec.MESSAGE_HEADER_LENGTH_INDEX);
             protocol.writeI16((short) (0xffff & headerLength));
-        } finally {
+        }
+        finally {
             bos.setWriteIndex(oldIndex);
         }
         // prepare
@@ -417,7 +420,8 @@ public class ThriftCodecTest {
             protocol.writeI16((short) (0xffff & headerLength));
             bos.setWriteIndex(ThriftCodec.MESSAGE_LENGTH_INDEX);
             protocol.writeI32(messageLength);
-        } finally {
+        }
+        finally {
             bos.setWriteIndex(oldIndex);
         }
 

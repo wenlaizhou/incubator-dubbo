@@ -60,7 +60,8 @@ public class DeprecatedFilter implements Filter {
             for (Class<?> type : types) {
                 if (first) {
                     first = false;
-                } else {
+                }
+                else {
                     buf.append(", ");
                 }
                 buf.append(type.getSimpleName());

@@ -45,10 +45,12 @@ public class SpringStatusChecker implements StatusChecker {
         if (context instanceof Lifecycle) {
             if (((Lifecycle) context).isRunning()) {
                 level = Status.Level.OK;
-            } else {
+            }
+            else {
                 level = Status.Level.ERROR;
             }
-        } else {
+        }
+        else {
             level = Status.Level.UNKNOWN;
         }
         StringBuilder buf = new StringBuilder();
@@ -58,7 +60,8 @@ public class SpringStatusChecker implements StatusChecker {
             while (cls != null && method == null) {
                 try {
                     method = cls.getDeclaredMethod("getConfigLocations", new Class<?>[0]);
-                } catch (NoSuchMethodException t) {
+                }
+                catch (NoSuchMethodException t) {
                     cls = cls.getSuperclass();
                 }
             }
@@ -76,7 +79,8 @@ public class SpringStatusChecker implements StatusChecker {
                     }
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         return new Status(level, buf.toString());

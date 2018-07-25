@@ -24,6 +24,7 @@ import org.apache.dubbo.rpc.Protocol;
 import org.apache.dubbo.rpc.RpcException;
 
 public class MockProtocol2 implements Protocol {
+
     public static Protocol delegate;
 
     @Override

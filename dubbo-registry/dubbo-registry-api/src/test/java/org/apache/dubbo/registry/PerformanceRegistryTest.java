@@ -27,7 +27,6 @@ import org.junit.Test;
 
 /**
  * RegistryPerformanceTest
- *
  */
 public class PerformanceRegistryTest extends TestCase {
 
@@ -59,7 +58,8 @@ public class PerformanceRegistryTest extends TestCase {
             while (true) {
                 try {
                     PerformanceRegistryTest.class.wait();
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                 }
             }
         }

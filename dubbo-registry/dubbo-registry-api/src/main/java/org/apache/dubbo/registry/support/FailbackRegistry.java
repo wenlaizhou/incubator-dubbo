@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * FailbackRegistry. (SPI, Prototype, ThreadSafe)
- *
  */
 public abstract class FailbackRegistry extends AbstractRegistry {
 
@@ -72,7 +71,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                 // Check and connect to the registry
                 try {
                     retry();
-                } catch (Throwable t) { // Defensive fault tolerance
+                }
+                catch (Throwable t) { // Defensive fault tolerance
                     logger.error("Unexpected error occur at failed retry, cause: " + t.getMessage(), t);
                 }
             }
@@ -135,7 +135,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
         try {
             // Sending a registration request to the server side
             doRegister(url);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Throwable t = e;
 
             // If the startup detection is opened, the Exception is thrown directly.
@@ -148,7 +149,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                     t = t.getCause();
                 }
                 throw new IllegalStateException("Failed to register " + url + " to registry " + getUrl().getAddress() + ", cause: " + t.getMessage(), t);
-            } else {
+            }
+            else {
                 logger.error("Failed to register " + url + ", waiting for retry, cause: " + t.getMessage(), t);
             }
 
@@ -165,7 +167,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
         try {
             // Sending a cancellation request to the server side
             doUnregister(url);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Throwable t = e;
 
             // If the startup detection is opened, the Exception is thrown directly.
@@ -178,7 +181,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                     t = t.getCause();
                 }
                 throw new IllegalStateException("Failed to unregister " + url + " to registry " + getUrl().getAddress() + ", cause: " + t.getMessage(), t);
-            } else {
+            }
+            else {
                 logger.error("Failed to uregister " + url + ", waiting for retry, cause: " + t.getMessage(), t);
             }
 
@@ -194,14 +198,16 @@ public abstract class FailbackRegistry extends AbstractRegistry {
         try {
             // Sending a subscription request to the server side
             doSubscribe(url, listener);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Throwable t = e;
 
             List<URL> urls = getCacheUrls(url);
             if (urls != null && !urls.isEmpty()) {
                 notify(url, listener, urls);
                 logger.error("Failed to subscribe " + url + ", Using cached list: " + urls + " from cache file: " + getUrl().getParameter(Constants.FILE_KEY, System.getProperty("user.home") + "/dubbo-registry-" + url.getHost() + ".cache") + ", cause: " + t.getMessage(), t);
-            } else {
+            }
+            else {
                 // If the startup detection is opened, the Exception is thrown directly.
                 boolean check = getUrl().getParameter(Constants.CHECK_KEY, true)
                         && url.getParameter(Constants.CHECK_KEY, true);
@@ -211,7 +217,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                         t = t.getCause();
                     }
                     throw new IllegalStateException("Failed to subscribe " + url + ", cause: " + t.getMessage(), t);
-                } else {
+                }
+                else {
                     logger.error("Failed to subscribe " + url + ", waiting for retry, cause: " + t.getMessage(), t);
                 }
             }
@@ -228,7 +235,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
         try {
             // Sending a canceling subscription request to the server side
             doUnsubscribe(url, listener);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Throwable t = e;
 
             // If the startup detection is opened, the Exception is thrown directly.
@@ -240,7 +248,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                     t = t.getCause();
                 }
                 throw new IllegalStateException("Failed to unsubscribe " + url + " to registry " + getUrl().getAddress() + ", cause: " + t.getMessage(), t);
-            } else {
+            }
+            else {
                 logger.error("Failed to unsubscribe " + url + ", waiting for retry, cause: " + t.getMessage(), t);
             }
 
@@ -264,7 +273,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
         }
         try {
             doNotify(url, listener, urls);
-        } catch (Exception t) {
+        }
+        catch (Exception t) {
             // Record a failed registration request to a failed list, retry regularly
             Map<NotifyListener, List<URL>> listeners = failedNotified.get(url);
             if (listeners == null) {
@@ -320,11 +330,13 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                         try {
                             doRegister(url);
                             failedRegistered.remove(url);
-                        } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                        }
+                        catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                             logger.warn("Failed to retry register " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                         }
                     }
-                } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                }
+                catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                     logger.warn("Failed to retry register " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                 }
             }
@@ -340,11 +352,13 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                         try {
                             doUnregister(url);
                             failedUnregistered.remove(url);
-                        } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                        }
+                        catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                             logger.warn("Failed to retry unregister  " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                         }
                     }
-                } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                }
+                catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                     logger.warn("Failed to retry unregister  " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                 }
             }
@@ -368,12 +382,14 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                             try {
                                 doSubscribe(url, listener);
                                 listeners.remove(listener);
-                            } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                            }
+                            catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                                 logger.warn("Failed to retry subscribe " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                             }
                         }
                     }
-                } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                }
+                catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                     logger.warn("Failed to retry subscribe " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                 }
             }
@@ -397,12 +413,14 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                             try {
                                 doUnsubscribe(url, listener);
                                 listeners.remove(listener);
-                            } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                            }
+                            catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                                 logger.warn("Failed to retry unsubscribe " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                             }
                         }
                     }
-                } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                }
+                catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                     logger.warn("Failed to retry unsubscribe " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                 }
             }
@@ -426,12 +444,14 @@ public abstract class FailbackRegistry extends AbstractRegistry {
                                 List<URL> urls = entry.getValue();
                                 listener.notify(urls);
                                 values.remove(listener);
-                            } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                            }
+                            catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                                 logger.warn("Failed to retry notify " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                             }
                         }
                     }
-                } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+                }
+                catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
                     logger.warn("Failed to retry notify " + failed + ", waiting for again, cause: " + t.getMessage(), t);
                 }
             }
@@ -443,7 +463,8 @@ public abstract class FailbackRegistry extends AbstractRegistry {
         super.destroy();
         try {
             retryFuture.cancel(true);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         ExecutorUtil.gracefulShutdown(retryExecutor, retryPeriod);

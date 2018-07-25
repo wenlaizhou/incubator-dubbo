@@ -26,7 +26,9 @@ import org.apache.dubbo.remoting.Transporter;
 import org.mockito.Mockito;
 
 public class MockTransporter implements Transporter {
+
     private Server server = Mockito.mock(Server.class);
+
     private Client client = Mockito.mock(Client.class);
 
     @Override

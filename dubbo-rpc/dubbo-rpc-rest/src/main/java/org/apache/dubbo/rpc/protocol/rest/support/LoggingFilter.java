@@ -45,7 +45,6 @@ import java.util.Map;
 
 /**
  * This logging filter is not highly optimized for now
- *
  */
 @Priority(Integer.MIN_VALUE)
 public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilter, ContainerResponseFilter, ClientResponseFilter, WriterInterceptor, ReaderInterceptor {
@@ -106,6 +105,7 @@ public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilte
     protected static class OutputStreamWrapper extends OutputStream {
 
         private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
         private final OutputStream output;
 
         private OutputStreamWrapper(OutputStream output) {

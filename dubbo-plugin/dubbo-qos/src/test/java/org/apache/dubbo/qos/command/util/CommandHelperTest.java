@@ -19,6 +19,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class CommandHelperTest {
+
     @Test
     public void testHasCommand() throws Exception {
         assertTrue(CommandHelper.hasCommand("greeting"));

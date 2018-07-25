@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.apache.dubbo.rpc.protocol.thrift;
+
 /**
  * @since 2.7.0, use https://github.com/dubbo/dubbo-rpc-native-thrift instead
  */
@@ -22,8 +23,11 @@ package org.apache.dubbo.rpc.protocol.thrift;
 public final class ThriftConstants {
 
     public static final String THRIFT_PROTOCOL_KEY = "thrift.protocol";
+
     public static final String BINARY_THRIFT_PROTOCOL = "binary";
+
     public static final String CLASS_NAME_GENERATOR_KEY = "class.name.generator";
+
     public static final String DEFAULT_PROTOCOL = BINARY_THRIFT_PROTOCOL;
 
     private ThriftConstants() {

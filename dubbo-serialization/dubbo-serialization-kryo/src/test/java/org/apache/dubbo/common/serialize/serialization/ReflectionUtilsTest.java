@@ -34,12 +34,14 @@ public class ReflectionUtilsTest {
     }
 
     static class Foo {
+
         public Foo(int i) {
 
         }
     }
 
     static class Bar {
+
         private Bar() {
 
         }

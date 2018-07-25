@@ -61,7 +61,8 @@ public class ExceptionFilter extends AbstractPostProcessFilter {
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         try {
             return postProcessResult(invoker.invoke(invocation), invoker, invocation);
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
             logger.error("Got unchecked and undeclared exception which called by " + RpcContext.getContext().getRemoteHost()
                     + ". service: " + invoker.getInterface().getName() + ", method: " + invocation.getMethodName()
                     + ", exception: " + e.getClass().getName() + ": " + e.getMessage(), e);
@@ -88,7 +89,8 @@ public class ExceptionFilter extends AbstractPostProcessFilter {
                             return result;
                         }
                     }
-                } catch (NoSuchMethodException e) {
+                }
+                catch (NoSuchMethodException e) {
                     return result;
                 }
 
@@ -115,7 +117,8 @@ public class ExceptionFilter extends AbstractPostProcessFilter {
 
                 // otherwise, wrap with RuntimeException and throw back to the client
                 return new RpcResult(new RuntimeException(StringUtils.toString(exception)));
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn("Fail to ExceptionFilter when called by " + RpcContext.getContext().getRemoteHost()
                         + ". service: " + invoker.getInterface().getName() + ", method: " + invocation.getMethodName()
                         + ", exception: " + e.getClass().getName() + ": " + e.getMessage(), e);

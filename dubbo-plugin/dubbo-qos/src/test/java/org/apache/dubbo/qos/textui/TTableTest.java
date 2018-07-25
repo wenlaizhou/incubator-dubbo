@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class TTableTest {
+
     @Test
     public void test1() throws Exception {
         TTable table = new TTable(4);

@@ -27,6 +27,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class GrizzlyTransporterTest {
+
     @Test
     public void shouldAbleToBindGrizzly() throws Exception {
         int port = NetUtils.getAvailablePort();

@@ -40,12 +40,19 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class ZookeeperRegistryTest {
+
     private TestingServer zkServer;
+
     private ZookeeperRegistry zookeeperRegistry;
+
     private String service = "org.apache.dubbo.test.injvmServie";
+
     private URL serviceUrl = URL.valueOf("zookeeper://zookeeper/" + service + "?notify=false&methods=test1,test2");
+
     private URL anyUrl = URL.valueOf("zookeeper://zookeeper/*");
+
     private URL registryUrl;
+
     private ZookeeperRegistryFactory zookeeperRegistryFactory;
 
     @Before

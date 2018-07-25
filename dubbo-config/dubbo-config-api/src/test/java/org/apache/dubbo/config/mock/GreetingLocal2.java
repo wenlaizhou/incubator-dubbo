@@ -19,6 +19,7 @@ package org.apache.dubbo.config.mock;
 import org.apache.dubbo.config.api.Greeting;
 
 public class GreetingLocal2 implements Greeting {
+
     @Override
     public String hello() {
         return "local";

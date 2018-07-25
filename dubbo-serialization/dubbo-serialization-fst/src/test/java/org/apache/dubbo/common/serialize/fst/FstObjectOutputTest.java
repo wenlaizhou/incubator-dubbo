@@ -30,9 +30,13 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
 public class FstObjectOutputTest {
+
     private FstObjectOutput fstObjectOutput;
+
     private FstObjectInput fstObjectInput;
+
     private ByteArrayOutputStream byteArrayOutputStream;
+
     private ByteArrayInputStream byteArrayInputStream;
 
     @Before

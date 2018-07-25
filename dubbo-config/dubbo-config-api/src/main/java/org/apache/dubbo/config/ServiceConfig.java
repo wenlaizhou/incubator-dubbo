@@ -78,18 +78,27 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
     private static final Map<String, Integer> RANDOM_PORT_MAP = new HashMap<String, Integer>();
 
     private static final ScheduledExecutorService delayExportExecutor = Executors.newSingleThreadScheduledExecutor(new NamedThreadFactory("DubboServiceDelayExporter", true));
+
     private final List<URL> urls = new ArrayList<URL>();
+
     private final List<Exporter<?>> exporters = new ArrayList<Exporter<?>>();
+
     // interface type
     private String interfaceName;
+
     private Class<?> interfaceClass;
+
     // reference to interface impl
     private T ref;
+
     // service name
     private String path;
+
     // method configuration
     private List<MethodConfig> methods;
+
     private ProviderConfig provider;
+
     private transient volatile boolean exported;
 
     private transient volatile boolean unexported;
@@ -212,7 +221,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                     doExport();
                 }
             }, delay, TimeUnit.MILLISECONDS);
-        } else {
+        }
+        else {
             doExport();
         }
     }
@@ -267,11 +277,13 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             if (StringUtils.isEmpty(generic)) {
                 generic = Boolean.TRUE.toString();
             }
-        } else {
+        }
+        else {
             try {
                 interfaceClass = Class.forName(interfaceName, true, Thread.currentThread()
                         .getContextClassLoader());
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
             checkInterfaceAndMethods(interfaceClass, methods);
@@ -285,7 +297,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             Class<?> localClass;
             try {
                 localClass = ClassHelper.forNameWithThreadContextClassLoader(local);
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
             if (!interfaceClass.isAssignableFrom(localClass)) {
@@ -299,7 +312,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             Class<?> stubClass;
             try {
                 stubClass = ClassHelper.forNameWithThreadContextClassLoader(stub);
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
             if (!interfaceClass.isAssignableFrom(stubClass)) {
@@ -342,7 +356,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             for (Exporter<?> exporter : exporters) {
                 try {
                     exporter.unexport();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn("unexpected err when unexport" + exporter, t);
                 }
             }
@@ -404,10 +419,12 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                                         if (argument.getIndex() != -1) {
                                             if (argtypes[argument.getIndex()].getName().equals(argument.getType())) {
                                                 appendParameters(map, argument, method.getName() + "." + argument.getIndex());
-                                            } else {
+                                            }
+                                            else {
                                                 throw new IllegalArgumentException("argument config error : the index attribute and type attribute not match :index :" + argument.getIndex() + ", type:" + argument.getType());
                                             }
-                                        } else {
+                                        }
+                                        else {
                                             // multiple callbacks in the method
                                             for (int j = 0; j < argtypes.length; j++) {
                                                 Class<?> argclazz = argtypes[j];
@@ -422,9 +439,11 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                                     }
                                 }
                             }
-                        } else if (argument.getIndex() != -1) {
+                        }
+                        else if (argument.getIndex() != -1) {
                             appendParameters(map, argument, method.getName() + "." + argument.getIndex());
-                        } else {
+                        }
+                        else {
                             throw new IllegalArgumentException("argument config must set index or type attribute.eg: <dubbo:argument index='0' .../> or <dubbo:argument type=xxx .../>");
                         }
 
@@ -436,7 +455,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         if (ProtocolUtils.isGeneric(generic)) {
             map.put(Constants.GENERIC_KEY, generic);
             map.put(Constants.METHODS_KEY, Constants.ANY_VALUE);
-        } else {
+        }
+        else {
             String revision = Version.getVersion(interfaceClass, version);
             if (revision != null && revision.length() > 0) {
                 map.put("revision", revision);
@@ -446,14 +466,16 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
             if (methods.length == 0) {
                 logger.warn("NO method found in service interface " + interfaceClass.getName());
                 map.put(Constants.METHODS_KEY, Constants.ANY_VALUE);
-            } else {
+            }
+            else {
                 map.put(Constants.METHODS_KEY, StringUtils.join(new HashSet<String>(Arrays.asList(methods)), ","));
             }
         }
         if (!ConfigUtils.isEmpty(token)) {
             if (ConfigUtils.isDefault(token)) {
                 map.put(Constants.TOKEN_KEY, UUID.randomUUID().toString());
-            } else {
+            }
+            else {
                 map.put(Constants.TOKEN_KEY, token);
             }
         }
@@ -513,7 +535,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                         Exporter<?> exporter = protocol.export(wrapperInvoker);
                         exporters.add(exporter);
                     }
-                } else {
+                }
+                else {
                     Invoker<?> invoker = proxyFactory.getInvoker(ref, (Class) interfaceClass, url);
                     DelegateProviderMetaDataInvoker wrapperInvoker = new DelegateProviderMetaDataInvoker(invoker, this);
 
@@ -552,6 +575,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
      * @param protocolConfig
      * @param registryURLs
      * @param map
+     *
      * @return
      */
     private String findConfigedHosts(ProtocolConfig protocolConfig, List<URL> registryURLs, Map<String, String> map) {
@@ -572,7 +596,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                 anyhost = true;
                 try {
                     hostToBind = InetAddress.getLocalHost().getHostAddress();
-                } catch (UnknownHostException e) {
+                }
+                catch (UnknownHostException e) {
                     logger.warn(e.getMessage(), e);
                 }
                 if (isInvalidLocalHost(hostToBind)) {
@@ -589,13 +614,16 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                                     socket.connect(addr, 1000);
                                     hostToBind = socket.getLocalAddress().getHostAddress();
                                     break;
-                                } finally {
+                                }
+                                finally {
                                     try {
                                         socket.close();
-                                    } catch (Throwable e) {
+                                    }
+                                    catch (Throwable e) {
                                     }
                                 }
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 logger.warn(e.getMessage(), e);
                             }
                         }
@@ -613,7 +641,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         String hostToRegistry = getValueFromConfig(protocolConfig, Constants.DUBBO_IP_TO_REGISTRY);
         if (hostToRegistry != null && hostToRegistry.length() > 0 && isInvalidLocalHost(hostToRegistry)) {
             throw new IllegalArgumentException("Specified invalid registry ip from property:" + Constants.DUBBO_IP_TO_REGISTRY + ", value:" + hostToRegistry);
-        } else if (hostToRegistry == null || hostToRegistry.length() == 0) {
+        }
+        else if (hostToRegistry == null || hostToRegistry.length() == 0) {
             // bind ip is used as registry ip by default
             hostToRegistry = hostToBind;
         }
@@ -630,6 +659,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
      *
      * @param protocolConfig
      * @param name
+     *
      * @return
      */
     private Integer findConfigedPorts(ProtocolConfig protocolConfig, String name, Map<String, String> map) {
@@ -681,7 +711,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                     throw new IllegalArgumentException("Specified invalid port from env value:" + configPort);
                 }
                 port = intPort;
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new IllegalArgumentException("Specified invalid port from env value:" + configPort);
             }
         }
@@ -733,7 +764,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
                 this.interfaceClass = Class.forName(interfaceName, true, Thread.currentThread()
                         .getContextClassLoader());
             }
-        } catch (ClassNotFoundException t) {
+        }
+        catch (ClassNotFoundException t) {
             throw new IllegalStateException(t.getMessage(), t);
         }
         return interfaceClass;
@@ -741,6 +773,7 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
 
     /**
      * @param interfaceClass
+     *
      * @see #setInterface(Class)
      * @deprecated
      */
@@ -814,7 +847,8 @@ public class ServiceConfig<T> extends AbstractServiceConfig {
         }
         if (ProtocolUtils.isGeneric(generic)) {
             this.generic = generic;
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported generic type " + generic);
         }
     }

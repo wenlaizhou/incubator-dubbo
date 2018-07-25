@@ -36,6 +36,7 @@ import org.junit.Test;
  * Client reconnect test
  */
 public class ClientReconnectTest {
+
     public static void main(String[] args) {
         System.out.println(3 % 1);
     }
@@ -84,7 +85,8 @@ public class ClientReconnectTest {
                 + Constants.RECONNECT_KEY + "=" + 1; //1ms reconnect, ensure that there is enough frequency to reconnect
         try {
             Exchangers.connect(url);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
 
             //do nothing
         }
@@ -107,6 +109,7 @@ public class ClientReconnectTest {
     }
 
     static class HandlerAdapter extends ExchangeHandlerAdapter {
+
         @Override
         public void connected(Channel channel) throws RemotingException {
         }

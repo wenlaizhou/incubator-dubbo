@@ -48,13 +48,15 @@ public class TraceTelnetHandler implements TelnetHandler {
         if (service == null || service.length() == 0) {
             service = parts.length > 0 ? parts[0] : null;
             method = parts.length > 1 ? parts[1] : null;
-        } else {
+        }
+        else {
             method = parts.length > 0 ? parts[0] : null;
         }
         if (StringUtils.isInteger(method)) {
             times = method;
             method = null;
-        } else {
+        }
+        else {
             times = parts.length > 2 ? parts[2] : "1";
         }
         if (!StringUtils.isInteger(times)) {
@@ -83,7 +85,8 @@ public class TraceTelnetHandler implements TelnetHandler {
                 }
             }
             TraceFilter.addTracer(invoker.getInterface(), method, channel, Integer.parseInt(times));
-        } else {
+        }
+        else {
             return "No such service " + service;
         }
         return null;

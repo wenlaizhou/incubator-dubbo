@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 public class ModuleConfigTest {
+
     @Test(expected = IllegalStateException.class)
     public void testName1() throws Exception {
         ModuleConfig module = new ModuleConfig();

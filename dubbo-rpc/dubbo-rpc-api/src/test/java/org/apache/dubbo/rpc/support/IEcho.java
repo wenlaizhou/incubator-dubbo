@@ -17,5 +17,6 @@
 package org.apache.dubbo.rpc.support;
 
 public interface IEcho {
+
     String echo(String e);
 }

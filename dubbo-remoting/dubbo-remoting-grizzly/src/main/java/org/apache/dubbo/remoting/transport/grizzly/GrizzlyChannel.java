@@ -35,8 +35,6 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * GrizzlyChannel
- *
- *
  */
 final class GrizzlyChannel extends AbstractChannel {
 
@@ -108,10 +106,12 @@ final class GrizzlyChannel extends AbstractChannel {
                 timeout = getUrl().getPositiveParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT);
                 future.get(timeout, TimeUnit.MILLISECONDS);
             }
-        } catch (TimeoutException e) {
+        }
+        catch (TimeoutException e) {
             throw new RemotingException(this, "Failed to send message " + message + " to " + getRemoteAddress()
                     + "in timeout(" + timeout + "ms) limit", e);
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RemotingException(this, "Failed to send message " + message + " to " + getRemoteAddress() + ", cause: " + e.getMessage(), e);
         }
     }
@@ -120,12 +120,14 @@ final class GrizzlyChannel extends AbstractChannel {
     public void close() {
         try {
             super.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             removeChannelIfDisconnected(connection);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
@@ -133,7 +135,8 @@ final class GrizzlyChannel extends AbstractChannel {
                 logger.info("Close grizzly channel " + connection);
             }
             connection.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -168,13 +171,24 @@ final class GrizzlyChannel extends AbstractChannel {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         GrizzlyChannel other = (GrizzlyChannel) obj;
         if (connection == null) {
-            if (other.connection != null) return false;
-        } else if (!connection.equals(other.connection)) return false;
+            if (other.connection != null) {
+                return false;
+            }
+        }
+        else if (!connection.equals(other.connection)) {
+            return false;
+        }
         return true;
     }
 

@@ -31,6 +31,7 @@ public interface ProxyFactory {
      * create proxy.
      *
      * @param invoker
+     *
      * @return proxy
      */
     @Adaptive({Constants.PROXY_KEY})
@@ -40,6 +41,7 @@ public interface ProxyFactory {
      * create proxy.
      *
      * @param invoker
+     *
      * @return proxy
      */
     @Adaptive({Constants.PROXY_KEY})
@@ -52,6 +54,7 @@ public interface ProxyFactory {
      * @param proxy
      * @param type
      * @param url
+     *
      * @return invoker
      */
     @Adaptive({Constants.PROXY_KEY})

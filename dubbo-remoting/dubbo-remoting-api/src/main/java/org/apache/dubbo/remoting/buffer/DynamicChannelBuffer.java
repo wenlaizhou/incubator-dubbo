@@ -52,7 +52,8 @@ public class DynamicChannelBuffer extends AbstractChannelBuffer {
         int newCapacity;
         if (capacity() == 0) {
             newCapacity = 1;
-        } else {
+        }
+        else {
             newCapacity = capacity();
         }
         int minNewCapacity = writerIndex() + minWritableBytes;

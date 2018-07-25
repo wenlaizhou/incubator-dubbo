@@ -45,6 +45,7 @@ public interface Group {
      * leave.
      *
      * @param url
+     *
      * @throws RemotingException
      */
     void leave(URL url) throws RemotingException;

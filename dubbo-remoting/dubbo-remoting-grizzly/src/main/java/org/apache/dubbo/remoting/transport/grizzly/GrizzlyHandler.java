@@ -52,9 +52,11 @@ public class GrizzlyHandler extends BaseFilter {
         GrizzlyChannel channel = GrizzlyChannel.getOrAddChannel(connection, url, handler);
         try {
             handler.connected(channel);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new IOException(StringUtils.toString(e));
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
         return ctx.getInvokeAction();
@@ -66,9 +68,11 @@ public class GrizzlyHandler extends BaseFilter {
         GrizzlyChannel channel = GrizzlyChannel.getOrAddChannel(connection, url, handler);
         try {
             handler.disconnected(channel);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new IOException(StringUtils.toString(e));
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
         return ctx.getInvokeAction();
@@ -80,9 +84,11 @@ public class GrizzlyHandler extends BaseFilter {
         GrizzlyChannel channel = GrizzlyChannel.getOrAddChannel(connection, url, handler);
         try {
             handler.received(channel, ctx.getMessage());
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new IOException(StringUtils.toString(e));
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
         return ctx.getInvokeAction();
@@ -94,9 +100,11 @@ public class GrizzlyHandler extends BaseFilter {
         GrizzlyChannel channel = GrizzlyChannel.getOrAddChannel(connection, url, handler);
         try {
             handler.sent(channel, ctx.getMessage());
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new IOException(StringUtils.toString(e));
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
         return ctx.getInvokeAction();
@@ -108,9 +116,11 @@ public class GrizzlyHandler extends BaseFilter {
         GrizzlyChannel channel = GrizzlyChannel.getOrAddChannel(connection, url, handler);
         try {
             handler.caught(channel, error);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             logger.error("RemotingException on channel " + channel, e);
-        } finally {
+        }
+        finally {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
         }
     }

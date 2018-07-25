@@ -131,7 +131,8 @@ public class DubboConfigBindingBeanPostProcessor implements BeanPostProcessor, A
         if (dubboConfigBinder == null) {
             try {
                 dubboConfigBinder = applicationContext.getBean(DubboConfigBinder.class);
-            } catch (BeansException ignored) {
+            }
+            catch (BeansException ignored) {
                 if (log.isDebugEnabled()) {
                     log.debug("DubboConfigBinder Bean can't be found in ApplicationContext.");
                 }
@@ -149,6 +150,7 @@ public class DubboConfigBindingBeanPostProcessor implements BeanPostProcessor, A
      * Create {@link DubboConfigBinder} instance.
      *
      * @param environment
+     *
      * @return {@link DefaultDubboConfigBinder}
      */
     protected DubboConfigBinder createDubboConfigBinder(Environment environment) {

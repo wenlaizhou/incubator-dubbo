@@ -5,6 +5,7 @@ import org.apache.dubbo.registry.Registry;
 import org.apache.dubbo.registry.RegistryFactory;
 
 public class TestRegistryFactory implements RegistryFactory {
+
     static Registry registry;
 
     @Override

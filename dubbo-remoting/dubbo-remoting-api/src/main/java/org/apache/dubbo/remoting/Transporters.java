@@ -50,7 +50,8 @@ public class Transporters {
         ChannelHandler handler;
         if (handlers.length == 1) {
             handler = handlers[0];
-        } else {
+        }
+        else {
             handler = new ChannelHandlerDispatcher(handlers);
         }
         return getTransporter().bind(url, handler);
@@ -67,9 +68,11 @@ public class Transporters {
         ChannelHandler handler;
         if (handlers == null || handlers.length == 0) {
             handler = new ChannelHandlerAdapter();
-        } else if (handlers.length == 1) {
+        }
+        else if (handlers.length == 1) {
             handler = handlers[0];
-        } else {
+        }
+        else {
             handler = new ChannelHandlerDispatcher(handlers);
         }
         return getTransporter().connect(url, handler);

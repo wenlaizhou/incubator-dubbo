@@ -73,23 +73,28 @@ final class HeartBeatTask implements Runnable {
                         if (channel instanceof Client) {
                             try {
                                 ((Client) channel).reconnect();
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 //do nothing
                             }
-                        } else {
+                        }
+                        else {
                             channel.close();
                         }
                     }
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn("Exception when heartbeat to remote channel " + channel.getRemoteAddress(), t);
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn("Unhandled exception when heartbeat, cause: " + t.getMessage(), t);
         }
     }
 
     interface ChannelProvider {
+
         Collection<Channel> getChannels();
     }
 

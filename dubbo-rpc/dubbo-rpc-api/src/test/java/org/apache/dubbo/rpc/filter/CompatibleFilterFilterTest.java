@@ -37,8 +37,11 @@ import static org.mockito.Mockito.mock;
  * CompatibleFilterTest.java
  */
 public class CompatibleFilterFilterTest {
+
     private Filter compatibleFilter = new CompatibleFilter();
+
     private Invocation invocation;
+
     private Invoker invoker;
 
     @After

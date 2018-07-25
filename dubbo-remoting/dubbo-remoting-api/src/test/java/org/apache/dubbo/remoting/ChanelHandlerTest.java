@@ -43,18 +43,21 @@ public class ChanelHandlerTest extends TestCase {
         while (run) {
             try {
                 exchangeClient = Exchangers.connect(url, handler);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
 
                 if (t != null && t.getCause() != null && t.getCause().getClass() != null && (t.getCause().getClass() == java.net.ConnectException.class
                         || t.getCause().getClass() == java.net.ConnectException.class)) {
 
-                } else {
+                }
+                else {
                     t.printStackTrace();
                 }
 
                 try {
                     Thread.sleep(50);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -91,6 +94,7 @@ public class ChanelHandlerTest extends TestCase {
     }
 
     static class PeformanceTestHandler extends ExchangeHandlerAdapter {
+
         String url = "";
 
         /**
@@ -116,7 +120,7 @@ public class ChanelHandlerTest extends TestCase {
          */
         @Override
         public void caught(Channel channel, Throwable exception) throws RemotingException {
-//            System.out.println("caught event:"+exception);
+            //            System.out.println("caught event:"+exception);
         }
 
 

@@ -37,9 +37,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class TelnetCodecTest {
+
     protected Codec2 codec;
+
     byte[] UP = new byte[]{27, 91, 65};
+
     byte[] DOWN = new byte[]{27, 91, 66};
+
     //======================================================
     URL url = URL.valueOf("dubbo://10.20.30.40:20880");
 
@@ -76,9 +80,11 @@ public class TelnetCodecTest {
         byte[] bytes;
         if (obj instanceof String) {
             bytes = ((String) obj).getBytes();
-        } else if (obj instanceof byte[]) {
+        }
+        else if (obj instanceof byte[]) {
             bytes = (byte[]) obj;
-        } else {
+        }
+        else {
             try {
                 //object to bytearray
                 ByteArrayOutputStream bo = new ByteArrayOutputStream();
@@ -87,7 +93,8 @@ public class TelnetCodecTest {
                 bytes = bo.toByteArray();
                 bo.close();
                 oo.close();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
@@ -172,7 +179,8 @@ public class TelnetCodecTest {
         Object obj = codec.decode(channel, buffer);
         if (isNeedmore) {
             Assert.assertEquals(Codec2.DecodeResult.NEED_MORE_INPUT, obj);
-        } else {
+        }
+        else {
             Assert.assertTrue("return must string ", obj instanceof String);
         }
     }
@@ -337,8 +345,11 @@ public class TelnetCodecTest {
 
     //======================================================
     public static class Person implements Serializable {
+
         private static final long serialVersionUID = 3362088148941547337L;
+
         public String name;
+
         public String sex;
 
         @Override
@@ -352,23 +363,32 @@ public class TelnetCodecTest {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             Person other = (Person) obj;
             if (name == null) {
-                if (other.name != null)
+                if (other.name != null) {
                     return false;
-            } else if (!name.equals(other.name))
+                }
+            }
+            else if (!name.equals(other.name)) {
                 return false;
+            }
             if (sex == null) {
-                if (other.sex != null)
+                if (other.sex != null) {
                     return false;
-            } else if (!sex.equals(other.sex))
+                }
+            }
+            else if (!sex.equals(other.sex)) {
                 return false;
+            }
             return true;
         }
 

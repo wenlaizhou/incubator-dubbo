@@ -19,6 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class HttpCommandDecoderTest {
+
     @Test
     public void decodeGet() throws Exception {
         HttpRequest request = mock(HttpRequest.class);

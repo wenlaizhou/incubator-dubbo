@@ -23,23 +23,23 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
 /**
  * We don't support propertyInjector here since the resource impl should be singleton in dubbo
- *
  */
 public class DubboResourceFactory implements ResourceFactory {
 
     private Object resourceInstance;
+
     private Class scannableClass;
-//    private PropertyInjector propertyInjector;
-//    private String context = null;
+    //    private PropertyInjector propertyInjector;
+    //    private String context = null;
 
     public DubboResourceFactory(Object resourceInstance, Class scannableClass) {
         this.resourceInstance = resourceInstance;
         this.scannableClass = scannableClass;
     }
 
-//    public PropertyInjector getPropertyInjector() {
-//        return propertyInjector;
-//    }
+    //    public PropertyInjector getPropertyInjector() {
+    //        return propertyInjector;
+    //    }
 
     @Override
     public Object createResource(HttpRequest request, HttpResponse response,
@@ -54,7 +54,7 @@ public class DubboResourceFactory implements ResourceFactory {
 
     @Override
     public void registered(ResteasyProviderFactory factory) {
-//        this.propertyInjector = factory.getInjectorFactory().createPropertyInjector(getScannableClass(), factory);
+        //        this.propertyInjector = factory.getInjectorFactory().createPropertyInjector(getScannableClass(), factory);
     }
 
     @Override
@@ -66,11 +66,11 @@ public class DubboResourceFactory implements ResourceFactory {
     public void unregistered() {
     }
 
-//    public void setContext(String context) {
-//        this.context = context;
-//    }
-//
-//    public String getContext() {
-//        return context;
-//    }
+    //    public void setContext(String context) {
+    //        this.context = context;
+    //    }
+    //
+    //    public String getContext() {
+    //        return context;
+    //    }
 }

@@ -31,7 +31,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * StatusTest
- *
  */
 public class RegistryStatusCheckerTest {
 
@@ -41,6 +40,7 @@ public class RegistryStatusCheckerTest {
     }
 
     URL registryUrl = URL.valueOf("dubbo://cat:cat@127.0.0.1:9090/");
+
     URL registryUrl2 = URL.valueOf("dubbo://cat:cat@127.0.0.1:9091");
 
     @Before

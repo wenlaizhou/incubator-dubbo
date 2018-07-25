@@ -35,6 +35,7 @@ import java.util.concurrent.CompletableFuture;
  * InvokerWrapper
  */
 public abstract class AbstractProxyInvoker<T> implements Invoker<T> {
+
     Logger logger = LoggerFactory.getLogger(AbstractProxyInvoker.class);
 
     private final T proxy;
@@ -85,18 +86,22 @@ public abstract class AbstractProxyInvoker<T> implements Invoker<T> {
             Object obj = doInvoke(proxy, invocation.getMethodName(), invocation.getParameterTypes(), invocation.getArguments());
             if (RpcUtils.isFutureReturnType(invocation)) {
                 return new AsyncRpcResult((CompletableFuture<Object>) obj);
-            } else if (rpcContext.isAsyncStarted()) { // ignore obj in case of RpcContext.startAsync()? always rely on user to write back.
+            }
+            else if (rpcContext.isAsyncStarted()) { // ignore obj in case of RpcContext.startAsync()? always rely on user to write back.
                 return new AsyncRpcResult(rpcContext.getAsyncContext().getInternalFuture());
-            } else {
+            }
+            else {
                 return new RpcResult(obj);
             }
-        } catch (InvocationTargetException e) {
+        }
+        catch (InvocationTargetException e) {
             // TODO async throw exception before async thread write back, should stop asyncContext
             if (rpcContext.isAsyncStarted() && !rpcContext.stopAsync()) {
                 logger.error("Provider async started, but got an exception from the original method, cannot write the exception back to consumer because an async result may have returned the new thread.", e);
             }
             return new RpcResult(e.getTargetException());
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RpcException("Failed to invoke remote proxy method " + invocation.getMethodName() + " to " + getUrl() + ", cause: " + e.getMessage(), e);
         }
     }

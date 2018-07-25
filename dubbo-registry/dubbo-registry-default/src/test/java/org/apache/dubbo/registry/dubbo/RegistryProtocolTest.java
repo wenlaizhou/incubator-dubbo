@@ -44,7 +44,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * RegistryProtocolTest
- *
  */
 public class RegistryProtocolTest {
 
@@ -53,8 +52,11 @@ public class RegistryProtocolTest {
     }
 
     final String service = "org.apache.dubbo.registry.protocol.DemoService:1.0.0";
+
     final String serviceUrl = "dubbo://127.0.0.1:9453/" + service + "?notify=true&methods=test1,test2&side=con&side=consumer";
+
     final URL registryUrl = URL.valueOf("registry://127.0.0.1:9090/");
+
     final private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
 
     @Test
@@ -113,9 +115,9 @@ public class RegistryProtocolTest {
         assertEquals("y", exporter.getInvoker().getUrl().getParameter("x"));
 
         exporter.unexport();
-//        int timeout = ConfigUtils.getServerShutdownTimeout();
-//        Thread.sleep(timeout + 1000);
-//        assertEquals(false, exporter.getInvoker().isAvailable());
+        //        int timeout = ConfigUtils.getServerShutdownTimeout();
+        //        Thread.sleep(timeout + 1000);
+        //        assertEquals(false, exporter.getInvoker().isAvailable());
         destroyRegistryProtocol();
 
     }
@@ -164,6 +166,7 @@ public class RegistryProtocolTest {
     }
 
     static class MockInvoker<T> extends AbstractInvoker<T> {
+
         public MockInvoker(Class<T> type, URL url) {
             super(type, url);
         }

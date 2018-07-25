@@ -33,6 +33,7 @@ import static org.mockito.Mockito.mock;
 public class CurrentTelnetHandlerTest {
 
     private static TelnetHandler count = new CurrentTelnetHandler();
+
     private Channel mockChannel;
 
     @Test

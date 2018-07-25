@@ -76,7 +76,8 @@ public class DubboInvoker<T> extends AbstractInvoker<T> {
         ExchangeClient currentClient;
         if (clients.length == 1) {
             currentClient = clients[0];
-        } else {
+        }
+        else {
             currentClient = clients[index.getAndIncrement() % clients.length];
         }
         try {
@@ -89,7 +90,8 @@ public class DubboInvoker<T> extends AbstractInvoker<T> {
                 currentClient.send(inv, isSent);
                 RpcContext.getContext().setFuture(null);
                 return new RpcResult();
-            } else if (isAsync) {
+            }
+            else if (isAsync) {
                 ResponseFuture future = currentClient.request(inv, timeout);
                 // For compatibility
                 FutureAdapter<Object> futureAdapter = new FutureAdapter<>(future);
@@ -99,25 +101,30 @@ public class DubboInvoker<T> extends AbstractInvoker<T> {
                 if (isAsyncFuture) {
                     // register resultCallback, sometimes we need the asyn result being processed by the filter chain.
                     result = new AsyncRpcResult(futureAdapter, futureAdapter.getResultFuture(), false);
-                } else {
+                }
+                else {
                     result = new SimpleAsyncRpcResult(futureAdapter, futureAdapter.getResultFuture(), false);
                 }
                 return result;
-            } else {
+            }
+            else {
                 RpcContext.getContext().setFuture(null);
                 return (Result) currentClient.request(inv, timeout).get();
             }
-        } catch (TimeoutException e) {
+        }
+        catch (TimeoutException e) {
             throw new RpcException(RpcException.TIMEOUT_EXCEPTION, "Invoke remote method timeout. method: " + invocation.getMethodName() + ", provider: " + getUrl() + ", cause: " + e.getMessage(), e);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException(RpcException.NETWORK_EXCEPTION, "Failed to invoke remote method: " + invocation.getMethodName() + ", provider: " + getUrl() + ", cause: " + e.getMessage(), e);
         }
     }
 
     @Override
     public boolean isAvailable() {
-        if (!super.isAvailable())
+        if (!super.isAvailable()) {
             return false;
+        }
         for (ExchangeClient client : clients) {
             if (client.isConnected() && !client.hasAttribute(Constants.CHANNEL_ATTRIBUTE_READONLY_KEY)) {
                 //cannot write == not Available ?
@@ -134,7 +141,8 @@ public class DubboInvoker<T> extends AbstractInvoker<T> {
         // closed.
         if (super.isDestroyed()) {
             return;
-        } else {
+        }
+        else {
             // double check to avoid dup close
             destroyLock.lock();
             try {
@@ -148,12 +156,14 @@ public class DubboInvoker<T> extends AbstractInvoker<T> {
                 for (ExchangeClient client : clients) {
                     try {
                         client.close(ConfigUtils.getServerShutdownTimeout());
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn(t.getMessage(), t);
                     }
                 }
 
-            } finally {
+            }
+            finally {
                 destroyLock.unlock();
             }
         }

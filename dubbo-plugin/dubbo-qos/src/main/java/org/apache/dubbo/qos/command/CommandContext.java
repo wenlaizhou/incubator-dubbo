@@ -19,17 +19,22 @@ package org.apache.dubbo.qos.command;
 import io.netty.channel.Channel;
 
 public class CommandContext {
+
     private String commandName;
+
     private String[] args;
+
     private Channel remote;
+
     private boolean isHttp;
+
     private Object orginRequest;
 
     public CommandContext(String commandName) {
         this.commandName = commandName;
     }
 
-    public CommandContext(String commandName, String[] args,boolean isHttp) {
+    public CommandContext(String commandName, String[] args, boolean isHttp) {
         this.commandName = commandName;
         this.args = args;
         this.isHttp = isHttp;

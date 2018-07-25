@@ -38,12 +38,17 @@ import java.util.concurrent.TimeUnit;
  * @date 2017/10/29
  */
 public class ZkClientWrapper {
+
     Logger logger = LoggerFactory.getLogger(ZkClientWrapper.class);
 
     private long timeout;
+
     private ZkClient client;
+
     private volatile KeeperState state;
+
     private ListenableFutureTask<ZkClient> listenableFutureTask;
+
     private volatile boolean started = false;
 
 
@@ -65,11 +70,13 @@ public class ZkClientWrapper {
             connectThread.start();
             try {
                 client = listenableFutureTask.get(timeout, TimeUnit.MILLISECONDS);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error("Timeout! zookeeper server can not be connected in : " + timeout + "ms!", t);
             }
             started = true;
-        } else {
+        }
+        else {
             logger.warn("Zkclient has already been started!");
         }
     }
@@ -81,9 +88,11 @@ public class ZkClientWrapper {
                 try {
                     client = listenableFutureTask.get();
                     client.subscribeStateChanges(listener);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     logger.warn(Thread.currentThread().getName() + " was interrupted unexpectedly, which may cause unpredictable exception!");
-                } catch (ExecutionException e) {
+                }
+                catch (ExecutionException e) {
                     logger.error("Got an exception when trying to create zkclient instance, can not connect to zookeeper server, please check!", e);
                 }
             }

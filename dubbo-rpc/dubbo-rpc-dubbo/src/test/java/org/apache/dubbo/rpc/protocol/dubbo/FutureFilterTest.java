@@ -39,7 +39,9 @@ import static org.mockito.Mockito.mock;
  * TODO rely on callback integration test for now
  */
 public class FutureFilterTest {
+
     private static RpcInvocation invocation;
+
     private Filter eventFilter = new FutureFilter();
 
     @BeforeClass

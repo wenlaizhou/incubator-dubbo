@@ -25,6 +25,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class ThreadLocalCacheFactoryTest extends AbstractCacheFactoryTest {
+
     @Test
     public void testThreadLocalCacheFactory() throws Exception {
         Cache cache = super.constructCache();

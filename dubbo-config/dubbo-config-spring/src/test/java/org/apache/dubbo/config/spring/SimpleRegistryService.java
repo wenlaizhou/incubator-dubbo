@@ -36,8 +36,11 @@ import java.util.concurrent.ConcurrentMap;
 public class SimpleRegistryService extends AbstractRegistryService {
 
     private final static Logger logger = LoggerFactory.getLogger(SimpleRegistryService.class);
+
     private final ConcurrentMap<String, ConcurrentMap<String, URL>> remoteRegistered = new ConcurrentHashMap<String, ConcurrentMap<String, URL>>();
+
     private final ConcurrentMap<String, ConcurrentMap<String, NotifyListener>> remoteListeners = new ConcurrentHashMap<String, ConcurrentMap<String, NotifyListener>>();
+
     private List<String> registries;
 
     @Override

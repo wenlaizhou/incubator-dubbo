@@ -69,12 +69,14 @@ public abstract class AbstractRegistryFactory implements RegistryFactory {
             for (Registry registry : getRegistries()) {
                 try {
                     registry.destroy();
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     LOGGER.error(e.getMessage(), e);
                 }
             }
             REGISTRIES.clear();
-        } finally {
+        }
+        finally {
             // Release the lock
             LOCK.unlock();
         }
@@ -99,7 +101,8 @@ public abstract class AbstractRegistryFactory implements RegistryFactory {
             }
             REGISTRIES.put(key, registry);
             return registry;
-        } finally {
+        }
+        finally {
             // Release the lock
             LOCK.unlock();
         }

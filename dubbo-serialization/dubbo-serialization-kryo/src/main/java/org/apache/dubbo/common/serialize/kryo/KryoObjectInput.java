@@ -31,6 +31,7 @@ import java.lang.reflect.Type;
 public class KryoObjectInput implements ObjectInput, Cleanable {
 
     private Kryo kryo;
+
     private Input input;
 
     public KryoObjectInput(InputStream inputStream) {
@@ -42,7 +43,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public boolean readBool() throws IOException {
         try {
             return input.readBoolean();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -51,7 +53,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public byte readByte() throws IOException {
         try {
             return input.readByte();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -60,7 +63,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public short readShort() throws IOException {
         try {
             return input.readShort();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -69,7 +73,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public int readInt() throws IOException {
         try {
             return input.readInt();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -78,7 +83,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public long readLong() throws IOException {
         try {
             return input.readLong();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -87,7 +93,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public float readFloat() throws IOException {
         try {
             return input.readFloat();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -96,7 +103,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public double readDouble() throws IOException {
         try {
             return input.readDouble();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -107,12 +115,15 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
             int len = input.readInt();
             if (len < 0) {
                 return null;
-            } else if (len == 0) {
+            }
+            else if (len == 0) {
                 return new byte[]{};
-            } else {
+            }
+            else {
                 return input.readBytes(len);
             }
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -121,7 +132,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     public String readUTF() throws IOException {
         try {
             return input.readString();
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }
@@ -131,7 +143,8 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
         // TODO optimization
         try {
             return kryo.readClassAndObject(input);
-        } catch (KryoException e) {
+        }
+        catch (KryoException e) {
             throw new IOException(e);
         }
     }

@@ -23,7 +23,9 @@ import java.io.InputStream;
 public class ChannelBufferInputStream extends InputStream {
 
     private final ChannelBuffer buffer;
+
     private final int startIndex;
+
     private final int endIndex;
 
     public ChannelBufferInputStream(ChannelBuffer buffer) {
@@ -95,7 +97,8 @@ public class ChannelBufferInputStream extends InputStream {
     public long skip(long n) throws IOException {
         if (n > Integer.MAX_VALUE) {
             return skipBytes(Integer.MAX_VALUE);
-        } else {
+        }
+        else {
             return skipBytes((int) n);
         }
     }

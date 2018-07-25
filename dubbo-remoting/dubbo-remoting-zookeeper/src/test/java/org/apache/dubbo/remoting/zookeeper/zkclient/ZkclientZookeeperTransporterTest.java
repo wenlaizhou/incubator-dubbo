@@ -29,7 +29,9 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 
 public class ZkclientZookeeperTransporterTest {
+
     private TestingServer zkServer;
+
     private ZookeeperClient zookeeperClient;
 
     @Before

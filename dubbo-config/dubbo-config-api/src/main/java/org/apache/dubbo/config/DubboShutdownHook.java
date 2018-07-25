@@ -82,7 +82,8 @@ public class DubboShutdownHook extends Thread {
                 if (protocol != null) {
                     protocol.destroy();
                 }
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn(t.getMessage(), t);
             }
         }

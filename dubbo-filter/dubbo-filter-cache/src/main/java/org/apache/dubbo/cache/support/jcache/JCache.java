@@ -56,7 +56,8 @@ public class JCache implements org.apache.dubbo.cache.Cache {
                                 .setManagementEnabled(true)
                                 .setStatisticsEnabled(true);
                 cache = cacheManager.createCache(key, config);
-            } catch (CacheException e) {
+            }
+            catch (CacheException e) {
                 // concurrent cache initialization
                 cache = cacheManager.getCache(key);
             }

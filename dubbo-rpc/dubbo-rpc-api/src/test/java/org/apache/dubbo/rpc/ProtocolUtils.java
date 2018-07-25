@@ -25,6 +25,7 @@ import org.apache.dubbo.common.extension.ExtensionLoader;
 public class ProtocolUtils {
 
     private static Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private static ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     public static <T> T refer(Class<T> type, String url) {

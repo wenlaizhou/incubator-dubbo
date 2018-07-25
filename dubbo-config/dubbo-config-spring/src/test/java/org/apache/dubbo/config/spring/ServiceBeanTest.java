@@ -25,6 +25,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.mockito.Mockito.mock;
 
 public class ServiceBeanTest {
+
     @Test
     public void testGetService() {
         TestService service = mock(TestService.class);

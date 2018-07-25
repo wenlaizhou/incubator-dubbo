@@ -21,9 +21,9 @@
     <!-- 以下是appender的定义 -->
     <!-- ===================================================================== -->
     <appender name="dubbo" class="org.apache.dubbo.common.utils.DubboAppender">
-        <param name="encoding" value="GBK"/>
+        <param name="encoding" value="GBK" />
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %p [%c:%M] - %m%n"/>
+            <param name="ConversionPattern" value="%d %p [%c:%M] - %m%n" />
         </layout>
         <!-- <filter class="org.apache.log4j.varia.LevelRangeFilter">
             <param name="LevelMin" value="DEBUG" />
@@ -31,7 +31,7 @@
         </filter> -->
     </appender>
     <root>
-        <level value="INFO"/>
-        <appender-ref ref="dubbo"/>
+        <level value="INFO" />
+        <appender-ref ref="dubbo" />
     </root>
 </log4j:configuration>

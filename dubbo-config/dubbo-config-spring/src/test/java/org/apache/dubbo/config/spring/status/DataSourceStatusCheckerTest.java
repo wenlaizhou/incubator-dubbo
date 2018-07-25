@@ -39,6 +39,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class DataSourceStatusCheckerTest {
+
     private DataSourceStatusChecker dataSourceStatusChecker;
 
     @Mock

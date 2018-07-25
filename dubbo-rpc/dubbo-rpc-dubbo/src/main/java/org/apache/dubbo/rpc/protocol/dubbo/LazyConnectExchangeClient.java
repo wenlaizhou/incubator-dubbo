@@ -42,14 +42,22 @@ final class LazyConnectExchangeClient implements ExchangeClient {
 
     // when this warning rises from invocation, program probably have bug.
     static final String REQUEST_WITH_WARNING_KEY = "lazyclient_request_with_warning";
+
     private final static Logger logger = LoggerFactory.getLogger(LazyConnectExchangeClient.class);
+
     protected final boolean requestWithWarning;
+
     private final URL url;
+
     private final ExchangeHandler requestHandler;
+
     private final Lock connectLock = new ReentrantLock();
+
     // lazy connect, initial state for connection
     private final boolean initialState;
+
     private volatile ExchangeClient client;
+
     private AtomicLong warningcount = new AtomicLong(0);
 
     public LazyConnectExchangeClient(URL url, ExchangeHandler requestHandler) {
@@ -62,17 +70,20 @@ final class LazyConnectExchangeClient implements ExchangeClient {
 
 
     private void initClient() throws RemotingException {
-        if (client != null)
+        if (client != null) {
             return;
+        }
         if (logger.isInfoEnabled()) {
             logger.info("Lazy connect to " + url);
         }
         connectLock.lock();
         try {
-            if (client != null)
+            if (client != null) {
                 return;
+            }
             this.client = Exchangers.connect(url, requestHandler);
-        } finally {
+        }
+        finally {
             connectLock.unlock();
         }
     }
@@ -93,7 +104,8 @@ final class LazyConnectExchangeClient implements ExchangeClient {
     public InetSocketAddress getRemoteAddress() {
         if (client == null) {
             return InetSocketAddress.createUnresolved(url.getHost(), url.getPort());
-        } else {
+        }
+        else {
             return client.getRemoteAddress();
         }
     }
@@ -129,7 +141,8 @@ final class LazyConnectExchangeClient implements ExchangeClient {
     public boolean isConnected() {
         if (client == null) {
             return initialState;
-        } else {
+        }
+        else {
             return client.isConnected();
         }
     }
@@ -138,7 +151,8 @@ final class LazyConnectExchangeClient implements ExchangeClient {
     public InetSocketAddress getLocalAddress() {
         if (client == null) {
             return InetSocketAddress.createUnresolved(NetUtils.getLocalHost(), 0);
-        } else {
+        }
+        else {
             return client.getLocalAddress();
         }
     }
@@ -162,22 +176,26 @@ final class LazyConnectExchangeClient implements ExchangeClient {
 
     @Override
     public boolean isClosed() {
-        if (client != null)
+        if (client != null) {
             return client.isClosed();
-        else
+        }
+        else {
             return true;
+        }
     }
 
     @Override
     public void close() {
-        if (client != null)
+        if (client != null) {
             client.close();
+        }
     }
 
     @Override
     public void close(int timeout) {
-        if (client != null)
+        if (client != null) {
             client.close(timeout);
+        }
     }
 
     @Override
@@ -209,7 +227,8 @@ final class LazyConnectExchangeClient implements ExchangeClient {
     public Object getAttribute(String key) {
         if (client == null) {
             return null;
-        } else {
+        }
+        else {
             return client.getAttribute(key);
         }
     }
@@ -230,7 +249,8 @@ final class LazyConnectExchangeClient implements ExchangeClient {
     public boolean hasAttribute(String key) {
         if (client == null) {
             return false;
-        } else {
+        }
+        else {
             return client.hasAttribute(key);
         }
     }

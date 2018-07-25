@@ -22,10 +22,10 @@
     ">
 
     <!-- current application configuration -->
-    <dubbo:application name="demo-consumer"/>
+    <dubbo:application name="demo-consumer" />
 
     <!-- service configuration -->
     <dubbo:reference id="demoService" interface="org.apache.dubbo.config.spring.api.DemoService"
-                     url="dubbo://127.0.0.1:20813" init="true" scope="remote"/>
+                     url="dubbo://127.0.0.1:20813" init="true" scope="remote" />
 
 </beans>

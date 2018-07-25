@@ -131,7 +131,8 @@ public class AccessLogFilter implements Filter {
                     for (Class<?> type : types) {
                         if (first) {
                             first = false;
-                        } else {
+                        }
+                        else {
                             sn.append(",");
                         }
                         sn.append(type.getName());
@@ -145,17 +146,20 @@ public class AccessLogFilter implements Filter {
                 String msg = sn.toString();
                 if (ConfigUtils.isDefault(accesslog)) {
                     LoggerFactory.getLogger(ACCESS_LOG_KEY + "." + invoker.getInterface().getName()).info(msg);
-                } else {
+                }
+                else {
                     log(accesslog, msg);
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn("Exception in AcessLogFilter of service(" + invoker + " -> " + inv + ")", t);
         }
         return invoker.invoke(inv);
     }
 
     private class LogTask implements Runnable {
+
         @Override
         public void run() {
             try {
@@ -189,15 +193,18 @@ public class AccessLogFilter implements Filter {
                                     writer.write("\r\n");
                                 }
                                 writer.flush();
-                            } finally {
+                            }
+                            finally {
                                 writer.close();
                             }
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e) {
                             logger.error(e.getMessage(), e);
                         }
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.error(e.getMessage(), e);
             }
         }

@@ -57,11 +57,14 @@ public class Request {
     }
 
     private static String safeToString(Object data) {
-        if (data == null) return null;
+        if (data == null) {
+            return null;
+        }
         String dataStr;
         try {
             dataStr = data.toString();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             dataStr = "<Fail toString of " + data.getClass() + ", cause: " +
                     StringUtils.toString(e) + ">";
         }

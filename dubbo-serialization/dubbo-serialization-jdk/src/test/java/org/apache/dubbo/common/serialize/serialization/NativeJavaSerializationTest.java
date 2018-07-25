@@ -19,6 +19,7 @@ package org.apache.dubbo.common.serialize.serialization;
 import org.apache.dubbo.common.serialize.nativejava.NativeJavaSerialization;
 
 public class NativeJavaSerializationTest extends AbstractSerializationPersionFailTest {
+
     {
         serialization = new NativeJavaSerialization();
     }

@@ -103,7 +103,8 @@ public class MulticastRegistry extends FailbackRegistry {
                             }
                             MulticastRegistry.this.receive(msg, (InetSocketAddress) recv.getSocketAddress());
                             Arrays.fill(buf, (byte) 0);
-                        } catch (Throwable e) {
+                        }
+                        catch (Throwable e) {
                             if (!mutilcastSocket.isClosed()) {
                                 logger.error(e.getMessage(), e);
                             }
@@ -113,7 +114,8 @@ public class MulticastRegistry extends FailbackRegistry {
             }, "DubboMulticastRegistryReceiver");
             thread.setDaemon(true);
             thread.start();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
         this.cleanPeriod = url.getParameter(Constants.SESSION_TIMEOUT_KEY, Constants.DEFAULT_SESSION_TIMEOUT);
@@ -123,12 +125,14 @@ public class MulticastRegistry extends FailbackRegistry {
                 public void run() {
                     try {
                         clean(); // Remove the expired
-                    } catch (Throwable t) { // Defensive fault tolerance
+                    }
+                    catch (Throwable t) { // Defensive fault tolerance
                         logger.error("Unexpected exception occur at clean expired provider, cause: " + t.getMessage(), t);
                     }
                 }
             }, cleanPeriod, cleanPeriod, TimeUnit.MILLISECONDS);
-        } else {
+        }
+        else {
             this.cleanFuture = null;
         }
     }
@@ -174,29 +178,36 @@ public class MulticastRegistry extends FailbackRegistry {
         Socket socket = null;
         try {
             socket = new Socket(url.getHost(), url.getPort());
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             try {
                 Thread.sleep(100);
-            } catch (Throwable e2) {
+            }
+            catch (Throwable e2) {
             }
             Socket socket2 = null;
             try {
                 socket2 = new Socket(url.getHost(), url.getPort());
-            } catch (Throwable e2) {
+            }
+            catch (Throwable e2) {
                 return true;
-            } finally {
+            }
+            finally {
                 if (socket2 != null) {
                     try {
                         socket2.close();
-                    } catch (Throwable e2) {
+                    }
+                    catch (Throwable e2) {
                     }
                 }
             }
-        } finally {
+        }
+        finally {
             if (socket != null) {
                 try {
                     socket.close();
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                 }
             }
         }
@@ -210,10 +221,12 @@ public class MulticastRegistry extends FailbackRegistry {
         if (msg.startsWith(Constants.REGISTER)) {
             URL url = URL.valueOf(msg.substring(Constants.REGISTER.length()).trim());
             registered(url);
-        } else if (msg.startsWith(Constants.UNREGISTER)) {
+        }
+        else if (msg.startsWith(Constants.UNREGISTER)) {
             URL url = URL.valueOf(msg.substring(Constants.UNREGISTER.length()).trim());
             unregistered(url);
-        } else if (msg.startsWith(Constants.SUBSCRIBE)) {
+        }
+        else if (msg.startsWith(Constants.SUBSCRIBE)) {
             URL url = URL.valueOf(msg.substring(Constants.SUBSCRIBE.length()).trim());
             Set<URL> urls = getRegistered();
             if (urls != null && !urls.isEmpty()) {
@@ -224,7 +237,8 @@ public class MulticastRegistry extends FailbackRegistry {
                         if (url.getParameter("unicast", true) // Whether the consumer's machine has only one process
                                 && !NetUtils.getLocalHost().equals(host)) { // Multiple processes in the same machine cannot be unicast with unicast or there will be only one process receiving information
                             unicast(Constants.REGISTER + " " + u.toFullString(), host);
-                        } else {
+                        }
+                        else {
                             broadcast(Constants.REGISTER + " " + u.toFullString());
                         }
                     }
@@ -242,7 +256,8 @@ public class MulticastRegistry extends FailbackRegistry {
             byte[] data = (msg + "\n").getBytes();
             DatagramPacket hi = new DatagramPacket(data, data.length, mutilcastAddress, mutilcastPort);
             mutilcastSocket.send(hi);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -255,7 +270,8 @@ public class MulticastRegistry extends FailbackRegistry {
             byte[] data = (msg + "\n").getBytes();
             DatagramPacket hi = new DatagramPacket(data, data.length, InetAddress.getByName(host), mutilcastPort);
             mutilcastSocket.send(hi);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -279,7 +295,8 @@ public class MulticastRegistry extends FailbackRegistry {
         synchronized (listener) {
             try {
                 listener.wait(url.getParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT));
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
             }
         }
     }
@@ -297,7 +314,8 @@ public class MulticastRegistry extends FailbackRegistry {
     public boolean isAvailable() {
         try {
             return mutilcastSocket != null;
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             return false;
         }
     }
@@ -312,13 +330,15 @@ public class MulticastRegistry extends FailbackRegistry {
             if (cleanFuture != null) {
                 cleanFuture.cancel(true);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         try {
             mutilcastSocket.leaveGroup(mutilcastAddress);
             mutilcastSocket.close();
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         ExecutorUtil.gracefulShutdown(cleanExecutor, cleanPeriod);
@@ -353,8 +373,8 @@ public class MulticastRegistry extends FailbackRegistry {
                 if (urls != null) {
                     urls.remove(url);
                 }
-                if (urls == null || urls.isEmpty()){
-                    if (urls == null){
+                if (urls == null || urls.isEmpty()) {
+                    if (urls == null) {
                         urls = new ConcurrentHashSet<URL>();
                     }
                     URL empty = url.setProtocol(Constants.EMPTY_PROTOCOL);

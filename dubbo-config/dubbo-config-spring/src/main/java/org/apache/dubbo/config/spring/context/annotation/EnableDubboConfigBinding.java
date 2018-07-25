@@ -59,6 +59,7 @@ public @interface EnableDubboConfigBinding {
 
     /**
      * @return The binding type of {@link AbstractConfig Dubbo Config}.
+     *
      * @see AbstractConfig
      * @see ApplicationConfig
      * @see ModuleConfig

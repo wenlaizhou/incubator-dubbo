@@ -43,7 +43,9 @@ public interface Protocol {
      *
      * @param <T>     Service type
      * @param invoker Service invoker
+     *
      * @return exporter reference for exported service, useful for unexport the service later
+     *
      * @throws RpcException thrown when error occurs during export the service, for example: port is occupied
      */
     @Adaptive
@@ -61,7 +63,9 @@ public interface Protocol {
      * @param <T>  Service type
      * @param type Service class
      * @param url  URL address for the remote service
+     *
      * @return invoker service's local proxy
+     *
      * @throws RpcException when there's any error while connecting to the service provider
      */
     @Adaptive

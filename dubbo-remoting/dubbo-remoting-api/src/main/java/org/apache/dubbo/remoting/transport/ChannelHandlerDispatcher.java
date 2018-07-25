@@ -66,7 +66,8 @@ public class ChannelHandlerDispatcher implements ChannelHandler {
         for (ChannelHandler listener : channelHandlers) {
             try {
                 listener.connected(channel);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }
@@ -77,7 +78,8 @@ public class ChannelHandlerDispatcher implements ChannelHandler {
         for (ChannelHandler listener : channelHandlers) {
             try {
                 listener.disconnected(channel);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }
@@ -88,7 +90,8 @@ public class ChannelHandlerDispatcher implements ChannelHandler {
         for (ChannelHandler listener : channelHandlers) {
             try {
                 listener.sent(channel, message);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }
@@ -99,7 +102,8 @@ public class ChannelHandlerDispatcher implements ChannelHandler {
         for (ChannelHandler listener : channelHandlers) {
             try {
                 listener.received(channel, message);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }
@@ -110,7 +114,8 @@ public class ChannelHandlerDispatcher implements ChannelHandler {
         for (ChannelHandler listener : channelHandlers) {
             try {
                 listener.caught(channel, exception);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }

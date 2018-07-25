@@ -20,17 +20,29 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class Media implements java.io.Serializable {
+
     public String uri;
+
     public String title;        // Can be unset.
+
     public int width;
+
     public int height;
+
     public String format;
+
     public long duration;
+
     public long size;
+
     public int bitrate;         // Can be unset.
+
     public boolean hasBitrate;
+
     public List<String> persons;
+
     public Player player;
+
     public String copyright;    // Can be unset.
 
     public Media() {
@@ -53,23 +65,51 @@ public class Media implements java.io.Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Media media = (Media) o;
 
-        if (bitrate != media.bitrate) return false;
-        if (duration != media.duration) return false;
-        if (hasBitrate != media.hasBitrate) return false;
-        if (height != media.height) return false;
-        if (size != media.size) return false;
-        if (width != media.width) return false;
-        if (copyright != null ? !copyright.equals(media.copyright) : media.copyright != null) return false;
-        if (format != null ? !format.equals(media.format) : media.format != null) return false;
-        if (persons != null ? !persons.equals(media.persons) : media.persons != null) return false;
-        if (player != media.player) return false;
-        if (title != null ? !title.equals(media.title) : media.title != null) return false;
-        if (uri != null ? !uri.equals(media.uri) : media.uri != null) return false;
+        if (bitrate != media.bitrate) {
+            return false;
+        }
+        if (duration != media.duration) {
+            return false;
+        }
+        if (hasBitrate != media.hasBitrate) {
+            return false;
+        }
+        if (height != media.height) {
+            return false;
+        }
+        if (size != media.size) {
+            return false;
+        }
+        if (width != media.width) {
+            return false;
+        }
+        if (copyright != null ? !copyright.equals(media.copyright) : media.copyright != null) {
+            return false;
+        }
+        if (format != null ? !format.equals(media.format) : media.format != null) {
+            return false;
+        }
+        if (persons != null ? !persons.equals(media.persons) : media.persons != null) {
+            return false;
+        }
+        if (player != media.player) {
+            return false;
+        }
+        if (title != null ? !title.equals(media.title) : media.title != null) {
+            return false;
+        }
+        if (uri != null ? !uri.equals(media.uri) : media.uri != null) {
+            return false;
+        }
 
         return true;
     }

@@ -40,6 +40,7 @@ public class $__ClassNameTestDubboStub {
     }
 
     public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor implements org.apache.thrift.TProcessor {
+
         private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class.getName());
 
         public Processor(I iface) {
@@ -56,6 +57,7 @@ public class $__ClassNameTestDubboStub {
         }
 
         private static class echo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, echo_args> {
+
             public echo() {
                 super("echo");
             }
@@ -74,8 +76,11 @@ public class $__ClassNameTestDubboStub {
     }
 
     public static class echo_args implements org.apache.thrift.TBase<echo_args, echo_args._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echo_args");
+
         private static final org.apache.thrift.protocol.TField ARG_FIELD_DESC = new org.apache.thrift.protocol.TField("arg", org.apache.thrift.protocol.TType.STRING, (short) 1);
 
         static {
@@ -147,7 +152,8 @@ public class $__ClassNameTestDubboStub {
                 case ARG:
                     if (value == null) {
                         unsetArg();
-                    } else {
+                    }
+                    else {
                         setArg((String) value);
                     }
                     break;
@@ -181,24 +187,29 @@ public class $__ClassNameTestDubboStub {
 
         @Override
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echo_args)
+            }
+            if (that instanceof echo_args) {
                 return this.equals((echo_args) that);
+            }
             return false;
         }
 
         public boolean equals(echo_args that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_arg = true && this.isSetArg();
             boolean that_present_arg = true && that.isSetArg();
             if (this_present_arg || that_present_arg) {
-                if (!(this_present_arg && that_present_arg))
+                if (!(this_present_arg && that_present_arg)) {
                     return false;
-                if (!this.arg.equals(that.arg))
+                }
+                if (!this.arg.equals(that.arg)) {
                     return false;
+                }
             }
 
             return true;
@@ -246,7 +257,8 @@ public class $__ClassNameTestDubboStub {
                     case 1: // ARG
                         if (field.type == org.apache.thrift.protocol.TType.STRING) {
                             this.arg = iprot.readString();
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -282,7 +294,8 @@ public class $__ClassNameTestDubboStub {
             sb.append("arg:");
             if (this.arg == null) {
                 sb.append("null");
-            } else {
+            }
+            else {
                 sb.append(this.arg);
             }
             first = false;
@@ -300,7 +313,8 @@ public class $__ClassNameTestDubboStub {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -308,7 +322,8 @@ public class $__ClassNameTestDubboStub {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -328,6 +343,7 @@ public class $__ClassNameTestDubboStub {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -353,7 +369,9 @@ public class $__ClassNameTestDubboStub {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 
@@ -376,8 +394,11 @@ public class $__ClassNameTestDubboStub {
     }
 
     public static class echo_result implements org.apache.thrift.TBase<echo_result, echo_result._Fields>, java.io.Serializable, Cloneable {
+
         public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+
         private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("echo_result");
+
         private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short) 0);
 
         static {
@@ -449,7 +470,8 @@ public class $__ClassNameTestDubboStub {
                 case SUCCESS:
                     if (value == null) {
                         unsetSuccess();
-                    } else {
+                    }
+                    else {
                         setSuccess((String) value);
                     }
                     break;
@@ -483,24 +505,29 @@ public class $__ClassNameTestDubboStub {
 
         @Override
         public boolean equals(Object that) {
-            if (that == null)
+            if (that == null) {
                 return false;
-            if (that instanceof echo_result)
+            }
+            if (that instanceof echo_result) {
                 return this.equals((echo_result) that);
+            }
             return false;
         }
 
         public boolean equals(echo_result that) {
-            if (that == null)
+            if (that == null) {
                 return false;
+            }
 
             boolean this_present_success = true && this.isSetSuccess();
             boolean that_present_success = true && that.isSetSuccess();
             if (this_present_success || that_present_success) {
-                if (!(this_present_success && that_present_success))
+                if (!(this_present_success && that_present_success)) {
                     return false;
-                if (!this.success.equals(that.success))
+                }
+                if (!this.success.equals(that.success)) {
                     return false;
+                }
             }
 
             return true;
@@ -548,7 +575,8 @@ public class $__ClassNameTestDubboStub {
                     case 0: // SUCCESS
                         if (field.type == org.apache.thrift.protocol.TType.STRING) {
                             this.success = iprot.readString();
-                        } else {
+                        }
+                        else {
                             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
                         }
                         break;
@@ -583,7 +611,8 @@ public class $__ClassNameTestDubboStub {
             sb.append("success:");
             if (this.success == null) {
                 sb.append("null");
-            } else {
+            }
+            else {
                 sb.append(this.success);
             }
             first = false;
@@ -598,7 +627,8 @@ public class $__ClassNameTestDubboStub {
         private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
             try {
                 write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -606,7 +636,8 @@ public class $__ClassNameTestDubboStub {
         private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
             try {
                 read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-            } catch (org.apache.thrift.TException te) {
+            }
+            catch (org.apache.thrift.TException te) {
                 throw new java.io.IOException(te);
             }
         }
@@ -626,6 +657,7 @@ public class $__ClassNameTestDubboStub {
             }
 
             private final short _thriftId;
+
             private final String _fieldName;
 
             _Fields(short thriftId, String fieldName) {
@@ -651,7 +683,9 @@ public class $__ClassNameTestDubboStub {
              */
             public static _Fields findByThriftIdOrThrow(int fieldId) {
                 _Fields fields = findByThriftId(fieldId);
-                if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                if (fields == null) {
+                    throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+                }
                 return fields;
             }
 

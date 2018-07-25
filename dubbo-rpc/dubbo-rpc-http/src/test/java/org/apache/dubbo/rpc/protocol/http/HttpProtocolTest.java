@@ -168,9 +168,11 @@ public class HttpProtocolTest {
         try {
             client.timeOut(6000);
             fail();
-        } catch (RpcException expected) {
+        }
+        catch (RpcException expected) {
             Assert.assertEquals(true, expected.isTimeout());
-        } finally {
+        }
+        finally {
             invoker.destroy();
             exporter.unexport();
         }
@@ -189,7 +191,8 @@ public class HttpProtocolTest {
         try {
             client.customException();
             fail();
-        } catch (HttpServiceImpl.MyException expected) {
+        }
+        catch (HttpServiceImpl.MyException expected) {
         }
         invoker.destroy();
         exporter.unexport();

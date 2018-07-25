@@ -41,7 +41,8 @@ public class SimpleRegistryExporter {
         try {
             new ServerSocket(port).close();
             return export(port);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             return null;
         }
     }

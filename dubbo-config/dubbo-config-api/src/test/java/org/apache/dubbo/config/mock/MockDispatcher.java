@@ -22,6 +22,7 @@ import org.apache.dubbo.remoting.ChannelHandler;
 import org.apache.dubbo.remoting.Dispatcher;
 
 public class MockDispatcher implements Dispatcher {
+
     @Override
     public ChannelHandler dispatch(ChannelHandler handler, URL url) {
         return null;

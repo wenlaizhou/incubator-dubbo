@@ -23,7 +23,6 @@ import java.net.InetSocketAddress;
 /**
  * Endpoint. (API/SPI, Prototype, ThreadSafe)
  *
- *
  * @see org.apache.dubbo.remoting.Channel
  * @see org.apache.dubbo.remoting.Client
  * @see org.apache.dubbo.remoting.Server
@@ -55,6 +54,7 @@ public interface Endpoint {
      * send message.
      *
      * @param message
+     *
      * @throws RemotingException
      */
     void send(Object message) throws RemotingException;

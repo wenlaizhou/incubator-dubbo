@@ -84,7 +84,8 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
                 Method method = applicationContext.getClass().getMethod("addApplicationListener", ApplicationListener.class); // backward compatibility to spring 2.0.1
                 method.invoke(applicationContext, this);
                 supportedApplicationListener = true;
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 if (applicationContext instanceof AbstractApplicationContext) {
                     try {
                         Method method = AbstractApplicationContext.class.getDeclaredMethod("addListener", ApplicationListener.class); // backward compatibility to spring 2.0.1
@@ -93,7 +94,8 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
                         }
                         method.invoke(applicationContext, this);
                         supportedApplicationListener = true;
-                    } catch (Throwable t2) {
+                    }
+                    catch (Throwable t2) {
                     }
                 }
             }
@@ -151,7 +153,8 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
                     if (!providerConfigs.isEmpty()) {
                         setProviders(providerConfigs);
                     }
-                } else {
+                }
+                else {
                     ProviderConfig providerConfig = null;
                     for (ProviderConfig config : providerConfigMap.values()) {
                         if (config.isDefault() == null || config.isDefault()) {

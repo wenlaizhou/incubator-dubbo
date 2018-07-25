@@ -29,7 +29,9 @@ import java.util.Map;
 public class RegistryConfig extends AbstractConfig {
 
     public static final String NO_AVAILABLE = "N/A";
+
     private static final long serialVersionUID = 5508512956753757169L;
+
     // register center address
     private String address;
 
@@ -146,6 +148,7 @@ public class RegistryConfig extends AbstractConfig {
 
     /**
      * @return wait
+     *
      * @see org.apache.dubbo.config.ProviderConfig#getWait()
      * @deprecated
      */
@@ -156,14 +159,16 @@ public class RegistryConfig extends AbstractConfig {
 
     /**
      * @param wait
+     *
      * @see org.apache.dubbo.config.ProviderConfig#setWait(Integer)
      * @deprecated
      */
     @Deprecated
     public void setWait(Integer wait) {
         this.wait = wait;
-        if (wait != null && wait > 0)
+        if (wait != null && wait > 0) {
             System.setProperty(Constants.SHUTDOWN_WAIT_KEY, String.valueOf(wait));
+        }
     }
 
     public Boolean isCheck() {
@@ -185,6 +190,7 @@ public class RegistryConfig extends AbstractConfig {
 
     /**
      * @return transport
+     *
      * @see #getTransporter()
      * @deprecated
      */
@@ -196,6 +202,7 @@ public class RegistryConfig extends AbstractConfig {
 
     /**
      * @param transport
+     *
      * @see #setTransporter(String)
      * @deprecated
      */

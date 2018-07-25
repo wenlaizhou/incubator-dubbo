@@ -40,14 +40,23 @@ import static org.mockito.Mockito.mock;
 
 @RunWith(Parameterized.class)
 public class CacheFilterTest {
+
     private RpcInvocation invocation;
+
     private CacheFilter cacheFilter = new CacheFilter();
+
     private Invoker<?> invoker = mock(Invoker.class);
+
     private Invoker<?> invoker1 = mock(Invoker.class);
+
     private Invoker<?> invoker2 = mock(Invoker.class);
+
     private Invoker<?> invoker3 = mock(Invoker.class);
+
     private Invoker<?> invoker4 = mock(Invoker.class);
+
     private String cacheType;
+
     private CacheFactory cacheFactory;
 
     public CacheFilterTest(String cacheType, CacheFactory cacheFactory) {

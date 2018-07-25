@@ -19,6 +19,7 @@ package org.apache.dubbo.config.mock;
 import org.apache.dubbo.config.api.Greeting;
 
 public class GreetingLocal3 implements Greeting {
+
     private Greeting greeting;
 
     public GreetingLocal3(Greeting greeting) {

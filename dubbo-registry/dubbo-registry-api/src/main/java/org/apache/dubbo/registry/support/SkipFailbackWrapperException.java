@@ -24,6 +24,7 @@ package org.apache.dubbo.registry.support;
  * @see FailbackRegistry
  */
 public class SkipFailbackWrapperException extends RuntimeException {
+
     public SkipFailbackWrapperException(Throwable cause) {
         super(cause);
     }

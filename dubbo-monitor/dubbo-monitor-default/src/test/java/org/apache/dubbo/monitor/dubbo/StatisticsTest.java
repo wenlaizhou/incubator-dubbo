@@ -27,6 +27,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class StatisticsTest {
+
     @Test
     public void testEquals() {
         URL statistics = new URL("dubbo", "10.20.153.10", 0)

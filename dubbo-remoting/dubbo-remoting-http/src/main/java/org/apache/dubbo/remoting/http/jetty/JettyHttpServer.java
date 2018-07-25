@@ -76,7 +76,7 @@ public class JettyHttpServer extends AbstractHttpServer {
         servletHolder.setInitOrder(2);
 
         // dubbo's original impl can't support the use of ServletContext
-//        server.addHandler(servletHandler);
+        //        server.addHandler(servletHandler);
         // TODO Context.SESSIONS is the best option here?
         Context context = new Context(server, "/", Context.SESSIONS);
         context.setServletHandler(servletHandler);
@@ -84,7 +84,8 @@ public class JettyHttpServer extends AbstractHttpServer {
 
         try {
             server.start();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException("Failed to start jetty server on " + url.getParameter(Constants.BIND_IP_KEY) + ":" + url.getParameter(Constants.BIND_PORT_KEY) + ", cause: "
                     + e.getMessage(), e);
         }
@@ -100,7 +101,8 @@ public class JettyHttpServer extends AbstractHttpServer {
         if (server != null) {
             try {
                 server.stop();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 logger.warn(e.getMessage(), e);
             }
         }

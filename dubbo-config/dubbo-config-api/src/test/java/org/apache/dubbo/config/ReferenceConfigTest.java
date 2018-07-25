@@ -55,7 +55,8 @@ public class ReferenceConfigTest {
             rc.get();
             Assert.assertTrue(!Constants.LOCAL_PROTOCOL.equalsIgnoreCase(
                     rc.getInvoker().getUrl().getProtocol()));
-        } finally {
+        }
+        finally {
             demoService.unexport();
         }
     }

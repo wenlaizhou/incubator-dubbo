@@ -44,14 +44,16 @@ public class ListTelnetHandler implements TelnetHandler {
             for (String part : parts) {
                 if ("-l".equals(part)) {
                     detail = true;
-                } else {
+                }
+                else {
                     if (service != null && service.length() > 0) {
                         return "Invaild parameter " + part;
                     }
                     service = part;
                 }
             }
-        } else {
+        }
+        else {
             service = (String) channel.getAttribute(ChangeTelnetHandler.SERVICE_KEY);
             if (service != null && service.length() > 0) {
                 buf.append("Use default service " + service + ".\r\n");
@@ -68,7 +70,8 @@ public class ListTelnetHandler implements TelnetHandler {
                     buf.append(exporter.getInvoker().getUrl());
                 }
             }
-        } else {
+        }
+        else {
             Invoker<?> invoker = null;
             for (Exporter<?> exporter : DubboProtocol.getDubboProtocol().getExporters()) {
                 if (service.equals(exporter.getInvoker().getInterface().getSimpleName())
@@ -86,11 +89,13 @@ public class ListTelnetHandler implements TelnetHandler {
                     }
                     if (detail) {
                         buf.append(ReflectUtils.getName(method));
-                    } else {
+                    }
+                    else {
                         buf.append(method.getName());
                     }
                 }
-            } else {
+            }
+            else {
                 buf.append("No such service " + service);
             }
         }

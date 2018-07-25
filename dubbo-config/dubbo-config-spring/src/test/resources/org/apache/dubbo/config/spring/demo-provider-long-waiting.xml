@@ -21,19 +21,19 @@
     http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <!-- current application configuration -->
-    <dubbo:application name="demo-provider"/>
+    <dubbo:application name="demo-provider" />
 
     <!-- registry center configuration -->
-    <dubbo:registry address="N/A"/>
+    <dubbo:registry address="N/A" />
 
     <!-- protocol configuration -->
-    <dubbo:protocol id="dubbo1" name="dubbo" port="20813"/>
-    <dubbo:protocol id="dubbo2" name="dubbo" port="20814"/>
+    <dubbo:protocol id="dubbo1" name="dubbo" port="20813" />
+    <dubbo:protocol id="dubbo2" name="dubbo" port="20814" />
 
     <!-- service configuration -->
     <dubbo:service interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService"
-                   protocol="dubbo1,dubbo2"/>
+                   protocol="dubbo1,dubbo2" />
 
-    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl_LongWaiting"/>
+    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl_LongWaiting" />
 
 </beans>

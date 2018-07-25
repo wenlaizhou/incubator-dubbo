@@ -110,9 +110,11 @@ public class HessianProtocol extends AbstractProxyProtocol {
         String client = url.getParameter(Constants.CLIENT_KEY, Constants.DEFAULT_HTTP_CLIENT);
         if ("httpclient".equals(client)) {
             hessianProxyFactory.setConnectionFactory(new HttpClientConnectionFactory());
-        } else if (client != null && client.length() > 0 && !Constants.DEFAULT_HTTP_CLIENT.equals(client)) {
+        }
+        else if (client != null && client.length() > 0 && !Constants.DEFAULT_HTTP_CLIENT.equals(client)) {
             throw new IllegalStateException("Unsupported http protocol client=\"" + client + "\"!");
-        } else {
+        }
+        else {
             HessianConnectionFactory factory = new DubboHessianURLConnectionFactory();
             factory.setHessianProxyFactory(hessianProxyFactory);
             hessianProxyFactory.setConnectionFactory(factory);
@@ -133,7 +135,8 @@ public class HessianProtocol extends AbstractProxyProtocol {
                 }
             }
             return RpcException.NETWORK_EXCEPTION;
-        } else if (e instanceof HessianMethodSerializationException) {
+        }
+        else if (e instanceof HessianMethodSerializationException) {
             return RpcException.SERIALIZATION_EXCEPTION;
         }
         return super.getErrorCode(e);
@@ -150,7 +153,8 @@ public class HessianProtocol extends AbstractProxyProtocol {
                         logger.info("Close hessian server " + server.getUrl());
                     }
                     server.close();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }
@@ -166,7 +170,8 @@ public class HessianProtocol extends AbstractProxyProtocol {
             HessianSkeleton skeleton = skeletonMap.get(uri);
             if (!request.getMethod().equalsIgnoreCase("POST")) {
                 response.setStatus(500);
-            } else {
+            }
+            else {
                 RpcContext.getContext().setRemoteAddress(request.getRemoteAddr(), request.getRemotePort());
 
                 Enumeration<String> enumeration = request.getHeaderNames();
@@ -180,7 +185,8 @@ public class HessianProtocol extends AbstractProxyProtocol {
 
                 try {
                     skeleton.invoke(request.getInputStream(), response.getOutputStream());
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     throw new ServletException(e);
                 }
             }

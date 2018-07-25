@@ -44,25 +44,28 @@ import java.util.HashMap;
 import static org.junit.Assert.fail;
 
 /**
- *
- *         byte 16
- *         0-1 magic code
- *         2 flag
- *         8 - 1-request/0-response
- *         7 - two way
- *         6 - heartbeat
- *         1-5 serialization id
- *         3 status
- *         20 ok
- *         90 error?
- *         4-11 id (long)
- *         12 -15 datalength
+ * byte 16
+ * 0-1 magic code
+ * 2 flag
+ * 8 - 1-request/0-response
+ * 7 - two way
+ * 6 - heartbeat
+ * 1-5 serialization id
+ * 3 status
+ * 20 ok
+ * 90 error?
+ * 4-11 id (long)
+ * 12 -15 datalength
  */
 public class ExchangeCodecTest extends TelnetCodecTest {
+
     // magic header.
     private static final short MAGIC = (short) 0xdabb;
+
     private static final byte MAGIC_HIGH = (byte) Bytes.short2bytes(MAGIC)[0];
+
     private static final byte MAGIC_LOW = (byte) Bytes.short2bytes(MAGIC)[1];
+
     Serialization serialization = getSerialization(Constants.DEFAULT_REMOTING_SERIALIZATION);
 
     private static Serialization getSerialization(String name) {
@@ -154,7 +157,8 @@ public class ExchangeCodecTest extends TelnetCodecTest {
         try {
             testDecode_assertEquals(request, TelnetCodec.DecodeResult.NEED_MORE_INPUT);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
             Assert.assertTrue(expected.getMessage().startsWith("Data length too large: " + Bytes.bytes2int(new byte[]{1, 1, 1, 1})));
         }
     }
@@ -351,7 +355,7 @@ public class ExchangeCodecTest extends TelnetCodecTest {
         Assert.assertEquals(response.isHeartbeat(), obj.isHeartbeat());
         Assert.assertEquals(person, obj.getResult());
         // encode response verson ??
-//        Assert.assertEquals(response.getProtocolVersion(), obj.getVersion());
+        //        Assert.assertEquals(response.getProtocolVersion(), obj.getVersion());
 
     }
 
@@ -381,7 +385,7 @@ public class ExchangeCodecTest extends TelnetCodecTest {
         Assert.assertEquals(response.isHeartbeat(), obj.isHeartbeat());
         Assert.assertEquals(badString, obj.getErrorMessage());
         Assert.assertEquals(null, obj.getResult());
-//        Assert.assertEquals(response.getProtocolVersion(), obj.getVersion());
+        //        Assert.assertEquals(response.getProtocolVersion(), obj.getVersion());
     }
 
     // http://code.alibabatech.com/jira/browse/DUBBO-392
@@ -428,7 +432,8 @@ public class ExchangeCodecTest extends TelnetCodecTest {
         try {
             codec.encode(channel, encodeBuffer, request);
             Assert.fail();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Assert.assertTrue(e.getMessage().startsWith("Data length too large: " + 6));
         }
 

@@ -114,11 +114,13 @@ public class PerformanceUtils {
                 while (interfaces.hasMoreElements()) {
                     try {
                         return interfaces.nextElement();
-                    } catch (Throwable e) {
+                    }
+                    catch (Throwable e) {
                     }
                 }
             }
-        } catch (SocketException e) {
+        }
+        catch (SocketException e) {
         }
         return null;
     }

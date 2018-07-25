@@ -41,7 +41,8 @@ public class TelnetServer {
             while (true) {
                 try {
                     TelnetServer.class.wait();
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                 }
             }
         }

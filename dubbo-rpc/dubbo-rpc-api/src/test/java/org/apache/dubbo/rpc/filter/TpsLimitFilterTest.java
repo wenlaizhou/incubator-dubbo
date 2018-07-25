@@ -54,7 +54,8 @@ public class TpsLimitFilterTest {
         for (int i = 0; i < 10; i++) {
             try {
                 filter.invoke(invoker, invocation);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 assertTrue(i >= 5);
                 throw e;
             }

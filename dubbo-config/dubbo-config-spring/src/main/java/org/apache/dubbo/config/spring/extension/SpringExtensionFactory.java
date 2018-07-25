@@ -17,6 +17,7 @@
 package org.apache.dubbo.config.spring.extension;
 
 import java.util.Set;
+
 import org.apache.dubbo.common.extension.ExtensionFactory;
 import org.apache.dubbo.common.extension.SPI;
 import org.apache.dubbo.common.logger.Logger;
@@ -30,6 +31,7 @@ import org.springframework.context.ApplicationContext;
  * SpringExtensionFactory
  */
 public class SpringExtensionFactory implements ExtensionFactory {
+
     private static final Logger logger = LoggerFactory.getLogger(SpringExtensionFactory.class);
 
     private static final Set<ApplicationContext> contexts = new ConcurrentHashSet<ApplicationContext>();
@@ -70,9 +72,11 @@ public class SpringExtensionFactory implements ExtensionFactory {
         for (ApplicationContext context : contexts) {
             try {
                 return context.getBean(type);
-            } catch (NoUniqueBeanDefinitionException multiBeanExe) {
+            }
+            catch (NoUniqueBeanDefinitionException multiBeanExe) {
                 throw multiBeanExe;
-            } catch (NoSuchBeanDefinitionException noBeanExe) {
+            }
+            catch (NoSuchBeanDefinitionException noBeanExe) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Error when get spring extension(bean) for type:" + type.getName(), noBeanExe);
                 }

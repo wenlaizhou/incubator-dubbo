@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class DefaultCommandExecutorTest {
+
     @Test(expected = NoSuchCommandException.class)
     public void testExecute1() throws Exception {
         DefaultCommandExecutor executor = new DefaultCommandExecutor();

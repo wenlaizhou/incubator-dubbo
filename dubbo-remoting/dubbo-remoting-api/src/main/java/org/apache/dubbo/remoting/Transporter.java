@@ -39,7 +39,9 @@ public interface Transporter {
      *
      * @param url     server url
      * @param handler
+     *
      * @return server
+     *
      * @throws RemotingException
      * @see org.apache.dubbo.remoting.Transporters#bind(URL, Receiver, ChannelHandler)
      */
@@ -51,7 +53,9 @@ public interface Transporter {
      *
      * @param url     server url
      * @param handler
+     *
      * @return client
+     *
      * @throws RemotingException
      * @see org.apache.dubbo.remoting.Transporters#connect(URL, Receiver, ChannelListener)
      */

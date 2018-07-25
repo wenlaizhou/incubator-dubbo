@@ -121,7 +121,8 @@ public abstract class AbstractMethodConfig extends AbstractConfig {
     public void setMock(Boolean mock) {
         if (mock == null) {
             setMock((String) null);
-        } else {
+        }
+        else {
             setMock(String.valueOf(mock));
         }
     }
@@ -129,7 +130,8 @@ public abstract class AbstractMethodConfig extends AbstractConfig {
     public void setMock(String mock) {
         if (mock != null && mock.startsWith(Constants.RETURN_PREFIX)) {
             checkLength("mock", mock);
-        } else {
+        }
+        else {
             checkName("mock", mock);
         }
         this.mock = mock;

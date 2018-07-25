@@ -37,15 +37,25 @@ import java.lang.reflect.Field;
 public class ReferenceCountExchangeClientTest {
 
     public static ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
     private static DubboProtocol protocol = DubboProtocol.getDubboProtocol();
+
     Exporter<?> demoExporter;
+
     Exporter<?> helloExporter;
+
     Invoker<IDemoService> demoServiceInvoker;
+
     Invoker<IHelloService> helloServiceInvoker;
+
     IDemoService demoService;
+
     IHelloService helloService;
+
     ExchangeClient demoClient;
+
     ExchangeClient helloClient;
+
     String errorMsg = "safe guard client , should not be called ,must have a bug";
 
     @BeforeClass
@@ -174,13 +184,15 @@ public class ReferenceCountExchangeClientTest {
     private ExchangeClient getClient(Invoker<?> invoker) {
         if (invoker.getUrl().getParameter(Constants.CONNECTIONS_KEY, 1) == 1) {
             return getInvokerClient(invoker);
-        } else {
+        }
+        else {
             ReferenceCountExchangeClient client = getReferenceClient(invoker);
             try {
                 Field clientField = ReferenceCountExchangeClient.class.getDeclaredField("client");
                 clientField.setAccessible(true);
                 return (ExchangeClient) clientField.get(client);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
                 Assert.fail(e.getMessage());
                 throw new RuntimeException(e);
@@ -201,7 +213,8 @@ public class ReferenceCountExchangeClientTest {
             ExchangeClient[] clients = (ExchangeClient[]) clientField.get(dInvoker);
             return clients[0];
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
             throw new RuntimeException(e);
@@ -209,20 +222,24 @@ public class ReferenceCountExchangeClientTest {
     }
 
     public interface IDemoService {
+
         public String demo();
     }
 
     public interface IHelloService {
+
         public String hello();
     }
 
     public class DemoServiceImpl implements IDemoService {
+
         public String demo() {
             return "demo";
         }
     }
 
     public class HelloServiceImpl implements IHelloService {
+
         public String hello() {
             return "hello";
         }

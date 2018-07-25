@@ -37,20 +37,30 @@ public class RpcStatus {
     private static final ConcurrentMap<String, RpcStatus> SERVICE_STATISTICS = new ConcurrentHashMap<String, RpcStatus>();
 
     private static final ConcurrentMap<String, ConcurrentMap<String, RpcStatus>> METHOD_STATISTICS = new ConcurrentHashMap<String, ConcurrentMap<String, RpcStatus>>();
+
     private final ConcurrentMap<String, Object> values = new ConcurrentHashMap<String, Object>();
+
     private final AtomicInteger active = new AtomicInteger();
+
     private final AtomicLong total = new AtomicLong();
+
     private final AtomicInteger failed = new AtomicInteger();
+
     private final AtomicLong totalElapsed = new AtomicLong();
+
     private final AtomicLong failedElapsed = new AtomicLong();
+
     private final AtomicLong maxElapsed = new AtomicLong();
+
     private final AtomicLong failedMaxElapsed = new AtomicLong();
+
     private final AtomicLong succeededMaxElapsed = new AtomicLong();
 
     /**
      * Semaphore used to control concurrency limit set by `executes`
      */
     private volatile Semaphore executesLimit;
+
     private volatile int executesPermits;
 
     private RpcStatus() {
@@ -58,6 +68,7 @@ public class RpcStatus {
 
     /**
      * @param url
+     *
      * @return status
      */
     public static RpcStatus getStatus(URL url) {
@@ -81,6 +92,7 @@ public class RpcStatus {
     /**
      * @param url
      * @param methodName
+     *
      * @return status
      */
     public static RpcStatus getStatus(URL url, String methodName) {
@@ -142,7 +154,8 @@ public class RpcStatus {
             if (status.succeededMaxElapsed.get() < elapsed) {
                 status.succeededMaxElapsed.set(elapsed);
             }
-        } else {
+        }
+        else {
             status.failed.incrementAndGet();
             status.failedElapsed.addAndGet(elapsed);
             if (status.failedMaxElapsed.get() < elapsed) {
@@ -165,6 +178,7 @@ public class RpcStatus {
      * get value.
      *
      * @param key
+     *
      * @return value
      */
     public Object get(String key) {
@@ -316,10 +330,11 @@ public class RpcStatus {
      * Get the semaphore for thread number. Semaphore's permits is decided by {@link Constants#EXECUTES_KEY}
      *
      * @param maxThreadNum value of {@link Constants#EXECUTES_KEY}
+     *
      * @return thread number semaphore
      */
     public Semaphore getSemaphore(int maxThreadNum) {
-        if(maxThreadNum <= 0) {
+        if (maxThreadNum <= 0) {
             return null;
         }
 

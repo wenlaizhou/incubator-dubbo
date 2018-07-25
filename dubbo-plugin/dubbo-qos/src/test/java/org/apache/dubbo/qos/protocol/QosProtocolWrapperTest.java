@@ -18,10 +18,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class QosProtocolWrapperTest {
+
     private URL url = Mockito.mock(URL.class);
+
     private Invoker invoker = mock(Invoker.class);
+
     private Protocol protocol = mock(Protocol.class);
+
     private QosProtocolWrapper wrapper = new QosProtocolWrapper(protocol);
+
     private Server server = Server.getInstance();
 
     @Before

@@ -20,12 +20,14 @@ package org.apache.dubbo.rpc;
  *
  */
 public interface PostProcessFilter extends Filter {
+
     /**
      * TODO Filter is singleton, so we have to add invoker & invocation as parameters for every invoke. But think of prototype, we may need to restore invocation between threads, because we will lost 'closure'.
      *
      * @param result
      * @param invoker
      * @param invocation
+     *
      * @return
      */
     Result postProcessResult(Result result, Invoker<?> invoker, Invocation invocation);

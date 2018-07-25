@@ -40,6 +40,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class RpcUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(RpcUtils.class);
+
     private static final AtomicLong INVOKE_ID = new AtomicLong(0);
 
     public static Class<?> getReturnType(Invocation invocation) {
@@ -57,7 +58,8 @@ public class RpcUtils {
                     return method.getReturnType();
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         return null;
@@ -84,11 +86,13 @@ public class RpcUtils {
                             if (actualArgType instanceof ParameterizedType) {
                                 returnType = (Class<?>) ((ParameterizedType) actualArgType).getRawType();
                                 genericReturnType = actualArgType;
-                            } else {
+                            }
+                            else {
                                 returnType = (Class<?>) actualArgType;
                                 genericReturnType = returnType;
                             }
-                        } else {
+                        }
+                        else {
                             returnType = null;
                             genericReturnType = null;
                         }
@@ -96,7 +100,8 @@ public class RpcUtils {
                     return new Type[]{returnType, genericReturnType};
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         return null;
@@ -124,9 +129,11 @@ public class RpcUtils {
         if (value == null) {
             // add invocationid in async operation by default
             return isAsync(url, invocation);
-        } else if (Boolean.TRUE.toString().equalsIgnoreCase(value)) {
+        }
+        else if (Boolean.TRUE.toString().equalsIgnoreCase(value)) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -173,7 +180,8 @@ public class RpcUtils {
         boolean isAsync;
         if (Boolean.TRUE.toString().equals(inv.getAttachment(Constants.ASYNC_KEY))) {
             isAsync = true;
-        } else {
+        }
+        else {
             isAsync = url.getMethodParameter(getMethodName(inv), Constants.ASYNC_KEY, false);
         }
         return isAsync;
@@ -200,7 +208,8 @@ public class RpcUtils {
         boolean isOneway;
         if (Boolean.FALSE.toString().equals(inv.getAttachment(Constants.RETURN_KEY))) {
             isOneway = true;
-        } else {
+        }
+        else {
             isOneway = !url.getMethodParameter(getMethodName(inv), Constants.RETURN_KEY, true);
         }
         return isOneway;

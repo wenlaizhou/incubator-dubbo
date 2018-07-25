@@ -15,6 +15,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TelnetProcessHandlerTest {
+
     @Test
     public void testPrompt() throws Exception {
         ChannelHandlerContext context = mock(ChannelHandlerContext.class);

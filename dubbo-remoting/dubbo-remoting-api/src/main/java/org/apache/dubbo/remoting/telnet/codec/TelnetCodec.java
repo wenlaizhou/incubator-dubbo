@@ -58,10 +58,12 @@ public class TelnetCodec extends TransportCodec {
             if (attribute instanceof String) {
                 try {
                     return Charset.forName((String) attribute);
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
-            } else if (attribute instanceof Charset) {
+            }
+            else if (attribute instanceof Charset) {
                 return (Charset) attribute;
             }
             URL url = channel.getUrl();
@@ -70,7 +72,8 @@ public class TelnetCodec extends TransportCodec {
                 if (parameter != null && parameter.length() > 0) {
                     try {
                         return Charset.forName(parameter);
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn(t.getMessage(), t);
                     }
                 }
@@ -78,7 +81,8 @@ public class TelnetCodec extends TransportCodec {
         }
         try {
             return Charset.forName(Constants.DEFAULT_CHARSET);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
         return Charset.defaultCharset();
@@ -98,18 +102,23 @@ public class TelnetCodec extends TransportCodec {
                         index--;
                     }
                 }
-            } else if (b == 27) { // escape
+            }
+            else if (b == 27) { // escape
                 if (i < message.length - 4 && message[i + 4] == 126) {
                     i = i + 4;
-                } else if (i < message.length - 3 && message[i + 3] == 126) {
+                }
+                else if (i < message.length - 3 && message[i + 3] == 126) {
                     i = i + 3;
-                } else if (i < message.length - 2) {
+                }
+                else if (i < message.length - 2) {
                     i = i + 2;
                 }
-            } else if (b == -1 && i < message.length - 2
+            }
+            else if (b == -1 && i < message.length - 2
                     && (message[i + 1] == -3 || message[i + 1] == -5)) { // handshake
                 i = i + 2;
-            } else {
+            }
+            else {
                 copy[index++] = message[i];
             }
         }
@@ -144,7 +153,8 @@ public class TelnetCodec extends TransportCodec {
             }
             byte[] msgData = ((String) message).getBytes(getCharset(channel).name());
             buffer.writeBytes(msgData);
-        } else {
+        }
+        else {
             super.encode(channel, buffer, message);
         }
     }
@@ -171,7 +181,8 @@ public class TelnetCodec extends TransportCodec {
             try {
                 boolean doublechar = message.length >= 3 && message[message.length - 3] < 0; // double byte char
                 channel.send(new String(doublechar ? new byte[]{32, 32, 8, 8} : new byte[]{32, 8}, getCharset(channel).name()));
-            } catch (RemotingException e) {
+            }
+            catch (RemotingException e) {
                 throw new IOException(StringUtils.toString(e));
             }
             return DecodeResult.NEED_MORE_INPUT;
@@ -198,13 +209,15 @@ public class TelnetCodec extends TransportCodec {
             Integer old = index;
             if (index == null) {
                 index = history.size() - 1;
-            } else {
+            }
+            else {
                 if (up) {
                     index = index - 1;
                     if (index < 0) {
                         index = history.size() - 1;
                     }
-                } else {
+                }
+                else {
                     index = index + 1;
                     if (index > history.size() - 1) {
                         index = 0;
@@ -230,7 +243,8 @@ public class TelnetCodec extends TransportCodec {
                 }
                 try {
                     channel.send(value);
-                } catch (RemotingException e) {
+                }
+                catch (RemotingException e) {
                     throw new IOException(StringUtils.toString(e));
                 }
             }
@@ -276,7 +290,8 @@ public class TelnetCodec extends TransportCodec {
             }
             if (history.isEmpty()) {
                 history.addLast(result);
-            } else if (!result.equals(history.getLast())) {
+            }
+            else if (!result.equals(history.getLast())) {
                 history.remove(result);
                 history.addLast(result);
                 if (history.size() > 10) {

@@ -84,7 +84,8 @@ public class ExporterSideConfigUrlTest extends UrlTestBase {
         String paramStringFromDb = getProviderParamString();
         try {
             paramStringFromDb = URLDecoder.decode(paramStringFromDb, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e) {
             // impossible
         }
 

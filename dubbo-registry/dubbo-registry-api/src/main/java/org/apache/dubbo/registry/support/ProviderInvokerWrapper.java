@@ -26,13 +26,18 @@ import org.apache.dubbo.rpc.RpcException;
  * @date 2017/11/23
  */
 public class ProviderInvokerWrapper<T> implements Invoker {
+
     private Invoker<T> invoker;
+
     private URL originUrl;
+
     private URL registryUrl;
+
     private URL providerUrl;
+
     private volatile boolean isReg;
 
-    public ProviderInvokerWrapper(Invoker<T> invoker,URL registryUrl,URL providerUrl) {
+    public ProviderInvokerWrapper(Invoker<T> invoker, URL registryUrl, URL providerUrl) {
         this.invoker = invoker;
         this.originUrl = URL.valueOf(invoker.getUrl().toFullString());
         this.registryUrl = URL.valueOf(registryUrl.toFullString());

@@ -67,7 +67,8 @@ public class NettyHandler extends SimpleChannelHandler {
                 channels.put(NetUtils.toAddressString((InetSocketAddress) ctx.getChannel().getRemoteAddress()), channel);
             }
             handler.connected(channel);
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.getChannel());
         }
     }
@@ -78,7 +79,8 @@ public class NettyHandler extends SimpleChannelHandler {
         try {
             channels.remove(NetUtils.toAddressString((InetSocketAddress) ctx.getChannel().getRemoteAddress()));
             handler.disconnected(channel);
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.getChannel());
         }
     }
@@ -88,7 +90,8 @@ public class NettyHandler extends SimpleChannelHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.getChannel(), url, handler);
         try {
             handler.received(channel, e.getMessage());
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.getChannel());
         }
     }
@@ -99,7 +102,8 @@ public class NettyHandler extends SimpleChannelHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.getChannel(), url, handler);
         try {
             handler.sent(channel, e.getMessage());
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.getChannel());
         }
     }
@@ -109,7 +113,8 @@ public class NettyHandler extends SimpleChannelHandler {
         NettyChannel channel = NettyChannel.getOrAddChannel(ctx.getChannel(), url, handler);
         try {
             handler.caught(channel, e.getCause());
-        } finally {
+        }
+        finally {
             NettyChannel.removeChannelIfDisconnected(ctx.getChannel());
         }
     }

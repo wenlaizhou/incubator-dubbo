@@ -54,7 +54,8 @@ public class StatusTelnetHandler implements TelnetHandler {
                     Status stat;
                     try {
                         stat = checker.check();
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         stat = new Status(Status.Level.ERROR, t.getMessage());
                     }
                     statuses.put(name, stat);
@@ -74,7 +75,8 @@ public class StatusTelnetHandler implements TelnetHandler {
             row.add(stat.getMessage());
             table.add(row);
             return TelnetUtils.toTable(header, table);
-        } else if (message.length() > 0) {
+        }
+        else if (message.length() > 0) {
             return "Unsupported parameter " + message + " for status.";
         }
         String status = channel.getUrl().getParameter("status");
@@ -86,7 +88,8 @@ public class StatusTelnetHandler implements TelnetHandler {
                 Status stat;
                 try {
                     stat = handler.check();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     stat = new Status(Status.Level.ERROR, t.getMessage());
                 }
                 statuses.put(s, stat);

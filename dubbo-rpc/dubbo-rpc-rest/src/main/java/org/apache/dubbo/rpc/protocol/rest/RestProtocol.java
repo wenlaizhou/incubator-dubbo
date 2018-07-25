@@ -57,12 +57,17 @@ import java.util.concurrent.TimeUnit;
 public class RestProtocol extends AbstractProxyProtocol {
 
     private static final int DEFAULT_PORT = 80;
+
     private static final String DEFAULT_SERVER = "jetty";
 
     private static final int HTTPCLIENTCONNECTIONMANAGER_MAXPERROUTE = 20;
+
     private static final int HTTPCLIENTCONNECTIONMANAGER_MAXTOTAL = 20;
-    private static final int HTTPCLIENT_KEEPALIVEDURATION = 30*1000;
+
+    private static final int HTTPCLIENT_KEEPALIVEDURATION = 30 * 1000;
+
     private static final int HTTPCLIENTCONNECTIONMANAGER_CLOSEWAITTIME_MS = 1000;
+
     private static final int HTTPCLIENTCONNECTIONMANAGER_CLOSEIDLETIME_S = 30;
 
     private final Map<String, RestServer> servers = new ConcurrentHashMap<String, RestServer>();
@@ -187,7 +192,8 @@ public class RestProtocol extends AbstractProxyProtocol {
             if (!StringUtils.isEmpty(clazz)) {
                 try {
                     client.register(Thread.currentThread().getContextClassLoader().loadClass(clazz.trim()));
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new RpcException("Error loading JAX-RS extension class: " + clazz.trim(), e);
                 }
             }
@@ -218,7 +224,8 @@ public class RestProtocol extends AbstractProxyProtocol {
                     logger.info("Closing the rest server at " + entry.getKey());
                 }
                 entry.getValue().stop();
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn("Error closing rest server", t);
             }
         }
@@ -230,7 +237,8 @@ public class RestProtocol extends AbstractProxyProtocol {
         for (ResteasyClient client : clients) {
             try {
                 client.close();
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.warn("Error closing rest client", t);
             }
         }
@@ -239,11 +247,13 @@ public class RestProtocol extends AbstractProxyProtocol {
 
     protected String getContextPath(URL url) {
         String contextPath = url.getPath();
-        return contextPath.endsWith("/") ? contextPath.substring(0,contextPath.length()-1) : contextPath;
+        return contextPath.endsWith("/") ? contextPath.substring(0, contextPath.length() - 1) : contextPath;
     }
 
     protected class ConnectionMonitor extends Thread {
+
         private volatile boolean shutdown;
+
         private final List<PoolingHttpClientConnectionManager> connectionManagers = Collections.synchronizedList(new LinkedList<PoolingHttpClientConnectionManager>());
 
         public void addConnectionManager(PoolingHttpClientConnectionManager connectionManager) {
@@ -262,7 +272,8 @@ public class RestProtocol extends AbstractProxyProtocol {
                         }
                     }
                 }
-            } catch (InterruptedException ex) {
+            }
+            catch (InterruptedException ex) {
                 shutdown();
             }
         }

@@ -36,7 +36,8 @@ public class ClassLoaderFilter implements Filter {
         Thread.currentThread().setContextClassLoader(invoker.getInterface().getClassLoader());
         try {
             return invoker.invoke(invocation);
-        } finally {
+        }
+        finally {
             Thread.currentThread().setContextClassLoader(ocl);
         }
     }

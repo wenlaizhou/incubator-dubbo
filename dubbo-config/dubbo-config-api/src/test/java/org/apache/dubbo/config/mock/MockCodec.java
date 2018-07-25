@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class MockCodec implements Codec {
+
     @Override
     public void encode(Channel channel, OutputStream output, Object message) throws IOException {
 

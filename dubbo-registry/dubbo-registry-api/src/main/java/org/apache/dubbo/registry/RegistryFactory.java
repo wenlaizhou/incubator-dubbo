@@ -40,6 +40,7 @@ public interface RegistryFactory {
      * 6. Support session=60000 session timeout or expiration settings.<br>
      *
      * @param url Registry address, is not allowed to be empty
+     *
      * @return Registry reference, never return empty value
      */
     @Adaptive({"protocol"})

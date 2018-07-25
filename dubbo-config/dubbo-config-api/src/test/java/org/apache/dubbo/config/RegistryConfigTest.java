@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class RegistryConfigTest {
+
     @Test
     public void testProtocol() throws Exception {
         RegistryConfig registry = new RegistryConfig();
@@ -70,7 +71,8 @@ public class RegistryConfigTest {
             registry.setWait(10);
             assertThat(registry.getWait(), is(10));
             assertThat(System.getProperty(Constants.SHUTDOWN_WAIT_KEY), equalTo("10"));
-        } finally {
+        }
+        finally {
             System.clearProperty(Constants.SHUTDOWN_TIMEOUT_KEY);
         }
     }

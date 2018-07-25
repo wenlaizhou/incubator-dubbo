@@ -74,7 +74,8 @@ public class MinaServer extends AbstractServer {
             if (acceptor != null) {
                 acceptor.unbind(getBindAddress());
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }

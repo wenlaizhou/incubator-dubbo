@@ -32,8 +32,11 @@ import static java.lang.System.currentTimeMillis;
 public class TTree implements TComponent {
 
     private static final String STEP_FIRST_CHAR = "`---";
+
     private static final String STEP_NORMAL_CHAR = "+---";
+
     private static final String STEP_HAS_BOARD = "|   ";
+
     private static final String STEP_EMPTY_BOARD = "    ";
 
     // should output cost or not
@@ -85,7 +88,8 @@ public class TTree implements TComponent {
                         if (isFirst) {
                             treeSB.append(scanner.nextLine()).append("\n");
                             isFirst = false;
-                        } else {
+                        }
+                        else {
                             treeSB
                                     .append(prefix)
                                     .append(repeat(' ', stepStringLength))
@@ -95,7 +99,8 @@ public class TTree implements TComponent {
                                     .append("\n");
                         }
                     }
-                } finally {
+                }
+                finally {
                     scanner.close();
                 }
 
@@ -135,6 +140,7 @@ public class TTree implements TComponent {
      * create a branch node
      *
      * @param data node data
+     *
      * @return this
      */
     public TTree begin(Object data) {

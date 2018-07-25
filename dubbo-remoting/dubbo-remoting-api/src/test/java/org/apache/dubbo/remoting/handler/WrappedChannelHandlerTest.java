@@ -31,7 +31,9 @@ import java.lang.reflect.Field;
 import static org.junit.Assert.fail;
 
 public class WrappedChannelHandlerTest {
+
     WrappedChannelHandler handler;
+
     URL url = URL.valueOf("test://10.20.30.40:1234");
 
     @Before
@@ -62,10 +64,12 @@ public class WrappedChannelHandlerTest {
             if (field != null) {
                 field.setAccessible(true);
                 return field.get(obj);
-            } else {
+            }
+            else {
                 throw new NoSuchFieldException();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e);
         }
     }
@@ -73,7 +77,8 @@ public class WrappedChannelHandlerTest {
     protected void sleep(int ms) {
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
@@ -100,12 +105,14 @@ public class WrappedChannelHandlerTest {
         try {
             handler.caught(new MockedChannel(), new BizException());
             fail();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Assert.assertEquals(BizException.class, e.getCause().getClass());
         }
     }
 
     class BizChannelHander extends MockedChannelHandler {
+
         private boolean invokeWithBizError;
 
         public BizChannelHander(boolean invokeWithBizError) {
@@ -143,6 +150,7 @@ public class WrappedChannelHandlerTest {
     }
 
     class BizException extends RuntimeException {
+
         private static final long serialVersionUID = -7541893754900723624L;
     }
 }

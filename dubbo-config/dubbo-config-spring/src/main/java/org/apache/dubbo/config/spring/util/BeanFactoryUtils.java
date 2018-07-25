@@ -47,6 +47,7 @@ public class BeanFactoryUtils {
      * @param beanName    the name of Bean
      * @param beanType    the {@link Class type} of Bean
      * @param <T>         the {@link Class type} of Bean
+     *
      * @return A bean if present , or <code>null</code>
      */
     public static <T> T getOptionalBean(ListableBeanFactory beanFactory, String beanName, Class<T> beanType) {
@@ -71,6 +72,7 @@ public class BeanFactoryUtils {
      * @param beanNames   the names of Bean
      * @param beanType    the {@link Class type} of Bean
      * @param <T>         the {@link Class type} of Bean
+     *
      * @return
      */
     public static <T> List<T> getBeans(ListableBeanFactory beanFactory, String[] beanNames, Class<T> beanType) {

@@ -26,7 +26,6 @@ import java.util.Collection;
 
 /**
  * RegistryStatusChecker
- *
  */
 @Activate
 public class RegistryStatusChecker implements StatusChecker {
@@ -47,7 +46,8 @@ public class RegistryStatusChecker implements StatusChecker {
             if (!registry.isAvailable()) {
                 level = Status.Level.ERROR;
                 buf.append("(disconnected)");
-            } else {
+            }
+            else {
                 buf.append("(connected)");
             }
         }

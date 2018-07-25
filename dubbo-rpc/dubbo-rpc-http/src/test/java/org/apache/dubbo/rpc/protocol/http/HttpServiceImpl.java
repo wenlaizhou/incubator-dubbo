@@ -27,7 +27,7 @@ public class HttpServiceImpl implements HttpService {
         called = true;
         return "Hello, " + name;
     }
-    
+
     public String sayHello(String name, int times) {
         called = true;
         StringBuilder sb = new StringBuilder();
@@ -44,7 +44,8 @@ public class HttpServiceImpl implements HttpService {
     public void timeOut(int millis) {
         try {
             Thread.sleep(millis);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

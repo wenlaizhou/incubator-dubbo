@@ -70,25 +70,39 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
     private static final Cluster cluster = ExtensionLoader.getExtensionLoader(Cluster.class).getAdaptiveExtension();
 
     private static final ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
     private final List<URL> urls = new ArrayList<URL>();
+
     // interface name
     private String interfaceName;
+
     private Class<?> interfaceClass;
+
     private Class<?> asyncInterfaceClass;
+
     // client type
     private String client;
+
     // url for peer-to-peer invocation
     private String url;
+
     // method configs
     private List<MethodConfig> methods;
+
     // default config
     private ConsumerConfig consumer;
+
     private String protocol;
+
     // interface proxy reference
     private transient volatile T ref;
+
     private transient volatile Invoker<?> invoker;
+
     private transient volatile boolean initialized;
+
     private transient volatile boolean destroyed;
+
     @SuppressWarnings("unused")
     private final Object finalizerGuardian = new Object() {
         @Override
@@ -144,7 +158,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
     private static Method getMethodByName(Class<?> clazz, String methodName) {
         try {
             return ReflectUtils.findMethodByMethodName(clazz, methodName);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e);
         }
     }
@@ -177,7 +192,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
         destroyed = true;
         try {
             invoker.destroy();
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn("Unexpected err when destroy invoker of ReferenceConfig(" + url + ").", t);
         }
         invoker = null;
@@ -200,11 +216,13 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
         }
         if (ProtocolUtils.isGeneric(getGeneric())) {
             interfaceClass = GenericService.class;
-        } else {
+        }
+        else {
             try {
                 interfaceClass = Class.forName(interfaceName, true, Thread.currentThread()
                         .getContextClassLoader());
-            } catch (ClassNotFoundException e) {
+            }
+            catch (ClassNotFoundException e) {
                 throw new IllegalStateException(e.getMessage(), e);
             }
             checkInterfaceAndMethods(interfaceClass, methods);
@@ -225,12 +243,17 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
                 try {
                     fis = new FileInputStream(new File(resolveFile));
                     properties.load(fis);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     throw new IllegalStateException("Unload " + resolveFile + ", cause: " + e.getMessage(), e);
-                } finally {
+                }
+                finally {
                     try {
-                        if (null != fis) fis.close();
-                    } catch (IOException e) {
+                        if (null != fis) {
+                            fis.close();
+                        }
+                    }
+                    catch (IOException e) {
                         logger.warn(e.getMessage(), e);
                     }
                 }
@@ -242,7 +265,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
             if (logger.isWarnEnabled()) {
                 if (resolveFile != null) {
                     logger.warn("Using default dubbo resolve file " + resolveFile + " replace " + interfaceName + "" + resolve + " to p2p invoke remote service.");
-                } else {
+                }
+                else {
                     logger.warn("Using -D" + interfaceName + "=" + resolve + " to p2p invoke remote service.");
                 }
             }
@@ -298,7 +322,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
             if (methods.length == 0) {
                 logger.warn("NO method found in service interface " + interfaceClass.getName());
                 map.put("methods", Constants.ANY_VALUE);
-            } else {
+            }
+            else {
                 map.put("methods", StringUtils.join(new HashSet<String>(Arrays.asList(methods)), ","));
             }
         }
@@ -326,7 +351,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
         String hostToRegistry = ConfigUtils.getSystemProperty(Constants.DUBBO_IP_TO_REGISTRY);
         if (hostToRegistry == null || hostToRegistry.length() == 0) {
             hostToRegistry = NetUtils.getLocalHost();
-        } else if (isInvalidLocalHost(hostToRegistry)) {
+        }
+        else if (isInvalidLocalHost(hostToRegistry)) {
             throw new IllegalArgumentException("Specified invalid registry ip from property:" + Constants.DUBBO_IP_TO_REGISTRY + ", value:" + hostToRegistry);
         }
         map.put(Constants.REGISTER_IP_KEY, hostToRegistry);
@@ -345,13 +371,16 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
         if (isInjvm() == null) {
             if (url != null && url.length() > 0) { // if a url is specified, don't do local reference
                 isJvmRefer = false;
-            } else if (InjvmProtocol.getInjvmProtocol().isInjvmRefer(tmpUrl)) {
+            }
+            else if (InjvmProtocol.getInjvmProtocol().isInjvmRefer(tmpUrl)) {
                 // by default, reference local service if there is
                 isJvmRefer = true;
-            } else {
+            }
+            else {
                 isJvmRefer = false;
             }
-        } else {
+        }
+        else {
             isJvmRefer = isInjvm().booleanValue();
         }
 
@@ -361,7 +390,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
             if (logger.isInfoEnabled()) {
                 logger.info("Using injvm service " + interfaceClass.getName());
             }
-        } else {
+        }
+        else {
             if (url != null && url.length() > 0) { // user specified URL, could be peer-to-peer address, or register center's address.
                 String[] us = Constants.SEMICOLON_SPLIT_PATTERN.split(url);
                 if (us != null && us.length > 0) {
@@ -372,12 +402,14 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
                         }
                         if (Constants.REGISTRY_PROTOCOL.equals(url.getProtocol())) {
                             urls.add(url.addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map)));
-                        } else {
+                        }
+                        else {
                             urls.add(ClusterUtils.mergeUrl(url, map));
                         }
                     }
                 }
-            } else { // assemble URL from register center's configuration
+            }
+            else { // assemble URL from register center's configuration
                 List<URL> us = loadRegistries(false);
                 if (us != null && !us.isEmpty()) {
                     for (URL u : us) {
@@ -395,7 +427,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
 
             if (urls.size() == 1) {
                 invoker = refprotocol.refer(interfaceClass, urls.get(0));
-            } else {
+            }
+            else {
                 List<Invoker<?>> invokers = new ArrayList<Invoker<?>>();
                 URL registryURL = null;
                 for (URL url : urls) {
@@ -408,7 +441,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
                     // use AvailableCluster only when register's cluster is available
                     URL u = registryURL.addParameter(Constants.CLUSTER_KEY, AvailableCluster.NAME);
                     invoker = cluster.join(new StaticDirectory(u, invokers));
-                } else { // not a registry url
+                }
+                else { // not a registry url
                     invoker = cluster.join(new StaticDirectory(invokers));
                 }
             }
@@ -440,9 +474,13 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
 
     private void resolveAsyncInterface(Class<?> interfaceClass, Map<String, String> map) {
         AsyncFor annotation = interfaceClass.getAnnotation(AsyncFor.class);
-        if (annotation == null) return;
+        if (annotation == null) {
+            return;
+        }
         Class<?> target = annotation.value();
-        if (!target.isAssignableFrom(interfaceClass)) return;
+        if (!target.isAssignableFrom(interfaceClass)) {
+            return;
+        }
         this.asyncInterfaceClass = interfaceClass;
         this.interfaceClass = target;
         setInterface(this.interfaceClass.getName());
@@ -463,7 +501,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
                 this.interfaceClass = Class.forName(interfaceName, true, Thread.currentThread()
                         .getContextClassLoader());
             }
-        } catch (ClassNotFoundException t) {
+        }
+        catch (ClassNotFoundException t) {
             throw new IllegalStateException(t.getMessage(), t);
         }
         return interfaceClass;
@@ -471,6 +510,7 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
 
     /**
      * @param interfaceClass
+     *
      * @see #setInterface(Class)
      * @deprecated
      */

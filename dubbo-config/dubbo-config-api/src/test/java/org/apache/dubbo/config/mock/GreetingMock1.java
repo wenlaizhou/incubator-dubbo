@@ -17,4 +17,5 @@
 package org.apache.dubbo.config.mock;
 
 public class GreetingMock1 {
+
 }

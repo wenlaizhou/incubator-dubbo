@@ -50,8 +50,8 @@ public class TomcatHttpServer extends AbstractHttpServer {
         tomcat.setPort(url.getPort());
         tomcat.getConnector().setProperty(
                 "maxThreads", String.valueOf(url.getParameter(Constants.THREADS_KEY, Constants.DEFAULT_THREADS)));
-//        tomcat.getConnector().setProperty(
-//                "minSpareThreads", String.valueOf(url.getParameter(Constants.THREADS_KEY, Constants.DEFAULT_THREADS)));
+        //        tomcat.getConnector().setProperty(
+        //                "minSpareThreads", String.valueOf(url.getParameter(Constants.THREADS_KEY, Constants.DEFAULT_THREADS)));
 
         tomcat.getConnector().setProperty(
                 "maxConnections", String.valueOf(url.getParameter(Constants.ACCEPTS_KEY, -1)));
@@ -69,7 +69,8 @@ public class TomcatHttpServer extends AbstractHttpServer {
 
         try {
             tomcat.start();
-        } catch (LifecycleException e) {
+        }
+        catch (LifecycleException e) {
             throw new IllegalStateException("Failed to start tomcat server at " + url.getAddress(), e);
         }
     }
@@ -82,7 +83,8 @@ public class TomcatHttpServer extends AbstractHttpServer {
 
         try {
             tomcat.stop();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
     }

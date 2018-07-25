@@ -71,6 +71,7 @@ public class DubboLazyConnectTest {
     }
 
     public class DemoServiceImpl implements IDemoService {
+
         public String get() {
             return "ok";
         }

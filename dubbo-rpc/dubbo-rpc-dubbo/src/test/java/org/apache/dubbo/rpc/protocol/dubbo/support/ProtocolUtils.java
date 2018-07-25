@@ -33,6 +33,7 @@ import java.util.Collection;
 public class ProtocolUtils {
 
     public static ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
+
     private static Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
 
     public static <T> T refer(Class<T> type, String url) {

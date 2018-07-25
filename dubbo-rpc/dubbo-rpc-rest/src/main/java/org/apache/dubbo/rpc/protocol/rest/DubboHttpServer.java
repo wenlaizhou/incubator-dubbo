@@ -39,10 +39,13 @@ import java.util.Enumeration;
 public class DubboHttpServer extends BaseRestServer {
 
     private final HttpServletDispatcher dispatcher = new HttpServletDispatcher();
+
     private final ResteasyDeployment deployment = new ResteasyDeployment();
+
     private HttpBinder httpBinder;
+
     private HttpServer httpServer;
-//    private boolean isExternalServer;
+    //    private boolean isExternalServer;
 
     public DubboHttpServer(HttpBinder httpBinder) {
         this.httpBinder = httpBinder;
@@ -66,7 +69,8 @@ public class DubboHttpServer extends BaseRestServer {
 
         try {
             dispatcher.init(new SimpleServletConfig(servletContext));
-        } catch (ServletException e) {
+        }
+        catch (ServletException e) {
             throw new RpcException(e);
         }
     }

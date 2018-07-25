@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class AbstractServiceConfigTest {
+
     @Test
     public void testVersion() throws Exception {
         ServiceConfig serviceConfig = new ServiceConfig();

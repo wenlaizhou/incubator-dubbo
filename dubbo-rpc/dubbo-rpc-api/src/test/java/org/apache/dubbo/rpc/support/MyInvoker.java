@@ -29,7 +29,9 @@ import org.apache.dubbo.rpc.RpcResult;
 public class MyInvoker<T> implements Invoker<T> {
 
     URL url;
+
     Class<T> type;
+
     boolean hasException = false;
 
     public MyInvoker(URL url) {
@@ -62,7 +64,8 @@ public class MyInvoker<T> implements Invoker<T> {
         if (hasException == false) {
             result.setValue("alibaba");
             return result;
-        } else {
+        }
+        else {
             result.setException(new RuntimeException("mocked exception"));
             return result;
         }

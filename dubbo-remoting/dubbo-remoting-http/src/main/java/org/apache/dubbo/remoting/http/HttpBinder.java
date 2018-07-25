@@ -31,6 +31,7 @@ public interface HttpBinder {
      * bind the server.
      *
      * @param url server url.
+     *
      * @return server.
      */
     @Adaptive({Constants.SERVER_KEY})

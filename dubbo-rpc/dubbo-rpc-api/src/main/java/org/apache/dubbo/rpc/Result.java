@@ -62,6 +62,7 @@ public interface Result extends Serializable {
      * </code>
      *
      * @return result.
+     *
      * @throws if has exception throw it.
      */
     Object recreate() throws Throwable;

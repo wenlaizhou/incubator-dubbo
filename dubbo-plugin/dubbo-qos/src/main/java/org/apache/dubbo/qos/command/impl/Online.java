@@ -37,7 +37,9 @@ import java.util.Set;
         "online xx.xx.xxx.service"
 })
 public class Online implements BaseCommand {
+
     private Logger logger = LoggerFactory.getLogger(Online.class);
+
     private RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader(RegistryFactory.class).getAdaptiveExtension();
 
     @Override
@@ -68,7 +70,8 @@ public class Online implements BaseCommand {
 
         if (hasService) {
             return "OK";
-        } else {
+        }
+        else {
             return "service not found";
         }
 

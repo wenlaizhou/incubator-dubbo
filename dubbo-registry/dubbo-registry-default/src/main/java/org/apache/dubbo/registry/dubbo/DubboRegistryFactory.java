@@ -37,12 +37,13 @@ import java.util.List;
 
 /**
  * DubboRegistryFactory
- *
  */
 public class DubboRegistryFactory extends AbstractRegistryFactory {
 
     private Protocol protocol;
+
     private ProxyFactory proxyFactory;
+
     private Cluster cluster;
 
     private static URL getRegistryURL(URL url) {

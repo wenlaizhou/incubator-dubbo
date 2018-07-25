@@ -34,7 +34,9 @@ public class MockChannel implements Channel {
     private Map<String, Object> attributes = new HashMap<String, Object>();
 
     private volatile boolean closed = false;
+
     private volatile boolean closing = false;
+
     private List<Object> sentObjects = new ArrayList<Object>();
 
     @Override

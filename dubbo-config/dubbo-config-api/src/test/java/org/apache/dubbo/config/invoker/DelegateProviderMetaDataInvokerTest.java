@@ -29,7 +29,9 @@ import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 public class DelegateProviderMetaDataInvokerTest {
+
     private ServiceConfig service;
+
     private Invoker<Greeting> invoker;
 
     @Before

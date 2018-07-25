@@ -34,6 +34,7 @@ import java.util.Set;
         "ls"
 })
 public class Ls implements BaseCommand {
+
     @Override
     public String execute(CommandContext commandContext, String[] args) {
         StringBuilder result = new StringBuilder();

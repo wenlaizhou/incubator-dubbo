@@ -22,7 +22,6 @@ import org.apache.dubbo.remoting.RemotingException;
 import org.apache.dubbo.remoting.exchange.support.MultiMessage;
 
 /**
- *
  * @see MultiMessage
  */
 public class MultiMessageHandler extends AbstractChannelHandlerDelegate {
@@ -39,7 +38,8 @@ public class MultiMessageHandler extends AbstractChannelHandlerDelegate {
             for (Object obj : list) {
                 handler.received(channel, obj);
             }
-        } else {
+        }
+        else {
             handler.received(channel, message);
         }
     }

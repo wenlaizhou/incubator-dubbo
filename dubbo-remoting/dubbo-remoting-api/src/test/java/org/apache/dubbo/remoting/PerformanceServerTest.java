@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture;
 public class PerformanceServerTest extends TestCase {
 
     private static final Logger logger = LoggerFactory.getLogger(PerformanceServerTest.class);
+
     private static ExchangeServer server = null;
 
     private static void restartServer(int times, int alive, int sleep) throws Exception {
@@ -51,9 +52,13 @@ public class PerformanceServerTest extends TestCase {
         for (int i = 0; i < times; i++) {
             logger.info("restart times:" + i);
             server = statServer();
-            if (alive > 0) Thread.sleep(alive);
+            if (alive > 0) {
+                Thread.sleep(alive);
+            }
             server.close();
-            if (sleep > 0) Thread.sleep(sleep);
+            if (sleep > 0) {
+                Thread.sleep(sleep);
+            }
         }
 
         server = statServer();
@@ -102,35 +107,43 @@ public class PerformanceServerTest extends TestCase {
             public String telnet(Channel channel, String message) throws RemotingException {
                 if (message.equals("help")) {
                     return "support cmd: \r\n\tstart \r\n\tstop \r\n\tshutdown \r\n\trestart times [alive] [sleep] \r\ntelnet>";
-                } else if (message.equals("stop")) {
+                }
+                else if (message.equals("stop")) {
                     logger.info("server closed:" + server);
                     server.close();
                     return "stop server\r\ntelnet>";
-                } else if (message.startsWith("start")) {
+                }
+                else if (message.startsWith("start")) {
                     try {
                         restartServer(0, 0, 0);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
                     return "start server\r\ntelnet>";
-                } else if (message.startsWith("shutdown")) {
+                }
+                else if (message.startsWith("shutdown")) {
                     System.exit(0);
                     return "start server\r\ntelnet>";
-                } else if (message.startsWith("channels")) {
+                }
+                else if (message.startsWith("channels")) {
                     return "server.getExchangeChannels():" + server.getExchangeChannels().size() + "\r\ntelnet>";
-                } else if (message.startsWith("restart ")) { //r times [sleep] r 10 or r 10 100
+                }
+                else if (message.startsWith("restart ")) { //r times [sleep] r 10 or r 10 100
                     String[] args = message.split(" ");
                     int times = Integer.parseInt(args[1]);
                     int alive = args.length > 2 ? Integer.parseInt(args[2]) : 0;
                     int sleep = args.length > 3 ? Integer.parseInt(args[3]) : 100;
                     try {
                         restartServer(times, alive, sleep);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                     }
 
                     return "restart server,times:" + times + " stop alive time: " + alive + ",sleep time: " + sleep + " usage:r times [alive] [sleep] \r\ntelnet>";
-                } else {
+                }
+                else {
                     return "echo: " + message + "\r\ntelnet> ";
                 }
 
@@ -149,14 +162,17 @@ public class PerformanceServerTest extends TestCase {
         }
         final int port = PerformanceUtils.getIntProperty("port", 9911);
         final boolean telnet = PerformanceUtils.getBooleanProperty("telnet", true);
-        if (telnet) statTelnetServer(port + 1);
+        if (telnet) {
+            statTelnetServer(port + 1);
+        }
         server = statServer();
 
         synchronized (PerformanceServerTest.class) {
             while (true) {
                 try {
                     PerformanceServerTest.class.wait();
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                 }
             }
         }

@@ -148,7 +148,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
         String wait = ConfigUtils.getProperty(Constants.SHUTDOWN_WAIT_KEY);
         if (wait != null && wait.trim().length() > 0) {
             System.setProperty(Constants.SHUTDOWN_WAIT_KEY, wait.trim());
-        } else {
+        }
+        else {
             wait = ConfigUtils.getProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY);
             if (wait != null && wait.trim().length() > 0) {
                 System.setProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY, wait.trim());
@@ -182,7 +183,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
                     if (!map.containsKey("protocol")) {
                         if (ExtensionLoader.getExtensionLoader(RegistryFactory.class).hasExtension("remote")) {
                             map.put("protocol", "remote");
-                        } else {
+                        }
+                        else {
                             map.put("protocol", "dubbo");
                         }
                     }
@@ -235,12 +237,14 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
             if (!map.containsKey(Constants.PROTOCOL_KEY)) {
                 if (ExtensionLoader.getExtensionLoader(MonitorFactory.class).hasExtension("logstat")) {
                     map.put(Constants.PROTOCOL_KEY, "logstat");
-                } else {
+                }
+                else {
                     map.put(Constants.PROTOCOL_KEY, "dubbo");
                 }
             }
             return UrlUtils.parseURL(address, map);
-        } else if (Constants.REGISTRY_PROTOCOL.equals(monitor.getProtocol()) && registryURL != null) {
+        }
+        else if (Constants.REGISTRY_PROTOCOL.equals(monitor.getProtocol()) && registryURL != null) {
             return registryURL.setProtocol("dubbo").addParameter(Constants.PROTOCOL_KEY, "registry").addParameterAndEncoded(Constants.REFER_KEY, StringUtils.toQueryString(map));
         }
         return null;
@@ -285,7 +289,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
             }
             try {
                 ReflectUtils.findConstructor(localClass, interfaceClass);
-            } catch (NoSuchMethodException e) {
+            }
+            catch (NoSuchMethodException e) {
                 throw new IllegalStateException("No such constructor \"public " + localClass.getSimpleName() + "(" + interfaceClass.getName() + ")\" in local implementation class " + localClass.getName());
             }
         }
@@ -296,7 +301,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
             }
             try {
                 ReflectUtils.findConstructor(localClass, interfaceClass);
-            } catch (NoSuchMethodException e) {
+            }
+            catch (NoSuchMethodException e) {
                 throw new IllegalStateException("No such constructor \"public " + localClass.getSimpleName() + "(" + interfaceClass.getName() + ")\" in local implementation class " + localClass.getName());
             }
         }
@@ -305,17 +311,20 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
                 String value = mock.substring(Constants.RETURN_PREFIX.length());
                 try {
                     MockInvoker.parseMockValue(value);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     throw new IllegalStateException("Illegal mock json value in <dubbo:service ... mock=\"" + mock + "\" />");
                 }
-            } else {
+            }
+            else {
                 Class<?> mockClass = ConfigUtils.isDefault(mock) ? ReflectUtils.forName(interfaceClass.getName() + "Mock") : ReflectUtils.forName(mock);
                 if (!interfaceClass.isAssignableFrom(mockClass)) {
                     throw new IllegalStateException("The mock implementation class " + mockClass.getName() + " not implement interface " + interfaceClass.getName());
                 }
                 try {
                     mockClass.getConstructor(new Class<?>[0]);
-                } catch (NoSuchMethodException e) {
+                }
+                catch (NoSuchMethodException e) {
                     throw new IllegalStateException("No such empty constructor \"public " + mockClass.getSimpleName() + "()\" in mock implementation class " + mockClass.getName());
                 }
             }
@@ -324,6 +333,7 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
 
     /**
      * @return local
+     *
      * @deprecated Replace to <code>getStub()</code>
      */
     @Deprecated
@@ -333,19 +343,22 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
 
     /**
      * @param local
+     *
      * @deprecated Replace to <code>setStub(Boolean)</code>
      */
     @Deprecated
     public void setLocal(Boolean local) {
         if (local == null) {
             setLocal((String) null);
-        } else {
+        }
+        else {
             setLocal(String.valueOf(local));
         }
     }
 
     /**
      * @param local
+     *
      * @deprecated Replace to <code>setStub(String)</code>
      */
     @Deprecated
@@ -361,7 +374,8 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
     public void setStub(Boolean stub) {
         if (stub == null) {
             setStub((String) null);
-        } else {
+        }
+        else {
             setStub(String.valueOf(stub));
         }
     }

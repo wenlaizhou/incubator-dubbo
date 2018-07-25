@@ -34,6 +34,7 @@ import static org.junit.Assert.assertEquals;
  * ConsumerContextFilterTest.java
  */
 public class ConsumerContextFilterTest {
+
     Filter consumerContextFilter = new ConsumerContextFilter();
 
     @Test

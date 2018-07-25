@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
 public class TKvTest {
+
     @Test
     public void test1() {
         TKv tKv = new TKv(new TTable.ColumnDefine(TTable.Align.RIGHT), new TTable.ColumnDefine(10, false, TTable.Align.LEFT));

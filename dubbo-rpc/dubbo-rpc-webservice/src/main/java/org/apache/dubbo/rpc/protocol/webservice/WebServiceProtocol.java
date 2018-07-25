@@ -95,10 +95,10 @@ public class WebServiceProtocol extends AbstractProxyProtocol {
         return new Runnable() {
             @Override
             public void run() {
-                if(serverFactoryBean.getServer()!= null) {
+                if (serverFactoryBean.getServer() != null) {
                     serverFactoryBean.getServer().destroy();
                 }
-                if(serverFactoryBean.getBus()!=null) {
+                if (serverFactoryBean.getBus() != null) {
                     serverFactoryBean.getBus().shutdown(true);
                 }
             }
@@ -129,7 +129,8 @@ public class WebServiceProtocol extends AbstractProxyProtocol {
         }
         if (e instanceof SocketTimeoutException) {
             return RpcException.TIMEOUT_EXCEPTION;
-        } else if (e instanceof IOException) {
+        }
+        else if (e instanceof IOException) {
             return RpcException.NETWORK_EXCEPTION;
         }
         return super.getErrorCode(e);

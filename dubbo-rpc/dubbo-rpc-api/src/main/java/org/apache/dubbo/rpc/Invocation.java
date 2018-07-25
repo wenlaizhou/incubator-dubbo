@@ -31,6 +31,7 @@ public interface Invocation {
      * get method name.
      *
      * @return method name.
+     *
      * @serial
      */
     String getMethodName();
@@ -39,6 +40,7 @@ public interface Invocation {
      * get parameter types.
      *
      * @return parameter types.
+     *
      * @serial
      */
     Class<?>[] getParameterTypes();
@@ -47,6 +49,7 @@ public interface Invocation {
      * get arguments.
      *
      * @return arguments.
+     *
      * @serial
      */
     Object[] getArguments();
@@ -55,6 +58,7 @@ public interface Invocation {
      * get attachments.
      *
      * @return attachments.
+     *
      * @serial
      */
     Map<String, String> getAttachments();
@@ -63,6 +67,7 @@ public interface Invocation {
      * get attachment by key.
      *
      * @return attachment value.
+     *
      * @serial
      */
     String getAttachment(String key);
@@ -71,6 +76,7 @@ public interface Invocation {
      * get attachment by key with default value.
      *
      * @return attachment value.
+     *
      * @serial
      */
     String getAttachment(String key, String defaultValue);
@@ -79,6 +85,7 @@ public interface Invocation {
      * get the invoker in current context.
      *
      * @return invoker.
+     *
      * @transient
      */
     Invoker<?> getInvoker();

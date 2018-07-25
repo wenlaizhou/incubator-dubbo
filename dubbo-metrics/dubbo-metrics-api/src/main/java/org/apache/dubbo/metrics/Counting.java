@@ -20,6 +20,7 @@ package org.apache.dubbo.metrics;
  * An interface for metric types which have counts.
  */
 public interface Counting {
+
     /**
      * Returns the current count.
      *

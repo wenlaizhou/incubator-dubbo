@@ -34,6 +34,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MultiThreadTest extends TestCase {
 
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     public void testDubboMultiThreadInvoke() throws Exception {

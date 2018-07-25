@@ -26,9 +26,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ProviderModel {
+
     private final String serviceName;
+
     private final Object serviceInstance;
+
     private final ServiceConfig metadata;
+
     private final Map<String, List<ProviderMethodModel>> methods = new HashMap<String, List<ProviderMethodModel>>();
 
     public ProviderModel(String serviceName, ServiceConfig metadata, Object serviceInstance) {

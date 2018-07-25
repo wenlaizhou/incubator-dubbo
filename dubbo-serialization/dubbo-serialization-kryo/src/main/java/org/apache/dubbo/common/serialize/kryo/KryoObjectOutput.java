@@ -29,6 +29,7 @@ import java.io.OutputStream;
 public class KryoObjectOutput implements ObjectOutput, Cleanable {
 
     private Output output;
+
     private Kryo kryo;
 
     public KryoObjectOutput(OutputStream outputStream) {
@@ -75,7 +76,8 @@ public class KryoObjectOutput implements ObjectOutput, Cleanable {
     public void writeBytes(byte[] v) throws IOException {
         if (v == null) {
             output.writeInt(-1);
-        } else {
+        }
+        else {
             writeBytes(v, 0, v.length);
         }
     }
@@ -84,7 +86,8 @@ public class KryoObjectOutput implements ObjectOutput, Cleanable {
     public void writeBytes(byte[] v, int off, int len) throws IOException {
         if (v == null) {
             output.writeInt(-1);
-        } else {
+        }
+        else {
             output.writeInt(len);
             output.write(v, off, len);
         }

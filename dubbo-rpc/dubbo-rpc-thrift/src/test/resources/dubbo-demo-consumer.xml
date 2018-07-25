@@ -21,12 +21,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
     http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="dubbo-demo-consumer"/>
+    <dubbo:application name="dubbo-demo-consumer" />
 
-    <dubbo:registry address="multicast://224.5.6.7:1234"/>
+    <dubbo:registry address="multicast://224.5.6.7:1234" />
 
-    <dubbo:protocol name="thrift"/>
+    <dubbo:protocol name="thrift" />
 
-    <dubbo:reference id="demoService" interface="org.apache.dubbo.rpc.gen.thrift.Demo$Iface" timeout="1000000"/>
+    <dubbo:reference id="demoService" interface="org.apache.dubbo.rpc.gen.thrift.Demo$Iface" timeout="1000000" />
 
 </beans>

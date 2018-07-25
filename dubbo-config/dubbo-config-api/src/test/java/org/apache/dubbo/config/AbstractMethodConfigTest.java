@@ -28,6 +28,7 @@ import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 public class AbstractMethodConfigTest {
+
     @Test
     public void testTimeout() throws Exception {
         MethodConfig methodConfig = new MethodConfig();

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public interface DemoService {
+
     void sayHello(String name);
 
     String echo(String text);
@@ -41,7 +42,7 @@ public interface DemoService {
 
     Type enumlength(Type... types);
 
-//	Type enumlength(Type type);
+    //	Type enumlength(Type type);
 
     String get(CustomArgument arg1);
 

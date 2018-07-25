@@ -46,9 +46,13 @@ import static org.mockito.Mockito.mock;
 public class ListTelnetHandlerTest {
 
     private static TelnetHandler list = new ListTelnetHandler();
+
     private static String detailMethods;
+
     private static String methodsName;
+
     private Channel mockChannel;
+
     private Invoker<DemoService> mockInvoker;
 
     @BeforeClass

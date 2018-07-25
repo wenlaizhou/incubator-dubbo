@@ -44,6 +44,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * AbstractMonitorFactory. (SPI, Singleton, ThreadSafe)
  */
 public abstract class AbstractMonitorFactory implements MonitorFactory {
+
     private static final Logger logger = LoggerFactory.getLogger(AbstractMonitorFactory.class);
 
     // lock for getting monitor center
@@ -85,7 +86,8 @@ public abstract class AbstractMonitorFactory implements MonitorFactory {
             FUTURES.put(key, listenableFutureTask);
 
             return null;
-        } finally {
+        }
+        finally {
             // unlock
             LOCK.unlock();
         }
@@ -122,10 +124,12 @@ public abstract class AbstractMonitorFactory implements MonitorFactory {
                 ListenableFuture<Monitor> listenableFuture = AbstractMonitorFactory.FUTURES.get(key);
                 AbstractMonitorFactory.MONITORS.put(key, listenableFuture.get());
                 AbstractMonitorFactory.FUTURES.remove(key);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 logger.warn("Thread was interrupted unexpectedly, monitor will never be got.");
                 AbstractMonitorFactory.FUTURES.remove(key);
-            } catch (ExecutionException e) {
+            }
+            catch (ExecutionException e) {
                 logger.warn("Create monitor failed, monitor data will not be collected until you fix this problem. ", e);
             }
         }

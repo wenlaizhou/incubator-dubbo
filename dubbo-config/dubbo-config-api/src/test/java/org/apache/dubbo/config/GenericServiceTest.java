@@ -88,13 +88,16 @@ public class GenericServiceTest {
                 try {
                     demoService.throwDemoException();
                     Assert.fail();
-                } catch (DemoException e) {
+                }
+                catch (DemoException e) {
                     Assert.assertEquals("Generic", e.getMessage());
                 }
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }
@@ -125,10 +128,12 @@ public class GenericServiceTest {
                 users = (List<Map<String, Object>>) genericService.$invoke("getUsers", new String[]{List.class.getName()}, new Object[]{users});
                 Assert.assertEquals(1, users.size());
                 Assert.assertEquals("actual.provider", users.get(0).get("name"));
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }
@@ -193,10 +198,12 @@ public class GenericServiceTest {
                                 .deserialize(null, new ByteArrayInputStream((byte[]) obj))
                                 .readObject());
 
-            } finally {
+            }
+            finally {
                 reference.destroy();
             }
-        } finally {
+        }
+        finally {
             service.unexport();
         }
     }
@@ -231,7 +238,8 @@ public class GenericServiceTest {
             descriptor = (JavaBeanDescriptor) descriptor.getProperty(0);
             Assert.assertTrue(descriptor.isBeanType());
             Assert.assertEquals(user.getName(), ((JavaBeanDescriptor) descriptor.getProperty("name")).getPrimitiveProperty());
-        } finally {
+        }
+        finally {
             if (reference != null) {
                 reference.destroy();
             }
@@ -295,7 +303,8 @@ public class GenericServiceTest {
             Assert.assertEquals(User.class.getName(), descriptor.getClassName());
             Assert.assertEquals(user.getName(), ((JavaBeanDescriptor) descriptor.getProperty("name")).getPrimitiveProperty());
             Assert.assertNull(demoService.sayName("zhangsan"));
-        } finally {
+        }
+        finally {
             if (ref != null) {
                 ref.destroy();
             }

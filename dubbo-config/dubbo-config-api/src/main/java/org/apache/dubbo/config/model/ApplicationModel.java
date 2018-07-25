@@ -37,6 +37,7 @@ public class ApplicationModel {
      * full qualified class name -> provided service
      */
     private static final ConcurrentMap<String, ProviderModel> providedServices = new ConcurrentHashMap<String, ProviderModel>();
+
     /**
      * full qualified class name -> subscribe service
      */
@@ -75,20 +76,20 @@ public class ApplicationModel {
         }
     }
 
-   public static void addProviderInvoker(String serviceName,Invoker invoker){
-       Set<Invoker> invokers = providedServicesInvoker.get(serviceName);
-       if (invokers == null){
-           providedServicesInvoker.putIfAbsent(serviceName,new ConcurrentHashSet<Invoker>());
-           invokers = providedServicesInvoker.get(serviceName);
-       }
-       invokers.add(invoker);
-   }
+    public static void addProviderInvoker(String serviceName, Invoker invoker) {
+        Set<Invoker> invokers = providedServicesInvoker.get(serviceName);
+        if (invokers == null) {
+            providedServicesInvoker.putIfAbsent(serviceName, new ConcurrentHashSet<Invoker>());
+            invokers = providedServicesInvoker.get(serviceName);
+        }
+        invokers.add(invoker);
+    }
 
-   public Set<Invoker> getProviderInvoker(String serviceName){
-       Set<Invoker> invokers = providedServicesInvoker.get(serviceName);
-       if (invokers == null){
-           return Collections.emptySet();
-       }
-       return invokers;
-   }
+    public Set<Invoker> getProviderInvoker(String serviceName) {
+        Set<Invoker> invokers = providedServicesInvoker.get(serviceName);
+        if (invokers == null) {
+            return Collections.emptySet();
+        }
+        return invokers;
+    }
 }

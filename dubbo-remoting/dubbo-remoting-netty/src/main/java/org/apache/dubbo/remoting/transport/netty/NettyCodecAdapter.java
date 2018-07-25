@@ -78,7 +78,8 @@ final class NettyCodecAdapter {
             NettyChannel channel = NettyChannel.getOrAddChannel(ch, url, handler);
             try {
                 codec.encode(channel, buffer, msg);
-            } finally {
+            }
+            finally {
                 NettyChannel.removeChannelIfDisconnected(ch);
             }
             return ChannelBuffers.wrappedBuffer(buffer.toByteBuffer());
@@ -109,14 +110,16 @@ final class NettyCodecAdapter {
                 if (buffer instanceof DynamicChannelBuffer) {
                     buffer.writeBytes(input.toByteBuffer());
                     message = buffer;
-                } else {
+                }
+                else {
                     int size = buffer.readableBytes() + input.readableBytes();
                     message = org.apache.dubbo.remoting.buffer.ChannelBuffers.dynamicBuffer(
                             size > bufferSize ? size : bufferSize);
                     message.writeBytes(buffer, buffer.readableBytes());
                     message.writeBytes(input.toByteBuffer());
                 }
-            } else {
+            }
+            else {
                 message = org.apache.dubbo.remoting.buffer.ChannelBuffers.wrappedBuffer(
                         input.toByteBuffer());
             }
@@ -131,14 +134,16 @@ final class NettyCodecAdapter {
                     saveReaderIndex = message.readerIndex();
                     try {
                         msg = codec.decode(channel, message);
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         buffer = org.apache.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;
                         throw e;
                     }
                     if (msg == Codec2.DecodeResult.NEED_MORE_INPUT) {
                         message.readerIndex(saveReaderIndex);
                         break;
-                    } else {
+                    }
+                    else {
                         if (saveReaderIndex == message.readerIndex()) {
                             buffer = org.apache.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;
                             throw new IOException("Decode without read data.");
@@ -147,12 +152,15 @@ final class NettyCodecAdapter {
                             Channels.fireMessageReceived(ctx, msg, event.getRemoteAddress());
                         }
                     }
-                } while (message.readable());
-            } finally {
+                }
+                while (message.readable());
+            }
+            finally {
                 if (message.readable()) {
                     message.discardReadBytes();
                     buffer = message;
-                } else {
+                }
+                else {
                     buffer = org.apache.dubbo.remoting.buffer.ChannelBuffers.EMPTY_BUFFER;
                 }
                 NettyChannel.removeChannelIfDisconnected(ctx.getChannel());

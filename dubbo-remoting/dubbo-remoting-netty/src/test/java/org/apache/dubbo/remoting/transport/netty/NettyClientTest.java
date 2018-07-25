@@ -34,6 +34,7 @@ import java.util.List;
  * Time: 5:47 PM
  */
 public class NettyClientTest {
+
     static Server server;
 
 
@@ -45,9 +46,11 @@ public class NettyClientTest {
     @AfterClass
     public static void tearDown() throws Exception {
         try {
-            if (server != null)
+            if (server != null) {
                 server.close();
-        } finally {
+            }
+        }
+        finally {
         }
     }
 

@@ -57,15 +57,18 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
                 public void stateChanged(CuratorFramework client, ConnectionState state) {
                     if (state == ConnectionState.LOST) {
                         CuratorZookeeperClient.this.stateChanged(StateListener.DISCONNECTED);
-                    } else if (state == ConnectionState.CONNECTED) {
+                    }
+                    else if (state == ConnectionState.CONNECTED) {
                         CuratorZookeeperClient.this.stateChanged(StateListener.CONNECTED);
-                    } else if (state == ConnectionState.RECONNECTED) {
+                    }
+                    else if (state == ConnectionState.RECONNECTED) {
                         CuratorZookeeperClient.this.stateChanged(StateListener.RECONNECTED);
                     }
                 }
             });
             client.start();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -74,8 +77,10 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
     public void createPersistent(String path) {
         try {
             client.create().forPath(path);
-        } catch (NodeExistsException e) {
-        } catch (Exception e) {
+        }
+        catch (NodeExistsException e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -84,8 +89,10 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
     public void createEphemeral(String path) {
         try {
             client.create().withMode(CreateMode.EPHEMERAL).forPath(path);
-        } catch (NodeExistsException e) {
-        } catch (Exception e) {
+        }
+        catch (NodeExistsException e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -94,8 +101,10 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
     public void delete(String path) {
         try {
             client.delete().forPath(path);
-        } catch (NoNodeException e) {
-        } catch (Exception e) {
+        }
+        catch (NoNodeException e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -104,9 +113,11 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
     public List<String> getChildren(String path) {
         try {
             return client.getChildren().forPath(path);
-        } catch (NoNodeException e) {
+        }
+        catch (NoNodeException e) {
             return null;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
@@ -117,10 +128,12 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
             if (client.checkExists().forPath(path) != null) {
                 return true;
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
         }
         return false;
     }
+
     @Override
     public boolean isConnected() {
         return client.getZookeeperClient().isConnected();
@@ -140,9 +153,11 @@ public class CuratorZookeeperClient extends AbstractZookeeperClient<CuratorWatch
     public List<String> addTargetChildListener(String path, CuratorWatcher listener) {
         try {
             return client.getChildren().usingWatcher(listener).forPath(path);
-        } catch (NoNodeException e) {
+        }
+        catch (NoNodeException e) {
             return null;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }

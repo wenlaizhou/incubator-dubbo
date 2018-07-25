@@ -65,14 +65,16 @@ public abstract class AbstractGroup implements Group {
         for (URL url : new ArrayList<URL>(servers.keySet())) {
             try {
                 leave(url);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }
         for (URL url : new ArrayList<URL>(clients.keySet())) {
             try {
                 disconnect(url);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 logger.error(t.getMessage(), t);
             }
         }

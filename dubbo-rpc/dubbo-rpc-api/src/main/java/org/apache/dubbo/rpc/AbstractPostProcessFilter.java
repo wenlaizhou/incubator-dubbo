@@ -20,13 +20,15 @@ package org.apache.dubbo.rpc;
  *
  */
 public abstract class AbstractPostProcessFilter implements PostProcessFilter {
+
     @Override
     public Result postProcessResult(Result result, Invoker<?> invoker, Invocation invocation) {
         if (result instanceof AsyncRpcResult) {
             AsyncRpcResult asyncResult = (AsyncRpcResult) result;
             asyncResult.thenApplyWithContext(r -> doPostProcess(r, invoker, invocation));
             return asyncResult;
-        } else {
+        }
+        else {
             return doPostProcess(result, invoker, invocation);
         }
     }

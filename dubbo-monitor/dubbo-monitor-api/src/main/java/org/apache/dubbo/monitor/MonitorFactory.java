@@ -30,6 +30,7 @@ public interface MonitorFactory {
      * Create monitor.
      *
      * @param url
+     *
      * @return monitor
      */
     @Adaptive("protocol")

@@ -27,6 +27,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class JValidationTest {
+
     @Test(expected = ValidationException.class)
     public void testReturnTypeWithInvalidValidationProvider() throws Exception {
         Validation jValidation = new JValidation();

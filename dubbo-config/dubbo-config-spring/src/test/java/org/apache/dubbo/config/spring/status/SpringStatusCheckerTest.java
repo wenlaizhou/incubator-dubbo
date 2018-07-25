@@ -31,6 +31,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class SpringStatusCheckerTest {
+
     private SpringStatusChecker springStatusChecker;
 
     @Mock
@@ -75,6 +76,7 @@ public class SpringStatusCheckerTest {
     }
 
     interface ApplicationLifeCycle extends Lifecycle, ApplicationContext {
+
         String[] getConfigLocations();
     }
 }

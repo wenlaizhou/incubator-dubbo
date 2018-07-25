@@ -19,6 +19,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class LocalHostPermitHandlerTest {
+
     @Test
     public void testHandlerAdded() throws Exception {
         ChannelHandlerContext context = mock(ChannelHandlerContext.class);

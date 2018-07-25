@@ -194,8 +194,11 @@ public class ExpiringMap<K, V> implements Map<K, V> {
      * can be expired object
      */
     private class ExpiryObject {
+
         private K key;
+
         private V value;
+
         private AtomicLong lastAccessTime;
 
         ExpiryObject(K key, V value, long lastAccessTime) {
@@ -247,9 +250,13 @@ public class ExpiringMap<K, V> implements Map<K, V> {
      * Background thread, periodically checking if the data is out of date
      */
     public class ExpireThread implements Runnable {
+
         private long timeToLiveMillis;
+
         private long expirationIntervalMillis;
+
         private volatile boolean running = false;
+
         private final Thread expirerThread;
 
         @Override
@@ -273,7 +280,8 @@ public class ExpiringMap<K, V> implements Map<K, V> {
                 processExpires();
                 try {
                     Thread.sleep(expirationIntervalMillis);
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     running = false;
                 }
             }

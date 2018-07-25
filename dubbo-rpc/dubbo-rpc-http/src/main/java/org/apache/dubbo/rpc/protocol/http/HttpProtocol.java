@@ -99,7 +99,8 @@ public class HttpProtocol extends AbstractProxyProtocol {
         httpServiceExporter.setService(impl);
         try {
             httpServiceExporter.afterPropertiesSet();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RpcException(e.getMessage(), e);
         }
         return httpServiceExporter;
@@ -142,12 +143,14 @@ public class HttpProtocol extends AbstractProxyProtocol {
                 }
             };
             httpProxyFactoryBean.setHttpInvokerRequestExecutor(httpInvokerRequestExecutor);
-        } else if ("commons".equals(client)) {
+        }
+        else if ("commons".equals(client)) {
             HttpComponentsHttpInvokerRequestExecutor httpInvokerRequestExecutor = new HttpComponentsHttpInvokerRequestExecutor();
             httpInvokerRequestExecutor.setReadTimeout(url.getParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT));
             httpInvokerRequestExecutor.setConnectTimeout(url.getParameter(Constants.CONNECT_TIMEOUT_KEY, Constants.DEFAULT_CONNECT_TIMEOUT));
             httpProxyFactoryBean.setHttpInvokerRequestExecutor(httpInvokerRequestExecutor);
-        } else {
+        }
+        else {
             throw new IllegalStateException("Unsupported http protocol client " + client + ", only supported: simple, commons");
         }
         httpProxyFactoryBean.afterPropertiesSet();
@@ -163,9 +166,11 @@ public class HttpProtocol extends AbstractProxyProtocol {
             Class<?> cls = e.getClass();
             if (SocketTimeoutException.class.equals(cls)) {
                 return RpcException.TIMEOUT_EXCEPTION;
-            } else if (IOException.class.isAssignableFrom(cls)) {
+            }
+            else if (IOException.class.isAssignableFrom(cls)) {
                 return RpcException.NETWORK_EXCEPTION;
-            } else if (ClassNotFoundException.class.isAssignableFrom(cls)) {
+            }
+            else if (ClassNotFoundException.class.isAssignableFrom(cls)) {
                 return RpcException.SERIALIZATION_EXCEPTION;
             }
         }
@@ -181,11 +186,13 @@ public class HttpProtocol extends AbstractProxyProtocol {
             HttpInvokerServiceExporter skeleton = skeletonMap.get(uri);
             if (!request.getMethod().equalsIgnoreCase("POST")) {
                 response.setStatus(500);
-            } else {
+            }
+            else {
                 RpcContext.getContext().setRemoteAddress(request.getRemoteAddr(), request.getRemotePort());
                 try {
                     skeleton.handleRequest(request, response);
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     throw new ServletException(e);
                 }
             }

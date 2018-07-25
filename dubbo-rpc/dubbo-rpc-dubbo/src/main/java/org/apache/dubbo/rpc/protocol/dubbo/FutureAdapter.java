@@ -32,6 +32,7 @@ import java.util.concurrent.TimeoutException;
 public class FutureAdapter<V> extends CompletableFuture<V> {
 
     private final ResponseFuture future;
+
     private CompletableFuture<Result> resultFuture;
 
     public FutureAdapter(ResponseFuture future) {
@@ -45,7 +46,8 @@ public class FutureAdapter<V> extends CompletableFuture<V> {
                 V value = null;
                 try {
                     value = (V) result.recreate();
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     FutureAdapter.this.completeExceptionally(t);
                 }
                 FutureAdapter.this.complete(value);
@@ -82,9 +84,11 @@ public class FutureAdapter<V> extends CompletableFuture<V> {
     public V get() throws InterruptedException, ExecutionException {
         try {
             return super.get();
-        } catch (ExecutionException | InterruptedException e) {
+        }
+        catch (ExecutionException | InterruptedException e) {
             throw e;
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RpcException(e);
         }
     }
@@ -94,9 +98,11 @@ public class FutureAdapter<V> extends CompletableFuture<V> {
     public V get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
         try {
             return super.get(timeout, unit);
-        } catch (TimeoutException | ExecutionException | InterruptedException e) {
+        }
+        catch (TimeoutException | ExecutionException | InterruptedException e) {
             throw e;
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RpcException(e);
         }
     }

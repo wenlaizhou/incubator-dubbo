@@ -51,10 +51,15 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.withSettings;
 
 public class ServiceConfigTest {
+
     private Protocol protocolDelegate = Mockito.mock(Protocol.class);
+
     private Registry registryDelegate = Mockito.mock(Registry.class);
+
     private Exporter exporter = Mockito.mock(Exporter.class);
+
     private ServiceConfig<DemoServiceImpl> service = new ServiceConfig<DemoServiceImpl>();
+
     private ServiceConfig<DemoServiceImpl> service2 = new ServiceConfig<DemoServiceImpl>();
 
 
@@ -140,7 +145,8 @@ public class ServiceConfigTest {
             service.unexport();
             Thread.sleep(1000);
             Mockito.verify(exporter, Mockito.atLeastOnce()).unexport();
-        } finally {
+        }
+        finally {
             System.clearProperty(Constants.SHUTDOWN_TIMEOUT_KEY);
         }
     }

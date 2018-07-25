@@ -69,7 +69,8 @@ public class MinaClient extends AbstractClient {
         SocketConnector c = connectors.get(connectorKey);
         if (c != null) {
             connector = c;
-        } else {
+        }
+        else {
             // set thread pool.
             connector = new SocketConnector(Constants.DEFAULT_IO_THREADS,
                     Executors.newCachedThreadPool(new NamedThreadFactory("MinaClientWorker", true)));
@@ -107,36 +108,43 @@ public class MinaClient extends AbstractClient {
                                         logger.info("Close old mina channel " + oldSession + " on create new mina channel " + newSession);
                                     }
                                     oldSession.close();
-                                } finally {
+                                }
+                                finally {
                                     MinaChannel.removeChannelIfDisconnected(oldSession);
                                 }
                             }
-                        } finally {
+                        }
+                        finally {
                             if (MinaClient.this.isClosed()) {
                                 try {
                                     if (logger.isInfoEnabled()) {
                                         logger.info("Close new mina channel " + newSession + ", because the client closed.");
                                     }
                                     newSession.close();
-                                } finally {
+                                }
+                                finally {
                                     MinaClient.this.session = null;
                                     MinaChannel.removeChannelIfDisconnected(newSession);
                                 }
-                            } else {
+                            }
+                            else {
                                 MinaClient.this.session = newSession;
                             }
                         }
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     exception.set(e);
-                } finally {
+                }
+                finally {
                     finish.countDown();
                 }
             }
         });
         try {
             finish.await(getTimeout(), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             throw new RemotingException(this, "client(url: " + getUrl() + ") failed to connect to server " + getRemoteAddress() + " client-side timeout "
                     + getTimeout() + "ms (elapsed: " + (System.currentTimeMillis() - start)
                     + "ms) from netty client " + NetUtils.getLocalHost() + " using dubbo version "
@@ -152,7 +160,8 @@ public class MinaClient extends AbstractClient {
     protected void doDisConnect() throws Throwable {
         try {
             MinaChannel.removeChannelIfDisconnected(session);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage());
         }
     }
@@ -165,8 +174,9 @@ public class MinaClient extends AbstractClient {
     @Override
     protected Channel getChannel() {
         IoSession s = session;
-        if (s == null || !s.isConnected())
+        if (s == null || !s.isConnected()) {
             return null;
+        }
         return MinaChannel.getOrAddChannel(s, getUrl(), this);
     }
 

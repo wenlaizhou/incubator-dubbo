@@ -41,7 +41,9 @@ import static org.mockito.Mockito.reset;
 public class ChangeTelnetHandlerTest {
 
     private static TelnetHandler change = new ChangeTelnetHandler();
+
     private Channel mockChannel;
+
     private Invoker<DemoService> mockInvoker;
 
     @AfterClass

@@ -36,7 +36,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class DubboMonitorFactoryTest {
+
     private DubboMonitorFactory dubboMonitorFactory;
+
     @Mock
     private ProxyFactory proxyFactory;
 

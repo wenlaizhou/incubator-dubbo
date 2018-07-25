@@ -73,7 +73,7 @@ public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable 
     public Object decode(Channel channel, InputStream input) throws IOException {
         ObjectInput in = CodecSupport.getSerialization(channel.getUrl(), serializationType)
                 .deserialize(channel.getUrl(), input);
-        
+
         byte flag = in.readByte();
         switch (flag) {
             case DubboCodec.RESPONSE_NULL_VALUE:
@@ -84,24 +84,28 @@ public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable 
                     setValue(returnType == null || returnType.length == 0 ? in.readObject() :
                             (returnType.length == 1 ? in.readObject((Class<?>) returnType[0])
                                     : in.readObject((Class<?>) returnType[0], returnType[1])));
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new IOException(StringUtils.toString("Read response data failed.", e));
                 }
                 break;
             case DubboCodec.RESPONSE_WITH_EXCEPTION:
                 try {
                     Object obj = in.readObject();
-                    if (obj instanceof Throwable == false)
+                    if (obj instanceof Throwable == false) {
                         throw new IOException("Response data error, expect Throwable, but get " + obj);
+                    }
                     setException((Throwable) obj);
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new IOException(StringUtils.toString("Read response data failed.", e));
                 }
                 break;
             case DubboCodec.RESPONSE_NULL_VALUE_WITH_ATTACHMENTS:
                 try {
                     setAttachments((Map<String, String>) in.readObject(Map.class));
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new IOException(StringUtils.toString("Read response data failed.", e));
                 }
                 break;
@@ -112,18 +116,21 @@ public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable 
                             (returnType.length == 1 ? in.readObject((Class<?>) returnType[0])
                                     : in.readObject((Class<?>) returnType[0], returnType[1])));
                     setAttachments((Map<String, String>) in.readObject(Map.class));
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new IOException(StringUtils.toString("Read response data failed.", e));
                 }
                 break;
             case DubboCodec.RESPONSE_WITH_EXCEPTION_WITH_ATTACHMENTS:
                 try {
                     Object obj = in.readObject();
-                    if (obj instanceof Throwable == false)
+                    if (obj instanceof Throwable == false) {
                         throw new IOException("Response data error, expect Throwable, but get " + obj);
+                    }
                     setException((Throwable) obj);
                     setAttachments((Map<String, String>) in.readObject(Map.class));
-                } catch (ClassNotFoundException e) {
+                }
+                catch (ClassNotFoundException e) {
                     throw new IOException(StringUtils.toString("Read response data failed.", e));
                 }
                 break;
@@ -141,13 +148,15 @@ public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable 
         if (!hasDecoded && channel != null && inputStream != null) {
             try {
                 decode(channel, inputStream);
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 if (log.isWarnEnabled()) {
                     log.warn("Decode rpc result failed: " + e.getMessage(), e);
                 }
                 response.setStatus(Response.CLIENT_ERROR);
                 response.setErrorMessage(StringUtils.toString(e));
-            } finally {
+            }
+            finally {
                 hasDecoded = true;
             }
         }

@@ -45,6 +45,7 @@ public class AnnotationUtils {
      * @param annotation
      * @param propertyResolver
      * @param ignoreDefaultValue
+     *
      * @return non-null
      */
     public static Map<String, Object> getAttributes(Annotation annotation, PropertyResolver propertyResolver,

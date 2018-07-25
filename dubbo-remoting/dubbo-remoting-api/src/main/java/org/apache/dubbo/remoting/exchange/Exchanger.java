@@ -37,6 +37,7 @@ public interface Exchanger {
      *
      * @param url
      * @param handler
+     *
      * @return message server
      */
     @Adaptive({Constants.EXCHANGER_KEY})
@@ -47,6 +48,7 @@ public interface Exchanger {
      *
      * @param url
      * @param handler
+     *
      * @return message channel
      */
     @Adaptive({Constants.EXCHANGER_KEY})

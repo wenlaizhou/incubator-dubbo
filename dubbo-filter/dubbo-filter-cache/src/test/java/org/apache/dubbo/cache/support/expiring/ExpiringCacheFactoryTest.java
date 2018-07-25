@@ -25,6 +25,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class ExpiringCacheFactoryTest extends AbstractCacheFactoryTest {
+
     @Test
     public void testLruCacheFactory() throws Exception {
         Cache cache = super.constructCache();

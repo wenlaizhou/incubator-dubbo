@@ -193,6 +193,7 @@ public class HeaderExchangeHandlerTest {
     }
 
     private class BizException extends RuntimeException {
+
         private static final long serialVersionUID = 1L;
     }
 
@@ -208,6 +209,7 @@ public class HeaderExchangeHandlerTest {
     }
 
     private class Person {
+
         private String name;
 
         public Person(String name) {

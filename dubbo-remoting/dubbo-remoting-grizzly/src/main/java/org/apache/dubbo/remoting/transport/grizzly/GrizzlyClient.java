@@ -37,8 +37,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * GrizzlyClient
- *
- *
  */
 public class GrizzlyClient extends AbstractClient {
 
@@ -84,7 +82,8 @@ public class GrizzlyClient extends AbstractClient {
     protected void doDisConnect() throws Throwable {
         try {
             GrizzlyChannel.removeChannelIfDisconnected(connection);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage());
         }
     }
@@ -93,7 +92,8 @@ public class GrizzlyClient extends AbstractClient {
     protected void doClose() throws Throwable {
         try {
             transport.stop();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -101,8 +101,9 @@ public class GrizzlyClient extends AbstractClient {
     @Override
     protected Channel getChannel() {
         Connection<?> c = connection;
-        if (c == null || !c.isOpen())
+        if (c == null || !c.isOpen()) {
             return null;
+        }
         return GrizzlyChannel.getOrAddChannel(c, getUrl(), this);
     }
 

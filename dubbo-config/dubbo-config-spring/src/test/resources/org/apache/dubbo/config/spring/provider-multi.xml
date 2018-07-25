@@ -21,25 +21,25 @@
     http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd
     ">
 
-    <dubbo:application name="service-class"/>
+    <dubbo:application name="service-class" />
 
-    <dubbo:registry address="N/A"/>
+    <dubbo:registry address="N/A" />
 
-    <dubbo:protocol name="dubbo" port="20887"/>
+    <dubbo:protocol name="dubbo" port="20887" />
 
-    <dubbo:provider timeout="2000"/>
+    <dubbo:provider timeout="2000" />
 
-    <dubbo:service id="serviceConfig" interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService"/>
+    <dubbo:service id="serviceConfig" interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService" />
 
     <dubbo:provider timeout="1000" default="true" delay="1000">
         <dubbo:service id="serviceConfig2" interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService"
-                       group="demo2"/>
+                       group="demo2" />
     </dubbo:provider>
     <dubbo:provider default="true" delay="500">
         <dubbo:service interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService"
-                       group="demo2"/>
+                       group="demo2" />
     </dubbo:provider>
 
-    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl" />
 
 </beans>

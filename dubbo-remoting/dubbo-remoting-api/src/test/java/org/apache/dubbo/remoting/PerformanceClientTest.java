@@ -105,23 +105,28 @@ public class PerformanceClientTest extends TestCase {
                                     throw new IllegalStateException("Invalid result " + result);
                                 }
                                 time.addAndGet(end - start);
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 error.incrementAndGet();
                                 e.printStackTrace();
                                 if ("exit".equals(onerror)) {
                                     System.exit(-1);
-                                } else if ("break".equals(onerror)) {
+                                }
+                                else if ("break".equals(onerror)) {
                                     break;
-                                } else if ("sleep".equals(onerror)) {
+                                }
+                                else if ("sleep".equals(onerror)) {
                                     try {
                                         Thread.sleep(30000);
-                                    } catch (InterruptedException e1) {
+                                    }
+                                    catch (InterruptedException e1) {
                                     }
                                 }
                             }
                         }
                         all.addAndGet(System.currentTimeMillis() - init);
-                    } finally {
+                    }
+                    finally {
                         latch.countDown();
                     }
                 }
@@ -140,13 +145,16 @@ public class PerformanceClientTest extends TestCase {
                     while (latch.getCount() > 0) {
                         long c = count.get() - lastCount;
                         if (!bfirst)// The first time is inaccurate.
+                        {
                             System.out.println("[" + dateFormat.format(new Date()) + "] count: " + count.get() + ", error: " + error.get() + ",tps:" + (c / elapsd));
+                        }
 
                         bfirst = false;
                         lastCount = count.get();
                         Thread.sleep(sleepTime);
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     e.printStackTrace();
                 }
             }

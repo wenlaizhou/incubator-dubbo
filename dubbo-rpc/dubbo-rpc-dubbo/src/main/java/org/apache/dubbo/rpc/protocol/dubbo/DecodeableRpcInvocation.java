@@ -68,13 +68,15 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
         if (!hasDecoded && channel != null && inputStream != null) {
             try {
                 decode(channel, inputStream);
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 if (log.isWarnEnabled()) {
                     log.warn("Decode rpc invocation failed: " + e.getMessage(), e);
                 }
                 request.setBroken(true);
                 request.setData(e);
-            } finally {
+            }
+            finally {
                 hasDecoded = true;
             }
         }
@@ -105,13 +107,15 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
             if (desc.length() == 0) {
                 pts = DubboCodec.EMPTY_CLASS_ARRAY;
                 args = DubboCodec.EMPTY_OBJECT_ARRAY;
-            } else {
+            }
+            else {
                 pts = ReflectUtils.desc2classArray(desc);
                 args = new Object[pts.length];
                 for (int i = 0; i < args.length; i++) {
                     try {
                         args[i] = in.readObject(pts[i]);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         if (log.isWarnEnabled()) {
                             log.warn("Decode argument failed: " + e.getMessage(), e);
                         }
@@ -136,9 +140,11 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
 
             setArguments(args);
 
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             throw new IOException(StringUtils.toString("Read invocation data failed.", e));
-        } finally {
+        }
+        finally {
             if (in instanceof Cleanable) {
                 ((Cleanable) in).cleanup();
             }

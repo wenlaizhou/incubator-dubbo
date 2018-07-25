@@ -34,6 +34,7 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 public class MethodConfigTest {
+
     @Test
     public void testName() throws Exception {
         MethodConfig method = new MethodConfig();

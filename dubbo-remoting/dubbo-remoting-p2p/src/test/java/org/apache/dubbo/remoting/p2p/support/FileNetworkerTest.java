@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import static org.mockito.Mockito.mock;
 
 public class FileNetworkerTest {
+
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 

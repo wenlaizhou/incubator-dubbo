@@ -28,8 +28,11 @@ import java.net.InetSocketAddress;
 public class MockChannel implements ExchangeChannel {
 
     public static boolean closed = false;
+
     public static boolean closing = true;
+
     final InetSocketAddress localAddress;
+
     final InetSocketAddress remoteAddress;
 
     public MockChannel(String localHostname, int localPort, String remoteHostName, int remotePort) {

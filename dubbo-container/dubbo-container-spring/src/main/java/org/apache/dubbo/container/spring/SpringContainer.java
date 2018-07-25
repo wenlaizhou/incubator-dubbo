@@ -30,8 +30,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringContainer implements Container {
 
     public static final String SPRING_CONFIG = "dubbo.spring.config";
+
     public static final String DEFAULT_SPRING_CONFIG = "classpath*:META-INF/spring/*.xml";
+
     private static final Logger logger = LoggerFactory.getLogger(SpringContainer.class);
+
     static ClassPathXmlApplicationContext context;
 
     public static ClassPathXmlApplicationContext getContext() {
@@ -59,7 +62,8 @@ public class SpringContainer implements Container {
                 context.close();
                 context = null;
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.error(e.getMessage(), e);
         }
     }

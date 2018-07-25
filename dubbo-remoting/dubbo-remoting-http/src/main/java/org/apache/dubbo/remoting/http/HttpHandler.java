@@ -31,6 +31,7 @@ public interface HttpHandler {
      *
      * @param request  request.
      * @param response response.
+     *
      * @throws IOException
      * @throws ServletException
      */

@@ -42,7 +42,8 @@ public class ChangeTelnetHandler implements TelnetHandler {
             String service = (String) channel.getAttribute(SERVICE_KEY);
             channel.removeAttribute(SERVICE_KEY);
             buf.append("Cancelled default service " + service + ".");
-        } else {
+        }
+        else {
             boolean found = false;
             for (Exporter<?> exporter : DubboProtocol.getDubboProtocol().getExporters()) {
                 if (message.equals(exporter.getInvoker().getInterface().getSimpleName())
@@ -55,7 +56,8 @@ public class ChangeTelnetHandler implements TelnetHandler {
             if (found) {
                 channel.setAttribute(SERVICE_KEY, message);
                 buf.append("Used the " + message + " as default.\r\nYou can cancel default service by command: cd /");
-            } else {
+            }
+            else {
                 buf.append("No such service " + message);
             }
         }

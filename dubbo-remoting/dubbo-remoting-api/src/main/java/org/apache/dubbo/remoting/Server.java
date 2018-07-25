@@ -48,6 +48,7 @@ public interface Server extends Endpoint, Resetable {
      * get channel.
      *
      * @param remoteAddress
+     *
      * @return channel
      */
     Channel getChannel(InetSocketAddress remoteAddress);

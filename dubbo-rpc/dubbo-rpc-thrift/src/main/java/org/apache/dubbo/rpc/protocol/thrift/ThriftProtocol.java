@@ -42,6 +42,7 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
 /**
  * @since 2.7.0, use https://github.com/dubbo/dubbo-rpc-native-thrift instead
  */
@@ -100,7 +101,8 @@ public class ThriftProtocol extends AbstractProtocol {
         public void received(Channel channel, Object message) throws RemotingException {
             if (message instanceof Invocation) {
                 reply((ExchangeChannel) channel, message);
-            } else {
+            }
+            else {
                 super.received(channel, message);
             }
         }
@@ -147,7 +149,8 @@ public class ThriftProtocol extends AbstractProtocol {
                         logger.info("Close dubbo server: " + server.getLocalAddress());
                     }
                     server.close(ConfigUtils.getServerShutdownTimeout());
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             } // ~ end of if ( server != null )
@@ -187,7 +190,8 @@ public class ThriftProtocol extends AbstractProtocol {
 
         try {
             client = Exchangers.connect(url);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException("Fail to create remoting client for service(" + url
                     + "): " + e.getMessage(), e);
         }
@@ -201,13 +205,15 @@ public class ThriftProtocol extends AbstractProtocol {
         url = url.addParameterIfAbsent(Constants.CHANNEL_READONLYEVENT_SENT_KEY, Boolean.TRUE.toString());
         String str = url.getParameter(Constants.SERVER_KEY, Constants.DEFAULT_REMOTING_SERVER);
 
-        if (str != null && str.length() > 0 && !ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str))
+        if (str != null && str.length() > 0 && !ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str)) {
             throw new RpcException("Unsupported server type: " + str + ", url: " + url);
+        }
 
         ExchangeServer server;
         try {
             server = Exchangers.bind(url, handler);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException("Fail to start server(url: " + url + ") " + e.getMessage(), e);
         }
         str = url.getParameter(Constants.CLIENT_KEY);

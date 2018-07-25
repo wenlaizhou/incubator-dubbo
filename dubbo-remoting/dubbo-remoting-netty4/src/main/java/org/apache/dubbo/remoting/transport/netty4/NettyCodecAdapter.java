@@ -68,7 +68,8 @@ final class NettyCodecAdapter {
             NettyChannel channel = NettyChannel.getOrAddChannel(ch, url, handler);
             try {
                 codec.encode(channel, buffer, msg);
-            } finally {
+            }
+            finally {
                 NettyChannel.removeChannelIfDisconnected(ch);
             }
         }
@@ -93,13 +94,15 @@ final class NettyCodecAdapter {
                     saveReaderIndex = message.readerIndex();
                     try {
                         msg = codec.decode(channel, message);
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         throw e;
                     }
                     if (msg == Codec2.DecodeResult.NEED_MORE_INPUT) {
                         message.readerIndex(saveReaderIndex);
                         break;
-                    } else {
+                    }
+                    else {
                         //is it possible to go here ?
                         if (saveReaderIndex == message.readerIndex()) {
                             throw new IOException("Decode without read data.");
@@ -108,8 +111,10 @@ final class NettyCodecAdapter {
                             out.add(msg);
                         }
                     }
-                } while (message.readable());
-            } finally {
+                }
+                while (message.readable());
+            }
+            finally {
                 NettyChannel.removeChannelIfDisconnected(ctx.channel());
             }
         }

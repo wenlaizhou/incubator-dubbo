@@ -22,6 +22,7 @@ import org.apache.dubbo.remoting.RemotingException;
 import org.apache.dubbo.remoting.telnet.TelnetHandler;
 
 public class MockTelnetHandler implements TelnetHandler {
+
     @Override
     public String telnet(Channel channel, String message) throws RemotingException {
         return null;

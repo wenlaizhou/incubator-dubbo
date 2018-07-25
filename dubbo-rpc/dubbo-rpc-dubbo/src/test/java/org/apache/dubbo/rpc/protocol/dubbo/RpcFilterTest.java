@@ -27,7 +27,9 @@ import org.apache.dubbo.rpc.service.EchoService;
 import junit.framework.TestCase;
 
 public class RpcFilterTest extends TestCase {
+
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     public void testRpcFilter() throws Exception {

@@ -87,9 +87,13 @@ import java.util.Map;
  * {@link #arrayFormat(String, Object[])} methods for more details.
  */
 final class MessageFormatter {
+
     static final char DELIM_START = '{';
+
     static final char DELIM_STOP = '}';
+
     static final String DELIM_STR = "{}";
+
     private static final char ESCAPE_CHAR = '\\';
 
     /**
@@ -107,6 +111,7 @@ final class MessageFormatter {
      *
      * @param messagePattern The message pattern which will be parsed and formatted
      * @param arg            The argument to be substituted in place of the formatting anchor
+     *
      * @return The formatted message
      */
     static FormattingTuple format(String messagePattern, Object arg) {
@@ -130,6 +135,7 @@ final class MessageFormatter {
      *                       anchor
      * @param argB           The argument to be substituted in place of the second formatting
      *                       anchor
+     *
      * @return The formatted message
      */
     static FormattingTuple format(final String messagePattern,
@@ -157,6 +163,7 @@ final class MessageFormatter {
      * @param messagePattern The message pattern which will be parsed and formatted
      * @param argArray       An array of arguments to be substituted in place of formatting
      *                       anchors
+     *
      * @return The formatted message
      */
     static FormattingTuple arrayFormat(final String messagePattern,
@@ -186,20 +193,23 @@ final class MessageFormatter {
                 if (i == 0) { // this is a simple string
                     return new FormattingTuple(messagePattern, argArray,
                             throwableCandidate);
-                } else { // add the tail string which contains no variables and return
+                }
+                else { // add the tail string which contains no variables and return
                     // the result.
                     sbuf.append(messagePattern.substring(i, messagePattern.length()));
                     return new FormattingTuple(sbuf.toString(), argArray,
                             throwableCandidate);
                 }
-            } else {
+            }
+            else {
                 if (isEscapedDelimeter(messagePattern, j)) {
                     if (!isDoubleEscaped(messagePattern, j)) {
                         L--; // DELIM_START was escaped, thus should not be incremented
                         sbuf.append(messagePattern.substring(i, j - 1));
                         sbuf.append(DELIM_START);
                         i = j + 1;
-                    } else {
+                    }
+                    else {
                         // The escape character preceding the delimiter start is
                         // itself escaped: "abc x:\\{}"
                         // we have to consume one backward slash
@@ -207,7 +217,8 @@ final class MessageFormatter {
                         deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], Void>());
                         i = j + 2;
                     }
-                } else {
+                }
+                else {
                     // normal case
                     sbuf.append(messagePattern.substring(i, j));
                     deeplyAppendParameter(sbuf, argArray[L], new HashMap<Object[], Void>());
@@ -219,7 +230,8 @@ final class MessageFormatter {
         sbuf.append(messagePattern.substring(i, messagePattern.length()));
         if (L < argArray.length - 1) {
             return new FormattingTuple(sbuf.toString(), argArray, throwableCandidate);
-        } else {
+        }
+        else {
             return new FormattingTuple(sbuf.toString(), argArray, null);
         }
     }
@@ -247,26 +259,35 @@ final class MessageFormatter {
         }
         if (!o.getClass().isArray()) {
             safeObjectAppend(sbuf, o);
-        } else {
+        }
+        else {
             // check for primitive array types because they
             // unfortunately cannot be cast to Object[]
             if (o instanceof boolean[]) {
                 booleanArrayAppend(sbuf, (boolean[]) o);
-            } else if (o instanceof byte[]) {
+            }
+            else if (o instanceof byte[]) {
                 byteArrayAppend(sbuf, (byte[]) o);
-            } else if (o instanceof char[]) {
+            }
+            else if (o instanceof char[]) {
                 charArrayAppend(sbuf, (char[]) o);
-            } else if (o instanceof short[]) {
+            }
+            else if (o instanceof short[]) {
                 shortArrayAppend(sbuf, (short[]) o);
-            } else if (o instanceof int[]) {
+            }
+            else if (o instanceof int[]) {
                 intArrayAppend(sbuf, (int[]) o);
-            } else if (o instanceof long[]) {
+            }
+            else if (o instanceof long[]) {
                 longArrayAppend(sbuf, (long[]) o);
-            } else if (o instanceof float[]) {
+            }
+            else if (o instanceof float[]) {
                 floatArrayAppend(sbuf, (float[]) o);
-            } else if (o instanceof double[]) {
+            }
+            else if (o instanceof double[]) {
                 doubleArrayAppend(sbuf, (double[]) o);
-            } else {
+            }
+            else {
                 objectArrayAppend(sbuf, (Object[]) o, seenMap);
             }
         }
@@ -276,7 +297,8 @@ final class MessageFormatter {
         try {
             String oAsString = o.toString();
             sbuf.append(oAsString);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             System.err
                     .println("SLF4J: Failed toString() invocation on an object of type ["
                             + o.getClass().getName() + ']');
@@ -299,7 +321,8 @@ final class MessageFormatter {
             }
             // allow repeats in siblings
             seenMap.remove(a);
-        } else {
+        }
+        else {
             sbuf.append("...");
         }
         sbuf.append(']');

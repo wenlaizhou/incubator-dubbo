@@ -17,5 +17,6 @@
 package org.apache.dubbo.rpc.protocol.injvm;
 
 public interface IEcho {
+
     String echo(String e);
 }

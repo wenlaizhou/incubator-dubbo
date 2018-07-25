@@ -45,7 +45,9 @@ import static org.junit.Assert.assertEquals;
  */
 
 public class DubboProtocolTest {
+
     private Protocol protocol = ExtensionLoader.getExtensionLoader(Protocol.class).getAdaptiveExtension();
+
     private ProxyFactory proxy = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
 
     @Test
@@ -164,7 +166,8 @@ public class DubboProtocolTest {
         try {
             service.nonSerializedParameter(new NonSerialized());
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertTrue(e.getMessage().contains("org.apache.dubbo.rpc.protocol.dubbo.support.NonSerialized must implement java.io.Serializable"));
         }
     }
@@ -177,7 +180,8 @@ public class DubboProtocolTest {
         try {
             service.returnNonSerialized();
             Assert.fail();
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             Assert.assertTrue(e.getMessage().contains("org.apache.dubbo.rpc.protocol.dubbo.support.NonSerialized must implement java.io.Serializable"));
         }
     }

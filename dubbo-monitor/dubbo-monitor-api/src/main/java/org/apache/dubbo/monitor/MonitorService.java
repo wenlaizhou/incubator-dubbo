@@ -82,6 +82,7 @@ public interface MonitorService {
      * 1.4 date=2012-07-03: specify the date to collect the data, today is the default value
      *
      * @param query
+     *
      * @return statistics
      */
     List<URL> lookup(URL query);

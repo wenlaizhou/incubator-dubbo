@@ -24,12 +24,14 @@ import java.util.List;
 import java.util.Set;
 
 public class CommandHelper {
+
     public static boolean hasCommand(String commandName) {
 
         BaseCommand command = null;
         try {
             command = ExtensionLoader.getExtensionLoader(BaseCommand.class).getExtension(commandName);
-        } catch (Throwable throwable) {
+        }
+        catch (Throwable throwable) {
             return false;
         }
 
@@ -37,7 +39,7 @@ public class CommandHelper {
 
     }
 
-    public static List<Class<?>> getAllCommandClass(){
+    public static List<Class<?>> getAllCommandClass() {
         final Set<String> commandList = ExtensionLoader.getExtensionLoader(BaseCommand.class).getSupportedExtensions();
         final List<Class<?>> classes = new ArrayList<Class<?>>();
 
@@ -50,10 +52,11 @@ public class CommandHelper {
     }
 
 
-    public static Class<?> getCommandClass(String commandName){
-        if (hasCommand(commandName)){
+    public static Class<?> getCommandClass(String commandName) {
+        if (hasCommand(commandName)) {
             return ExtensionLoader.getExtensionLoader(BaseCommand.class).getExtension(commandName).getClass();
-        }else {
+        }
+        else {
             return null;
         }
     }

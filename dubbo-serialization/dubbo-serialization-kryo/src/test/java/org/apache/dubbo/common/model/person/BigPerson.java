@@ -19,6 +19,7 @@ package org.apache.dubbo.common.model.person;
 import java.io.Serializable;
 
 public class BigPerson implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     String personId;
@@ -104,40 +105,59 @@ public class BigPerson implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         BigPerson other = (BigPerson) obj;
         if (email == null) {
-            if (other.email != null)
+            if (other.email != null) {
                 return false;
-        } else if (!email.equals(other.email))
+            }
+        }
+        else if (!email.equals(other.email)) {
             return false;
+        }
         if (infoProfile == null) {
-            if (other.infoProfile != null)
+            if (other.infoProfile != null) {
                 return false;
-        } else if (!infoProfile.equals(other.infoProfile))
+            }
+        }
+        else if (!infoProfile.equals(other.infoProfile)) {
             return false;
+        }
         if (loginName == null) {
-            if (other.loginName != null)
+            if (other.loginName != null) {
                 return false;
-        } else if (!loginName.equals(other.loginName))
+            }
+        }
+        else if (!loginName.equals(other.loginName)) {
             return false;
+        }
         if (penName == null) {
-            if (other.penName != null)
+            if (other.penName != null) {
                 return false;
-        } else if (!penName.equals(other.penName))
+            }
+        }
+        else if (!penName.equals(other.penName)) {
             return false;
+        }
         if (personId == null) {
-            if (other.personId != null)
+            if (other.personId != null) {
                 return false;
-        } else if (!personId.equals(other.personId))
+            }
+        }
+        else if (!personId.equals(other.personId)) {
             return false;
-        if (status != other.status)
+        }
+        if (status != other.status) {
             return false;
+        }
         return true;
     }
 

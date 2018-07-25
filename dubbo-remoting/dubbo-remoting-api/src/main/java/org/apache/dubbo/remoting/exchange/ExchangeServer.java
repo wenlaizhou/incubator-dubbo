@@ -37,6 +37,7 @@ public interface ExchangeServer extends Server {
      * get channel.
      *
      * @param remoteAddress
+     *
      * @return channel
      */
     ExchangeChannel getExchangeChannel(InetSocketAddress remoteAddress);

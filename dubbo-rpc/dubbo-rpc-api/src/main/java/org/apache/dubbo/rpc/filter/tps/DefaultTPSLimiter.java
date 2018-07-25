@@ -42,7 +42,8 @@ public class DefaultTPSLimiter implements TPSLimiter {
                 statItem = stats.get(serviceKey);
             }
             return statItem.isAllowable();
-        } else {
+        }
+        else {
             StatItem statItem = stats.get(serviceKey);
             if (statItem != null) {
                 stats.remove(serviceKey);

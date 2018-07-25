@@ -43,13 +43,13 @@ public class ExecuteLimitFilter implements Filter {
         int max = url.getMethodParameter(methodName, Constants.EXECUTES_KEY, 0);
         if (max > 0) {
             RpcStatus count = RpcStatus.getStatus(url, invocation.getMethodName());
-//            if (count.getActive() >= max) {
+            //            if (count.getActive() >= max) {
             /**
              * http://manzhizhen.iteye.com/blog/2386408
              * use semaphore for concurrency control (to limit thread number)
              */
             executesLimit = count.getSemaphore(max);
-            if(executesLimit != null && !(acquireResult = executesLimit.tryAcquire())) {
+            if (executesLimit != null && !(acquireResult = executesLimit.tryAcquire())) {
                 throw new RpcException("Failed to invoke method " + invocation.getMethodName() + " in provider " + url + ", cause: The service using threads greater than <dubbo:service executes=\"" + max + "\" /> limited.");
             }
         }
@@ -59,16 +59,19 @@ public class ExecuteLimitFilter implements Filter {
         try {
             Result result = invoker.invoke(invocation);
             return result;
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             isSuccess = false;
             if (t instanceof RuntimeException) {
                 throw (RuntimeException) t;
-            } else {
+            }
+            else {
                 throw new RpcException("unexpected exception when ExecuteLimitFilter", t);
             }
-        } finally {
+        }
+        finally {
             RpcStatus.endCount(url, methodName, System.currentTimeMillis() - begin, isSuccess);
-            if(acquireResult) {
+            if (acquireResult) {
                 executesLimit.release();
             }
         }

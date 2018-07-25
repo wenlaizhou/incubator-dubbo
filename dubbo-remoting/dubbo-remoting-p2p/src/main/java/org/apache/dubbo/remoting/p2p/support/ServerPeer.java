@@ -59,7 +59,8 @@ public class ServerPeer extends ServerDelegate implements Peer {
     public void close() {
         try {
             leave();
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             logger.error(e.getMessage(), e);
         }
     }
@@ -100,22 +101,26 @@ public class ServerPeer extends ServerDelegate implements Peer {
         Throwable last = null;
         try {
             super.send(message, sent);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             last = t;
         }
         for (Client client : clients.values()) {
             try {
                 client.send(message, sent);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 last = t;
             }
         }
         if (last != null) {
             if (last instanceof RemotingException) {
                 throw (RemotingException) last;
-            } else if (last instanceof RuntimeException) {
+            }
+            else if (last instanceof RuntimeException) {
                 throw (RuntimeException) last;
-            } else {
+            }
+            else {
                 throw new RuntimeException(last.getMessage(), last);
             }
         }

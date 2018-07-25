@@ -50,15 +50,25 @@ import static org.apache.dubbo.rpc.protocol.dubbo.CallbackServiceCodec.encodeInv
 public class DubboCodec extends ExchangeCodec implements Codec2 {
 
     public static final String NAME = "dubbo";
+
     public static final String DUBBO_VERSION = Version.getProtocolVersion();
+
     public static final byte RESPONSE_WITH_EXCEPTION = 0;
+
     public static final byte RESPONSE_VALUE = 1;
+
     public static final byte RESPONSE_NULL_VALUE = 2;
+
     public static final byte RESPONSE_WITH_EXCEPTION_WITH_ATTACHMENTS = 3;
+
     public static final byte RESPONSE_VALUE_WITH_ATTACHMENTS = 4;
+
     public static final byte RESPONSE_NULL_VALUE_WITH_ATTACHMENTS = 5;
+
     public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
     public static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+
     private static final Logger log = LoggerFactory.getLogger(DubboCodec.class);
 
     @Override
@@ -81,9 +91,11 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                     Object data;
                     if (res.isHeartbeat()) {
                         data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));
-                    } else if (res.isEvent()) {
+                    }
+                    else if (res.isEvent()) {
                         data = decodeEventData(channel, deserialize(s, channel.getUrl(), is));
-                    } else {
+                    }
+                    else {
                         DecodeableRpcResult result;
                         if (channel.getUrl().getParameter(
                                 Constants.DECODE_IN_IO_THREAD_KEY,
@@ -91,7 +103,8 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                             result = new DecodeableRpcResult(channel, res, is,
                                     (Invocation) getRequestData(id), proto);
                             result.decode();
-                        } else {
+                        }
+                        else {
                             result = new DecodeableRpcResult(channel, res,
                                     new UnsafeByteArrayInputStream(readMessageData(is)),
                                     (Invocation) getRequestData(id), proto);
@@ -99,18 +112,21 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                         data = result;
                     }
                     res.setResult(data);
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     if (log.isWarnEnabled()) {
                         log.warn("Decode response failed: " + t.getMessage(), t);
                     }
                     res.setStatus(Response.CLIENT_ERROR);
                     res.setErrorMessage(StringUtils.toString(t));
                 }
-            } else {
+            }
+            else {
                 res.setErrorMessage(deserialize(s, channel.getUrl(), is).readUTF());
             }
             return res;
-        } else {
+        }
+        else {
             // decode request.
             Request req = new Request(id);
             req.setVersion(Version.getProtocolVersion());
@@ -122,23 +138,27 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                 Object data;
                 if (req.isHeartbeat()) {
                     data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));
-                } else if (req.isEvent()) {
+                }
+                else if (req.isEvent()) {
                     data = decodeEventData(channel, deserialize(s, channel.getUrl(), is));
-                } else {
+                }
+                else {
                     DecodeableRpcInvocation inv;
                     if (channel.getUrl().getParameter(
                             Constants.DECODE_IN_IO_THREAD_KEY,
                             Constants.DEFAULT_DECODE_IN_IO_THREAD)) {
                         inv = new DecodeableRpcInvocation(channel, req, is, proto);
                         inv.decode();
-                    } else {
+                    }
+                    else {
                         inv = new DecodeableRpcInvocation(channel, req,
                                 new UnsafeByteArrayInputStream(readMessageData(is)), proto);
                     }
                     data = inv;
                 }
                 req.setData(data);
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 if (log.isWarnEnabled()) {
                     log.warn("Decode request failed: " + t.getMessage(), t);
                 }
@@ -185,10 +205,11 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
         out.writeUTF(inv.getMethodName());
         out.writeUTF(ReflectUtils.getDesc(inv.getParameterTypes()));
         Object[] args = inv.getArguments();
-        if (args != null)
+        if (args != null) {
             for (int i = 0; i < args.length; i++) {
                 out.writeObject(encodeInvocationArgument(channel, inv, i));
             }
+        }
         out.writeObject(RpcUtils.getNecessaryAttachments(inv));
     }
 
@@ -202,11 +223,13 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
             Object ret = result.getValue();
             if (ret == null) {
                 out.writeByte(attach ? RESPONSE_NULL_VALUE_WITH_ATTACHMENTS : RESPONSE_NULL_VALUE);
-            } else {
+            }
+            else {
                 out.writeByte(attach ? RESPONSE_VALUE_WITH_ATTACHMENTS : RESPONSE_VALUE);
                 out.writeObject(ret);
             }
-        } else {
+        }
+        else {
             out.writeByte(attach ? RESPONSE_WITH_EXCEPTION_WITH_ATTACHMENTS : RESPONSE_WITH_EXCEPTION);
             out.writeObject(th);
         }

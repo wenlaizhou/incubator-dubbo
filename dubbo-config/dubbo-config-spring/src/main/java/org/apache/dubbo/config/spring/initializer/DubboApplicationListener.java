@@ -42,7 +42,8 @@ public class DubboApplicationListener implements ApplicationListener<Application
     public void onApplicationEvent(ApplicationEvent applicationEvent) {
         if (applicationEvent instanceof ContextRefreshedEvent) {
             dubboBootstrap.start();
-        } else if (applicationEvent instanceof ContextClosedEvent) {
+        }
+        else if (applicationEvent instanceof ContextClosedEvent) {
             dubboBootstrap.stop();
         }
     }

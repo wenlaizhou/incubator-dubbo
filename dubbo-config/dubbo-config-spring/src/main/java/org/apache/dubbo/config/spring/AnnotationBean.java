@@ -63,10 +63,15 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
     private static final long serialVersionUID = -7582802454287589552L;
 
     private static final Logger logger = LoggerFactory.getLogger(Logger.class);
+
     private final Set<ServiceConfig<?>> serviceConfigs = new ConcurrentHashSet<ServiceConfig<?>>();
+
     private final ConcurrentMap<String, ReferenceBean<?>> referenceConfigs = new ConcurrentHashMap<String, ReferenceBean<?>>();
+
     private String annotationPackage;
+
     private String[] annotationPackages;
+
     private ApplicationContext applicationContext;
 
     public String getPackage() {
@@ -76,7 +81,7 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
     public void setPackage(String annotationPackage) {
         this.annotationPackage = annotationPackage;
         this.annotationPackages = (annotationPackage == null || annotationPackage.length() == 0) ? null
-            : Constants.COMMA_SPLIT_PATTERN.split(annotationPackage);
+                : Constants.COMMA_SPLIT_PATTERN.split(annotationPackage);
     }
 
     @Override
@@ -86,7 +91,7 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-        throws BeansException {
+            throws BeansException {
         if (annotationPackage == null || annotationPackage.length() == 0) {
             return;
         }
@@ -104,7 +109,8 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
                 String[] packages = Constants.COMMA_SPLIT_PATTERN.split(annotationPackage);
                 Method scan = scannerClass.getMethod("scan", String[].class);
                 scan.invoke(scanner, new Object[]{packages});
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 // spring 2.0
             }
         }
@@ -127,7 +133,8 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
         for (ReferenceConfig<?> referenceConfig : referenceConfigs.values()) {
             try {
                 referenceConfig.destroy();
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.error(e.getMessage(), e);
             }
         }
@@ -135,7 +142,7 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName)
-        throws BeansException {
+            throws BeansException {
         if (!isMatchPackage(bean)) {
             return bean;
         }
@@ -144,10 +151,11 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
             ServiceBean<Object> serviceConfig = new ServiceBean<Object>(service);
             serviceConfig.setRef(bean);
             if (void.class.equals(service.interfaceClass())
-                && "".equals(service.interfaceName())) {
+                    && "".equals(service.interfaceName())) {
                 if (bean.getClass().getInterfaces().length > 0) {
                     serviceConfig.setInterface(bean.getClass().getInterfaces()[0]);
-                } else {
+                }
+                else {
                     throw new IllegalStateException("Failed to export remote service class " + bean.getClass().getName() + ", cause: The @Service undefined interfaceClass or interfaceName, and the service class unimplemented any interfaces.");
                 }
             }
@@ -188,9 +196,11 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
                 }
                 try {
                     serviceConfig.afterPropertiesSet();
-                } catch (RuntimeException e) {
+                }
+                catch (RuntimeException e) {
                     throw e;
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     throw new IllegalStateException(e.getMessage(), e);
                 }
             }
@@ -202,7 +212,7 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName)
-        throws BeansException {
+            throws BeansException {
         if (!isMatchPackage(bean)) {
             return bean;
         }
@@ -210,9 +220,9 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
         for (Method method : methods) {
             String name = method.getName();
             if (name.length() > 3 && name.startsWith("set")
-                && method.getParameterTypes().length == 1
-                && Modifier.isPublic(method.getModifiers())
-                && !Modifier.isStatic(method.getModifiers())) {
+                    && method.getParameterTypes().length == 1
+                    && Modifier.isPublic(method.getModifiers())
+                    && !Modifier.isStatic(method.getModifiers())) {
                 try {
                     Reference reference = method.getAnnotation(Reference.class);
                     if (reference != null) {
@@ -221,7 +231,8 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
                             method.invoke(bean, value);
                         }
                     }
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     logger.error("Failed to init remote service reference at method " + name + " in class " + bean.getClass().getName() + ", cause: " + e.getMessage(), e);
                 }
             }
@@ -239,7 +250,8 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
                         field.set(bean, value);
                     }
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.error("Failed to init remote service reference at filed " + field.getName() + " in class " + bean.getClass().getName() + ", cause: " + e.getMessage(), e);
             }
         }
@@ -250,11 +262,14 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
         String interfaceName;
         if (!"".equals(reference.interfaceName())) {
             interfaceName = reference.interfaceName();
-        } else if (!void.class.equals(reference.interfaceClass())) {
+        }
+        else if (!void.class.equals(reference.interfaceClass())) {
             interfaceName = reference.interfaceClass().getName();
-        } else if (referenceClass.isInterface()) {
+        }
+        else if (referenceClass.isInterface()) {
             interfaceName = referenceClass.getName();
-        } else {
+        }
+        else {
             throw new IllegalStateException("The @Reference undefined interfaceClass or interfaceName, and the property type " + referenceClass.getName() + " is not a interface.");
         }
         String key = reference.group() + "/" + interfaceName + ":" + reference.version();
@@ -262,8 +277,8 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
         if (referenceConfig == null) {
             referenceConfig = new ReferenceBean<Object>(reference);
             if (void.class.equals(reference.interfaceClass())
-                && "".equals(reference.interfaceName())
-                && referenceClass.isInterface()) {
+                    && "".equals(reference.interfaceName())
+                    && referenceClass.isInterface()) {
                 referenceConfig.setInterface(referenceClass);
             }
             if (applicationContext != null) {
@@ -294,9 +309,11 @@ public class AnnotationBean extends AbstractConfig implements DisposableBean, Be
                 }
                 try {
                     referenceConfig.afterPropertiesSet();
-                } catch (RuntimeException e) {
+                }
+                catch (RuntimeException e) {
                     throw e;
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     throw new IllegalStateException(e.getMessage(), e);
                 }
             }

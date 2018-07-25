@@ -47,12 +47,14 @@ public final class DubboCountCodec implements Codec2 {
             if (Codec2.DecodeResult.NEED_MORE_INPUT == obj) {
                 buffer.readerIndex(save);
                 break;
-            } else {
+            }
+            else {
                 result.addMessage(obj);
                 logMessageLength(obj, buffer.readerIndex() - save);
                 save = buffer.readerIndex();
             }
-        } while (true);
+        }
+        while (true);
         if (result.isEmpty()) {
             return Codec2.DecodeResult.NEED_MORE_INPUT;
         }
@@ -70,14 +72,17 @@ public final class DubboCountCodec implements Codec2 {
             try {
                 ((RpcInvocation) ((Request) result).getData()).setAttachment(
                         Constants.INPUT_KEY, String.valueOf(bytes));
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 /* ignore */
             }
-        } else if (result instanceof Response) {
+        }
+        else if (result instanceof Response) {
             try {
                 ((RpcResult) ((Response) result).getResult()).setAttachment(
                         Constants.OUTPUT_KEY, String.valueOf(bytes));
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 /* ignore */
             }
         }

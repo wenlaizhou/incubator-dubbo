@@ -21,17 +21,17 @@
     http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <!-- current application configuration -->
-    <dubbo:application name="demo-provider"/>
+    <dubbo:application name="demo-provider" />
 
     <!-- registry center configuration -->
-    <dubbo:registry address="N/A"/>
+    <dubbo:registry address="N/A" />
 
     <!-- service protocol configuration -->
-    <dubbo:protocol name="dubbo" port="20813"/>
+    <dubbo:protocol name="dubbo" port="20813" />
 
     <!-- service configuration -->
-    <dubbo:service interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService"/>
+    <dubbo:service interface="org.apache.dubbo.config.spring.api.DemoService" ref="demoService" />
 
-    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.config.spring.impl.DemoServiceImpl" />
 
 </beans>

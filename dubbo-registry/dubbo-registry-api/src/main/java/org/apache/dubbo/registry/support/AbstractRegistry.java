@@ -51,27 +51,37 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * AbstractRegistry. (SPI, Prototype, ThreadSafe)
- *
  */
 public abstract class AbstractRegistry implements Registry {
 
     // URL address separator, used in file cache, service provider URL separation
     private static final char URL_SEPARATOR = ' ';
+
     // URL address separated regular expression for parsing the service provider URL list in the file cache
     private static final String URL_SPLIT = "\\s+";
+
     // Log output
     protected final Logger logger = LoggerFactory.getLogger(getClass());
+
     // Local disk cache, where the special key value.registies records the list of registry centers, and the others are the list of notified service providers
     private final Properties properties = new Properties();
+
     // File cache timing writing
     private final ExecutorService registryCacheExecutor = Executors.newFixedThreadPool(1, new NamedThreadFactory("DubboSaveRegistryCache", true));
+
     // Is it synchronized to save the file
     private final boolean syncSaveFile;
+
     private final AtomicLong lastCacheChanged = new AtomicLong();
+
     private final Set<URL> registered = new ConcurrentHashSet<URL>();
+
     private final ConcurrentMap<URL, Set<NotifyListener>> subscribed = new ConcurrentHashMap<URL, Set<NotifyListener>>();
+
     private final ConcurrentMap<URL, Map<String, List<URL>>> notified = new ConcurrentHashMap<URL, Map<String, List<URL>>>();
+
     private URL registryUrl;
+
     // Local disk cache file
     private File file;
 
@@ -168,22 +178,28 @@ public abstract class AbstractRegistry implements Registry {
                         FileOutputStream outputFile = new FileOutputStream(file);
                         try {
                             properties.store(outputFile, "Dubbo Registry Cache");
-                        } finally {
+                        }
+                        finally {
                             outputFile.close();
                         }
-                    } finally {
+                    }
+                    finally {
                         lock.release();
                     }
-                } finally {
+                }
+                finally {
                     channel.close();
                 }
-            } finally {
+            }
+            finally {
                 raf.close();
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             if (version < lastCacheChanged.get()) {
                 return;
-            } else {
+            }
+            else {
                 registryCacheExecutor.execute(new SaveProperties(lastCacheChanged.incrementAndGet()));
             }
             logger.warn("Failed to save registry store file, cause: " + e.getMessage(), e);
@@ -199,13 +215,16 @@ public abstract class AbstractRegistry implements Registry {
                 if (logger.isInfoEnabled()) {
                     logger.info("Load registry store file " + file + ", data: " + properties);
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 logger.warn("Failed to load registry store file " + file, e);
-            } finally {
+            }
+            finally {
                 if (in != null) {
                     try {
                         in.close();
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e) {
                         logger.warn(e.getMessage(), e);
                     }
                 }
@@ -243,7 +262,8 @@ public abstract class AbstractRegistry implements Registry {
                     }
                 }
             }
-        } else {
+        }
+        else {
             final AtomicReference<List<URL>> reference = new AtomicReference<List<URL>>();
             NotifyListener listener = new NotifyListener() {
                 @Override
@@ -349,7 +369,9 @@ public abstract class AbstractRegistry implements Registry {
     }
 
     protected void notify(List<URL> urls) {
-        if (urls == null || urls.isEmpty()) return;
+        if (urls == null || urls.isEmpty()) {
+            return;
+        }
 
         for (Map.Entry<URL, Set<NotifyListener>> entry : getSubscribed().entrySet()) {
             URL url = entry.getKey();
@@ -363,7 +385,8 @@ public abstract class AbstractRegistry implements Registry {
                 for (NotifyListener listener : listeners) {
                     try {
                         notify(url, listener, filterEmpty(url, urls));
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.error("Failed to notify registry event, urls: " + urls + ", cause: " + t.getMessage(), t);
                     }
                 }
@@ -437,10 +460,12 @@ public abstract class AbstractRegistry implements Registry {
             long version = lastCacheChanged.incrementAndGet();
             if (syncSaveFile) {
                 doSaveProperties(version);
-            } else {
+            }
+            else {
                 registryCacheExecutor.execute(new SaveProperties(version));
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn(t.getMessage(), t);
         }
     }
@@ -459,7 +484,8 @@ public abstract class AbstractRegistry implements Registry {
                         if (logger.isInfoEnabled()) {
                             logger.info("Destroy unregister url " + url);
                         }
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn("Failed to unregister url " + url + " to registry " + getUrl() + " on destroy, cause: " + t.getMessage(), t);
                     }
                 }
@@ -475,7 +501,8 @@ public abstract class AbstractRegistry implements Registry {
                         if (logger.isInfoEnabled()) {
                             logger.info("Destroy unsubscribe url " + url);
                         }
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.warn("Failed to unsubscribe url " + url + " to registry " + getUrl() + " on destroy, cause: " + t.getMessage(), t);
                     }
                 }
@@ -489,6 +516,7 @@ public abstract class AbstractRegistry implements Registry {
     }
 
     private class SaveProperties implements Runnable {
+
         private long version;
 
         private SaveProperties(long version) {

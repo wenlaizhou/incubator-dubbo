@@ -23,6 +23,7 @@ import java.io.OutputStream;
 public class ChannelBufferOutputStream extends OutputStream {
 
     private final ChannelBuffer buffer;
+
     private final int startIndex;
 
     public ChannelBufferOutputStream(ChannelBuffer buffer) {

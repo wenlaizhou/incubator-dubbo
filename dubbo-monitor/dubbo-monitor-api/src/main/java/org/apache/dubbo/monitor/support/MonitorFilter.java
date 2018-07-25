@@ -65,13 +65,16 @@ public class MonitorFilter implements Filter {
                 Result result = invoker.invoke(invocation); // proceed invocation chain
                 collect(invoker, invocation, result, remoteHost, start, false);
                 return result;
-            } catch (RpcException e) {
+            }
+            catch (RpcException e) {
                 collect(invoker, invocation, null, remoteHost, start, true);
                 throw e;
-            } finally {
+            }
+            finally {
                 getConcurrent(invoker, invocation).decrementAndGet(); // count down
             }
-        } else {
+        }
+        else {
             return invoker.invoke(invocation);
         }
     }
@@ -100,7 +103,8 @@ public class MonitorFilter implements Filter {
                 localPort = 0;
                 remoteKey = MonitorService.PROVIDER;
                 remoteValue = invoker.getUrl().getAddress();
-            } else {
+            }
+            else {
                 // ---- for service provider ----
                 localPort = invoker.getUrl().getPort();
                 remoteKey = MonitorService.CONSUMER;
@@ -127,7 +131,8 @@ public class MonitorFilter implements Filter {
                     Constants.OUTPUT_KEY, output,
                     Constants.GROUP_KEY, group,
                     Constants.VERSION_KEY, version));
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error("Failed to monitor count service " + invoker.getUrl() + ", cause: " + t.getMessage(), t);
         }
     }

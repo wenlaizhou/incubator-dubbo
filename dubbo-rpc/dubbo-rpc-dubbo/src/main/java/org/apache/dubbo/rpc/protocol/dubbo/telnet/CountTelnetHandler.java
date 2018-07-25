@@ -57,13 +57,15 @@ public class CountTelnetHandler implements TelnetHandler {
         if (service == null || service.length() == 0) {
             service = parts.length > 0 ? parts[0] : null;
             method = parts.length > 1 ? parts[1] : null;
-        } else {
+        }
+        else {
             method = parts.length > 0 ? parts[0] : null;
         }
         if (StringUtils.isInteger(method)) {
             times = method;
             method = null;
-        } else {
+        }
+        else {
             times = parts.length > 2 ? parts[2] : "1";
         }
         if (!StringUtils.isInteger(times)) {
@@ -91,19 +93,22 @@ public class CountTelnetHandler implements TelnetHandler {
                             String result = count(inv, mtd);
                             try {
                                 channel.send("\r\n" + result);
-                            } catch (RemotingException e1) {
+                            }
+                            catch (RemotingException e1) {
                                 return;
                             }
                             if (i < t - 1) {
                                 try {
                                     Thread.sleep(1000);
-                                } catch (InterruptedException e) {
+                                }
+                                catch (InterruptedException e) {
                                 }
                             }
                         }
                         try {
                             channel.send("\r\n" + prompt + "> ");
-                        } catch (RemotingException e1) {
+                        }
+                        catch (RemotingException e1) {
                             return;
                         }
                     }
@@ -111,7 +116,8 @@ public class CountTelnetHandler implements TelnetHandler {
                 thread.setDaemon(true);
                 thread.start();
             }
-        } else {
+        }
+        else {
             buf.append("No such service " + service);
         }
         return buf.toString();
@@ -139,7 +145,8 @@ public class CountTelnetHandler implements TelnetHandler {
                 row.add(String.valueOf(count.getSucceededMaxElapsed()) + "ms");
                 table.add(row);
             }
-        } else {
+        }
+        else {
             boolean found = false;
             for (Method m : invoker.getInterface().getMethods()) {
                 if (m.getName().equals(method)) {
@@ -157,7 +164,8 @@ public class CountTelnetHandler implements TelnetHandler {
                 row.add(String.valueOf(count.getSucceededAverageElapsed()) + "ms");
                 row.add(String.valueOf(count.getSucceededMaxElapsed()) + "ms");
                 table.add(row);
-            } else {
+            }
+            else {
                 return "No such method " + method + " in class " + invoker.getInterface().getName();
             }
         }

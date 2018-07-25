@@ -70,7 +70,8 @@ public class StubProxyFactoryWrapper implements ProxyFactory {
                 if (ConfigUtils.isDefault(stub)) {
                     if (invoker.getUrl().hasParameter(Constants.STUB_KEY)) {
                         stub = serviceType.getName() + "Stub";
-                    } else {
+                    }
+                    else {
                         stub = serviceType.getName() + "Local";
                     }
                 }
@@ -89,14 +90,17 @@ public class StubProxyFactoryWrapper implements ProxyFactory {
                             url = url.addParameter(Constants.IS_SERVER_KEY, Boolean.FALSE.toString());
                             try {
                                 export(proxy, (Class) invoker.getInterface(), url);
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e) {
                                 LOGGER.error("export a stub service error.", e);
                             }
                         }
-                    } catch (NoSuchMethodException e) {
+                    }
+                    catch (NoSuchMethodException e) {
                         throw new IllegalStateException("No such constructor \"public " + stubClass.getSimpleName() + "(" + serviceType.getName() + ")\" in stub implementation class " + stubClass.getName(), e);
                     }
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     LOGGER.error("Failed to create stub implementation class " + stub + " in consumer " + NetUtils.getLocalHost() + " use dubbo version " + Version.getVersion() + ", cause: " + t.getMessage(), t);
                     // ignore
                 }

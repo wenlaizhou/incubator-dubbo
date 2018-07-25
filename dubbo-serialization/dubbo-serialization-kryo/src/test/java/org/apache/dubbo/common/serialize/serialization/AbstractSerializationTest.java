@@ -62,13 +62,18 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public abstract class AbstractSerializationTest {
+
     static Random random = new Random();
+
     Serialization serialization;
+
     URL url = new URL("protocol", "1.1.1.1", 1234);
+
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
     // ================ Primitive Type ================ 
     BigPerson bigPerson;
+
     MediaContent mediaContent;
 
     {
@@ -123,7 +128,9 @@ public abstract class AbstractSerializationTest {
         for (int i = 0; i < 10; ++i) {
             Image image = new Image();
             image.setUri("url" + i);
-            if (i % 2 == 0) image.setTitle("title" + i);
+            if (i % 2 == 0) {
+                image.setTitle("title" + i);
+            }
             image.setWidth(34 + i);
             image.setHeight(2323 + i);
             image.setSize((i % 2 == 0) ? Size.SMALL : Size.LARGE);
@@ -149,7 +156,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readBool();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -177,7 +185,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readBool();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -196,7 +205,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readByte();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -222,7 +232,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readByte();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -241,7 +252,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readShort();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -261,7 +273,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readInt();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -280,7 +293,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readLong();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -299,7 +313,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readFloat();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -320,7 +335,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readDouble();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -339,7 +355,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readUTF();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -358,7 +375,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readBytes();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -379,7 +397,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readBytes();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -399,7 +418,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -417,7 +437,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(clazz);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -436,7 +457,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -454,7 +476,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(clazz);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -475,7 +498,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -496,7 +520,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(boolean[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -517,7 +542,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -538,7 +564,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(char[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -559,7 +586,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -580,7 +608,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(short[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -601,7 +630,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -622,7 +652,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(int[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -643,7 +674,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -664,7 +696,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(long[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -685,7 +718,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -706,7 +740,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(float[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -727,7 +762,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -748,7 +784,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject(double[].class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -975,7 +1012,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -1079,7 +1117,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -1106,7 +1145,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 
@@ -1132,7 +1172,8 @@ public abstract class AbstractSerializationTest {
             @SuppressWarnings("unused") // local variable, convenient for debug
                     Object read = deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
             System.out.println(expected);
         }
     }
@@ -1156,7 +1197,8 @@ public abstract class AbstractSerializationTest {
             @SuppressWarnings("unused") // local variable, convenient for debug
                     Object read = deserialize.readObject(MediaContent.class);
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
             System.out.println(expected);
         }
     }
@@ -1204,7 +1246,8 @@ public abstract class AbstractSerializationTest {
         try {
             deserialize.readObject();
             fail();
-        } catch (IOException expected) {
+        }
+        catch (IOException expected) {
         }
     }
 }

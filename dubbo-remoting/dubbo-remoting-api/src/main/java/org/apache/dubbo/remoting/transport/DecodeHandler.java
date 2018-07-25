@@ -58,7 +58,8 @@ public class DecodeHandler extends AbstractChannelHandlerDelegate {
                 if (log.isDebugEnabled()) {
                     log.debug("Decode decodeable message " + message.getClass().getName());
                 }
-            } catch (Throwable e) {
+            }
+            catch (Throwable e) {
                 if (log.isWarnEnabled()) {
                     log.warn("Call Decodeable.decode failed: " + e.getMessage(), e);
                 }

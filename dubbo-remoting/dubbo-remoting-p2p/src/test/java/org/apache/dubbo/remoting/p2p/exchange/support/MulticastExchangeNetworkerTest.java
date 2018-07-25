@@ -40,6 +40,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class MulticastExchangeNetworkerTest {
+
     @Test
     public void testJoin() throws RemotingException, InterruptedException {
         final String groupURL = "multicast://224.5.6.7:1234";

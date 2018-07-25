@@ -59,7 +59,8 @@ public class ExceptionFilterTest {
 
         try {
             exceptionFilter.invoke(invoker, invocation);
-        } catch (RpcException e) {
+        }
+        catch (RpcException e) {
             assertEquals("TestRpcException", e.getMessage());
         }
         Mockito.verify(logger).error(eq("Got unchecked and undeclared exception which called by 127.0.0.1. service: "

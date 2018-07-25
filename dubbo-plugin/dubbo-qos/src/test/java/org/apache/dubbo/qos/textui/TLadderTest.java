@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class TLadderTest {
+
     @Test
     public void testRendering() throws Exception {
         TLadder ladder = new TLadder();

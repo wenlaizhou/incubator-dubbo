@@ -39,10 +39,15 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ExplicitCallbackTest {
 
     protected Exporter<IDemoService> exporter = null;
+
     protected Exporter<IHelloService> hello_exporter = null;
+
     protected Invoker<IDemoService> reference = null;
+
     protected URL serviceURL = null;
+
     protected URL consumerUrl = null;
+
     // ============================A gorgeous line of segmentation================================================
     IDemoService demoProxy = null;
 
@@ -78,8 +83,8 @@ public class ExplicitCallbackTest {
                 + "&" + Constants.CALLBACK_INSTANCES_LIMIT_KEY + "=" + callbacks
         );
         //      uncomment is unblock invoking
-//        serviceURL = serviceURL.addParameter("yyy."+Constants.ASYNC_KEY,String.valueOf(true));
-//        consumerUrl = consumerUrl.addParameter("yyy."+Constants.ASYNC_KEY,String.valueOf(true));
+        //        serviceURL = serviceURL.addParameter("yyy."+Constants.ASYNC_KEY,String.valueOf(true));
+        //        consumerUrl = consumerUrl.addParameter("yyy."+Constants.ASYNC_KEY,String.valueOf(true));
     }
 
     public void initOrResetService() {
@@ -91,10 +96,17 @@ public class ExplicitCallbackTest {
     public void destroyService() {
         demoProxy = null;
         try {
-            if (exporter != null) exporter.unexport();
-            if (hello_exporter != null) hello_exporter.unexport();
-            if (reference != null) reference.destroy();
-        } catch (Exception e) {
+            if (exporter != null) {
+                exporter.unexport();
+            }
+            if (hello_exporter != null) {
+                hello_exporter.unexport();
+            }
+            if (reference != null) {
+                reference.destroy();
+            }
+        }
+        catch (Exception e) {
         }
     }
 
@@ -113,7 +125,7 @@ public class ExplicitCallbackTest {
             }
         }, "other custom args", 10, 100);
         System.out.println("Async...");
-//        Thread.sleep(10000000);
+        //        Thread.sleep(10000000);
         assertCallbackCount(10, 100, count);
         destroyService();
 
@@ -224,7 +236,9 @@ public class ExplicitCallbackTest {
     private void assertCallbackCount(int runs, int sleep, AtomicInteger count) throws InterruptedException {
         int last = count.get();
         for (int i = 0; i < runs; i++) {
-            if (last > runs) break;
+            if (last > runs) {
+                break;
+            }
             Thread.sleep(sleep * 2);
             System.out.println(count.get() + "  " + last);
             Assert.assertTrue(count.get() > last);
@@ -244,14 +258,17 @@ public class ExplicitCallbackTest {
     }
 
     interface IDemoCallback {
+
         String yyy(String msg);
     }
 
     interface IHelloService {
+
         public String sayHello();
     }
 
     interface IDemoService {
+
         public String get();
 
         public int getCallbackCount();
@@ -264,6 +281,7 @@ public class ExplicitCallbackTest {
     }
 
     class HelloServiceImpl implements IHelloService {
+
         public String sayHello() {
             return "hello";
         }
@@ -271,8 +289,11 @@ public class ExplicitCallbackTest {
     }
 
     class DemoServiceImpl implements IDemoService {
+
         private List<IDemoCallback> callbacks = new ArrayList<IDemoCallback>();
+
         private volatile Thread t = null;
+
         private volatile Lock lock = new ReentrantLock();
 
         public String get() {
@@ -288,7 +309,8 @@ public class ExplicitCallbackTest {
                         System.out.println("callback result is :" + ret);
                         try {
                             Thread.sleep(sleep);
-                        } catch (InterruptedException e) {
+                        }
+                        catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
@@ -322,13 +344,15 @@ public class ExplicitCallbackTest {
                                     for (IDemoCallback callback : callbacksCopy) {
                                         try {
                                             callback.yyy("this is callback msg,current time is :" + System.currentTimeMillis());
-                                        } catch (Exception e) {
+                                        }
+                                        catch (Exception e) {
                                             e.printStackTrace();
                                             callbacks.remove(callback);
                                         }
                                     }
                                     Thread.sleep(100);
-                                } catch (InterruptedException e) {
+                                }
+                                catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -336,7 +360,8 @@ public class ExplicitCallbackTest {
                     });
                     t.setDaemon(true);
                     t.start();
-                } finally {
+                }
+                finally {
                     lock.unlock();
                 }
             }

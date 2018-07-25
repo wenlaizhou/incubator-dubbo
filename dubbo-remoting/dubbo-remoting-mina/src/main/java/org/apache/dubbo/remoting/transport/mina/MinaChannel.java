@@ -99,7 +99,8 @@ final class MinaChannel extends AbstractChannel {
                 timeout = getUrl().getPositiveParameter(Constants.TIMEOUT_KEY, Constants.DEFAULT_TIMEOUT);
                 success = future.join(timeout);
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RemotingException(this, "Failed to send message " + message + " to " + getRemoteAddress() + ", cause: " + e.getMessage(), e);
         }
 
@@ -113,12 +114,14 @@ final class MinaChannel extends AbstractChannel {
     public void close() {
         try {
             super.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             removeChannelIfDisconnected(session);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
@@ -126,7 +129,8 @@ final class MinaChannel extends AbstractChannel {
                 logger.info("CLose mina channel " + session);
             }
             session.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -161,13 +165,24 @@ final class MinaChannel extends AbstractChannel {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         MinaChannel other = (MinaChannel) obj;
         if (session == null) {
-            if (other.session != null) return false;
-        } else if (!session.equals(other.session)) return false;
+            if (other.session != null) {
+                return false;
+            }
+        }
+        else if (!session.equals(other.session)) {
+            return false;
+        }
         return true;
     }
 

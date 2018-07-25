@@ -20,4 +20,5 @@ import org.apache.dubbo.rpc.gen.dubbo.$__DemoStub;
 import org.apache.dubbo.rpc.gen.dubbo.Demo;
 
 public class DubboDemoImpl extends DemoImpl implements Demo, $__DemoStub.Iface {
+
 }

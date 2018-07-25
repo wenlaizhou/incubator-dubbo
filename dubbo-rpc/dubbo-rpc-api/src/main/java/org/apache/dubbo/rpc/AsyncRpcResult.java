@@ -26,6 +26,7 @@ import java.util.function.Function;
 
 
 public class AsyncRpcResult extends AbstractResult {
+
     private static final Logger logger = LoggerFactory.getLogger(AsyncRpcResult.class);
 
     /**
@@ -33,6 +34,7 @@ public class AsyncRpcResult extends AbstractResult {
      * So we use Invocation instead, Invocation will create for every invoke, but invocation only support attachments of string type.
      */
     private RpcContext storedContext;
+
     private RpcContext storedServerContext;
 
     protected CompletableFuture<Object> valueFuture;
@@ -68,10 +70,12 @@ public class AsyncRpcResult extends AbstractResult {
                 if (t != null) {
                     if (t instanceof CompletionException) {
                         rpcResult = new RpcResult(t.getCause());
-                    } else {
+                    }
+                    else {
                         rpcResult = new RpcResult(t);
                     }
-                } else {
+                }
+                else {
                     rpcResult = new RpcResult(v);
                 }
                 // instead of resultFuture we must use rFuture here, resultFuture may being changed before complete when building filter chain, but rFuture was guaranteed never changed by closure.
@@ -119,7 +123,8 @@ public class AsyncRpcResult extends AbstractResult {
         Result result;
         try {
             result = resultFuture.get();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             // This should never happen;
             logger.error("", e);
             result = new RpcResult();
@@ -169,6 +174,7 @@ public class AsyncRpcResult extends AbstractResult {
      * tmp context to use when the thread switch to Dubbo thread.
      */
     private RpcContext tmpContext;
+
     private RpcContext tmpServerContext;
 
     private Function<Result, Result> beforeContext = (result) -> {

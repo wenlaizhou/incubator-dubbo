@@ -24,6 +24,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ReferenceConfigCacheTest {
+
     @Before
     public void setUp() throws Exception {
         MockReferenceConfig.setCounter(0);

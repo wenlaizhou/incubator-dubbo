@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+
 @Deprecated
 public class RandomAccessByteArrayOutputStream extends OutputStream {
 
@@ -36,8 +37,9 @@ public class RandomAccessByteArrayOutputStream extends OutputStream {
 
     public RandomAccessByteArrayOutputStream(int size) {
 
-        if (size < 0)
+        if (size < 0) {
             throw new IllegalArgumentException("Negative initial size: " + size);
+        }
         buffer = new byte[size];
     }
 
@@ -45,8 +47,9 @@ public class RandomAccessByteArrayOutputStream extends OutputStream {
     public void write(int b) {
 
         int newcount = count + 1;
-        if (newcount > buffer.length)
+        if (newcount > buffer.length) {
             buffer = Bytes.copyOf(buffer, Math.max(buffer.length << 1, newcount));
+        }
         buffer[count] = (byte) b;
         count = newcount;
     }
@@ -54,13 +57,16 @@ public class RandomAccessByteArrayOutputStream extends OutputStream {
     @Override
     public void write(byte b[], int off, int len) {
 
-        if ((off < 0) || (off > b.length) || (len < 0) || ((off + len) > b.length) || ((off + len) < 0))
+        if ((off < 0) || (off > b.length) || (len < 0) || ((off + len) > b.length) || ((off + len) < 0)) {
             throw new IndexOutOfBoundsException();
-        if (len == 0)
+        }
+        if (len == 0) {
             return;
+        }
         int newcount = count + len;
-        if (newcount > buffer.length)
+        if (newcount > buffer.length) {
             buffer = Bytes.copyOf(buffer, Math.max(buffer.length << 1, newcount));
+        }
         System.arraycopy(b, off, buffer, count, len);
         count = newcount;
     }

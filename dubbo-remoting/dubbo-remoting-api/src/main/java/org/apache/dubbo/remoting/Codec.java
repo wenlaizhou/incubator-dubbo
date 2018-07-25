@@ -53,7 +53,9 @@ public interface Codec {
      *
      * @param channel channel.
      * @param input   input stream.
+     *
      * @return message or <code>NEED_MORE_INPUT</code> poison.
+     *
      * @see #NEED_MORE_INPUT
      */
     @Adaptive({Constants.CODEC_KEY})

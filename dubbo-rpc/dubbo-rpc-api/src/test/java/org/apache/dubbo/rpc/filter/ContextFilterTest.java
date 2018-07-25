@@ -40,7 +40,9 @@ import static org.mockito.Mockito.mock;
 public class ContextFilterTest {
 
     Filter contextFilter = new ContextFilter();
+
     Invoker<DemoService> invoker;
+
     Invocation invocation;
 
     @SuppressWarnings("unchecked")

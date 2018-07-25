@@ -46,7 +46,8 @@ public class ExecutionChannelHandler extends WrappedChannelHandler {
         if (message instanceof Request) {
             try {
                 cexecutor.execute(new ChannelEventRunnable(channel, handler, ChannelState.RECEIVED, message));
-            } catch (Throwable t) {
+            }
+            catch (Throwable t) {
                 // FIXME: when the thread pool is full, SERVER_THREADPOOL_EXHAUSTED_ERROR cannot return properly,
                 // therefore the consumer side has to wait until gets timeout. This is a temporary solution to prevent
                 // this scenario from happening, but a better solution should be considered later.
@@ -64,7 +65,8 @@ public class ExecutionChannelHandler extends WrappedChannelHandler {
                 }
                 throw new ExecutionException(message, channel, getClass() + " error when process received event.", t);
             }
-        } else {
+        }
+        else {
             handler.received(channel, message);
         }
     }

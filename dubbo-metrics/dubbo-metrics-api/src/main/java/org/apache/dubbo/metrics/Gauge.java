@@ -33,6 +33,7 @@ package org.apache.dubbo.metrics;
  * @param <T> the type of the metric's value
  */
 public interface Gauge<T> extends Metric {
+
     /**
      * Returns the metric's current value.
      *

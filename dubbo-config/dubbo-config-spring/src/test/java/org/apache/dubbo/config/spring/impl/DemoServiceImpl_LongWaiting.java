@@ -27,7 +27,8 @@ public class DemoServiceImpl_LongWaiting implements DemoService {
     public String sayName(String name) {
         try {
             Thread.sleep(100 * 1000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
         }
 
         return "say:" + name;

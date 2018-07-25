@@ -48,7 +48,8 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
     public ChannelBufferFactory factory() {
         if (buffer.isDirect()) {
             return DirectChannelBufferFactory.getInstance();
-        } else {
+        }
+        else {
             return HeapChannelBufferFactory.getInstance();
         }
     }
@@ -65,7 +66,8 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
         ByteBuffer src;
         try {
             src = (ByteBuffer) buffer.duplicate().position(index).limit(index + length);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -89,7 +91,8 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
         ByteBuffer data = buffer.duplicate();
         try {
             data.limit(index + length).position(index);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             throw new IndexOutOfBoundsException();
         }
         data.get(dst, dstIndex, length);
@@ -102,7 +105,8 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
         int bytesToCopy = Math.min(capacity() - index, dst.remaining());
         try {
             data.limit(index + bytesToCopy).position(index);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             throw new IndexOutOfBoundsException();
         }
         dst.put(data);
@@ -117,9 +121,11 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
 
             data.limit(dstIndex + length).position(dstIndex);
             getBytes(index, data);
-        } else if (buffer.hasArray()) {
+        }
+        else if (buffer.hasArray()) {
             dst.setBytes(dstIndex, buffer.array(), index + buffer.arrayOffset(), length);
-        } else {
+        }
+        else {
             dst.setBytes(dstIndex, this, index, length);
         }
     }
@@ -136,7 +142,8 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
                     buffer.array(),
                     index + buffer.arrayOffset(),
                     length);
-        } else {
+        }
+        else {
             byte[] tmp = new byte[length];
             ((ByteBuffer) buffer.duplicate().position(index)).get(tmp);
             out.write(tmp);
@@ -180,9 +187,11 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
 
             data.limit(srcIndex + length).position(srcIndex);
             setBytes(index, data);
-        } else if (buffer.hasArray()) {
+        }
+        else if (buffer.hasArray()) {
             src.getBytes(srcIndex, buffer.array(), index + buffer.arrayOffset(), length);
-        } else {
+        }
+        else {
             src.getBytes(srcIndex, this, index, length);
         }
     }
@@ -192,7 +201,8 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
     public ByteBuffer toByteBuffer(int index, int length) {
         if (index == 0 && length == capacity()) {
             return buffer.duplicate();
-        } else {
+        }
+        else {
             return ((ByteBuffer) buffer.duplicate().position(
                     index).limit(index + length)).slice();
         }
@@ -210,15 +220,18 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
                 if (localReadBytes < 0) {
                     if (readBytes == 0) {
                         return -1;
-                    } else {
+                    }
+                    else {
                         break;
                     }
                 }
                 readBytes += localReadBytes;
                 index += localReadBytes;
                 length -= localReadBytes;
-            } while (length > 0);
-        } else {
+            }
+            while (length > 0);
+        }
+        else {
             byte[] tmp = new byte[length];
             int i = 0;
             do {
@@ -226,13 +239,15 @@ public class ByteBufferBackedChannelBuffer extends AbstractChannelBuffer {
                 if (localReadBytes < 0) {
                     if (readBytes == 0) {
                         return -1;
-                    } else {
+                    }
+                    else {
                         break;
                     }
                 }
                 readBytes += localReadBytes;
                 i += readBytes;
-            } while (i < tmp.length);
+            }
+            while (i < tmp.length);
             ((ByteBuffer) buffer.duplicate().position(index)).put(tmp);
         }
 

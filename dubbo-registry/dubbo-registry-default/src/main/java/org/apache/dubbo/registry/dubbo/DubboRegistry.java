@@ -38,7 +38,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * DubboRegistry
- *
  */
 public class DubboRegistry extends FailbackRegistry {
 
@@ -77,7 +76,8 @@ public class DubboRegistry extends FailbackRegistry {
                 // Check and connect to the registry
                 try {
                     connect();
-                } catch (Throwable t) { // Defensive fault tolerance
+                }
+                catch (Throwable t) { // Defensive fault tolerance
                     logger.error("Unexpected error occur at reconnect, cause: " + t.getMessage(), t);
                 }
             }
@@ -100,10 +100,12 @@ public class DubboRegistry extends FailbackRegistry {
                     return;
                 }
                 recover();
-            } finally {
+            }
+            finally {
                 clientLock.unlock();
             }
-        } catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
+        }
+        catch (Throwable t) { // Ignore all the exceptions and wait for the next retry
             if (getUrl().getParameter(Constants.CHECK_KEY, true)) {
                 if (t instanceof RuntimeException) {
                     throw (RuntimeException) t;
@@ -116,8 +118,9 @@ public class DubboRegistry extends FailbackRegistry {
 
     @Override
     public boolean isAvailable() {
-        if (registryInvoker == null)
+        if (registryInvoker == null) {
             return false;
+        }
         return registryInvoker.isAvailable();
     }
 
@@ -129,7 +132,8 @@ public class DubboRegistry extends FailbackRegistry {
             if (!reconnectFuture.isCancelled()) {
                 reconnectFuture.cancel(true);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.warn("Failed to cancel reconnect timer", t);
         }
         registryInvoker.destroy();

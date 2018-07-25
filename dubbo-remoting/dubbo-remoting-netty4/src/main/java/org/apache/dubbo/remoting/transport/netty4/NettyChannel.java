@@ -107,7 +107,8 @@ final class NettyChannel extends AbstractChannel {
             if (cause != null) {
                 throw cause;
             }
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             throw new RemotingException(this, "Failed to send message " + message + " to " + getRemoteAddress() + ", cause: " + e.getMessage(), e);
         }
 
@@ -121,17 +122,20 @@ final class NettyChannel extends AbstractChannel {
     public void close() {
         try {
             super.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             removeChannelIfDisconnected(channel);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
             attributes.clear();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
         try {
@@ -139,7 +143,8 @@ final class NettyChannel extends AbstractChannel {
                 logger.info("Close netty channel " + channel);
             }
             channel.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
     }
@@ -158,7 +163,8 @@ final class NettyChannel extends AbstractChannel {
     public void setAttribute(String key, Object value) {
         if (value == null) { // The null value unallowed in the ConcurrentHashMap.
             attributes.remove(key);
-        } else {
+        }
+        else {
             attributes.put(key, value);
         }
     }
@@ -178,13 +184,24 @@ final class NettyChannel extends AbstractChannel {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         NettyChannel other = (NettyChannel) obj;
         if (channel == null) {
-            if (other.channel != null) return false;
-        } else if (!channel.equals(other.channel)) return false;
+            if (other.channel != null) {
+                return false;
+            }
+        }
+        else if (!channel.equals(other.channel)) {
+            return false;
+        }
         return true;
     }
 

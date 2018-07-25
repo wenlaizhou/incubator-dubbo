@@ -22,14 +22,21 @@ import org.apache.dubbo.config.ReferenceConfig;
 import java.lang.reflect.Method;
 
 public class ConsumerMethodModel {
+
     private final Method method;
+
     private final ReferenceConfig metadata;
-//    private final boolean isCallBack;
-//    private final boolean isFuture;
+
+    //    private final boolean isCallBack;
+    //    private final boolean isFuture;
     private final String[] parameterTypes;
+
     private final Class<?>[] parameterClasses;
+
     private final Class<?> returnClass;
+
     private final String methodName;
+
     private final boolean generic;
 
     public ConsumerMethodModel(Method method, ReferenceConfig metadata) {
@@ -51,7 +58,6 @@ public class ConsumerMethodModel {
     }
 
 
-
     public String getMethodName() {
         return methodName;
     }
@@ -66,7 +72,7 @@ public class ConsumerMethodModel {
 
     private String[] createParamSignature(Class<?>[] args) {
         if (args == null || args.length == 0) {
-            return new String[] {};
+            return new String[]{};
         }
         String[] paramSig = new String[args.length];
         for (int x = 0; x < args.length; x++) {

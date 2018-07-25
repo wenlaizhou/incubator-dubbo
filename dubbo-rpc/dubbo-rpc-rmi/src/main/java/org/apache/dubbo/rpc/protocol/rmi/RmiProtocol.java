@@ -58,7 +58,8 @@ public class RmiProtocol extends AbstractProxyProtocol {
         rmiServiceExporter.setService(impl);
         try {
             rmiServiceExporter.afterPropertiesSet();
-        } catch (RemoteException e) {
+        }
+        catch (RemoteException e) {
             throw new RpcException(e.getMessage(), e);
         }
         return new Runnable() {
@@ -66,7 +67,8 @@ public class RmiProtocol extends AbstractProxyProtocol {
             public void run() {
                 try {
                     rmiServiceExporter.destroy();
-                } catch (Throwable e) {
+                }
+                catch (Throwable e) {
                     logger.warn(e.getMessage(), e);
                 }
             }
@@ -105,9 +107,11 @@ public class RmiProtocol extends AbstractProxyProtocol {
             Class<?> cls = e.getCause().getClass();
             if (SocketTimeoutException.class.equals(cls)) {
                 return RpcException.TIMEOUT_EXCEPTION;
-            } else if (IOException.class.isAssignableFrom(cls)) {
+            }
+            else if (IOException.class.isAssignableFrom(cls)) {
                 return RpcException.NETWORK_EXCEPTION;
-            } else if (ClassNotFoundException.class.isAssignableFrom(cls)) {
+            }
+            else if (ClassNotFoundException.class.isAssignableFrom(cls)) {
                 return RpcException.SERIALIZATION_EXCEPTION;
             }
         }

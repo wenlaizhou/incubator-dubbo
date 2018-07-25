@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class MulticastRegistryFactoryTest {
+
     @Test
     public void shouldCreateRegistry() {
         Registry registry = new MulticastRegistryFactory().createRegistry(URL.valueOf("multicast://239.255.255.255/"));

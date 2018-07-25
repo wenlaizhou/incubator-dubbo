@@ -32,6 +32,7 @@ public interface Networker {
      * lookup group.
      *
      * @param url group url
+     *
      * @return group.
      */
     Group lookup(URL url) throws RemotingException;

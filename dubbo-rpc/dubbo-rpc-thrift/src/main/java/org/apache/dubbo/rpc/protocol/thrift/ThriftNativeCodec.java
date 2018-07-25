@@ -35,6 +35,7 @@ import org.apache.thrift.transport.TIOStreamTransport;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @since 2.7.0, use https://github.com/dubbo/dubbo-rpc-native-thrift instead
  */
@@ -57,9 +58,11 @@ public class ThriftNativeCodec implements Codec2 {
             throws IOException {
         if (message instanceof Request) {
             encodeRequest(channel, buffer, (Request) message);
-        } else if (message instanceof Response) {
+        }
+        else if (message instanceof Response) {
             encodeResponse(channel, buffer, (Response) message);
-        } else {
+        }
+        else {
             throw new IOException("Unsupported message type "
                     + message.getClass().getName());
         }
@@ -78,7 +81,8 @@ public class ThriftNativeCodec implements Codec2 {
                 Class<?> type = invocation.getParameterTypes()[i];
 
             }
-        } catch (TException e) {
+        }
+        catch (TException e) {
             throw new IOException(e.getMessage(), e);
         }
 

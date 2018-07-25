@@ -69,11 +69,13 @@ public class GrizzlyServer extends AbstractServer {
             int threads = getUrl().getPositiveParameter(Constants.THREADS_KEY, Constants.DEFAULT_THREADS);
             config.setCorePoolSize(threads).setMaxPoolSize(threads)
                     .setKeepAliveTime(0L, TimeUnit.SECONDS);
-        } else if ("cached".equals(threadpool)) {
+        }
+        else if ("cached".equals(threadpool)) {
             int threads = getUrl().getPositiveParameter(Constants.THREADS_KEY, Integer.MAX_VALUE);
             config.setCorePoolSize(0).setMaxPoolSize(threads)
                     .setKeepAliveTime(60L, TimeUnit.SECONDS);
-        } else {
+        }
+        else {
             throw new IllegalArgumentException("Unsupported threadpool type " + threadpool);
         }
         builder.setKeepAlive(true).setReuseAddress(false)
@@ -88,7 +90,8 @@ public class GrizzlyServer extends AbstractServer {
     protected void doClose() throws Throwable {
         try {
             transport.stop();
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             logger.warn(e.getMessage(), e);
         }
     }

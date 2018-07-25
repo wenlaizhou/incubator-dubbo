@@ -51,7 +51,7 @@ public class ContextFilter extends AbstractPostProcessFilter {
         RpcContext.getContext()
                 .setInvoker(invoker)
                 .setInvocation(invocation)
-//                .setAttachments(attachments)  // merged from dubbox
+                //                .setAttachments(attachments)  // merged from dubbox
                 .setLocalAddress(invoker.getUrl().getHost(),
                         invoker.getUrl().getPort());
 
@@ -61,7 +61,8 @@ public class ContextFilter extends AbstractPostProcessFilter {
         if (attachments != null) {
             if (RpcContext.getContext().getAttachments() != null) {
                 RpcContext.getContext().getAttachments().putAll(attachments);
-            } else {
+            }
+            else {
                 RpcContext.getContext().setAttachments(attachments);
             }
         }
@@ -71,7 +72,8 @@ public class ContextFilter extends AbstractPostProcessFilter {
         }
         try {
             return postProcessResult(invoker.invoke(invocation), invoker, invocation);
-        } finally {
+        }
+        finally {
             // IMPORTANT! For async scenario, we must remove context from current thread, so we always create a new RpcContext for the next invoke for the same thread.
             RpcContext.removeContext();
             RpcContext.removeServerContext();

@@ -64,16 +64,25 @@ public class DubboProtocol extends AbstractProtocol {
     public static final String NAME = "dubbo";
 
     public static final int DEFAULT_PORT = 20880;
+
     private static final String IS_CALLBACK_SERVICE_INVOKE = "_isCallBackServiceInvoke";
+
     private static DubboProtocol INSTANCE;
+
     private final Map<String, ExchangeServer> serverMap = new ConcurrentHashMap<String, ExchangeServer>(); // <host:port,Exchanger>
+
     private final Map<String, ReferenceCountExchangeClient> referenceClientMap = new ConcurrentHashMap<String, ReferenceCountExchangeClient>(); // <host:port,Exchanger>
+
     private final ConcurrentMap<String, LazyConnectExchangeClient> ghostClientMap = new ConcurrentHashMap<String, LazyConnectExchangeClient>();
+
     private final ConcurrentMap<String, Object> locks = new ConcurrentHashMap<String, Object>();
+
     private final Set<String> optimizers = new ConcurrentHashSet<String>();
+
     //consumer side export a stub service for dispatching event
     //servicekey-stubmethods
     private final ConcurrentMap<String, String> stubServiceMethodsMap = new ConcurrentHashMap<String, String>();
+
     private ExchangeHandler requestHandler = new ExchangeHandlerAdapter() {
 
         @Override
@@ -87,7 +96,8 @@ public class DubboProtocol extends AbstractProtocol {
                     boolean hasMethod = false;
                     if (methodsStr == null || !methodsStr.contains(",")) {
                         hasMethod = inv.getMethodName().equals(methodsStr);
-                    } else {
+                    }
+                    else {
                         String[] methods = methodsStr.split(",");
                         for (String method : methods) {
                             if (inv.getMethodName().equals(method)) {
@@ -115,7 +125,8 @@ public class DubboProtocol extends AbstractProtocol {
 
                 if (result instanceof AsyncRpcResult) {
                     return ((AsyncRpcResult) result).getResultFuture().thenApply(r -> (Object) r);
-                } else {
+                }
+                else {
                     return CompletableFuture.completedFuture(result);
                 }
             }
@@ -128,7 +139,8 @@ public class DubboProtocol extends AbstractProtocol {
         public void received(Channel channel, Object message) throws RemotingException {
             if (message instanceof Invocation) {
                 reply((ExchangeChannel) channel, message);
-            } else {
+            }
+            else {
                 super.received(channel, message);
             }
         }
@@ -151,7 +163,8 @@ public class DubboProtocol extends AbstractProtocol {
             if (invocation != null) {
                 try {
                     received(channel, invocation);
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn("Failed to invoke event method " + invocation.getMethodName() + "(), cause: " + t.getMessage(), t);
                 }
             }
@@ -225,8 +238,9 @@ public class DubboProtocol extends AbstractProtocol {
 
         DubboExporter<?> exporter = (DubboExporter<?>) exporterMap.get(serviceKey);
 
-        if (exporter == null)
+        if (exporter == null) {
             throw new RemotingException(channel, "Not found exported service: " + serviceKey + " in " + exporterMap.keySet() + ", may be version or group mismatch " + ", channel: consumer: " + channel.getRemoteAddress() + " --> provider: " + channel.getLocalAddress() + ", message:" + inv);
+        }
 
         return exporter.getInvoker();
     }
@@ -259,7 +273,8 @@ public class DubboProtocol extends AbstractProtocol {
                     logger.warn(new IllegalStateException("consumer [" + url.getParameter(Constants.INTERFACE_KEY) +
                             "], has set stubproxy support event ,but no stub methods founded."));
                 }
-            } else {
+            }
+            else {
                 stubServiceMethodsMap.put(url.getServiceKey(), stubServiceMethods);
             }
         }
@@ -283,7 +298,8 @@ public class DubboProtocol extends AbstractProtocol {
                         serverMap.put(key, createServer(url));
                     }
                 }
-            } else {
+            }
+            else {
                 // server supports reset, use together with override
                 server.reset(url);
             }
@@ -297,14 +313,16 @@ public class DubboProtocol extends AbstractProtocol {
         url = url.addParameterIfAbsent(Constants.HEARTBEAT_KEY, String.valueOf(Constants.DEFAULT_HEARTBEAT));
         String str = url.getParameter(Constants.SERVER_KEY, Constants.DEFAULT_REMOTING_SERVER);
 
-        if (str != null && str.length() > 0 && !ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str))
+        if (str != null && str.length() > 0 && !ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str)) {
             throw new RpcException("Unsupported server type: " + str + ", url: " + url);
+        }
 
         url = url.addParameter(Constants.CODEC_KEY, DubboCodec.NAME);
         ExchangeServer server;
         try {
             server = Exchangers.bind(url, requestHandler);
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException("Fail to start server(url: " + url + ") " + e.getMessage(), e);
         }
         str = url.getParameter(Constants.CLIENT_KEY);
@@ -342,11 +360,14 @@ public class DubboProtocol extends AbstractProtocol {
             }
 
             optimizers.add(className);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             throw new RpcException("Cannot find the serialization optimizer class: " + className, e);
-        } catch (InstantiationException e) {
+        }
+        catch (InstantiationException e) {
             throw new RpcException("Cannot instantiate the serialization optimizer class: " + className, e);
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e) {
             throw new RpcException("Cannot instantiate the serialization optimizer class: " + className, e);
         }
     }
@@ -374,7 +395,8 @@ public class DubboProtocol extends AbstractProtocol {
         for (int i = 0; i < clients.length; i++) {
             if (service_share_connect) {
                 clients[i] = getSharedClient(url);
-            } else {
+            }
+            else {
                 clients[i] = initClient(url);
             }
         }
@@ -391,7 +413,8 @@ public class DubboProtocol extends AbstractProtocol {
             if (!client.isClosed()) {
                 client.incrementAndGetCount();
                 return client;
-            } else {
+            }
+            else {
                 referenceClientMap.remove(key);
             }
         }
@@ -434,10 +457,12 @@ public class DubboProtocol extends AbstractProtocol {
             // connection should be lazy
             if (url.getParameter(Constants.LAZY_CONNECT_KEY, false)) {
                 client = new LazyConnectExchangeClient(url, requestHandler);
-            } else {
+            }
+            else {
                 client = Exchangers.connect(url, requestHandler);
             }
-        } catch (RemotingException e) {
+        }
+        catch (RemotingException e) {
             throw new RpcException("Fail to create remoting client for service(" + url + "): " + e.getMessage(), e);
         }
         return client;
@@ -453,7 +478,8 @@ public class DubboProtocol extends AbstractProtocol {
                         logger.info("Close dubbo server: " + server.getLocalAddress());
                     }
                     server.close(ConfigUtils.getServerShutdownTimeout());
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }
@@ -467,7 +493,8 @@ public class DubboProtocol extends AbstractProtocol {
                         logger.info("Close dubbo connect: " + client.getLocalAddress() + "-->" + client.getRemoteAddress());
                     }
                     client.close(ConfigUtils.getServerShutdownTimeout());
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }
@@ -481,7 +508,8 @@ public class DubboProtocol extends AbstractProtocol {
                         logger.info("Close dubbo connect: " + client.getLocalAddress() + "-->" + client.getRemoteAddress());
                     }
                     client.close(ConfigUtils.getServerShutdownTimeout());
-                } catch (Throwable t) {
+                }
+                catch (Throwable t) {
                     logger.warn(t.getMessage(), t);
                 }
             }

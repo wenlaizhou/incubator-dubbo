@@ -61,9 +61,12 @@ public abstract class AbstractServiceConfig extends AbstractInterfaceConfig {
 
     // access log
     protected String accesslog;
+
     protected List<ProtocolConfig> protocols;
+
     // max allowed execute times
     private Integer executes;
+
     // whether to register
     private Boolean register;
 
@@ -136,7 +139,8 @@ public abstract class AbstractServiceConfig extends AbstractInterfaceConfig {
     public void setToken(Boolean token) {
         if (token == null) {
             setToken((String) null);
-        } else {
+        }
+        else {
             setToken(String.valueOf(token));
         }
     }
@@ -185,7 +189,8 @@ public abstract class AbstractServiceConfig extends AbstractInterfaceConfig {
     public void setAccesslog(Boolean accesslog) {
         if (accesslog == null) {
             setAccesslog((String) null);
-        } else {
+        }
+        else {
             setAccesslog(String.valueOf(accesslog));
         }
     }

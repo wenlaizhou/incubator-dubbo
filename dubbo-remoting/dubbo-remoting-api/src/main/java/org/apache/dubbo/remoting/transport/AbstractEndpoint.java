@@ -51,7 +51,8 @@ public abstract class AbstractEndpoint extends AbstractPeer implements Resetable
         String codecName = url.getParameter(Constants.CODEC_KEY, "telnet");
         if (ExtensionLoader.getExtensionLoader(Codec2.class).hasExtension(codecName)) {
             return ExtensionLoader.getExtensionLoader(Codec2.class).getExtension(codecName);
-        } else {
+        }
+        else {
             return new CodecAdapter(ExtensionLoader.getExtensionLoader(Codec.class)
                     .getExtension(codecName));
         }
@@ -70,7 +71,8 @@ public abstract class AbstractEndpoint extends AbstractPeer implements Resetable
                     this.timeout = t;
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
         try {
@@ -80,14 +82,16 @@ public abstract class AbstractEndpoint extends AbstractPeer implements Resetable
                     this.connectTimeout = t;
                 }
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
         try {
             if (url.hasParameter(Constants.CODEC_KEY)) {
                 this.codec = getChannelCodec(url);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
     }

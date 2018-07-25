@@ -23,4 +23,5 @@ import org.apache.dubbo.remoting.p2p.Peer;
  * Peer
  */
 public interface ExchangePeer extends Peer, ExchangeServer {
+
 }

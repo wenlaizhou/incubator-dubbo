@@ -74,7 +74,8 @@ public final class ChannelBuffers {
         }
         if (buffer.hasArray()) {
             return wrappedBuffer(buffer.array(), buffer.arrayOffset() + buffer.position(), buffer.remaining());
-        } else {
+        }
+        else {
             return new ByteBufferBackedChannelBuffer(buffer);
         }
     }
@@ -125,7 +126,8 @@ public final class ChannelBuffers {
             byte vb = bufferB.getByte(bIndex);
             if (va > vb) {
                 return 1;
-            } else if (va < vb) {
+            }
+            else if (va < vb) {
                 return -1;
             }
             aIndex++;

@@ -48,11 +48,13 @@ public class LogTelnetHandler implements TelnetHandler {
         StringBuffer buf = new StringBuffer();
         if (message == null || message.trim().length() == 0) {
             buf.append("EXAMPLE: log error / log 100");
-        } else {
+        }
+        else {
             String str[] = message.split(" ");
             if (!StringUtils.isInteger(str[0])) {
                 LoggerFactory.setLevel(Level.valueOf(message.toUpperCase()));
-            } else {
+            }
+            else {
                 int SHOW_LOG_LENGTH = Integer.parseInt(str[0]);
 
                 if (file != null && file.exists()) {
@@ -66,7 +68,8 @@ public class LogTelnetHandler implements TelnetHandler {
                                 if (size <= SHOW_LOG_LENGTH) {
                                     bb = ByteBuffer.allocate((int) size);
                                     filechannel.read(bb, 0);
-                                } else {
+                                }
+                                else {
                                     int pos = (int) (size - SHOW_LOG_LENGTH);
                                     bb = ByteBuffer.allocate(SHOW_LOG_LENGTH);
                                     filechannel.read(bb, pos);
@@ -79,16 +82,20 @@ public class LogTelnetHandler implements TelnetHandler {
                                 buf.append("\r\nmodified:" + (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                                         .format(new Date(file.lastModified()))));
                                 buf.append("\r\nsize:" + size + "\r\n");
-                            } finally {
+                            }
+                            finally {
                                 filechannel.close();
                             }
-                        } finally {
+                        }
+                        finally {
                             fis.close();
                         }
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         buf.append(e.getMessage());
                     }
-                } else {
+                }
+                else {
                     size = 0;
                     buf.append("\r\nMESSAGE: log file not exists or log appender is console .");
                 }

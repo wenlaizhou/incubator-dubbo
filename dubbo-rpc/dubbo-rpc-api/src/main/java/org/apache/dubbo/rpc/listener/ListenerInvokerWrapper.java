@@ -49,7 +49,8 @@ public class ListenerInvokerWrapper<T> implements Invoker<T> {
                 if (listener != null) {
                     try {
                         listener.referred(invoker);
-                    } catch (Throwable t) {
+                    }
+                    catch (Throwable t) {
                         logger.error(t.getMessage(), t);
                     }
                 }
@@ -86,13 +87,15 @@ public class ListenerInvokerWrapper<T> implements Invoker<T> {
     public void destroy() {
         try {
             invoker.destroy();
-        } finally {
+        }
+        finally {
             if (listeners != null && !listeners.isEmpty()) {
                 for (InvokerListener listener : listeners) {
                     if (listener != null) {
                         try {
                             listener.destroyed(invoker);
-                        } catch (Throwable t) {
+                        }
+                        catch (Throwable t) {
                             logger.error(t.getMessage(), t);
                         }
                     }

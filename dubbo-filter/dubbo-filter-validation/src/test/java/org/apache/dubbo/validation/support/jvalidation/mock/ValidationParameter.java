@@ -19,6 +19,7 @@ package org.apache.dubbo.validation.support.jvalidation.mock;
 import javax.validation.constraints.NotNull;
 
 public class ValidationParameter {
+
     @NotNull
     private String parameter;
 

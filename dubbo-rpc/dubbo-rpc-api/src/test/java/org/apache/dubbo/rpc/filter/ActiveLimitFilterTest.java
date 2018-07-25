@@ -37,6 +37,7 @@ import static org.junit.Assert.assertNotSame;
 public class ActiveLimitFilterTest {
 
     private static volatile int count = 0;
+
     Filter activeLimitFilter = new ActiveLimitFilter();
 
     @Test
@@ -67,13 +68,15 @@ public class ActiveLimitFilterTest {
                 public void run() {
                     try {
                         latch.await();
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     for (int i = 0; i < 100; i++) {
                         try {
                             activeLimitFilter.invoke(invoker, invocation);
-                        } catch (RpcException expected) {
+                        }
+                        catch (RpcException expected) {
                             count++;
                         }
                     }
@@ -85,7 +88,8 @@ public class ActiveLimitFilterTest {
 
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
         assertNotSame(0, count);

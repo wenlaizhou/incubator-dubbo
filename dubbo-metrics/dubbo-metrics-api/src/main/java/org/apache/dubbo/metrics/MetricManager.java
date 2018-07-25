@@ -37,7 +37,8 @@ public class MetricManager {
      * if not exist, an instance will be created.
      *
      * @param group the group of MetricRegistry
-     * @param name the name of the metric
+     * @param name  the name of the metric
+     *
      * @return an instance of counter
      */
     public static Counter getCounter(String group, MetricName name) {
@@ -50,7 +51,8 @@ public class MetricManager {
      * if not exist, an instance will be created.
      *
      * @param group the group of MetricRegistry
-     * @param name the name of the metric
+     * @param name  the name of the metric
+     *
      * @return an instance of {@link BucketCounter}
      */
     public static BucketCounter getBucketCounters(String group, MetricName name) {
@@ -63,7 +65,8 @@ public class MetricManager {
      * if not exist, an instance will be created.
      *
      * @param group the group of MetricRegistry
-     * @param name the name of the metric
+     * @param name  the name of the metric
+     *
      * @return an instance of {@link Compass}
      */
     public static Compass getCompass(String group, MetricName name) {
@@ -73,7 +76,8 @@ public class MetricManager {
 
     /**
      * Register a customized metric to specified group.
-     * @param group the group name of MetricRegistry
+     *
+     * @param group  the group name of MetricRegistry
      * @param metric the metric to register
      */
     public static void register(String group, MetricName name, Metric metric) {
@@ -83,6 +87,7 @@ public class MetricManager {
 
     /**
      * get dynamically bound {@link IMetricManager} instance
+     *
      * @return the {@link IMetricManager} instance bound
      */
     @SuppressWarnings("unchecked")
@@ -96,7 +101,8 @@ public class MetricManager {
                         Object binderObject = getSingleton.invoke(null);
                         Method getMetricManager = binderClazz.getMethod("getMetricManager");
                         iMetricManager = (IMetricManager) getMetricManager.invoke(binderObject);
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         iMetricManager = NOP_METRIC_MANAGER;
                     }
                 }

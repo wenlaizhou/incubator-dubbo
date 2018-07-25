@@ -124,10 +124,12 @@ public class TTable implements TComponent {
                     if (isFirstColOfRow
                             && border.has(Border.BORDER_OUTER_LEFT)) {
                         borderChar = "|";
-                    } else if (!isFirstColOfRow
+                    }
+                    else if (!isFirstColOfRow
                             && border.has(Border.BORDER_INNER_V)) {
                         borderChar = "|";
-                    } else {
+                    }
+                    else {
                         borderChar = EMPTY;
                     }
 
@@ -142,7 +144,8 @@ public class TTable implements TComponent {
                     if (scanner.hasNextLine()) {
                         data = scanner.nextLine();
                         hasNextLine = true;
-                    } else {
+                    }
+                    else {
                         data = EMPTY;
                     }
 
@@ -166,10 +169,12 @@ public class TTable implements TComponent {
                     rowSB.append(segmentSB);
                 }
 
-            } while (hasNextLine);
+            }
+            while (hasNextLine);
 
             return rowSB.toString();
-        } finally {
+        }
+        finally {
             for (Scanner scanner : scannerArray) {
                 if (null != scanner) {
                     scanner.close();
@@ -277,7 +282,8 @@ public class TTable implements TComponent {
                 if (index < columnDataArray.length
                         && null != columnDataArray[index]) {
                     columnDefine.rows.add(replaceTab(columnDataArray[index].toString()));
-                } else {
+                }
+                else {
                     columnDefine.rows.add(EMPTY);
                 }
             }
@@ -403,6 +409,7 @@ public class TTable implements TComponent {
      * replace tab to four spaces
      *
      * @param string the original string
+     *
      * @return the replaced string
      */
     private static String replaceTab(String string) {
@@ -411,10 +418,11 @@ public class TTable implements TComponent {
 
     /**
      * visible width for the given string.
-     *
+     * <p>
      * for example: "abc\n1234"'s width is 4.
      *
      * @param string the given string
+     *
      * @return visible width
      */
     private static int width(String string) {
@@ -424,7 +432,8 @@ public class TTable implements TComponent {
             while (scanner.hasNextLine()) {
                 maxWidth = max(length(scanner.nextLine()), maxWidth);
             }
-        } finally {
+        }
+        finally {
             scanner.close();
         }
         return maxWidth;
@@ -495,6 +504,7 @@ public class TTable implements TComponent {
          * whether has one of the specified border styles
          *
          * @param borderArray border styles
+         *
          * @return whether has one of the specified border styles
          */
         public boolean has(int... borderArray) {
@@ -522,6 +532,7 @@ public class TTable implements TComponent {
          * set border style
          *
          * @param border border style
+         *
          * @return this
          */
         public Border set(int border) {
@@ -556,7 +567,8 @@ public class TTable implements TComponent {
 
             if (c == '\n') {
                 count = 0;
-            } else {
+            }
+            else {
                 count++;
             }
 

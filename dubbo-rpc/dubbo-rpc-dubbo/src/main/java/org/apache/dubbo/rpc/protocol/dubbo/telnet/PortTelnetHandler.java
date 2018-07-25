@@ -44,7 +44,8 @@ public class PortTelnetHandler implements TelnetHandler {
             for (String part : parts) {
                 if ("-l".equals(part)) {
                     detail = true;
-                } else {
+                }
+                else {
                     if (!StringUtils.isInteger(part)) {
                         return "Illegal port " + part + ", must be integer.";
                     }
@@ -59,11 +60,13 @@ public class PortTelnetHandler implements TelnetHandler {
                 }
                 if (detail) {
                     buf.append(server.getUrl().getProtocol() + "://" + server.getUrl().getAddress());
-                } else {
+                }
+                else {
                     buf.append(server.getUrl().getPort());
                 }
             }
-        } else {
+        }
+        else {
             int p = Integer.parseInt(port);
             ExchangeServer server = null;
             for (ExchangeServer s : DubboProtocol.getDubboProtocol().getServers()) {
@@ -80,11 +83,13 @@ public class PortTelnetHandler implements TelnetHandler {
                     }
                     if (detail) {
                         buf.append(c.getRemoteAddress() + " -> " + c.getLocalAddress());
-                    } else {
+                    }
+                    else {
                         buf.append(c.getRemoteAddress());
                     }
                 }
-            } else {
+            }
+            else {
                 buf.append("No such port " + port);
             }
         }

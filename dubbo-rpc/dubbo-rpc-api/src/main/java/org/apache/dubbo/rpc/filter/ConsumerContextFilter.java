@@ -48,7 +48,8 @@ public class ConsumerContextFilter extends AbstractPostProcessFilter {
             // TODO should we clear server context?
             RpcContext.removeServerContext();
             return postProcessResult(invoker.invoke(invocation), invoker, invocation);
-        } finally {
+        }
+        finally {
             // TODO removeContext? but we need to save future for RpcContext.getFuture() API. If clear attachments here, attachments will not available when postProcessResult is invoked.
             RpcContext.getContext().clearAttachments();
         }

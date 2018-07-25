@@ -33,7 +33,9 @@ import java.util.concurrent.ConcurrentMap;
  * You can implement and use your own {@link ReferenceConfig} cache if you need use complicate strategy.
  */
 public class ReferenceConfigCache {
+
     public static final String DEFAULT_NAME = "_DEFAULT_";
+
     /**
      * Create the key with the <b>Group</b>, <b>Interface</b> and <b>version</b> attribute of {@link ReferenceConfig}.
      * <p>
@@ -62,9 +64,13 @@ public class ReferenceConfigCache {
             return ret.toString();
         }
     };
+
     static final ConcurrentMap<String, ReferenceConfigCache> cacheHolder = new ConcurrentHashMap<String, ReferenceConfigCache>();
+
     private final String name;
+
     private final KeyGenerator generator;
+
     ConcurrentMap<String, ReferenceConfig<?>> cache = new ConcurrentHashMap<String, ReferenceConfig<?>>();
 
     private ReferenceConfigCache(String name, KeyGenerator generator) {
@@ -117,7 +123,9 @@ public class ReferenceConfigCache {
 
     void destroyKey(String key) {
         ReferenceConfig<?> config = cache.remove(key);
-        if (config == null) return;
+        if (config == null) {
+            return;
+        }
         config.destroy();
     }
 
@@ -148,6 +156,7 @@ public class ReferenceConfigCache {
     }
 
     public static interface KeyGenerator {
+
         String generateKey(ReferenceConfig<?> referenceConfig);
     }
 }
